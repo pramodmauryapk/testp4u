@@ -78,7 +78,7 @@
     <string name="welcome_to">Welcome To</string>
     <string name="parvarish_knowledge_center">P4U Knowledge Center</string>
     <string name="todo">TODO</string>
-    <string name="welcome">welcome</string>
+    <string name="welcome">Welcome</string>
     <string name="home">Home</string>
     <string name="author_name">Author Name</string>
     <string name="book_title">Book Title</string>
@@ -125,5 +125,7 @@
     <string name="delete">Delete</string>
     <string name="mobile">Mobile No</string>
     <string name="menu_manage_user">Manage User</string>
+    <string name="menu_news">Load News</string>
+    <string name="menu_feedback">Feedback</string>
 
 </resources>

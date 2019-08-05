@@ -42,6 +42,8 @@ import my.app.p4ulibrary.book_cornor.IssueBookFragment;
 import my.app.p4ulibrary.book_cornor.SearchBookFragment;
 import my.app.p4ulibrary.book_cornor.SubmitBookFragment;
 import my.app.p4ulibrary.book_cornor.UpdateBookFragment;
+import my.app.p4ulibrary.home_for_all.FeedbackAddFragment;
+import my.app.p4ulibrary.home_for_all.NewsAddFragment;
 import my.app.p4ulibrary.user_cornor.AddUserFragment;
 import my.app.p4ulibrary.user_cornor.ManageUserFragment;
 import my.app.p4ulibrary.user_cornor.UserProfileFragment;
@@ -224,6 +226,11 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_manage_user:newContent=new ManageUserFragment ();
+                break;
+
+            case R.id.nav_manage_news:newContent=new NewsAddFragment ();
+                break;
+            case R.id.nav_feedback:newContent=new FeedbackAddFragment ();
                 break;
 
         }
