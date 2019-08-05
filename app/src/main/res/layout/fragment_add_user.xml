@@ -1,0 +1,142 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    style="@style/layout_padding"
+    android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/tv_createusername"
+                style="@style/createuser_control_style"
+                android:text="@string/username"
+                />
+
+            <EditText
+                android:id="@+id/et_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/tv_createusername"
+                style="@style/createuser_textbox_style"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_createemail"
+                android:layout_below="@+id/et_fullname"
+                android:text="@string/email"
+                style="@style/createuser_control_style"/>
+
+            <EditText
+                android:id="@+id/et_createemail"
+                android:layout_below="@+id/tv_createemail"
+                style="@style/createuser_textbox_style"
+                android:inputType="textEmailAddress"
+                android:hint="@string/username_gmail_com" />
+            <TextView
+                android:id="@+id/tv_createmobile"
+                style="@style/createuser_control_style"
+                android:layout_below="@+id/et_createemail"
+                android:text="@string/mobile_number" />
+
+            <EditText
+                android:id="@+id/et_createmobile"
+                android:layout_below="@+id/tv_createmobile"
+                android:hint="@string/_1234567890"
+                android:inputType="phone"
+                style="@style/createuser_textbox_style"/>
+
+            <TextView
+                android:id="@+id/tv_createpassword"
+                android:layout_below="@+id/et_createmobile"
+                android:text="@string/password"
+                style="@style/createuser_control_style"/>
+
+            <EditText
+                android:id="@+id/et_createpassword"
+                android:layout_below="@+id/tv_createpassword"
+                android:inputType="textPassword"
+                style="@style/createuser_textbox_style"/>
+            <TextView
+                android:id="@+id/tv_comfirmpassword"
+                android:layout_below="@+id/et_createpassword"
+                android:text="@string/confirm_password"
+                style="@style/createuser_control_style"/>
+
+            <EditText
+                android:id="@+id/et_confirmpassword"
+                android:layout_below="@+id/tv_comfirmpassword"
+                android:inputType="textPassword"
+                style="@style/createuser_textbox_style"/>
+            <TextView
+                android:id="@+id/tv_role"
+                android:layout_below="@+id/et_confirmpassword"
+                android:text="@string/role"
+                style="@style/createuser_control_style"/>
+            <Spinner
+                android:id="@+id/sp_role"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:entries="@array/role_array"
+                android:layout_below="@id/tv_role"
+                style="@style/createuser_textbox_style"/>
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_below="@+id/sp_role"
+                android:text="@string/address"
+                style="@style/createuser_control_style"/>
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_below="@+id/tv_address"
+                android:inputType="textPersonName"
+                android:hint="@string/address"
+                style="@style/createuser_textbox_style"/>
+            <TextView
+                android:id="@+id/tv_identity"
+                android:layout_below="@+id/et_address"
+                android:text="@string/identity"
+                style="@style/createuser_control_style"/>
+
+            <EditText
+                android:id="@+id/et_identity"
+                android:layout_below="@+id/tv_identity"
+                android:inputType="textPersonName"
+                android:hint="@string/aadhar_id_voter_id"
+                style="@style/createuser_textbox_style"/>
+
+            <Button
+                android:id="@+id/btn_createnewuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_identity"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/button_shape"
+                android:text="@string/create_new_user"
+                android:textColor="@color/colorwhite"/>
+
+            <ProgressBar
+                android:id="@+id/progressbar_createuser"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_confirmpassword"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

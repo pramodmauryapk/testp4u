@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+<RelativeLayout
+
+    android:id="@+id/fragmenent_add_book"
+    android:padding="@dimen/activity_horizontal_margin"
+   android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+    <EditText
+        android:padding="5dp"
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etBookId"
+        android:inputType="textAutoComplete"
+        android:hint="@string/Book_Id"/>
+    <EditText
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etBookTitle"
+        android:padding="5dp"
+        android:inputType="textAutoComplete"
+        android:hint="@string/book_title"
+        android:layout_below="@+id/etBookId"/>
+    <EditText
+        android:padding="5dp"
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etBookAuthor"
+        android:inputType="textAutoComplete"
+        android:layout_below="@+id/etBookTitle"
+        android:hint="@string/author_name"/>
+
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etBookAuthor"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <Spinner
+            style="@style/createuser_textbox_style"
+            android:layout_weight="3"
+            android:padding="5dp"
+            android:paddingEnd="15dp"
+            android:id="@+id/spBookSubject"
+            android:entries="@array/subject_list"
+            tools:ignore="RtlSymmetry" />
+        <Spinner
+            style="@style/createuser_textbox_style"
+            android:id="@+id/spBookYear"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:layout_weight="7"
+            android:entries="@array/pub_year"
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l1"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:weightSum="10">
+    <EditText
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etBookcost"
+        android:hint="@string/book_cost"
+        android:padding="5dp"
+        android:paddingEnd="15dp"
+        android:layout_weight="7"
+        android:inputType="number"
+        tools:ignore="RtlSymmetry" />
+    <EditText
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etBookLocation"
+        android:padding="5dp"
+        android:paddingStart="15dp"
+        android:hint="@string/book_location"
+        android:layout_weight="3"
+        android:inputType="textAutoComplete"
+        tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/l3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l2"
+        android:orientation="horizontal"
+        android:weightSum="10">
+    <EditText
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etDonor"
+        android:layout_weight="5"
+        android:padding="5dp"
+        android:paddingEnd="15dp"
+        android:hint="@string/donor_name"
+        tools:ignore="RtlSymmetry" />
+    <EditText
+        style="@style/createuser_textbox_style"
+        android:id="@+id/etDonorMobile"
+        android:hint="@string/donor_mobile"
+        android:padding="5dp"
+        android:paddingStart="15dp"
+        android:layout_weight="5"
+        android:inputType="phone"
+        tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+    <Button
+        style="@style/control_type"
+        android:id="@+id/btnAddBook"
+        android:layout_below="@+id/l3"
+        android:text="@string/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/colorwhite"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        style="@style/control_type"
+        android:id="@+id/textView"
+        android:layout_below="@+id/btnAddBook"
+        android:text="@string/books_list"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+    <TextView
+        style="@style/control_type"
+        android:layout_below="@+id/textView"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView1"
+        android:text="@string/tap_to_update_and_view_book_details"
+        android:textAlignment="center"/>
+
+</RelativeLayout>
+
+
+
+</ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listViewBooks" />
+</LinearLayout>
