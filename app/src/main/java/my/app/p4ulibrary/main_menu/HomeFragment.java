@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -32,13 +33,16 @@ public class HomeFragment extends Fragment {
 	private LinearLayout l1,l2,l3,l4;
 	private View v1,v2,v3,v4;
 	private View v;
+	private TextView tv;
+
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.home_fragment, container, false);
 		Context context = container.getContext();
 		viewPager = (ViewPager)v.findViewById(R.id.viewpager);
-
+		tv = (TextView) v.findViewById(R.id.mywidget);
+		tv.setSelected(true);  // Set focus to the textview
 		ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter (getContext ());
 
 		viewPager.setAdapter(viewPagerAdapter);
