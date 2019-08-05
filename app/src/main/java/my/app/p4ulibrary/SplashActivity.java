@@ -10,14 +10,21 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+
 public class SplashActivity extends Activity {
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 5000;
     private static final String TAG="Splash Activity";
+   // private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+      //  MobileAds.initialize(this, "ca-app-pub-3010715647637473/4395690831");
+      //  mAdView = findViewById(R.id.adView);
+      //  AdRequest adRequest = new AdRequest.Builder().build();
+      //  mAdView.loadAd(adRequest);
+
 
         if (isNetworkStatusAvialable(getApplicationContext())) {
             Thread thread = new Thread(new Runnable() {
@@ -46,7 +53,35 @@ public class SplashActivity extends Activity {
             finish();
             Log.d(TAG,"internet not available");
         }
+      /*  mAdView.setAdListener(new AdListener () {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
 
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+*/
     }
     @SuppressWarnings("deprecation")
     public static boolean isNetworkStatusAvialable (Context context) {

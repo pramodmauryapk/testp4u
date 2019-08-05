@@ -13,6 +13,7 @@
         <item>USER</item>
 
     </array>
+    <string name="banner_ad_unit_id">ca-app-pub-3010715647637473~4353073202</string>
     <string name="year_prompt">Year</string>
     <string-array name="pub_year">
         <item>Year</item>
