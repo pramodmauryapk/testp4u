@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
 		ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter (getContext ());
 
 		viewPager.setAdapter(viewPagerAdapter);
-		iconsizesetting (getContext ());
+		iconsizesetting (Objects.requireNonNull (getContext ()));
 
 		//                              //////////////////////////////////////////////////////////////////
 		l1 = (LinearLayout) v.findViewById(R.id.userlist);
