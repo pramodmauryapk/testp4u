@@ -14,24 +14,12 @@
             android:layout_height="180dp">
 
         </androidx.viewpager.widget.ViewPager>
-       <TextView
-           android:id="@+id/mywidget"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentEnd="true"
-           android:ellipsize="marquee"
-           android:layout_below="@+id/viewpager"
-           android:fadingEdge="horizontal"
-           android:marqueeRepeatLimit="marquee_forever"
-           android:scrollHorizontally="true"
-           android:textColor="#001EFF"
-           android:text="Simple application that shows how to use marquee, with a long text"
-           android:singleLine="true" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mywidget"
+        android:layout_below="@+id/viewpager"
         android:id="@+id/l2"
         android:gravity="center_horizontal">
         <LinearLayout
@@ -127,5 +115,18 @@
         </LinearLayout>
 
     </RelativeLayout>
+       <TextView
+           android:id="@+id/newsmarquee"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentEnd="true"
+           android:ellipsize="marquee"
+           android:layout_below="@+id/l2"
+           android:fadingEdge="horizontal"
+           android:marqueeRepeatLimit="marquee_forever"
+           android:scrollHorizontally="true"
+           android:textColor="#001EFF"
+           android:text=""
+           android:singleLine="true" />
    </RelativeLayout>
 </ScrollView>

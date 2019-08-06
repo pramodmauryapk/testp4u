@@ -42,7 +42,7 @@ public class FeedbackAddFragment extends HomeFragment {
         return v;
     }
     private void initViews(){
-        editText=(EditText)v.findViewById (R.id.textView1);
+        editText=(EditText)v.findViewById (R.id.marqueetext);
         textView=(TextView)v.findViewById (R.id.txt1);
         button=(Button)v.findViewById (R.id.btn_add);
         ratingBar=(RatingBar)v.findViewById (R.id.ratingBar);

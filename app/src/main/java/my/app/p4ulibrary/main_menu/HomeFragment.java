@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,31 +19,62 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Objects;
 
 import my.app.p4ulibrary.R;
+import my.app.p4ulibrary.classes.News;
+import my.app.p4ulibrary.classes.User;
 import my.app.p4ulibrary.classes.ViewPagerAdapter;
 import my.app.p4ulibrary.home_for_all.AllBookFragment;
 import my.app.p4ulibrary.home_for_all.AllCentreFragment;
 import my.app.p4ulibrary.home_for_all.AllDonorFragment;
 import my.app.p4ulibrary.home_for_all.AllUserFragment;
 
+import static java.util.Objects.requireNonNull;
+
 
 public class HomeFragment extends Fragment {
-	ViewPager viewPager;
+	private ViewPager viewPager;
+	private DatabaseReference myRef;
 	private LinearLayout l1,l2,l3,l4;
 	private View v1,v2,v3,v4;
 	private View v;
 	private TextView tv;
-
+	public String s;
+	private String newsId=null;
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.home_fragment, container, false);
 		Context context = container.getContext();
+
+		FirebaseDatabase database = FirebaseDatabase.getInstance();
+		myRef = database.getReference("News");
+
 		viewPager = (ViewPager)v.findViewById(R.id.viewpager);
-		tv = (TextView) v.findViewById(R.id.mywidget);
+		tv = (TextView) v.findViewById(R.id.newsmarquee);
 		tv.setSelected(true);  // Set focus to the textview
+        tv.setText ("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+	   /* myRef.addValueEventListener (new ValueEventListener () {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				show(dataSnapshot);
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+
+			}
+		});
+*/
 		ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter (getContext ());
 
 		viewPager.setAdapter(viewPagerAdapter);
@@ -89,7 +121,18 @@ public class HomeFragment extends Fragment {
 
 	}
 
-	
+	private void show(DataSnapshot dataSnapshot){
+
+			for (DataSnapshot ds : dataSnapshot.getChildren ()) {
+				News news = new News ();
+				news.setMarqueeText (((requireNonNull (ds.child (newsId).getValue (News.class)))).getMarqueeText ()); //set the role
+
+			tv.setText (news.getMarqueeText ());
+
+
+			}
+
+	}
 
 
 	@Override
