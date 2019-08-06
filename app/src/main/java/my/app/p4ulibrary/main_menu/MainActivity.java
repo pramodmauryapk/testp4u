@@ -110,8 +110,9 @@ public class MainActivity extends AppCompatActivity
 
         //Access real time database
         final FirebaseUser user = mAuth.getCurrentUser();
-        userID = ((Objects.requireNonNull(user))).getUid();
-
+        if(user!=null) {
+            userID = ((Objects.requireNonNull (user))).getUid ();
+        }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -121,11 +122,13 @@ public class MainActivity extends AppCompatActivity
 
     }
     private void get_values_from_intent(){
+        intent = getIntent ();
+        if(intent!=null) {
 
-            intent = getIntent ();
             user_name = intent.getStringExtra ("user_name");
             user_email = intent.getStringExtra ("user_email");
             user_roll = intent.getStringExtra ("user_role");
+        }
 
     }
     private void addMenuItemInNavMenuDrawer() {
@@ -215,7 +218,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_update_book:newContent=new UpdateBookFragment ();
                 break;
-
             case R.id.nav_search_book:newContent=new SearchBookFragment ();
                 break;
             case R.id.nav_issue_book:newContent=new IssueBookFragment ();

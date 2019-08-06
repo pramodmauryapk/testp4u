@@ -138,7 +138,16 @@
                 android:layout_height="50dp"
                android:src="@drawable/facebook"/>
             </LinearLayout>
-
+            <Button
+                style="@style/createuser_control_style"
+                android:text="Skip Login"
+                android:id="@+id/btn_skip"
+                android:gravity="center"
+                android:layout_below="@+id/li2"
+                android:layout_marginTop="10dp"
+                android:background="@color/transparent"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"/>
         </RelativeLayout>
     </ScrollView>
 

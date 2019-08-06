@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     private EditText inputEmail, inputPassword;
-    private Button btnSignin, btnForgotpassword,btnRegister;
+    private Button btnSignin, btnForgotpassword,btnRegister,btnskip;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 
@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         //If user is already logged in then go to respective role activities.
        if(auth.getCurrentUser() != null){
             Log.d(TAG,"User going to view role");
-
             startActivity(new Intent(LoginActivity.this, ViewRoleActivity.class));
             Log.d(TAG,"User already logged in, going to role activity now");
             finish();
@@ -73,7 +72,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, CreateuserActivity.class));
-                Log.d(TAG,"ResetPasswordActivity called successfully");
+                Log.d(TAG,"Register Activity called successfully");
+                finish();
+            }
+        });
+        btnskip.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View view) {
+                Intent i;
+                i=new Intent(LoginActivity.this, MainActivity.class);
+                i.putExtra("user_role", "USER");
+                i.putExtra("user_name", "USER");
+                i.putExtra("user_email", " ");
+                startActivity(i);
+                Log.d(TAG,"User bypassing login, going to role activity now");
                 finish();
             }
         });
@@ -131,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
         btnForgotpassword = (Button) findViewById(R.id.btn_forgotpassword);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnRegister=(Button)findViewById(R.id.btn_register);
-
+        btnskip=(Button)findViewById (R.id.btn_skip);
     }
 
 
