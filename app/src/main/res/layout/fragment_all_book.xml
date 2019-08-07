@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/search_book_fragment"
-    android:orientation="vertical"
+    android:orientation="vertical">
 
+      <EditText
+          android:id="@+id/et_search_book"
+          android:layout_width="329dp"
+          android:layout_height="40dp"
+          android:background="@drawable/border"
+          android:hint="@string/et_search_book" />
 
-    android:paddingTop="@dimen/activity_vertical_margin">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:textColor="@color/colorblack"
-    android:textSize="18sp"
-    android:text="List of Books"/>
+      <Button
+          android:id="@+id/btn_search_book"
+          android:layout_width="78dp"
+          android:layout_height="wrap_content"
+          android:layout_above="@id/view_list"
+          android:layout_toRightOf="@id/et_search_book"
+          android:background="@drawable/border"
+          android:text="@string/btn_search_book" />
+
       <ListView
-                android:id="@+id/view_list"
-          android:layout_height="match_parent"
-          android:layout_width="match_parent"/>
-</LinearLayout>
+          android:id="@+id/view_list"
+          android:layout_width="match_parent"
+          android:layout_height="618dp"
+          android:layout_below="@id/et_search_book"/>
+</RelativeLayout>
