@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="10"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="RtlSymmetry">
 
         <TextView
             android:text="@string/name"
@@ -28,7 +29,12 @@
             android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
-
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_weight="0"
+        android:layout_height="16dp"
+        android:layout_gravity="end"
+        android:src="@drawable/next"/>
 
     </LinearLayout>
 

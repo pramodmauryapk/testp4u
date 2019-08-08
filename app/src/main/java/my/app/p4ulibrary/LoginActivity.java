@@ -26,12 +26,10 @@ import java.util.Objects;
 
 import my.app.p4ulibrary.main_menu.MainActivity;
 import my.app.p4ulibrary.user_cornor.CreateuserActivity;
-
-//import my.app.p4u.user_cornor.CreateuserActivity;
+import my.app.p4ulibrary.user_cornor.ResetPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-
     private EditText inputEmail, inputPassword;
     private Button btnSignin, btnForgotpassword,btnRegister,btnskip;
     private ProgressBar progressBar;
@@ -45,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         Objects.requireNonNull(getSupportActionBar()).hide();
         FirebaseApp.initializeApp(this);
-        //If user is already logged in then go to respective role activities.
        if(auth.getCurrentUser() != null){
             Log.d(TAG,"User going to view role");
             startActivity(new Intent(LoginActivity.this, ViewRoleActivity.class));
@@ -56,14 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         // set the view now
         setContentView(R.layout.activity_login);
 
-        // Initial different layout resource
         initialise();
-
-        // Launch Reset Password Activity
         btnForgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
                 Log.d(TAG,"ResetPasswordActivity called successfully");
                 finish();
             }
@@ -85,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 i.putExtra("user_name", "USER");
                 i.putExtra("user_email", " ");
                 startActivity(i);
-                Log.d(TAG,"User bypassing login, going to role activity now");
+                Log.d(TAG,"User bypassing login, going to role activity now");file:///home/lenovo/balenaEtcher-1.5.52-x64.AppImage
                 finish();
             }
         });

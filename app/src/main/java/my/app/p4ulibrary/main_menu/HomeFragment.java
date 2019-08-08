@@ -49,24 +49,25 @@ public class HomeFragment extends Fragment {
 	private View v;
 	private TextView tv;
 	public String s;
-	private String newsId=null;
+	private String newsId="-Llm-uGC-KLnFbPCKfji";
+	private FirebaseAuth mAuth;
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.home_fragment, container, false);
 		Context context = container.getContext();
-
-		FirebaseDatabase database = FirebaseDatabase.getInstance();
-		myRef = database.getReference("News");
+		//mAuth = FirebaseAuth.getInstance();
+	//	FirebaseDatabase database = FirebaseDatabase.getInstance();
+		//myRef = database.getReference();
 
 		viewPager = (ViewPager)v.findViewById(R.id.viewpager);
 		tv = (TextView) v.findViewById(R.id.newsmarquee);
 		tv.setSelected(true);  // Set focus to the textview
         tv.setText ("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-	   /* myRef.addValueEventListener (new ValueEventListener () {
+	/*    myRef.addValueEventListener (new ValueEventListener () {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-				show(dataSnapshot);
+			//	show(dataSnapshot);
 			}
 
 			@Override
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment {
 		viewPager.setAdapter(viewPagerAdapter);
 		iconsizesetting (Objects.requireNonNull (getContext ()));
 
-		//                              //////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////
 		l1 = (LinearLayout) v.findViewById(R.id.userlist);
 
 		l2 = (LinearLayout) v.findViewById(R.id.centerlist);

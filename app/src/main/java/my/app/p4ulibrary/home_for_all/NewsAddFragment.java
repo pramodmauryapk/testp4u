@@ -28,20 +28,22 @@ public class NewsAddFragment extends HomeFragment {
     private EditText editText;
     private Button save;
     private View v;
+    private FirebaseAuth mAuth;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_add_news,container,false);
-
+        mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("books");
+        myRef = database.getReference("News");
 
         initViews();
         save.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View view) {
-                //updatenews();
+
+             //   updatenews();
             }
         });
 
@@ -57,7 +59,7 @@ public class NewsAddFragment extends HomeFragment {
         String newsid = myRef.push().getKey();
         String newstext = editText.getText ().toString ();
         News news= new News(newsid, newstext);
-        myRef.setValue (news);
+        //myRef.setValue (news);
         myRef.child(Objects.requireNonNull (newsid)).setValue(news);
         Toast.makeText(getContext(), "News Updated", Toast.LENGTH_LONG).show();
 

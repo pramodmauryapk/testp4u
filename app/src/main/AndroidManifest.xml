@@ -41,6 +41,7 @@
         </activity>
         <activity android:name="my.app.p4ulibrary.ViewRoleActivity" />
         <activity android:name="my.app.p4ulibrary.LoginActivity" />
+        <activity android:name=".user_cornor.ResetPasswordActivity" />
     </application>
 
 </manifest>
