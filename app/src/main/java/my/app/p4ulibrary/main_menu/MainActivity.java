@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         HeaderView =  navigationView.getHeaderView(0);
         username=(TextView)HeaderView.findViewById(R.id.username);
         email=(TextView)HeaderView.findViewById (R.id.email);
-        username.setText("Welcome! "+user_name);
+        username.setText("Welcome ! "+user_name);
         email.setText(user_email);
 
         //Access real time database

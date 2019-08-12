@@ -24,6 +24,7 @@
         <EditText
             android:padding="5dp"
             android:id="@+id/etUserName"
+            android:inputType="text"
             android:layout_weight="4"
             style="@style/createuser_textbox_style"/>
     </LinearLayout>
@@ -43,6 +44,7 @@
             android:padding="5dp"
             android:id="@+id/etEmailID"
             android:layout_weight="4"
+            android:inputType="textEmailAddress"
             style="@style/createuser_textbox_style"/>
     </LinearLayout>
     <LinearLayout
@@ -60,6 +62,7 @@
         <EditText
             android:padding="5dp"
             android:layout_weight="4"
+            android:inputType="phone"
             android:id="@+id/etMobile"
             style="@style/createuser_textbox_style"/>
 
@@ -80,6 +83,7 @@
         <EditText
             android:padding="5dp"
             android:layout_weight="4"
+            android:inputType="text"
             android:id="@+id/tvCenterName"
             style="@style/createuser_textbox_style"/>
     </LinearLayout>
@@ -98,6 +102,7 @@
         <EditText
             android:padding="5dp"
             android:layout_weight="4"
+            android:inputType="text"
             android:id="@+id/etIdentity"
             style="@style/createuser_textbox_style"/>
     </LinearLayout>
@@ -117,6 +122,7 @@
             android:padding="5dp"
             android:layout_weight="4"
             android:id="@+id/tvRole"
+            android:inputType="text"
             style="@style/createuser_textbox_style"/>
     </LinearLayout>
 <LinearLayout

@@ -39,6 +39,7 @@ public class AddUserFragment extends HomeFragment {
 	private ProgressBar progressBar;
 	private View v;
 	private FirebaseAuth auth;
+	private String email,password,aPassword,id,name,role,mobilenumber,address,identity,status;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class AddUserFragment extends HomeFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull  LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.fragment_add_user, container, false);
 		//MainActivity.actionBar.show();
@@ -65,96 +66,103 @@ public class AddUserFragment extends HomeFragment {
 		return v;
 
 	}
-	private void registerUser() {
-		final String email = etEmail.getText().toString().toLowerCase().trim();
-		final String password = etPassword.getText().toString().trim();
-		final String aPassword=etaPassword.getText().toString().trim();
-		final String id = null;
-		final String name = etFullname.getText().toString().toUpperCase();
-		final String role = spRole.getSelectedItem().toString();
-		final String mobilenumber = etMobile.getText().toString();
-		final String address=etAddress.getText().toString().toUpperCase();
-		final String identity=etIdentity.getText().toString().toUpperCase();
-		final String status="1";
-
+	private void get_values(){
+		email = etEmail.getText().toString().toLowerCase().trim();
+		password = etPassword.getText().toString().trim();
+		aPassword=etaPassword.getText().toString().trim();
+		id = null;
+		name = etFullname.getText().toString().toUpperCase();
+		role = spRole.getSelectedItem().toString();
+		mobilenumber = etMobile.getText().toString();
+		address=etAddress.getText().toString().toUpperCase();
+		identity=etIdentity.getText().toString().toUpperCase();
+		status="1";
+	}
+	private Boolean validate(){
 		if (TextUtils.isEmpty(name)) {
 			Toast.makeText(getContext(), "Enter full name!", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 
 		if (TextUtils.isEmpty(role)) {
 			Toast.makeText(getContext(), "Enter role!", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 
 		if (TextUtils.isEmpty(mobilenumber)&&mobilenumber.length()==10) {
 			Toast.makeText(getContext(), "Enter Mobile Number!", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 
 		if (TextUtils.isEmpty(email)) {
 			Toast.makeText(getContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 		if(password.equals(aPassword)) {
 			if (TextUtils.isEmpty(password)) {
 				Toast.makeText(getContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-				return;
+				return false;
 			}
 		}
 		if (password.length() < 6) {
 			Toast.makeText(getContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 		if (TextUtils.isEmpty(address)) {
 			Toast.makeText(getContext(), "Enter Address!", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 		if (TextUtils.isEmpty(identity)) {
 			Toast.makeText(getContext(), "Enter aadhar or Voter id !", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
-		progressBar.setVisibility(View.VISIBLE);
-		auth.createUserWithEmailAndPassword(email, password)
-				.addOnCompleteListener(new OnCompleteListener<AuthResult> () {
-					@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task) {
+		return true;
+	}
+	private void registerUser() {
+		get_values();
+		Boolean ans=validate();
+		if(ans) {
+			progressBar.setVisibility (View.VISIBLE);
+			auth.createUserWithEmailAndPassword (email, password)
+					.addOnCompleteListener (new OnCompleteListener<AuthResult> () {
+						@RequiresApi(api = Build.VERSION_CODES.KITKAT)
+						@Override
+						public void onComplete(@NonNull Task<AuthResult> task) {
 
-						if (task.isSuccessful()) {
+							if (task.isSuccessful ()) {
 
-							User user = new User (
-									id,
-									name,
-									email,
-									role,
-									mobilenumber,
-									address,
-									identity,
-									status
+								User user = new User (
+										id,
+										name,
+										email,
+										role,
+										mobilenumber,
+										address,
+										identity,
+										status
 
-							);
+								);
 
-							FirebaseDatabase.getInstance().getReference("Users")
-									.child((Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser())).getUid())
-									.setValue(user).addOnCompleteListener(new OnCompleteListener<Void> () {
-								@Override
-								public void onComplete(@NonNull Task<Void> task) {
-									progressBar.setVisibility(View.GONE);
-									if (task.isSuccessful()) {
-										Toast.makeText(getContext(), "Registration Success", Toast.LENGTH_LONG).show();
-									}  //display a failure message
+								FirebaseDatabase.getInstance ().getReference ("Users")
+										.child ((Objects.requireNonNull (FirebaseAuth.getInstance ().getCurrentUser ())).getUid ())
+										.setValue (user).addOnCompleteListener (new OnCompleteListener<Void> () {
+									@Override
+									public void onComplete(@NonNull Task<Void> task) {
+										progressBar.setVisibility (View.GONE);
+										if (task.isSuccessful ()) {
+											Toast.makeText (getContext (), "Registration Success", Toast.LENGTH_LONG).show ();
+										}  //display a failure message
 
-								}
-							});
+									}
+								});
 
-						} else {
-							Toast.makeText(getContext(),(Objects.requireNonNull(task.getException())).getMessage(), Toast.LENGTH_LONG).show();
+							} else {
+								Toast.makeText (getContext (), (Objects.requireNonNull (task.getException ())).getMessage (), Toast.LENGTH_LONG).show ();
+							}
 						}
-					}
-				});
+					});
 
-
+		}
 
 	}
 	private void initViews(){

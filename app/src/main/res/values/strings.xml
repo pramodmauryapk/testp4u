@@ -129,5 +129,7 @@
     <string name="menu_feedback">Feedback</string>
     <string name="et_search_book">Enter search term</string>
     <string name="btn_search_book">Search</string>
+    <string name="search_by_subject">Search By Subject</string>
+
 
 </resources>

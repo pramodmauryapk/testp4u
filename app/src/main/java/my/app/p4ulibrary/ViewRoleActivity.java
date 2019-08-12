@@ -29,7 +29,7 @@ public class ViewRoleActivity extends AppCompatActivity {
     private AnimatedCircleLoadingView animatedCircleLoadingView;
     public static int lp = 0;
     private String userID;
-private Intent intent;
+    private Intent intent;
 
 
 
@@ -46,15 +46,13 @@ private Intent intent;
         startPercentMockThread();
             //Access real time database
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        if(mAuth!=null){
-            FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-            //Declare database reference
-            DatabaseReference myRef = mFirebaseDatabase.getReference();
-            FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        //Declare database reference
+        DatabaseReference myRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!=null){
+
             userID = (requireNonNull(user)).getUid();
-
-
-
             myRef.addValueEventListener(new ValueEventListener() {
 
                 @Override
@@ -72,9 +70,9 @@ private Intent intent;
         }
         else
         {
-
-            startActivity(new Intent(ViewRoleActivity.this, CreateuserActivity.class));
+            startActivity(new Intent(ViewRoleActivity.this, WelcomeActivity.class));
             finish();
+
         }
 
 
@@ -90,22 +88,24 @@ private Intent intent;
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
                 User uInfo = new User();
 
-                    uInfo.setUserRole(((requireNonNull(ds.child(userID).getValue(User.class)))).getUserRole()); //set the role
+                uInfo.setUserRole(((requireNonNull(ds.child(userID).getValue(User.class)))).getUserRole()); //set the role
                 uInfo.setUserName(((requireNonNull(ds.child(userID).getValue(User.class)))).getUserName()); //set the role
                 uInfo.setUserEmail(((requireNonNull(ds.child(userID).getValue(User.class)))).getUserEmail()); //set the role
-                 Intent i;
-                 i = new Intent (ViewRoleActivity.this, MainActivity.class);
+                Intent i;
+                i = new Intent (ViewRoleActivity.this, MainActivity.class);
                 i.putExtra("user_role", uInfo.getUserRole());
-                    i.putExtra("user_name", uInfo.getUserName());
-                    i.putExtra("user_email", uInfo.getUserEmail());
+                i.putExtra("user_name", uInfo.getUserName());
+                i.putExtra("user_email", uInfo.getUserEmail());
                 startActivity(i);
                 Log.d(TAG, "Accessed role from user database going to Super User activity");
-                finish();
+
 
             }
         }
         catch (Exception e){
             Log.d(TAG, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"+e);
+
+
             }finally {
                 finish();
         }

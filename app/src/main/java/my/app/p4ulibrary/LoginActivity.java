@@ -73,14 +73,9 @@ public class LoginActivity extends AppCompatActivity {
         btnskip.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View view) {
-                Intent i;
-                i=new Intent(LoginActivity.this, MainActivity.class);
-                i.putExtra("user_role", "USER");
-                i.putExtra("user_name", "USER");
-                i.putExtra("user_email", " ");
-                startActivity(i);
-                Log.d(TAG,"User bypassing login, going to role activity now");file:///home/lenovo/balenaEtcher-1.5.52-x64.AppImage
+                startActivity(new Intent(LoginActivity.this, ViewRoleActivity.class));
                 finish();
+
             }
         });
 

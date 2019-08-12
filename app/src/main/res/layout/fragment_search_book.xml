@@ -60,7 +60,7 @@
                 style="@style/createuser_control_style"
                 android:layout_weight="5"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Search By Author   " />
+                android:text="@string/search_by_author" />
 
             <Spinner
                 android:id="@+id/sp_Book_Author"
@@ -82,7 +82,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="5"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Search By Subject  "/>
+                android:text="@string/search_by_subject"/>
 
             <Spinner
                 android:id="@+id/sp_Book_Subject"
@@ -103,7 +103,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="5"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Search By Cost       "/>
+                android:text="@string/search_by_cost"/>
 
             <Spinner
                 android:id="@+id/sp_Book_Cost"
@@ -115,7 +115,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Check"
+            android:text="@string/check"
             android:background="@drawable/button_shape"
             android:textColor="@color/colorwhite"
             android:textStyle="bold"
