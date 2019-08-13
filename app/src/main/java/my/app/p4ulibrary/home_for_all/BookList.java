@@ -20,7 +20,7 @@ public class BookList extends ArrayAdapter<Book> {
     private Activity context;
     private List<Book> books;
 
-     BookList(Activity context, List<Book> books) {
+     public BookList(Activity context, List<Book> books) {
         super(context, R.layout.layout_all_book, books);
         this.context = context;
         this.books = books;
