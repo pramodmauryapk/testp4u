@@ -31,10 +31,10 @@ public class IssueBookFragment extends HomeFragment {
     private List<Book> books;
     FirebaseHelper helper;
     private DatabaseReference databaseBooks;
-    View v;
+    private View v;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_issue_book,container,false);
           databaseBooks = FirebaseDatabase.getInstance().getReference("books");

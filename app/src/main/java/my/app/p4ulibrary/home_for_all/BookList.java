@@ -9,7 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.AnimatorRes;
+import androidx.annotation.AnyRes;
+import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
+
+import com.google.auto.value.AutoAnnotation;
+import com.google.auto.value.AutoValue;
 
 import java.util.List;
 
@@ -29,6 +35,7 @@ public class BookList extends ArrayAdapter<Book> {
 
     @SuppressLint("SetTextI18n")
     @Override
+    @NonNull
     public View getView(int position, View convertView,@NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_book, null, true);

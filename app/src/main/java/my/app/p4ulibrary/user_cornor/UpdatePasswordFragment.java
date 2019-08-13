@@ -29,7 +29,7 @@ public class UpdatePasswordFragment extends HomeFragment {
     private DatabaseReference myref;
     private String oldpassword,newpassword;
     private EditText oldpass,newpass;
-    String username = "helpmepls";
+    private String username = "helpmepls";
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_update_password, container, false);

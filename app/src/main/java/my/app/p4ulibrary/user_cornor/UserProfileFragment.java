@@ -46,7 +46,7 @@ public class UserProfileFragment extends HomeFragment {
   private TextView location,role;
     private List<User> users;
 private Button save,change;
-LinearLayout l9;
+private LinearLayout l9;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

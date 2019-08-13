@@ -35,6 +35,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
+    @NonNull
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

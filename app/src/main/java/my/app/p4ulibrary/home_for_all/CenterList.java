@@ -28,6 +28,7 @@ public class CenterList extends ArrayAdapter<User> {
 
 
     @Override
+    @NonNull
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_center, null, true);
