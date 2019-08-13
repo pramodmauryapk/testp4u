@@ -50,7 +50,7 @@ public class ManageUserFragment extends HomeFragment {
     private String Name,Email,Mobile,location,Identity,Role,status;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate
                 (R.layout.fragment_all_user, container, false);

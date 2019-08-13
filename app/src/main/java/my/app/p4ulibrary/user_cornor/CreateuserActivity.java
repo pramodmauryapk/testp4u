@@ -96,7 +96,7 @@ public class CreateuserActivity extends AppCompatActivity {
             return false;
         }
 
-        if (TextUtils.isEmpty(mobilenumber)) {
+        if (TextUtils.isEmpty(mobilenumber)&&mobilenumber.length ()!=10) {
             Toast.makeText(this, "Enter Mobile Number!", Toast.LENGTH_SHORT).show();
             return false;
         }

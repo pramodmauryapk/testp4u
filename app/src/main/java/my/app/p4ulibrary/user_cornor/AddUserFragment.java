@@ -89,7 +89,7 @@ public class AddUserFragment extends HomeFragment {
 			return false;
 		}
 
-		if (TextUtils.isEmpty(mobilenumber)&&mobilenumber.length()==10) {
+		if (TextUtils.isEmpty(mobilenumber)&&mobilenumber.length()!=10) {
 			Toast.makeText(getContext(), "Enter Mobile Number!", Toast.LENGTH_SHORT).show();
 			return false;
 		}
