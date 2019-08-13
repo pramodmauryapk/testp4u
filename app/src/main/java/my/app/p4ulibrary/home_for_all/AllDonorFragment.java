@@ -34,7 +34,7 @@ public class AllDonorFragment extends HomeFragment {
     private View v;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate
                 (R.layout.fragment_all_donors, container, false);
@@ -57,13 +57,9 @@ public class AllDonorFragment extends HomeFragment {
         databaseBooks.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clearing the previous artist list
                 donors.clear();
-                //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Book donor = postSnapshot.getValue(Book.class);
-
-
                     donors.add(donor);
 
                 }
@@ -84,7 +80,6 @@ public class AllDonorFragment extends HomeFragment {
                 //creating adapter
 
                 DonorList donorAdapter = new DonorList(getActivity(), donors);
-                //attaching adapter to the listview
                 listViewdonors.setAdapter(donorAdapter);
 
             }

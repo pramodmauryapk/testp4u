@@ -44,14 +44,13 @@ public class UpdateBookFragment extends HomeFragment {
     private Spinner dspinnerYear,dspinnerSubject;
     private Button dbuttonUpdate,dbuttonDelete,dbuttonBack;
     private View dialogView;
-    View v;
+    private View v;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_update_book,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference("books");
-        //getting views
         initViews();
 
         books = new ArrayList<>();
@@ -89,20 +88,13 @@ public class UpdateBookFragment extends HomeFragment {
         databaseBooks.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clearing the previous artist list
                 books.clear();
-                //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
                     Book book = postSnapshot.getValue(Book.class);
-                    //adding artist to the list
                     books.add(book);
 
                 }
-
-                //creating adapter
-                BookList bookAdapter = new BookList(getActivity(), books);
-                //attaching adapter to the listview
+          BookList bookAdapter = new BookList(getActivity(), books);
                 listViewBooks.setAdapter(bookAdapter);
 
             }
@@ -127,9 +119,6 @@ public class UpdateBookFragment extends HomeFragment {
                             String bookDonorTime,
                             String bookHandoverTo,
                             String bookHandoverTime) {
-        //getting the specified artist reference
-       // DatabaseReference dR = FirebaseDatabase.getInstance().getReference("books").child(bookId);
-        //DatabaseReference dR = FirebaseDatabase.getInstance().getReference("books");
 
         Book book = new Book (
                 bookId,
@@ -146,7 +135,6 @@ public class UpdateBookFragment extends HomeFragment {
                 bookHandoverTo,
                 bookHandoverTime);
 
-       // dR.setValue(book);
         databaseBooks.child(Objects.requireNonNull(bookId)).setValue(book);
         Toast.makeText(getContext(), "Book Record Updated", Toast.LENGTH_LONG).show();
     }
@@ -274,9 +262,7 @@ androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.
     }
 
     private void deleteBook(String book_id) {
-        //getting the specified book reference
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("books").child(book_id);
-        //removing book
         dR.removeValue();
         Toast.makeText(getContext(), "Book Deleted", Toast.LENGTH_LONG).show();
 

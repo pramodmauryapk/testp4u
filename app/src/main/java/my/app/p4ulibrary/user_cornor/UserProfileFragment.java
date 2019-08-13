@@ -49,7 +49,7 @@ private Button save,change;
 LinearLayout l9;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate (R.layout.show_user, container, false);
         initViews ();

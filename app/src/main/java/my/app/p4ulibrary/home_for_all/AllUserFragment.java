@@ -41,12 +41,11 @@ public class AllUserFragment extends HomeFragment {
     private View v;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate
                 (R.layout.fragment_all_user, container, false);
         databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
-        //getting views
         openedLine=1;
         initViews();
 
@@ -78,23 +77,15 @@ public class AllUserFragment extends HomeFragment {
         databaseUsers.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clearing the previous artist list
                 users.clear();
-                //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
                     User user = postSnapshot.getValue(User.class);
-                    //adding artist to the list
                     if(Objects.requireNonNull (user).getUserRole().equals("USER")) {
                         users.add(user);
                     }
 
                 }
-
-                //creating adapter
-                UserList userAdapter = new UserList(getActivity(), users);
-                //attaching adapter to the listview
-
+         UserList userAdapter = new UserList(getActivity(), users);
                 listViewUsers.setAdapter(userAdapter);
 
             }

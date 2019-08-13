@@ -40,7 +40,7 @@ public class AllBookFragment extends HomeFragment {
     private View dialogView;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_all_book,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference("books");
@@ -88,20 +88,13 @@ public class AllBookFragment extends HomeFragment {
         databaseBooks.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clearing the previous artist list
-                books.clear();
-                //iterating through all the nodes
+               books.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
                     Book book = postSnapshot.getValue(Book.class);
-                    //adding artist to the list
                     books.add(book);
 
                 }
-
-                //creating adapter
-                BookList bookAdapter = new BookList (getActivity(), books);
-                //attaching adapter to the listview
+                 BookList bookAdapter = new BookList (getActivity(), books);
                 listViewBooks.setAdapter(bookAdapter);
 
             }

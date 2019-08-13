@@ -44,26 +44,21 @@ public class AddBookFragment extends HomeFragment {
     private Spinner spBookSubject,spBookYear;
     private ListView listViewBooks;
     private List<Book> books;
-    View v;
+    private View v;
 
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
     private Button dBack;
     private View dialogView;
-    //our database reference object
+
     private DatabaseReference databaseBooks;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_add_book, container, false);
-        //getting the reference of artists node
         databaseBooks = FirebaseDatabase.getInstance().getReference("books");
-        //getting views
-
         initViews();
-        //list to store books
         books = new ArrayList<>();
-        //adding an onclicklistener to button
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -71,7 +66,6 @@ public class AddBookFragment extends HomeFragment {
                 addBooks();
             }
         });
-         //attaching listener to listview
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -94,6 +88,7 @@ public class AddBookFragment extends HomeFragment {
         });
         return v;
     }
+
     private void addBooks() {
 
         //getting the values to save
@@ -228,9 +223,7 @@ public class AddBookFragment extends HomeFragment {
         LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);
-
         init_dialog_views();
-
         dialogBuilder.setTitle("Book Record");
         final AlertDialog b = dialogBuilder.create();
         b.show();

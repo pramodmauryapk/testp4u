@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 import my.app.p4ulibrary.R;
@@ -18,7 +20,7 @@ public class CenterList extends ArrayAdapter<User> {
     private Activity context;
     private List<User> users;
 
-    public CenterList(Activity context, List<User> users) {
+   CenterList(Activity context, List<User> users) {
         super(context, R.layout.layout_all_center, users);
         this.context = context;
         this.users = users;
@@ -26,7 +28,7 @@ public class CenterList extends ArrayAdapter<User> {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_center, null, true);
         if (position % 2 == 1) {

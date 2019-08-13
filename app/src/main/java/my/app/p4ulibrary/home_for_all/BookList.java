@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 import my.app.p4ulibrary.R;
@@ -18,7 +20,7 @@ public class BookList extends ArrayAdapter<Book> {
     private Activity context;
     private List<Book> books;
 
-    public BookList(Activity context, List<Book> books) {
+     BookList(Activity context, List<Book> books) {
         super(context, R.layout.layout_all_book, books);
         this.context = context;
         this.books = books;
@@ -27,7 +29,7 @@ public class BookList extends ArrayAdapter<Book> {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView,@NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_book, null, true);
 

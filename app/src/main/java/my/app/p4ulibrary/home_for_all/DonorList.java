@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 import my.app.p4ulibrary.R;
@@ -18,7 +20,7 @@ public class DonorList extends ArrayAdapter<Book> {
     private Activity context;
     private List<Book> books;
 
-    public DonorList(Activity context, List<Book> books) {
+     DonorList(Activity context, List<Book> books) {
         super(context, R.layout.layout_all_donor, books);
         this.context = context;
         this.books = books;
@@ -26,7 +28,7 @@ public class DonorList extends ArrayAdapter<Book> {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView,@NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_donor, null, true);
         if (position % 2 == 1) {

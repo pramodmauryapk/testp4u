@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -29,7 +30,7 @@ public class UpdatePasswordFragment extends HomeFragment {
     private String oldpassword,newpassword;
     private EditText oldpass,newpass;
     String username = "helpmepls";
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_update_password, container, false);
         oldpass = (EditText) v.findViewById(R.id.et_oldpass);

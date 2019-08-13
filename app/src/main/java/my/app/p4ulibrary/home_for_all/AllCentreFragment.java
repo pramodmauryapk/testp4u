@@ -41,7 +41,7 @@ public class AllCentreFragment extends HomeFragment {
     private View v;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate
                 (R.layout.fragment_all_center, container, false);
@@ -77,20 +77,14 @@ public class AllCentreFragment extends HomeFragment {
         databaseUsers.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clearing the previous artist list
                 users.clear();
-                //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
                     User user = postSnapshot.getValue(User.class);
                     if(Objects.requireNonNull (user).getUserRole().equals("HEAD")) {
                         users.add (user);
                     }
                 }
-
-                //creating adapter
-                CenterList userAdapter = new CenterList (getActivity(), users);
-                //attaching adapter to the listview
+                 CenterList userAdapter = new CenterList (getActivity(), users);
                 listViewUsers.setAdapter(userAdapter);
 
             }

@@ -7,9 +7,6 @@ import android.view.Gravity;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
-/**
- * @author jlmd
- */
 @SuppressLint({"ViewConstructor", "AppCompatCustomView"})
 public class PercentIndicatorView extends TextView {
 

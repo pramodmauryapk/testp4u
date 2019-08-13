@@ -5,10 +5,6 @@ import android.content.Context;
 
 import my.app.p4ulibrary.R;
 
-
-/**
- * @author jlmd
- */
 @SuppressLint("ViewConstructor")
 public class FinishedOkView extends FinishedView {
 

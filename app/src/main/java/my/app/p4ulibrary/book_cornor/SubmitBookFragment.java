@@ -30,7 +30,6 @@ public class SubmitBookFragment extends HomeFragment {
     private ListView listViewBooks;
     private List<Book> books;
     FirebaseHelper helper;
-    //our database reference object
     private DatabaseReference databaseBooks;
     View v;
     @Nullable
@@ -38,12 +37,9 @@ public class SubmitBookFragment extends HomeFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_submit_book,container,false);
-//getting the reference of artists node
         databaseBooks = FirebaseDatabase.getInstance().getReference("books");
-        //getting views
         initViews();
 
-        //list to store books
         books = new ArrayList<>();
        // helper=new FirebaseHelper(databaseBooks);
        // spBookAuthor.setAdapter(new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,helper.retrieve()));
@@ -74,20 +70,13 @@ public class SubmitBookFragment extends HomeFragment {
         databaseBooks.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clearing the previous artist list
                 books.clear();
-                //iterating through all the nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
                     Book book = postSnapshot.getValue(Book.class);
-                    //adding artist to the list
                     books.add(book);
 
                 }
-
-                //creating adapter
                 BookList bookAdapter = new BookList(getActivity(), books);
-                //attaching adapter to the listview
                 listViewBooks.setAdapter(bookAdapter);
 
             }

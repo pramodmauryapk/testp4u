@@ -6,9 +6,6 @@ import android.content.Context;
 import my.app.p4ulibrary.R;
 
 
-/**
- * @author jlmd
- */
 @SuppressLint("ViewConstructor")
 public class FinishedFailureView extends FinishedView {
 

@@ -13,9 +13,6 @@ import my.app.p4ulibrary.Progress.animator.AnimationState;
 import my.app.p4ulibrary.Progress.component.ComponentViewAnimation;
 
 
-/**
- * @author jlmd
- */
 public abstract class FinishedView extends ComponentViewAnimation {
 
   private static final int MIN_IMAGE_SIZE = 1;
