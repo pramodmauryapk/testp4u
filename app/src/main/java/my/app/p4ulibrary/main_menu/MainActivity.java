@@ -97,14 +97,14 @@ public class MainActivity extends AppCompatActivity
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         addMenuItemInNavMenuDrawer ();
 
 
     // NavigationView Header
         HeaderView =  navigationView.getHeaderView(0);
-        username=(TextView)HeaderView.findViewById(R.id.username);
-        email=(TextView)HeaderView.findViewById (R.id.email);
+        username=HeaderView.findViewById(R.id.username);
+        email=HeaderView.findViewById (R.id.email);
         username.setText("Welcome ! "+user_name);
         email.setText(user_email);
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            List fragmentList = getSupportFragmentManager().getFragments();
+            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
             boolean handled = false;
             for(Object f : fragmentList) {
                 if(f instanceof HomeFragment) {
@@ -204,7 +204,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.

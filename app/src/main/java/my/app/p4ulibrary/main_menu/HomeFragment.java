@@ -1,6 +1,7 @@
 package my.app.p4ulibrary.main_menu;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class HomeFragment extends Fragment {
 	private Runnable runnable;
 	private int[] pagerIndex = {-1};
 	private ViewPagerAdapter viewPagerAdapter;
+	@SuppressLint("SetTextI18n")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -83,9 +85,10 @@ public class HomeFragment extends Fragment {
 			}
 		});
 */
-		viewPagerAdapter = new ViewPagerAdapter (getContext ());
+		viewPagerAdapter = new ViewPagerAdapter (context);
 		viewPager.setAdapter(viewPagerAdapter);
-		iconsizesetting (Objects.requireNonNull (getContext ()));
+
+		iconsizesetting (Objects.requireNonNull (context));
 
 		////////////////////////////////////////////////////////////////////
 		l1 =  v.findViewById(R.id.userlist);
@@ -127,7 +130,7 @@ public class HomeFragment extends Fragment {
 		return v;
 
 	}
-	/*
+/*
 	@Override
 	public void onStart() {
 		h.postDelayed(new Runnable() {
@@ -170,7 +173,7 @@ public class HomeFragment extends Fragment {
 	private void switchFragment(Fragment fragment) {
 
 
-		Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+		(requireNonNull(getActivity())).getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment)
 				.addToBackStack("my_fragment").commit();
 	}

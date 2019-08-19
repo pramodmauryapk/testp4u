@@ -56,6 +56,8 @@ public class AddBookFragment extends HomeFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_add_book, container, false);
+
+
         databaseBooks = FirebaseDatabase.getInstance().getReference("books");
         initViews();
         books = new ArrayList<>();
@@ -251,32 +253,32 @@ public class AddBookFragment extends HomeFragment {
 
 
     private void initViews(){
-        etBookId=(EditText)v.findViewById (R.id.etBookId);
-        etBookAuthor = (EditText) v.findViewById(R.id.etBookAuthor);
-        etBookTitle = (EditText) v.findViewById(R.id.etBookTitle);
-        etBookCost = (EditText) v.findViewById(R.id.etBookcost);
-        etDonor = (EditText) v.findViewById(R.id.etDonor);
-        etDonorMobile = (EditText) v.findViewById(R.id.etDonorMobile);
-        etBookLocation = (EditText) v.findViewById(R.id.etBookLocation);
-        spBookSubject = (Spinner) v.findViewById(R.id.spBookSubject);
-        spBookYear = (Spinner) v.findViewById(R.id.spBookYear);
-        listViewBooks = (ListView) v.findViewById(R.id.listViewBooks);
-        btnAddBook = (Button) v.findViewById(R.id.btnAddBook);
+        etBookId=v.findViewById (R.id.etBookId);
+        etBookAuthor = v.findViewById(R.id.etBookAuthor);
+        etBookTitle = v.findViewById(R.id.etBookTitle);
+        etBookCost =  v.findViewById(R.id.etBookcost);
+        etDonor = v.findViewById(R.id.etDonor);
+        etDonorMobile = v.findViewById(R.id.etDonorMobile);
+        etBookLocation =  v.findViewById(R.id.etBookLocation);
+        spBookSubject =  v.findViewById(R.id.spBookSubject);
+        spBookYear =  v.findViewById(R.id.spBookYear);
+        listViewBooks = v.findViewById(R.id.listViewBooks);
+        btnAddBook = v.findViewById(R.id.btnAddBook);
     }
     private void init_dialog_views(){
-        dBookid=(TextView)dialogView.findViewById (R.id.tvBookid);
-        dTitle = (TextView) dialogView.findViewById(R.id.tvTitle);
-        dCost = (TextView) dialogView.findViewById(R.id.tvCost);
-        dAuthor = (TextView) dialogView.findViewById(R.id.tvAuthor);
-        dYear = (TextView) dialogView.findViewById(R.id.tvYear);
-        dSubject = (TextView) dialogView.findViewById(R.id.tvSubject);
-        dLocation = (TextView) dialogView.findViewById(R.id.tvLocation);
-        dDonor = (TextView) dialogView.findViewById(R.id.tvDonor);
-        dDonorMobile = (TextView) dialogView.findViewById(R.id.tvDonorMobile);
-        dDonorTime = (TextView) dialogView.findViewById(R.id.tvDonateTime);
-        dIssueTo = (TextView) dialogView.findViewById(R.id.tvBookIssueto);
-        dIssueTime = (TextView) dialogView.findViewById(R.id.tvIssueTime);
-        dBack=(Button)dialogView.findViewById(R.id.dbuttonBack);
+        dBookid=dialogView.findViewById (R.id.tvBookid);
+        dTitle =  dialogView.findViewById(R.id.tvTitle);
+        dCost =  dialogView.findViewById(R.id.tvCost);
+        dAuthor = dialogView.findViewById(R.id.tvAuthor);
+        dYear =  dialogView.findViewById(R.id.tvYear);
+        dSubject = dialogView.findViewById(R.id.tvSubject);
+        dLocation = dialogView.findViewById(R.id.tvLocation);
+        dDonor =  dialogView.findViewById(R.id.tvDonor);
+        dDonorMobile = dialogView.findViewById(R.id.tvDonorMobile);
+        dDonorTime = dialogView.findViewById(R.id.tvDonateTime);
+        dIssueTo = dialogView.findViewById(R.id.tvBookIssueto);
+        dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
+        dBack=dialogView.findViewById(R.id.dbuttonBack);
     }
 
     private String get_current_time(){

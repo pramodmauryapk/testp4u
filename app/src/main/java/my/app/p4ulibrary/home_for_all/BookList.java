@@ -34,9 +34,10 @@ public class BookList extends ArrayAdapter<Book> {
 
 
 
-    @Override
+    @SuppressLint("SetTextI18n")
     @NonNull
-    public View getView(int position, View convertView,@NonNull ViewGroup parent) {
+    @Override
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_book, null, true);
 
@@ -45,11 +46,11 @@ public class BookList extends ArrayAdapter<Book> {
         } else {
             listViewItem.setBackgroundColor(Color.CYAN);
         }
-        TextView textViewid = (TextView) listViewItem.findViewById(R.id.tvbookidd);
-        TextView textViewAuthor = (TextView) listViewItem.findViewById(R.id.textView_Book_Author);
-        TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.textView_BookTitle);
-        TextView textViewYear = (TextView) listViewItem.findViewById(R.id.textView_BookYear);
-        TextView textViewCost = (TextView) listViewItem.findViewById(R.id.textView_Book_Cost);
+        TextView textViewid =  listViewItem.findViewById(R.id.tvbookidd);
+        TextView textViewAuthor =listViewItem.findViewById(R.id.textView_Book_Author);
+        TextView textViewTitle =  listViewItem.findViewById(R.id.textView_BookTitle);
+        TextView textViewYear =  listViewItem.findViewById(R.id.textView_BookYear);
+        TextView textViewCost = listViewItem.findViewById(R.id.textView_Book_Cost);
 
         Book book = books.get(position);
         textViewid.setText (book.getBookId ()+"-");

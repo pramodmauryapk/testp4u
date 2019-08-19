@@ -10,16 +10,7 @@
     </style>
 
 
-
-
-<style name="TwoWayView">
-<item name="android:orientation">horizontal</item>
-</style>
-
-<style name="DialogAnimation">
-<item name="android:windowEnterAnimation">@anim/left_slide_in</item>
-</style>
-<style name="createuser_control_style">
+    <style name="createuser_control_style">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:textSize">20sp</item>
@@ -45,11 +36,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorRed</item>
     </style>
-    <style name="control_type2" >
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-    </style>
+
     <style name="Relative_layout_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -58,30 +45,7 @@
         <item name="android:paddingRight">15dp</item>
         <item name="android:paddingTop">15dp</item>
     </style>
-    <style name="rel_layout_style_menu">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@color/slider2</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:layout_marginBottom">0.1dp</item>
-    </style>
-<style name="image_style_menu">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginLeft">7dp</item>
-    <item name="android:background">@null</item>
-</style>
-    <style name="textview_style_menu">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginLeft">40dp</item>
-        <item name="android:layout_marginTop">2dp</item>
-        <item name="android:textColor">@color/slider3</item>
-        <item name="android:textSize">15sp</item>
 
-    </style>
     <style name="AppTheme.FullScreen" parent="@style/Theme.AppCompat.Light">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
