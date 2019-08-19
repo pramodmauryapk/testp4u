@@ -7,23 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".main_menu.MainActivity"
     tools:showIn="@layout/app_bar_main">
-    <LinearLayout
-        android:id="@+id/headerlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:background="@drawable/upbar"
-            android:layout_gravity="bottom"
-            android:layout_height="20dp"
-            android:contentDescription="@string/parvarish_knowledge_center">
 
-        </ImageView>
-
-    </LinearLayout>
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"

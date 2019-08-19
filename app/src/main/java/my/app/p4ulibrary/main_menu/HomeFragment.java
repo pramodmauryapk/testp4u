@@ -127,10 +127,9 @@ public class HomeFragment extends Fragment {
 		return v;
 
 	}
+	/*
 	@Override
 	public void onStart() {
-
-
 		h.postDelayed(new Runnable() {
 						  public void run() {
 							  pagerIndex[0]++;
@@ -146,7 +145,7 @@ public class HomeFragment extends Fragment {
 				, delay);
 
 		super.onStart();
-	}
+	}*/
 	private void show(DataSnapshot dataSnapshot){
 
 			for (DataSnapshot ds : dataSnapshot.getChildren ()) {
