@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -24,7 +23,8 @@
             <EditText
                 android:id="@+id/et_fullname"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
                 android:layout_below="@+id/tv_createusername"
                 style="@style/createuser_textbox_style"
                 android:inputType="textPersonName" />
@@ -37,31 +37,75 @@
 
             <EditText
                 android:id="@+id/et_createemail"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_createemail"
+                android:padding="12dp"
                 style="@style/createuser_textbox_style"
                 android:inputType="textEmailAddress"
                 android:hint="@string/username_gmail_com" />
-            <TextView
-                android:id="@+id/tv_createmobile"
-                style="@style/createuser_control_style"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lin3"
                 android:layout_below="@+id/et_createemail"
-                android:text="@string/mobile_number" />
+                android:orientation="horizontal"
+                android:weightSum="10">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/lin1"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_createmobile"
+                    style="@style/createuser_control_style"
+                    android:text="@string/mobile_number" />
+                <EditText
+                    android:id="@+id/et_createmobile"
+                    android:padding="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_createmobile"
+                    android:hint="@string/_1234567890"
+                    android:inputType="phone"
+                    style="@style/createuser_textbox_style"/>
 
-            <EditText
-                android:id="@+id/et_createmobile"
-                android:layout_below="@+id/tv_createmobile"
-                android:hint="@string/_1234567890"
-                android:inputType="phone"
-                style="@style/createuser_textbox_style"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/lin2"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_below="@+id/et_createemail"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_role"
+                    android:text="@string/role"
+                    style="@style/createuser_control_style"/>
+                <Spinner
+                    android:id="@+id/sp_role"
+                    android:padding="12dp"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/role_array"
+                    style="@style/createuser_textbox_style"/>
+
+
+
+            </LinearLayout>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tv_createpassword"
-                android:layout_below="@+id/et_createmobile"
+                android:layout_below="@+id/lin3"
                 android:text="@string/password"
+                android:layout_height="wrap_content"
                 style="@style/createuser_control_style"/>
 
             <EditText
+                android:layout_height="wrap_content"
                 android:id="@+id/et_createpassword"
+                android:padding="12dp"
                 android:layout_below="@+id/tv_createpassword"
                 android:inputType="textPassword"
                 style="@style/createuser_textbox_style"/>
@@ -72,31 +116,24 @@
                 style="@style/createuser_control_style"/>
 
             <EditText
+                android:layout_height="wrap_content"
                 android:id="@+id/et_confirmpassword"
+                android:padding="12dp"
                 android:layout_below="@+id/tv_comfirmpassword"
                 android:inputType="textPassword"
                 style="@style/createuser_textbox_style"/>
-            <TextView
-                android:id="@+id/tv_role"
-                android:layout_below="@+id/et_confirmpassword"
-                android:text="@string/role"
-                style="@style/createuser_control_style"/>
-            <Spinner
-                android:id="@+id/sp_role"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:entries="@array/role_array"
-                android:layout_below="@id/tv_role"
-                style="@style/createuser_textbox_style"/>
+
 
             <TextView
                 android:id="@+id/tv_address"
-                android:layout_below="@+id/sp_role"
+                android:layout_below="@+id/et_confirmpassword"
                 android:text="@string/address"
                 style="@style/createuser_control_style"/>
 
             <EditText
                 android:id="@+id/et_address"
+                android:padding="12dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_address"
                 android:inputType="textPersonName"
                 android:hint="@string/address"
@@ -109,7 +146,9 @@
 
             <EditText
                 android:id="@+id/et_identity"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_identity"
+                android:padding="12dp"
                 android:inputType="textPersonName"
                 android:hint="@string/aadhar_id_voter_id"
                 style="@style/createuser_textbox_style"/>

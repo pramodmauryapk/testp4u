@@ -33,7 +33,7 @@ public class BookList extends ArrayAdapter<Book> {
     }
 
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     @NonNull
     public View getView(int position, View convertView,@NonNull ViewGroup parent) {

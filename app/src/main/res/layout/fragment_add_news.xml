@@ -29,6 +29,7 @@
     android:layout_below="@+id/lay0"
     android:layout_width="match_parent"
     android:layout_height="200sp"
+    android:padding="12dp"
     style="@style/createuser_textbox_style"
     android:lines="8"
     android:minLines="6"

@@ -47,7 +47,6 @@
             style="@style/createuser_textbox_style"
             android:layout_weight="3"
             android:padding="5dp"
-            android:paddingEnd="15dp"
             android:id="@+id/spBookSubject"
             android:entries="@array/subject_list"
             tools:ignore="RtlSymmetry" />
@@ -55,7 +54,6 @@
             style="@style/createuser_textbox_style"
             android:id="@+id/spBookYear"
             android:padding="5dp"
-            android:paddingStart="15dp"
             android:layout_weight="7"
             android:entries="@array/pub_year"
             tools:ignore="RtlSymmetry" />
@@ -82,7 +80,6 @@
         style="@style/createuser_textbox_style"
         android:id="@+id/etBookLocation"
         android:padding="5dp"
-        android:paddingStart="15dp"
         android:hint="@string/book_location"
         android:layout_weight="3"
         android:inputType="textAutoComplete"
@@ -108,7 +105,6 @@
         android:id="@+id/etDonorMobile"
         android:hint="@string/donor_mobile"
         android:padding="5dp"
-        android:paddingStart="15dp"
         android:layout_weight="5"
         android:inputType="phone"
         tools:ignore="RtlSymmetry" />

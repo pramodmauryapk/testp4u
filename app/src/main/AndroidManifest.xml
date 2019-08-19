@@ -44,6 +44,7 @@
         <activity android:name=".user_cornor.ResetPasswordActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".ExitActivity" />
+        <activity android:name=".user_cornor.SetprofileimageFragment" />
     </application>
 
 </manifest>

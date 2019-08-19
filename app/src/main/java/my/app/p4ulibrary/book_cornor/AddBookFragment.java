@@ -51,9 +51,9 @@ public class AddBookFragment extends HomeFragment {
     private View dialogView;
 
     private DatabaseReference databaseBooks;
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_add_book, container, false);
         databaseBooks = FirebaseDatabase.getInstance().getReference("books");

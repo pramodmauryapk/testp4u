@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
 	private int[] pagerIndex = {-1};
 	private ViewPagerAdapter viewPagerAdapter;
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.home_fragment, container, false);
 		Context context = container.getContext();
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
 		//FirebaseDatabase database = FirebaseDatabase.getInstance();
 		//myRef = database.getReference();
 
-		viewPager = v.findViewById(R.id.viewpager);
+		viewPager = v.findViewById(R.id.viewpagerr);
 		tv =  v.findViewById(R.id.newsmarquee);
 		tv.setSelected(true);  // Set focus to the textview
         tv.setText ("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
