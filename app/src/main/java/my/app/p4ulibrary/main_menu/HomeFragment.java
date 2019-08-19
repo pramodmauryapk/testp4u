@@ -4,6 +4,7 @@ package my.app.p4ulibrary.main_menu;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -51,19 +52,25 @@ public class HomeFragment extends Fragment {
 	public String s;
 	private String newsId="-Llm-uGC-KLnFbPCKfji";
 	private FirebaseAuth mAuth;
+	private Handler h = new Handler();
+	private int delay = 3000; //1 second
+	private Runnable runnable;
+	private int[] pagerIndex = {-1};
+	private ViewPagerAdapter viewPagerAdapter;
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.home_fragment, container, false);
 		Context context = container.getContext();
 		//mAuth = FirebaseAuth.getInstance();
-	//	FirebaseDatabase database = FirebaseDatabase.getInstance();
+		//FirebaseDatabase database = FirebaseDatabase.getInstance();
 		//myRef = database.getReference();
 
-		viewPager = (ViewPager)v.findViewById(R.id.viewpager);
-		tv = (TextView) v.findViewById(R.id.newsmarquee);
+		viewPager = v.findViewById(R.id.viewpager);
+		tv =  v.findViewById(R.id.newsmarquee);
 		tv.setSelected(true);  // Set focus to the textview
         tv.setText ("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
 	/*    myRef.addValueEventListener (new ValueEventListener () {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -76,19 +83,18 @@ public class HomeFragment extends Fragment {
 			}
 		});
 */
-		ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter (getContext ());
-
+		viewPagerAdapter = new ViewPagerAdapter (getContext ());
 		viewPager.setAdapter(viewPagerAdapter);
 		iconsizesetting (Objects.requireNonNull (getContext ()));
 
 		////////////////////////////////////////////////////////////////////
-		l1 = (LinearLayout) v.findViewById(R.id.userlist);
+		l1 =  v.findViewById(R.id.userlist);
 
-		l2 = (LinearLayout) v.findViewById(R.id.centerlist);
+		l2 = v.findViewById(R.id.centerlist);
 
-		l3 = (LinearLayout) v.findViewById(R.id.booklist);
+		l3 = v.findViewById(R.id.booklist);
 
-		l4 = (LinearLayout) v.findViewById(R.id.donorlist);
+		l4 = v.findViewById(R.id.donorlist);
 		l1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -121,14 +127,32 @@ public class HomeFragment extends Fragment {
 		return v;
 
 	}
+	@Override
+	public void onStart() {
 
+
+		h.postDelayed(new Runnable() {
+						  public void run() {
+							  pagerIndex[0]++;
+							  if (pagerIndex[0] >= viewPagerAdapter.getCount()) {
+								  pagerIndex[0] = 0;
+							  }
+
+							  viewPager.setCurrentItem(pagerIndex[0]);
+							  runnable=this;
+							  h.postDelayed(runnable, delay);
+						  }
+					  }
+				, delay);
+
+		super.onStart();
+	}
 	private void show(DataSnapshot dataSnapshot){
 
 			for (DataSnapshot ds : dataSnapshot.getChildren ()) {
 				News news = new News ();
 				news.setMarqueeText (((requireNonNull (ds.child (newsId).getValue (News.class)))).getMarqueeText ()); //set the role
-
-			tv.setText (news.getMarqueeText ());
+				tv.setText (news.getMarqueeText ());
 
 
 			}
@@ -183,7 +207,7 @@ public class HomeFragment extends Fragment {
 		DisplayMetrics metrics = new DisplayMetrics ();
 		display.getMetrics(metrics);
 		int width = metrics.widthPixels;
-		int height = metrics.heightPixels;
+		//int height = metrics.heightPixels;
 
 		View view1 = v.findViewById(R.id.userlist);
 		View view2 = v.findViewById(R.id.centerlist);

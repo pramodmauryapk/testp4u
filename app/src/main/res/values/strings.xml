@@ -69,7 +69,6 @@
     <string name="aadhar_id_voter_id">Aadhar ID/Voter ID</string>
     <string name="create_new_user">Create New User</string>
     <string name="exiting">Exiting…</string>
-    <string name="forgot_fassword">Forgot Fassword</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="forget_password">Forget Password</string>
@@ -130,6 +129,11 @@
     <string name="et_search_book">Enter search term</string>
     <string name="btn_search_book">Search</string>
     <string name="search_by_subject">Search By Subject</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="skip_login">Skip Login</string>
+    <string name="donor_list">Donor List</string>
+    <string name="center_list">Center List</string>
+    <string name="user_list">User List</string>
 
 
 </resources>

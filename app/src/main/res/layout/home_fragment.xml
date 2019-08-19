@@ -1,4 +1,5 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -14,12 +15,26 @@
             android:layout_height="180dp">
 
         </androidx.viewpager.widget.ViewPager>
+        <TextView
+            android:id="@+id/newsmarquee"
+           android:layout_below="@+id/viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:textColor="#001EFF"
+            android:text=""
+            android:singleLine="true" />
 
-
+   </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/viewpager"
         android:id="@+id/l2"
         android:gravity="center_horizontal">
         <LinearLayout
@@ -27,18 +42,20 @@
             android:padding="5dp"
             android:id="@+id/userlist"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:src="@drawable/users"/>
+            android:src="@drawable/users"
+            android:contentDescription="@string/parvarish_knowledge_center" />
          <TextView
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
 
-             android:text="User List"
+             android:text="@string/user_list"
              android:textStyle="bold"
              android:textSize="15sp"
              android:gravity="center_horizontal"
@@ -47,21 +64,23 @@
         <LinearLayout
             android:id="@+id/centerlist"
             android:padding="5dp"
-            android:layout_toRightOf="@+id/userlist"
+            android:layout_toEndOf="@+id/userlist"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:src="@drawable/centers"/>
+                android:src="@drawable/centers"
+                android:contentDescription="@string/parvarish_knowledge_center" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Center List"
+                android:text="@string/center_list"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorRed"/>
@@ -71,21 +90,23 @@
         <LinearLayout
             android:padding="5dp"
             android:id="@+id/booklist"
-            android:layout_toRightOf="@+id/centerlist"
+            android:layout_toEndOf="@+id/centerlist"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:src="@drawable/books"/>
+                android:src="@drawable/books"
+                android:contentDescription="@string/parvarish_knowledge_center" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Books List"
+                android:text="@string/books_list"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorRed"/>
@@ -95,38 +116,27 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:gravity="center_horizontal"
-            android:layout_toRightOf="@+id/booklist"
+            android:layout_toEndOf="@+id/booklist"
             android:id="@+id/donorlist"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
-                android:src="@drawable/donatenow"/>
+                android:src="@drawable/donatenow"
+                android:contentDescription="@string/parvarish_knowledge_center" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Donor List"
+                android:text="@string/donor_list"
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:textColor="@color/colorRed"/>
         </LinearLayout>
 
     </RelativeLayout>
-       <TextView
-           android:id="@+id/newsmarquee"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentEnd="true"
-           android:ellipsize="marquee"
-           android:layout_below="@+id/l2"
-           android:fadingEdge="horizontal"
-           android:marqueeRepeatLimit="marquee_forever"
-           android:scrollHorizontally="true"
-           android:textColor="#001EFF"
-           android:text=""
-           android:singleLine="true" />
-   </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

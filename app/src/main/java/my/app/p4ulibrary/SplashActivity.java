@@ -83,7 +83,6 @@ public class SplashActivity extends Activity {
         });
 */
     }
-    @SuppressWarnings("deprecation")
     public static boolean isNetworkStatusAvialable (Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null)

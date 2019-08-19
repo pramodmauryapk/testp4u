@@ -16,6 +16,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:contentDescription="@string/parvarish_knowledge_center"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:id="@+id/iv_logo"
@@ -36,6 +37,7 @@
                 android:textSize="20sp"/>
 
             <EditText
+                android:autofillHints="@string/username_gmail_com"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:inputType="textEmailAddress"
@@ -49,6 +51,7 @@
                 android:maxLines="1"/>
 
             <EditText
+                android:autofillHints="************"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:inputType="textPassword"
@@ -69,6 +72,7 @@
                 android:layout_marginTop="30dp"
                 android:visibility="gone" />
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
@@ -91,9 +95,10 @@
 
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/forgot_fassword"
+                android:text="@string/forgot_password"
                 android:layout_weight="5"
                 android:layout_marginEnd="5dp"
                 android:id="@+id/btn_forgotpassword"
@@ -102,6 +107,7 @@
                 android:textStyle="bold"
                />
     <Button
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register"
@@ -124,7 +130,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp">
             <ImageView
+
                 android:id="@+id/btn_google"
+                android:contentDescription="@string/parvarish_knowledge_center"
                 android:layout_weight="5"
                 android:layout_marginEnd="5dp"
                 android:layout_width="match_parent"
@@ -136,11 +144,12 @@
                 android:layout_marginEnd="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-               android:src="@drawable/facebook"/>
+               android:src="@drawable/facebook"
+                android:contentDescription="@string/parvarish_knowledge_center" />
             </LinearLayout>
             <Button
                 style="@style/createuser_control_style"
-                android:text="Skip Login"
+                android:text="@string/skip_login"
                 android:id="@+id/btn_skip"
                 android:gravity="center"
                 android:layout_below="@+id/li2"
