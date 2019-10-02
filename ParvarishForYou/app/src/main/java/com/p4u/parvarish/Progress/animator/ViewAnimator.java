@@ -13,7 +13,7 @@ import com.p4u.parvarish.Progress.component.finish.FinishedFailureView;
 import com.p4u.parvarish.Progress.component.finish.FinishedOkView;
 
 public class ViewAnimator implements ComponentViewAnimation.StateListener {
-
+  private static final String TAG = "ViewAniamtor";
   private InitialCenterCircleView initialCenterCircleView;
   private RightCircleView rightCircleView;
   private SideArcsView sideArcsView;

@@ -37,7 +37,7 @@ import com.p4u.parvarish.login.UserRegistration;
 import com.p4u.parvarish.user_pannel.UserProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "ListViewActivity";
+    private static final String TAG = "MainActivity";
     private Fragment newContent;
     private Bundle bundle;
     private FirebaseAuth mAuth;

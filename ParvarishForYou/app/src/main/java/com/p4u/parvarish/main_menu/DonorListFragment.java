@@ -25,7 +25,7 @@ import com.p4u.parvarish.admin_pannel.Book;
 
 
 public class DonorListFragment extends Fragment {
-
+    private static final String TAG = "DonorListFragment";
     private ListView listViewdonors;
     private List<Book> donors;
 

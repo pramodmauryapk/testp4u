@@ -8,7 +8,7 @@ import com.p4u.parvarish.Progress.exception.NullStateListenerException;
 
 
 public abstract class ComponentViewAnimation extends View {
-
+  private static final String TAG = "ComponentViewAnimation";
   protected final int parentWidth;
   protected final int mainColor;
   protected final int secondaryColor;

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 
 public class ExitActivity extends AppCompatActivity {
-
+    private static final String TAG = "ExitActivity";
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,7 +13,7 @@ import com.p4u.parvarish.Progress.animator.AnimationState;
 
 @SuppressLint("ViewConstructor")
 public class InitialCenterCircleView extends ComponentViewAnimation {
-
+  private static final String TAG = "InitialCenterCircleView";
   private Paint paint;
   private float minRadius;
   private float currentCircleWidth;

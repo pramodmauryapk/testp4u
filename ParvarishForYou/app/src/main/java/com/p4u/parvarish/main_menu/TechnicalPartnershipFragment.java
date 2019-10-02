@@ -13,7 +13,7 @@ import com.p4u.parvarish.R;
 
 public class TechnicalPartnershipFragment extends Fragment {
 
-
+    private static final String TAG = "TechnicalPartnershipFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

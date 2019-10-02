@@ -33,7 +33,7 @@ import com.p4u.parvarish.R;
 import static java.util.Objects.requireNonNull;
 
 public class UserProfileFragment extends Fragment {
-    private static final String TAG = "UserProfileActivity";
+    private static final String TAG = "UserProfileFragment";
     private String userID,userName,userEmail,userMobile,userIdentity,userPassword,userAgainPassword,userRole,userAddress,userStatus,userImg;
   private View v;
   private EditText username,email,mobile,identity,password,againpassword;

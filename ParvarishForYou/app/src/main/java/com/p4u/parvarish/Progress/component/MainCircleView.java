@@ -13,7 +13,7 @@ import com.p4u.parvarish.Progress.animator.AnimationState;
 
 @SuppressLint("ViewConstructor")
 public class MainCircleView extends ComponentViewAnimation {
-
+  private static final String TAG = "MainCircleView";
   private Paint paint;
   private RectF oval;
   private int arcFillAngle = 0;

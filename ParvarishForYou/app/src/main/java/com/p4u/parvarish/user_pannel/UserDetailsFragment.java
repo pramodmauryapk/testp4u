@@ -23,7 +23,7 @@ import com.p4u.parvarish.R;
 
 public class UserDetailsFragment extends Fragment {
 
-
+    private static final String TAG = "UserDetailsFragment";
     private TextView nameDetailTextView;
     private TextView Email;
     private TextView Role;

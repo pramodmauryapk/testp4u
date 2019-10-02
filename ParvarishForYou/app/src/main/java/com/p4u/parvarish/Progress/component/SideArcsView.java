@@ -14,7 +14,7 @@ import com.p4u.parvarish.Progress.animator.AnimationState;
 
 @SuppressLint("ViewConstructor")
 public class SideArcsView extends ComponentViewAnimation {
-
+  private static final String TAG = "SideArcsView";
   private static final int MIN_RESIZE_ANGLE = 8;
   private static final int MAX_RESIZE_ANGLE = 45;
   private static final int INITIAL_LEFT_ARC_START_ANGLE = 100;

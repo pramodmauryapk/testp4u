@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
     private View v;
 
     private Context context;
-    private static final String TAG="Home";
+    private static final String TAG="HomeFragment";
     private List<String> list;
     private WebBannerAdapter webBannerAdapter;
     private DatabaseReference mDatabaseRef;

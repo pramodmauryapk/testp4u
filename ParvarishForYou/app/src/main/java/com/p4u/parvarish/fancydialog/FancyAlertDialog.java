@@ -37,6 +37,7 @@ public class FancyAlertDialog {
 
 
     public static class Builder{
+        private static final String TAG = "FancyAlertDialog";
         private String title,message,positiveBtnText,negativeBtnText,input;
         private Activity activity;
         private int icon;

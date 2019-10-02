@@ -14,7 +14,7 @@ import com.p4u.parvarish.Progress.component.ComponentViewAnimation;
 
 
 public abstract class FinishedView extends ComponentViewAnimation {
-
+  private static final String TAG = "FinishedView";
   private static final int MIN_IMAGE_SIZE = 1;
   protected final int tintColor;
   private int maxImageSize;

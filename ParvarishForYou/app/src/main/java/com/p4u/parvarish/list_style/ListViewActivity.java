@@ -29,7 +29,7 @@ import com.p4u.parvarish.admin_pannel.Book;
 
 public class ListViewActivity extends AppCompatActivity {
 
-
+    private static final String TAG = "ListViewActivity";
     private List<Book> dataList = new ArrayList<>();
     private int redColor;
     private RecyclerView.Adapter adapter;

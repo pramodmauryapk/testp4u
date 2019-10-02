@@ -37,7 +37,7 @@ import static java.util.Objects.requireNonNull;
 public class Login_email extends AppCompatActivity {
 
     ImageView top_curve;
-   private static final String TAG = "LoginActivity";
+   private static final String TAG = "Login_email";
     TextInputEditText inputEmail, inputPassword;
     TextInputLayout tf1,tf2;
     private ProgressBar progressBar;

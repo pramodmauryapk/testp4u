@@ -17,6 +17,7 @@ import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 public class CenterList extends ArrayAdapter<Teacher> {
+    private static final String TAG = "CenterList";
     private Activity context;
     private List<Teacher> users;
 

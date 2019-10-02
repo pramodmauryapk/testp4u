@@ -17,6 +17,7 @@ import com.p4u.parvarish.R;
 import com.p4u.parvarish.admin_pannel.Book;
 
 public class DonorList extends ArrayAdapter<Book> {
+    private static final String TAG = "DonorList";
     private Activity context;
     private List<Book> books;
 

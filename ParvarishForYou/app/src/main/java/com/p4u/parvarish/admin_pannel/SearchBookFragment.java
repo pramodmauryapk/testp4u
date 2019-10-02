@@ -31,7 +31,7 @@ import java.util.Objects;
 import com.p4u.parvarish.R;
 
 public class SearchBookFragment extends Fragment {
-
+    private static final String TAG = "SearchBookFragment";
     private ListView listViewBooks;
     private List<Book> books;
     //our database reference object

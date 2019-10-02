@@ -17,13 +17,14 @@ import java.util.List;
 import com.p4u.parvarish.R;
 
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.GridItemViewHolder> {
+public class GridRecyclerAdapter extends RecyclerView.Adapter<GridRecyclerAdapter.GridItemViewHolder> {
+    private static final String TAG = "GridRecyclerAdapter";
     private Context context;
     private List<Menu> mItemList;
     private AdapterView.OnItemClickListener mOnItemClickListener;
 
 
-    public RecycleAdapter(Context context, List<Menu> mItemList) {
+    public GridRecyclerAdapter(Context context, List<Menu> mItemList) {
         this.context = context;
         this.mItemList = mItemList;
     }
@@ -68,9 +69,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.GridItem
     public class GridItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mimg;
         TextView mTitle, mPosition;
-        RecycleAdapter mAdapter;
+        GridRecyclerAdapter mAdapter;
 
-        GridItemViewHolder(View itemView, RecycleAdapter mAdapter) {
+        GridItemViewHolder(View itemView, GridRecyclerAdapter mAdapter) {
             super(itemView);
             this.mAdapter = mAdapter;
 

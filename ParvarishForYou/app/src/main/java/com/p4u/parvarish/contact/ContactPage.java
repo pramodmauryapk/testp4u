@@ -26,6 +26,7 @@ import com.p4u.parvarish.R;
 
 
 public class ContactPage {
+    private static final String TAG = "ContactPage";
     private final Context mContext;
     private final LayoutInflater mInflater;
     private final View mView;

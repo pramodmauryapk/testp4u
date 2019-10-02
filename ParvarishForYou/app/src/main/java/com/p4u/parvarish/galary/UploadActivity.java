@@ -34,7 +34,7 @@ import java.util.Objects;
 
 
 public class UploadActivity extends AppCompatActivity {
-
+    private static final String TAG = "UplaoadActivity";
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private EditText nameEditText;

@@ -14,7 +14,7 @@ import com.p4u.parvarish.Progress.animator.AnimationState;
 
 @SuppressLint("ViewConstructor")
 public class RightCircleView extends ComponentViewAnimation {
-
+  private static final String TAG = "RightCircleView";
   private int rightMargin;
   private int bottomMargin;
   private Paint paint;

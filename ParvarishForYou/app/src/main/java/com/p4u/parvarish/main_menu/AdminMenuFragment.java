@@ -33,7 +33,7 @@ import com.p4u.parvarish.admin_pannel.SubmitBookFragment;
 import com.p4u.parvarish.admin_pannel.UpdateBookFragment;
 import com.p4u.parvarish.galary.ManageGalleryFragment;
 import com.p4u.parvarish.grid.Menu;
-import com.p4u.parvarish.grid.RecycleAdapter;
+import com.p4u.parvarish.grid.GridRecyclerAdapter;
 import com.p4u.parvarish.marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.UserListFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -42,7 +42,7 @@ import static java.util.Objects.requireNonNull;
 
 public class AdminMenuFragment extends Fragment {
 
-
+    private static final String TAG = "AdminMenuFragment";
     private FirebaseAuth mAuth;
     private View v;
     DatabaseReference myRef;
@@ -77,7 +77,7 @@ public class AdminMenuFragment extends Fragment {
     private void add_click_listner() {
         RecyclerView mRecyclerView = v.findViewById(R.id.cardList);
         mRecyclerView.setLayoutManager(new GridLayoutManager(context,screenWidth/200));
-        RecycleAdapter mAdapter = new RecycleAdapter(getContext(), mList);
+        GridRecyclerAdapter mAdapter = new GridRecyclerAdapter(getContext(), mList);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

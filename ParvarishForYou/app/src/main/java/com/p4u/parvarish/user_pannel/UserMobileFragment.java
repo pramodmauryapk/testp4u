@@ -27,7 +27,7 @@ import java.util.Objects;
 import com.p4u.parvarish.R;
 
 public class UserMobileFragment extends Fragment {
-
+    private static final String TAG = "UserMobileFragment";
     private ListView listViewUsers;
     private List<Teacher> users;
     private View dialogView;

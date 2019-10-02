@@ -21,6 +21,7 @@ import com.p4u.parvarish.main_menu.HomeFragment;
 
 
 public class UpdatePasswordFragment extends Fragment {
+    private static final String TAG = "UpdatePasswordFragment";
     private String oldpassword,newpassword;
     private EditText oldpass,newpass;
 

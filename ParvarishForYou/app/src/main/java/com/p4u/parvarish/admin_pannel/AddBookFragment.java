@@ -33,6 +33,7 @@ import java.util.Objects;
 import com.p4u.parvarish.R;
 
 public class AddBookFragment extends Fragment {
+    private static final String TAG = "AddBookFragment";
     private EditText etBookId,etBookAuthor,etBookTitle,etBookCost,etDonor,etDonorMobile,etBookLocation;
     private Button btnAddBook;
     private Spinner spBookSubject,spBookYear;

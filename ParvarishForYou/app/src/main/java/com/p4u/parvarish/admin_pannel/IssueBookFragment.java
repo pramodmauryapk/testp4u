@@ -42,7 +42,7 @@ import com.p4u.parvarish.fancydialog.Icon;
 
 public class IssueBookFragment extends Fragment {
 
-    private static final String TAG = "IssueBook";
+    private static final String TAG = "IssueBookFragment";
     private ListView listViewBooks;
     private View dialogView;
     private List<Book> books;

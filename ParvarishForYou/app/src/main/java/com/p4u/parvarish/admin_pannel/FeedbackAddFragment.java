@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.p4u.parvarish.R;
 
 public class FeedbackAddFragment extends Fragment {
-
+    private static final String TAG = "FeedbackAddFragment";
 
     private DatabaseReference myref;
     private EditText editText;

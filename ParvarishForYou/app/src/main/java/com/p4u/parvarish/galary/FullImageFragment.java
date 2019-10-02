@@ -19,7 +19,7 @@ public class FullImageFragment extends Fragment {
 
 
     private static final String DRAWABLE_RESOURE = "resource";
-
+    private static final String TAG = "FullImageFragment";
 
     @Nullable
     @Override

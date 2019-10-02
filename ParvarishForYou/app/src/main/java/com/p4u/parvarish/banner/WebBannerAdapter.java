@@ -17,7 +17,7 @@ import com.p4u.parvarish.R;
 
 
 public class WebBannerAdapter extends RecyclerView.Adapter<WebBannerAdapter.MzViewHolder> {
-
+    private static final String TAG = "WebBannerAdapter";
     private Context context;
     private List<String> urlList;
     private BannerLayout.OnBannerItemClickListener onBannerItemClickListener;

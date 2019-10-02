@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 @SuppressLint({"ViewConstructor", "AppCompatCustomView"})
 public class PercentIndicatorView extends TextView {
-
+  private static final String TAG = "PercentIndicatorView";
   private final int parentWidth;
   private int textColor;
 

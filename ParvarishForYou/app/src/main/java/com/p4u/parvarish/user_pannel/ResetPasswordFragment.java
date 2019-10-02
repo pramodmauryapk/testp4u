@@ -26,7 +26,7 @@ import static java.util.Objects.requireNonNull;
 
 public class ResetPasswordFragment extends Fragment {
 
-    private static final String TAG = "Reset Activity";
+    private static final String TAG = "ResetPasswordFragment";
     private EditText inputEmail;
     private FirebaseAuth auth;
     private ProgressBar progressBar;

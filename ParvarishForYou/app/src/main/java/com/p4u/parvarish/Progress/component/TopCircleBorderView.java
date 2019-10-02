@@ -14,7 +14,7 @@ import com.p4u.parvarish.Progress.animator.AnimationState;
 
 @SuppressLint("ViewConstructor")
 public class TopCircleBorderView extends ComponentViewAnimation {
-
+  private static final String TAG = "TopCircleBorderView";
   private static final int MIN_ANGLE = 25;
   private static final int MAX_ANGLE = 180;
   private Paint paint;

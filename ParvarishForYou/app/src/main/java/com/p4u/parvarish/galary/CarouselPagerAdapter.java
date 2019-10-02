@@ -12,7 +12,7 @@ import com.p4u.parvarish.R;
 import java.util.Objects;
 
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
-
+    private static final String TAG = "CarouselPageAdapter";
     final static float BIG_SCALE = 1.0f;
     private final static float SMALL_SCALE = 0.7f;
     private final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;

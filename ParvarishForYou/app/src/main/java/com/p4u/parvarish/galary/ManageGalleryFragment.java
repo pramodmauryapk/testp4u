@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
 
 public class ManageGalleryFragment extends Fragment {
 
-
+    private static final String TAG = "ManageGalleryFragment";
     private Button openTeachersActivityBtn,openUploadActivityBtn;
     private View v;
     private RatingBar ratingBar;

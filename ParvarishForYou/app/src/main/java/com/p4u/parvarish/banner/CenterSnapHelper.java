@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 public class CenterSnapHelper extends RecyclerView.OnFlingListener {
-
+    private static final String TAG = "CenterSnapHelper";
     private RecyclerView mRecyclerView;
     private Scroller mGravityScroller;
 

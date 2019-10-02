@@ -15,7 +15,7 @@ import com.p4u.parvarish.R;
 import static java.util.Objects.requireNonNull;
 
 public class Login_mobile extends AppCompatActivity {
-
+    private static final String TAG = "Login_mobile";
     EditText mobile_number;
     TextInputLayout inputLayout;
     @Override

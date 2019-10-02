@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import com.p4u.parvarish.R;
 
 public class CropOptionAdapter extends ArrayAdapter<CropOption> {
+    private static final String TAG = "CropOptionAdapter";
     private ArrayList<CropOption> mOptions;
     private LayoutInflater mInflater;
 

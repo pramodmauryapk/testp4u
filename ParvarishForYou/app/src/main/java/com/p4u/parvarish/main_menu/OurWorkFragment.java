@@ -20,7 +20,7 @@ import com.p4u.parvarish.R;
 
 public class OurWorkFragment extends Fragment {
 
-
+    private static final String TAG = "OurWorkFragment";
     private EditText editText;
     private TextView textView;
     private Button button;

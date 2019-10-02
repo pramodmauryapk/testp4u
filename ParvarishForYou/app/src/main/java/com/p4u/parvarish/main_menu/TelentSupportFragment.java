@@ -13,7 +13,7 @@ import com.p4u.parvarish.R;
 
 public class TelentSupportFragment extends Fragment {
 
-
+    private static final String TAG = "TelentSupportFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

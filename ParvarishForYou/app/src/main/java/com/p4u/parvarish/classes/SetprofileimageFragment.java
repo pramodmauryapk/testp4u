@@ -33,20 +33,19 @@ import com.p4u.parvarish.R;
 import static android.app.Activity.RESULT_OK;
 
 public class SetprofileimageFragment extends Fragment {
-
+    private static final String TAG = "SetprofileimageFragment";
     private Uri mImageCaptureUri;
     private ImageView mImageView;
 
     private static final int PICK_FROM_CAMERA = 1;
     private static final int CROP_FROM_CAMERA = 2;
     private static final int PICK_FROM_FILE = 3;
-    private View v;
     private Context context;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        v = inflater.inflate(R.layout.fragment_setprofileimage, container, false);
+        View v = inflater.inflate(R.layout.fragment_setprofileimage, container, false);
         context = container.getContext();
 
         final String [] items			= new String [] {"Take from camera", "Select from gallery"};

@@ -17,7 +17,7 @@ import com.p4u.parvarish.R;
 
 public class ContactUsFragment extends Fragment {
 
-
+    private static final String TAG = "ContactUsFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

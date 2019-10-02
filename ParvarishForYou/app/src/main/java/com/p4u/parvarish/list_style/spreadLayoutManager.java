@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class spreadLayoutManager extends RecyclerView.LayoutManager {
-
+    private static final String TAG = "spreadLayoutManager";
     private int scroll = 0;
     private SparseArray<Rect> locationRects = new SparseArray<>();
     private SparseBooleanArray attachedItems = new SparseBooleanArray();

@@ -16,6 +16,7 @@ import java.util.List;
 import com.p4u.parvarish.R;
 
 public class UserList extends ArrayAdapter<Teacher> {
+    private static final String TAG = "UserList";
     private Activity context;
     private List<Teacher> users;
 

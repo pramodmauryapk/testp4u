@@ -29,7 +29,7 @@ import com.p4u.parvarish.R;
 
 
 public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnItemClickListener {
-
+    private static final String TAG = "ImageItemsFragment";
     private RecyclerAdapter mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;

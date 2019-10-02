@@ -16,6 +16,7 @@ import java.util.Objects;
 import com.p4u.parvarish.R;
 
 public class ImageGalleryFragment extends Fragment {
+    private static final String TAG = "ImageGalleryFragment";
     final static int LOOPS = 1000;
     public CarouselPagerAdapter adapter;
     ViewPager pager;

@@ -31,7 +31,7 @@ import com.p4u.parvarish.user_pannel.Teacher;
 
 
 public class CentreListFragment extends Fragment {
-
+    private static final String TAG = "CenterListFragment";
     private ListView listViewUsers;
     private List<Teacher> users;
     private View dialogView;

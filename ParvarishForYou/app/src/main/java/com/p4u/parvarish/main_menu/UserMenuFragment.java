@@ -29,13 +29,13 @@ import java.util.Stack;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.galary.ImageGalleryFragment;
 import com.p4u.parvarish.grid.Menu;
-import com.p4u.parvarish.grid.RecycleAdapter;
+import com.p4u.parvarish.grid.GridRecyclerAdapter;
 
 import static java.util.Objects.requireNonNull;
 
 public class UserMenuFragment extends HomeFragment{
 
-
+    private static final String TAG = "UserMenuFragment";
     private FirebaseAuth mAuth;
     private View v;
     DatabaseReference myRef;
@@ -82,7 +82,7 @@ public class UserMenuFragment extends HomeFragment{
         GridLayoutManager gd=new GridLayoutManager(context,screenWidth/200 );
 
         mRecyclerView.setLayoutManager(gd);
-        RecycleAdapter mAdapter = new RecycleAdapter(getContext(), mList);
+        GridRecyclerAdapter mAdapter = new GridRecyclerAdapter(getContext(), mList);
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -37,6 +37,7 @@ import java.util.Objects;
 import com.p4u.parvarish.R;
 
 public class UpdateBookFragment extends Fragment {
+    private static final String TAG = "UpdateBookFragment";
     private ListView listViewBooks;
     private List<Book> books;
 

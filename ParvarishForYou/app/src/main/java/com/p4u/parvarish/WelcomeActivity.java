@@ -26,6 +26,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 import static java.util.Objects.requireNonNull;
 
 public class WelcomeActivity extends AppCompatActivity {
+    private static final String TAG = "WelcomeActivity";
     private AnimatedCircleLoadingView animatedCircleLoadingView;
     FirebaseUser user;
     String user_name,user_email,user_roll,user_img;

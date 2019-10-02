@@ -58,7 +58,7 @@ public class UserRegistration extends AppCompatActivity {
 
     LinearLayout already_have_account_layout;
     CardView register_card;
-    private static final String TAG = "CreateuserFragment";
+    private static final String TAG = "UserRegistration";
     TextInputLayout tlname,tlpassword,tlapassword,tlemail,tlmobile,tladdress,tlidentity;
     private TextInputEditText etFullname, etPassword,etaPassword, etEmail, etMobile,etAddress,etIdentity;
     private FirebaseAuth auth;
@@ -127,6 +127,7 @@ public class UserRegistration extends AppCompatActivity {
     }
 
     public void login(View view) {
+        startActivity(new Intent(this, Login_email.class));
         finish();
     }
     public void registerButton(View view) {

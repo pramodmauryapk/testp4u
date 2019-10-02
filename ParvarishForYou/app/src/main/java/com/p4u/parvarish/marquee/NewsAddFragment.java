@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.p4u.parvarish.R;
 
 public class NewsAddFragment extends Fragment {
-
+    private static final String TAG = "NewsAddFragment";
     private String newsid,newstext;
     private DatabaseReference myRef;
     private EditText editText;

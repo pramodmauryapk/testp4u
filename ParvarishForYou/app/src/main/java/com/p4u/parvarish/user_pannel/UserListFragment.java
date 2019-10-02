@@ -38,7 +38,7 @@ import static java.util.Objects.requireNonNull;
 
 public class UserListFragment extends Fragment implements RecyclerAdapter.OnItemClickListener{
 
-
+    private static final String TAG = "UserListFragment";
     private RecyclerAdapter mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;

@@ -20,7 +20,7 @@ import com.p4u.parvarish.login.Login_email;
 public class SplashActivity extends Activity {
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 5000;
-    private static final String TAG="Splash Activity";
+    private static final String TAG="SplashActivity";
    // private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
