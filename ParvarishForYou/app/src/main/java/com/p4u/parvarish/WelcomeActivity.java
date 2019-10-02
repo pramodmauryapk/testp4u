@@ -48,6 +48,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 myref.addValueEventListener(new ValueEventListener() {
 
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Log.d(TAG, "Accessing database");

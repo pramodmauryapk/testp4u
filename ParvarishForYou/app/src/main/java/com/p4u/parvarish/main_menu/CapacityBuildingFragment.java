@@ -14,14 +14,11 @@ import com.p4u.parvarish.R;
 public class CapacityBuildingFragment extends Fragment {
 
 
-
-    private View v;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_capacity_building,container,false);
+        View v = inflater.inflate(R.layout.fragment_capacity_building, container, false);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 

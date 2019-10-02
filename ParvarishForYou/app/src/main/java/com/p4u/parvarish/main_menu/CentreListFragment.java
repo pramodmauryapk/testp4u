@@ -85,9 +85,8 @@ public class CentreListFragment extends Fragment {
                         users.add (user);
                     }
                 }
-                HashSet hs = new HashSet();
 
-                hs.addAll(users); // users= name of arrayList from which u want to remove duplicates
+                HashSet hs = new HashSet(users); // users= name of arrayList from which u want to remove duplicates
 
                 users.clear();
                 users.addAll(hs);

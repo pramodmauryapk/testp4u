@@ -18,13 +18,11 @@ public class AboutUsFragment extends Fragment {
 
     private DatabaseReference myref;
 
-    private View v;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_about_us,container,false);
+        View v = inflater.inflate(R.layout.fragment_about_us, container, false);
 
 
 

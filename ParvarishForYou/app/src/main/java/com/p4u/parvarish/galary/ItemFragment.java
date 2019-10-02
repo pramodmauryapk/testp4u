@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -37,24 +38,20 @@ public class ItemFragment extends Fragment {
 
     private int screenWidth;
     private int screenHeight;
-    private FirebaseStorage mStorage;
-    private DatabaseReference mDatabaseRef;
-    private ValueEventListener mDBListener;
     private List<Image_Model> mImageModels;
-    List<String> list;
-    ImageView imageView;
-   // private int[] imageArray = new int[]{};
+    private List<String> list;
+    // private int[] imageArray = new int[]{};
     private int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
             R.drawable.image3, R.drawable.image4, R.drawable.image5,
             R.drawable.image6, R.drawable.image7, R.drawable.image8,
             R.drawable.image9, R.drawable.image10};
 
-    public static Fragment newInstance(ImageGalleryFragment context, int pos, float scale) {
+    static Fragment newInstance(ImageGalleryFragment context, int pos, float scale) {
         Bundle b = new Bundle();
         b.putInt(POSITON, pos);
         b.putFloat(SCALE, scale);
 
-        return Fragment.instantiate(context.getActivity(), ItemFragment.class.getName(), b);
+        return Fragment.instantiate(requireNonNull(context.getActivity()), ItemFragment.class.getName(), b);
     }
 
     @Override
@@ -65,12 +62,12 @@ public class ItemFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (container == null) {
             return null;
         }
 
-        final int postion = this.getArguments().getInt(POSITON);
+        final int postion = requireNonNull(this.getArguments()).getInt(POSITON);
         float scale = this.getArguments().getFloat(SCALE);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(screenWidth / 2, screenHeight / 2);
@@ -80,7 +77,7 @@ public class ItemFragment extends Fragment {
 
         TextView textView = linearLayout.findViewById(R.id.text);
         CarouselLayout root = linearLayout.findViewById(R.id.root_container);
-        imageView = linearLayout.findViewById(R.id.pagerImg);
+        ImageView imageView = linearLayout.findViewById(R.id.pagerImg);
 
         textView.setText("Gallery item: " + postion);
         imageView.setLayoutParams(layoutParams);
@@ -109,12 +106,13 @@ public class ItemFragment extends Fragment {
         return linearLayout;
     }
     private void get_images(){
-        mStorage = FirebaseStorage.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("uploaded_image");
+        FirebaseStorage mStorage = FirebaseStorage.getInstance();
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("uploaded_image");
 
-        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        //   mAdapter.notifyDataSetChanged();
+        ValueEventListener mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 list.clear();
                 for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren()) {
@@ -125,12 +123,12 @@ public class ItemFragment extends Fragment {
 
 
                 }
-             //   mAdapter.notifyDataSetChanged();
+                //   mAdapter.notifyDataSetChanged();
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

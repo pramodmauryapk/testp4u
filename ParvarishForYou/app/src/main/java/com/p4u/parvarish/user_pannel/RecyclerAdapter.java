@@ -62,10 +62,10 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
 
-        public TextView nameTextView,descriptionTextView,dateTextView;
-        public ImageView teacherImageView;
+        TextView nameTextView,descriptionTextView,dateTextView;
+        ImageView teacherImageView;
 
-        public RecyclerViewHolder(View itemView) {
+        RecyclerViewHolder(View itemView) {
             super(itemView);
             nameTextView =itemView.findViewById ( R.id.nameTextView );
             descriptionTextView = itemView.findViewById(R.id.descriptionTextView);

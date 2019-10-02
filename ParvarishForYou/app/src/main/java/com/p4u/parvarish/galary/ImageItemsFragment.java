@@ -23,34 +23,31 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.p4u.parvarish.R;
 
 
 public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnItemClickListener {
 
-    private RecyclerView mRecyclerView;
     private RecyclerAdapter mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
     private List<Image_Model> mImageModels;
-    View v;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_image_items,container,false);
+        View v = inflater.inflate(R.layout.fragment_image_items, container, false);
 
 
-
-
-        mRecyclerView =v. findViewById(R.id.mRecyclerView);
+        RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mProgressBar =v. findViewById(R.id.myDataLoaderProgressBar);
+        mProgressBar = v. findViewById(R.id.myDataLoaderProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
 
         mImageModels = new ArrayList<> ();
@@ -63,13 +60,13 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
 
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 mImageModels.clear();
 
                 for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren()) {
                     Image_Model upload = teacherSnapshot.getValue(Image_Model.class);
-                    upload.setKey(teacherSnapshot.getKey());
+                    Objects.requireNonNull(upload).setKey(teacherSnapshot.getKey());
                     mImageModels.add(upload);
                 }
                 mAdapter.notifyDataSetChanged();
@@ -77,12 +74,12 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
         });
-return v;
+    return v;
     }
 
 

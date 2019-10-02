@@ -41,7 +41,7 @@ public class ManageGalleryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ManageGalleryFragment.this.startActivity(new Intent(ManageGalleryFragment.this.getContext(), UploadActivity.class));
-                ManageGalleryFragment.this.getActivity().finish();
+                requireNonNull(ManageGalleryFragment.this.getActivity()).finish();
             }
         });
 

@@ -1,6 +1,7 @@
 package com.p4u.parvarish.galary;
 
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -8,21 +9,23 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.p4u.parvarish.R;
 
+import java.util.Objects;
+
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
-    public final static float BIG_SCALE = 1.0f;
-    public final static float SMALL_SCALE = 0.7f;
-    public final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
+    final static float BIG_SCALE = 1.0f;
+    private final static float SMALL_SCALE = 0.7f;
+    private final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
     private ImageGalleryFragment context;
     private FragmentManager fragmentManager;
     private float scale;
 
-    public CarouselPagerAdapter(ImageGalleryFragment context, FragmentManager fm) {
+    CarouselPagerAdapter(ImageGalleryFragment context, FragmentManager fm) {
         super(fm);
         this.fragmentManager = fm;
         this.context = context;
     }
-
+@NonNull
     @Override
     public Fragment getItem(int position) {
         // make the first pager bigger than others
@@ -78,8 +81,8 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     }
 
     private CarouselLayout getRootView(int position) {
-        return (CarouselLayout) fragmentManager.findFragmentByTag(this.getFragmentTag(position))
-                .getView().findViewById(R.id.root_container);
+        return (CarouselLayout) Objects.requireNonNull(Objects.requireNonNull(fragmentManager.findFragmentByTag(this.getFragmentTag(position)))
+                .getView()).findViewById(R.id.root_container);
     }
 
     private String getFragmentTag(int position) {

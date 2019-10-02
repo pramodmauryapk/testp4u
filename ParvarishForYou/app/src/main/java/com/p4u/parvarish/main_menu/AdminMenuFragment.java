@@ -49,10 +49,10 @@ public class AdminMenuFragment extends Fragment {
     private List<Menu> mList = new ArrayList<>();
     private String Role;
     private FirebaseUser user;
-    Context context;
+    private Context context;
     private int screenWidth;
-    private int screenHeight;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -164,8 +164,8 @@ public class AdminMenuFragment extends Fragment {
 
     private void getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        screenHeight = displaymetrics.heightPixels;
+        requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
     }
     // switching fragment

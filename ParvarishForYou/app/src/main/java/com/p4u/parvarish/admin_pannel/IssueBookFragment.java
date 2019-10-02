@@ -225,7 +225,7 @@ public class IssueBookFragment extends Fragment {
                                     .setIcon(R.drawable.logo, Icon.Visible)
                                     .OnPositiveClicked(new FancyAlertDialogListener() {
                                         @Override
-                                        public boolean OnClick() {
+                                        public void OnClick() {
                                             updateBook(dbookId,
                                                     dbookTitle,
                                                     dbookAuthor,
@@ -239,15 +239,13 @@ public class IssueBookFragment extends Fragment {
                                                     IssueName,
                                                     get_current_time());
                                             Toast.makeText(IssueBookFragment.this.getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
-                                            return true;
                                         }
                                     })
                                     .OnNegativeClicked(new FancyAlertDialogListener() {
                                         @Override
-                                        public boolean OnClick() {
+                                        public void OnClick() {
                                             Toast.makeText(IssueBookFragment.this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
-                                            return false;
                                         }
                                     })
                                     .build();
@@ -310,16 +308,14 @@ public class IssueBookFragment extends Fragment {
                 .setIcon(R.drawable.logo, Icon.Visible)
                 .OnPositiveClicked(new FancyAlertDialogListener() {
                     @Override
-                    public boolean OnClick() {
-                        return true;
+                    public void OnClick() {
                     }
                 })
                 .OnNegativeClicked(new FancyAlertDialogListener() {
                     @Override
-                    public boolean OnClick() {
+                    public void OnClick() {
                         Toast.makeText(IssueBookFragment.this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
-                        return false;
                     }
                 })
                 .build();

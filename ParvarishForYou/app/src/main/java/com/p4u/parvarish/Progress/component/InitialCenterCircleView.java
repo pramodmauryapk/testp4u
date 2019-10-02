@@ -15,7 +15,6 @@ import com.p4u.parvarish.Progress.animator.AnimationState;
 public class InitialCenterCircleView extends ComponentViewAnimation {
 
   private Paint paint;
-  private RectF oval;
   private float minRadius;
   private float currentCircleWidth;
   private float currentCircleHeight;
@@ -39,7 +38,7 @@ public class InitialCenterCircleView extends ComponentViewAnimation {
   }
 
   private void initOval() {
-    oval = new RectF ();
+    RectF oval = new RectF();
     minRadius = (15 * parentWidth) / 700;
     currentCircleWidth = minRadius;
     currentCircleHeight = minRadius;
@@ -131,8 +130,8 @@ public class InitialCenterCircleView extends ComponentViewAnimation {
       @Override
       public void onAnimationEnd(Animator animation) {
         setState(AnimationState.MAIN_CIRCLE_SCALED_DISAPPEAR);
-        currentCircleWidth = circleRadius + (strokeWidth / 2);
-        currentCircleHeight = circleRadius + (strokeWidth / 2);
+        currentCircleWidth = circleRadius + (float)(strokeWidth / 2);
+        currentCircleHeight = circleRadius + (float)(strokeWidth / 2);
       }
 
       @Override

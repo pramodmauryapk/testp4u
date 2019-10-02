@@ -34,7 +34,6 @@ import static java.util.Objects.requireNonNull;
 
 public class UserProfileFragment extends Fragment {
     private static final String TAG = "UserProfileActivity";
-   ;
     private String userID,userName,userEmail,userMobile,userIdentity,userPassword,userAgainPassword,userRole,userAddress,userStatus,userImg;
   private View v;
   private EditText username,email,mobile,identity,password,againpassword;
@@ -141,8 +140,6 @@ private LinearLayout l9;
             }
         }catch (Exception e){
             Log.d(TAG, "Failed to retrive values"+e);
-        }finally {
-
         }
     }
     private void updatedetails(String ID,

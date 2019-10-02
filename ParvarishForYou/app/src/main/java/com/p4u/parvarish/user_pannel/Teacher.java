@@ -9,7 +9,6 @@ public class Teacher {
     private String userName;
     private String key;
     private String userEmail;
-    private int position;
     private String userPassword;
     private String userRole;
     private String userMobile;
@@ -23,7 +22,6 @@ public class Teacher {
         //empty constructor needed
     }
     public Teacher (int position){
-        this.position = position;
     }
 
 
@@ -68,14 +66,14 @@ public class Teacher {
         this.imageURL = imageURL;
     }
     @Exclude
-    public String getKey() {
+    String getKey() {
         return key;
     }
     @Exclude
-    public void setKey(String key) {
+    void setKey(String key) {
         this.key = key;
     }
-    public String getUserPassword() {
+    String getUserPassword() {
         return userPassword;
     }
 
@@ -110,7 +108,7 @@ public class Teacher {
         this.userIdentity = userIdentity;
     }
 
-    public String getUserStatus() {
+    String getUserStatus() {
         return userStatus;
     }
     public void setUserStatus(String userStatus) {

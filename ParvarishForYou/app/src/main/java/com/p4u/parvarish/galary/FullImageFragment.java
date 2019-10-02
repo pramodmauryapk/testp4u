@@ -18,10 +18,6 @@ import static java.util.Objects.requireNonNull;
 public class FullImageFragment extends Fragment {
 
 
-
-    private View v;
-    private ImageView showimage;
-    private Button show;
     private static final String DRAWABLE_RESOURE = "resource";
 
 
@@ -29,14 +25,14 @@ public class FullImageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_full_image,container,false);
+        View v = inflater.inflate(R.layout.fragment_full_image, container, false);
 
 
         initViews();
-        showimage = v.findViewById(R.id.img);
-        show = v.findViewById(R.id.btnClose);
+        ImageView showimage = v.findViewById(R.id.img);
+        Button show = v.findViewById(R.id.btnClose);
 
-        int drawbleResource=getArguments().getInt(DRAWABLE_RESOURE,0);
+        int drawbleResource= requireNonNull(getArguments()).getInt(DRAWABLE_RESOURE,0);
         showimage.setImageResource(drawbleResource);
 
         show.setOnClickListener(new View.OnClickListener() {

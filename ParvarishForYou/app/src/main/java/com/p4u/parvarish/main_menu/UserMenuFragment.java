@@ -43,13 +43,13 @@ public class UserMenuFragment extends HomeFragment{
     private String Role;
     private FirebaseUser user;
 
-    Context context;
+    private Context context;
     private int screenWidth;
-    private int screenHeight;
     private Fragment child2Fragment;
-    MainActivity my;
-    int i;
+    private MainActivity my;
+    private int i;
     private Bundle bundle;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -150,7 +150,7 @@ public class UserMenuFragment extends HomeFragment{
     private void getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        screenHeight = displaymetrics.heightPixels;
+        int screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
     }
     // switching fragment

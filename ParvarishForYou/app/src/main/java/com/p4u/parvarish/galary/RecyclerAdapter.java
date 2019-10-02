@@ -1,5 +1,6 @@
 package com.p4u.parvarish.galary;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -26,14 +28,15 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     private List<Image_Model> imageModels;
     private OnItemClickListener mListener;
 
-    public RecyclerAdapter(Context context, List<Image_Model> uploads) {
+    RecyclerAdapter(Context context, List<Image_Model> uploads) {
         mContext = context;
         imageModels = uploads;
     }
 
 
+    @NonNull
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.row_model_view, parent, false);
         return new RecyclerViewHolder(v);
     }
@@ -60,10 +63,10 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
 
-        public TextView nameTextView,descriptionTextView,dateTextView;
-        public ImageView teacherImageView;
+        TextView nameTextView,descriptionTextView,dateTextView;
+        ImageView teacherImageView;
 
-        public RecyclerViewHolder(View itemView) {
+        RecyclerViewHolder(View itemView) {
             super(itemView);
             nameTextView =itemView.findViewById ( R.id.nameTextView );
             descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
@@ -124,7 +127,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
         mListener = listener;
     }
     private String getDateToday(){
-        DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd");
         Date date=new Date();
         return dateFormat.format(date);
     }

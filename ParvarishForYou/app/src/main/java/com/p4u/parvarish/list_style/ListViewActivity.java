@@ -31,7 +31,7 @@ public class ListViewActivity extends AppCompatActivity {
 
 
     private List<Book> dataList = new ArrayList<>();
-    private int redColor, greenColor;
+    private int redColor;
     private RecyclerView.Adapter adapter;
     private Handler handler;
     private int currentPage = 0;
@@ -57,7 +57,7 @@ public class ListViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         redColor = getResources().getColor(R.color.red);
-        greenColor = getResources().getColor(R.color.green);
+        int greenColor = getResources().getColor(R.color.green);
 
         appendDataList();
         adapter.notifyDataSetChanged();
@@ -121,9 +121,11 @@ public class ListViewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 */
+    @NonNull
     private RecyclerView.Adapter getAdapter() {
         final LayoutInflater inflater = LayoutInflater.from(this);
-        RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
+        return new RecyclerView.Adapter() {
+            @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = inflater.inflate(R.layout.wega_recycler_item, parent, false);
@@ -145,7 +147,6 @@ public class ListViewActivity extends AppCompatActivity {
                 return dataList.size();
             }
         };
-        return adapter;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -158,11 +159,11 @@ public class ListViewActivity extends AppCompatActivity {
 
         MyViewHolder(View itemView) {
             super(itemView);
-            this.bookTitle = (TextView) itemView.findViewById(R.id.item_name_tv);
-            this.bookCost = (TextView) itemView.findViewById(R.id.item_current_price);
-            this.sybool = (ImageView) itemView.findViewById(R.id.item_trend_flag);
-            this.bookAuthor = (TextView) itemView.findViewById(R.id.item_gross);
-            this.bookSubject=(TextView)itemView.findViewById(R.id.txtsubject);
+            this.bookTitle = itemView.findViewById(R.id.item_name_tv);
+            this.bookCost = itemView.findViewById(R.id.item_current_price);
+            this.sybool = itemView.findViewById(R.id.item_trend_flag);
+            this.bookAuthor = itemView.findViewById(R.id.item_gross);
+            this.bookSubject= itemView.findViewById(R.id.txtsubject);
 
         }
 

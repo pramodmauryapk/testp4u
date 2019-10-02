@@ -39,7 +39,6 @@ import static java.util.Objects.requireNonNull;
 public class UserListFragment extends Fragment implements RecyclerAdapter.OnItemClickListener{
 
 
-    private RecyclerView mRecyclerView;
     private RecyclerAdapter mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;
@@ -59,7 +58,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
 
         v = inflater.inflate(R.layout.fragment_user_list,container,false);
 
-        mRecyclerView = v.findViewById(R.id.mRecyclerView);
+        RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

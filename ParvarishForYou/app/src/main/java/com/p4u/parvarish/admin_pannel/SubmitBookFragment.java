@@ -208,7 +208,7 @@ public class SubmitBookFragment extends Fragment {
                         .OnPositiveClicked(new FancyAlertDialogListener() {
 
                             @Override
-                            public boolean OnClick() {
+                            public void OnClick() {
                                 updateBook(dbookId,
                                         dbookTitle,
                                         dbookAuthor,
@@ -220,16 +220,14 @@ public class SubmitBookFragment extends Fragment {
                                         dbookDonorMobile,
                                         dbookDonorTime,
                                         get_current_time());
-                                return true;
 
                             }
                         })
                         .OnNegativeClicked(new FancyAlertDialogListener()  {
                             @Override
-                            public boolean OnClick() {
+                            public void OnClick() {
                                 Toast.makeText(SubmitBookFragment.this.getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
 
-                                return false;
                             }
                         })
                         .build();

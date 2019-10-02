@@ -65,9 +65,8 @@ public class DonorListFragment extends Fragment {
 
 
                 }
-                HashSet hs = new HashSet();
 
-                hs.addAll(donors); // donor= name of arrayList from which u want to remove duplicates
+                HashSet hs = new HashSet(donors); // donor= name of arrayList from which u want to remove duplicates
 
                 donors.clear();
                 donors.addAll(hs);

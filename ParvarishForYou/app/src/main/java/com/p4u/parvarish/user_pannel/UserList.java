@@ -19,7 +19,7 @@ public class UserList extends ArrayAdapter<Teacher> {
     private Activity context;
     private List<Teacher> users;
 
-   public UserList(Activity context, List<Teacher> users) {
+   UserList(Activity context, List<Teacher> users) {
         super(context, R.layout.layout_all_user, users);
         this.context = context;
         this.users = users;

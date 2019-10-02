@@ -16,22 +16,20 @@ import java.util.Objects;
 import com.p4u.parvarish.R;
 
 public class ImageGalleryFragment extends Fragment {
-    public final static int LOOPS = 1000;
+    final static int LOOPS = 1000;
     public CarouselPagerAdapter adapter;
-    public ViewPager pager;
-    public static int count = 10;
+    ViewPager pager;
+    static int count = 10;
 
-    public static int FIRST_PAGE = 10;
+    static int FIRST_PAGE = 10;
 
-
-    private View v;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_image_gallery,container,false);
-        pager = (ViewPager)v. findViewById(R.id.myviewpager);
+        View v = inflater.inflate(R.layout.fragment_image_gallery, container, false);
+        pager = v. findViewById(R.id.myviewpager);
 
         //set page margin between pages for viewpager
         DisplayMetrics metrics = new DisplayMetrics();

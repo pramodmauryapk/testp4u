@@ -23,8 +23,6 @@ import com.p4u.parvarish.R;
 public class NewsTextFragment extends Fragment {
 
     private TextView tv;
-    private String newsId;
-    private FirebaseAuth mAuth;
     private View v;
     private String text;
 
@@ -35,8 +33,8 @@ public class NewsTextFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_news_text, container, false);
         initViews();
-        mAuth=FirebaseAuth.getInstance();
-       newsId = "-Lozxh9p34me1oPFPFu6";
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String newsId = "-Lozxh9p34me1oPFPFu6";
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Welcome_text");
         try {
             myRef.addValueEventListener(new ValueEventListener() {

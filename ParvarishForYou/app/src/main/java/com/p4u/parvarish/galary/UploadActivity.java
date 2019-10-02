@@ -30,13 +30,13 @@ import com.squareup.picasso.Picasso;
 
 import com.p4u.parvarish.R;
 
+import java.util.Objects;
+
 
 public class UploadActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    private Button chooseImageBtn;
-    private Button uploadBtn;
     private EditText nameEditText;
     private EditText descriptionEditText;
     private ImageView chosenImageView;
@@ -56,10 +56,8 @@ public class UploadActivity extends AppCompatActivity {
         //v = inflater.inflate(R.layout.upload_image_fragment,container,false);
 
 
-
-
-        chooseImageBtn =findViewById(R.id.button_choose_image);
-        uploadBtn = findViewById(R.id.uploadBtn);
+        Button chooseImageBtn = findViewById(R.id.button_choose_image);
+        Button uploadBtn = findViewById(R.id.uploadBtn);
         nameEditText =findViewById(R.id.nameEditText);
         descriptionEditText = findViewById ( R.id.descriptionEditText );
         chosenImageView = findViewById(R.id.chosenImageView);
@@ -148,7 +146,7 @@ public class UploadActivity extends AppCompatActivity {
                                             descriptionEditText.getText().toString());
                                     Toast.makeText(UploadActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                                     String uploadId = mDatabaseRef.push().getKey();
-                                    mDatabaseRef.child(uploadId).setValue(upload);
+                                    mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
 
                                     uploadProgressBar.setVisibility(View.INVISIBLE);
                                     //openImagesActivity();

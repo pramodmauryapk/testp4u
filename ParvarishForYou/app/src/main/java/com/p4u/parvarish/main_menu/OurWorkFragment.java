@@ -21,18 +21,16 @@ import com.p4u.parvarish.R;
 public class OurWorkFragment extends Fragment {
 
 
-    private DatabaseReference myref;
     private EditText editText;
     private TextView textView;
     private Button button;
-    private View v;
     private RatingBar ratingBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-       v = inflater.inflate(R.layout.fragment_our_work,container,false);
-        myref = FirebaseDatabase.getInstance().getReference().child("News");
+        View v = inflater.inflate(R.layout.fragment_our_work, container, false);
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("News");
         initViews();
 
 

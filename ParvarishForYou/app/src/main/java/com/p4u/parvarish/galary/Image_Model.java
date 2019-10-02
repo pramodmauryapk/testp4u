@@ -7,15 +7,13 @@ public class Image_Model {
     private String imageURL;
     private String key;
     private String description;
-    private int position;
 
     public Image_Model() {
         //empty constructor needed
     }
     public Image_Model(int position){
-        this.position = position;
     }
-    public Image_Model(String name, String imageUrl , String Des) {
+    Image_Model(String name, String imageUrl, String Des) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
@@ -23,7 +21,7 @@ public class Image_Model {
         this.imageURL = imageUrl;
         this.description = Des;
     }
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
     public void setDescription(String description) {
@@ -43,7 +41,7 @@ public class Image_Model {
         this.imageURL = imageUrl;
     }
     @Exclude
-    public String getKey() {
+    String getKey() {
         return key;
     }
     @Exclude

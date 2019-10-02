@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class PercentIndicatorView extends TextView {
 
   private final int parentWidth;
-  private int textColor = Color.WHITE;
+  private int textColor;
 
   public PercentIndicatorView(Context context, int parentWidth, int textColor) {
     super(context);
@@ -28,6 +28,7 @@ public class PercentIndicatorView extends TextView {
     setAlpha(0.8f);
   }
 
+  @SuppressLint("SetTextI18n")
   public void setPercent(int percent) {
     setText(percent + "%");
   }

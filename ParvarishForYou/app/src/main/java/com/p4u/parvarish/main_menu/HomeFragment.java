@@ -41,7 +41,6 @@ public class HomeFragment extends Fragment {
     private static final String TAG="Home";
     private List<String> list;
     private WebBannerAdapter webBannerAdapter;
-    MainActivity my;
     private DatabaseReference mDatabaseRef;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -53,7 +52,7 @@ public class HomeFragment extends Fragment {
         assert this.getArguments() != null;
         String role = this.getArguments().getString("user_role");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("uploaded_image");
-       my=new MainActivity();
+        MainActivity my = new MainActivity();
         my.fragmentStack = new Stack<>();
         //inherit child fragment for marquee
         Fragment child1Fragment = new NewsTextFragment();

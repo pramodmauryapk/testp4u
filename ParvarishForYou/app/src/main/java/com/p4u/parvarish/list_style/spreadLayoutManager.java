@@ -23,7 +23,7 @@ public class spreadLayoutManager extends RecyclerView.LayoutManager {
     private RecyclerView.Adapter adapter;
     private RecyclerView.Recycler recycler;
 
-    public spreadLayoutManager() {
+    spreadLayoutManager() {
         setAutoMeasureEnabled(true);
     }
 
