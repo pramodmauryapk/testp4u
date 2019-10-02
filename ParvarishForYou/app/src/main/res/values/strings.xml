@@ -1,0 +1,217 @@
+<resources>
+    <array name="role_array">
+        <item>ADMIN</item>
+        <item>HEAD</item>
+        <item>USER</item>
+
+    </array>
+    <string name="app_name">Parvarish4You</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="tv_passwordresetinstruction">We just need your registered Email id to send you password reset instructions</string>
+    <string name="tv_passwordupdateinstruction">Please enter password minimum 6 characters.</string>
+    <string name="username">User Name</string>
+
+
+    <string name="mobile_number">Mobile Number</string>
+
+    <string name="confirm_password">Confirm Password</string>
+    <string name="address">Address</string>
+    <string name="identity">Identity</string>
+    <string name="aadhar_id_voter_id">Aadhar ID/Voter ID</string>
+    <string name="create_user">Create User</string>
+    <string name="exiting">Exiting…</string>
+    <string name="login">Login</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="back">Back</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="parvarish_knowledge_center">Parvarish4You</string>
+    <string name="todo">TODO</string>
+    <string name="welcome">Welcome</string>
+    <string name="add">Add</string>
+    <string name="books_list">Books List</string>
+
+    <string name="tap_to_update_and_view_book_details">Tap to update and view book details</string>
+
+    <string name="center_location">Center Location</string>
+    <string name="name">Name</string>
+    <string name="search_by_author">Search By Author</string>
+    <string name="search_by_cost">Search By Cost</string>
+    <string name="save">Save</string>
+    <string name="navigation_drawer_open">Drawer open</string>
+    <string name="navigation_drawer_close">Drawer close</string>
+    <string name="menu_home">Home</string>
+    <string name="action_update_profile">Update Profile</string>
+    <string name="action_logout_profile">Logout</string>
+    <string name="nav_header_desc">desc</string>
+    <string name="nav_header_title">Welcome User!</string>
+    <string name="nav_header_subtitle">Email Id</string>
+    <string name="user_corner">User Corner</string>
+    <string name="update">Update</string>
+    <string name="change_password">Change Password</string>
+    <string name="Book_Id">Book Id</string>
+    <string name="bookidd">Book Id-</string>
+    <string name="delete">Delete</string>
+    <string name="mobile">Mobile No</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="search_by_subject">Search By Subject</string>
+    <string name="donor_list">Donor List</string>
+    <string name="center_list">Center List</string>
+    <string name="author_name">Author Name</string>
+    <string name="book_title">Book Title</string>
+    <string name="book_cost">Book Cost</string>
+    <string name="book_location">Book Location</string>
+    <string name="donor_name">Donor Name</string>
+    <string name="donor_mobile">Donor Mobile</string>
+    <string name="search_by_name">Search By Name</string>
+    <string name="large_text">
+        "Under this scheme we are establishing centres where sessions"
+        "and classes can be arranged by expert to increase capacity of"
+        "students. As most of problems of society can be solved with "
+        "this capacity building initiative."
+        "Currently we are running our capacity building centres which "
+        "is giving very good response."
+    </string>
+
+    <string name="text_telent_support">
+
+    "ParvarishForYou has started this scheme. Under this scheme"
+    "we are trying to support talent either in academics , "
+    "sports and any other field of life. Under this scheme "
+    "organisation support students in different ways."
+
+    "1. To support student one year school fee of student who "
+    "got first position in school. (Already selected two students"
+    "from two different schools)."
+    "2. Awarding and supporting district topper with cash support"
+    "and other required support ."
+
+    "There are several other ways where organisation is working "
+    "to support real and needy talent."
+
+</string>
+    <string name="copy_right" translatable="false">Copyrights © %1$d</string>
+    <string name="text_tech_partner">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that . So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon .</string>
+    <string name="about_page_description" translatable="false">This is an initiative by alumni of Jawahar Navodaya Vidyalaya and youth from different sectors of working environment, different part of society and also from different geographical area, rural background. We all have same mind set about the problem of remote area and also challenges faced by backward class or other area of society. This mindset gave a positive path to all of us to do something for positive change . This laid the foundation of ParvarishForYou: a helping hand.</string>
+    <string name="about_contact_us">Contact us</string>
+
+    <string name="about_facebook">Like us on Facebook</string>
+    <string name="about_youtube">Watch us on Youtube</string>
+    <string name="about_website">Visit our website</string>
+    <string name="chose_one_of_them_to_search">Chose one of them to search</string>
+    <string name="category">Category</string>
+    <string name="teacher_name">Teacher Name</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
+    <string name="user_name">User Name</string>
+    <string name="role">Role</string>
+    <string name="email">Email</string>
+    <string name="teacher_address">Teacher Address</string>
+    <string name="teacher_mobile">Teacher Mobile</string>
+    <string name="teacher_identity">Teacher identity</string>
+    <string name="teacher_status">Teacher status</string>
+    <string name="users_list">Users List</string>
+    <string name="password">Password</string>
+    <string name="skip_login"><![CDATA[>>Skip Login>>]]></string>
+    <string name="login_with_mobile">Login with Mobile</string>
+    <string name="registration">REGISTRATION</string>
+    <string name="choose">Choose</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already Have Account?</string>
+    <string name="hi">Hi.</string>
+    <string name="let_s_get_started">Let\'s get Started</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="proceed">Proceed</string>
+    <string name="waiting_to_automatically_detect_an_n_sms_sent_to_your_mobile_number">Waiting to automatically detect an   SMS sent to your mobile number</string>
+    <string name="_91">+91</string>
+    <string name="minus">-</string>
+    <string name="invalid_otp">Invalid OTP</string>
+    <string name="didn_t_receieve_the_code">Didn\'t receieve the code?</string>
+    <string name="resend_code">RESEND CODE</string>
+    <string name="verify">Verify</string>
+    <string name="login_here">Login Here</string>
+    <string name="new_user">New User?</string>
+    <string name="join_us">Join Us</string>
+    <string-array name="pub_year">
+        <item>Year</item>
+        <item>2000</item>
+        <item>2001</item>
+        <item>2002</item>
+        <item>2003</item>
+        <item>2004</item>
+        <item>2005</item>
+        <item>2006</item>
+        <item>2007</item>
+        <item>2008</item>
+        <item>2009</item>
+        <item>2010</item>
+        <item>2011</item>
+        <item>2012</item>
+        <item>2013</item>
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+    </string-array>
+    <string-array name="subject_list">
+        <item>CATEGORY</item>
+        <item>HINDI</item>
+        <item>ENGLISH</item>
+        <item>MATHS</item>
+        <item>ENVIRONMENT</item>
+        <item>SOCIAL STUDIES</item>
+        <item>HISTORY</item>
+        <item>SCIENCE</item>
+        <item>CHEMISTRY</item>
+        <item>PYSICS</item>
+        <item>STORIES</item>
+        <item>POLITICAL SCIENCE</item>
+        <item>DRAMA</item>
+        <item>NOVEL</item>
+        <item>SANSKRIT</item>
+        <item>COMPUTER SCIENCE</item>
+        <item>MACHANICAL ENGINEERING</item>
+        <item>ELECTRICAL ENGINEERING</item>
+        <item>CIVIL ENGINEERING</item>
+        <item>INFORMATION TECHNOLOGY</item>
+        <item>MEDICAL</item>
+        <item>ART</item>
+        <item>PYSICAL SCIENCE</item>
+    </string-array>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="start">Start Service</string>
+    <string name="stop">Stop service</string>
+
+    <string name="item_name">Name</string>
+    <string name="item_position">Position</string>
+    <string name="profile_desc">Rowan Sebastian Atkinson CBE is an English actor,  comedian and screenwriter</string>
+    <string name="profile_title">Mr Bean</string>
+    <string name="posts">posts</string>
+    <string name="followers">followers</string>
+    <string name="following">following</string>
+    <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
+    <string name="lbl_set_profile_photo">Set profile image</string>
+    <string name="lbl_take_camera_picture">Take a picture</string>
+    <string name="lbl_choose_from_gallery">Choose from gallery</string>
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
+
+    <!-- font families -->
+    <string name="font_family_light">sans-serif-light</string>
+    <string name="font_family_medium">sans-serif-medium</string>
+    <string name="font_family_regular">sans-serif</string>
+    <string name="font_family_condensed">sans-serif-condensed</string>
+    <string name="font_family_black">sans-serif-black</string>
+    <string name="font_family_thin">sans-serif-thin</string>
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="go_to_settings">GOTO SETTINGS</string>
+    <string name="our_work">Our Work</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="share">Share</string>
+    <string name="exit">Exit</string>
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/search_book_fragment"
+    android:orientation="vertical"
+    style="@style/Relative_layout_style">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:id="@+id/lay0"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:paddingBottom="20dp"
+            android:id="@+id/txt1"
+            android:text="Type News to Add in Marquee"/>
+    </LinearLayout>
+
+<EditText
+    android:id="@+id/marqueetext"
+    android:layout_width="match_parent"
+    android:layout_height="200sp"
+    android:padding="12dp"
+    style="@style/createuser_textbox_style"
+    android:lines="8"
+    android:minLines="6"
+    android:gravity="top|start"
+    android:background="@drawable/bg_edittext"
+    android:maxLines="10"
+    android:scrollbars="vertical"
+    android:hint="Add new tagline.."
+    android:inputType="textMultiLine"/>
+
+    <RatingBar
+    android:id="@+id/ratingBar"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:text="@string/update"
+            android:textColor="@color/colorwhite"/>
+</LinearLayout>
+
+
+
+

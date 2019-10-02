@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:tag="Home"
+    android:orientation="vertical">
+
+
+
+        <com.p4u.parvarish.banner.BannerLayout
+
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:autoPlaying="true"
+            app:centerScale="1.3"
+            app:itemSpace="20"
+            app:moveSpeed="1.8"/>
+    <FrameLayout
+        android:id="@+id/child_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/recycler"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/menu_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/child_fragment_container"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
+
+
+
+</RelativeLayout>

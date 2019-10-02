@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="black">#000</color>
+    <color name="transparent">#00000000</color>
+    <color name="primary_dark_material_light" tools:ignore="PrivateResource">#ff757575</color>
+    <color name="reds">#EE3636</color>
+
+    <color name="colorEdittextborder">#A9A9A9</color>
+    <color name="colorwhite">#fff </color>
+
+    <color name="main">#4CAF50</color>
+    <color name="colorblack">#000</color>
+    <color name="colorRed">#D81B60</color>
+    <color name="main_color">#ff9a00</color>
+    <color name="secondary_color">#BDBDBD</color>
+    <color name="about_item_icon_color">#313131</color>
+    <color name="about_background_color">#FFFFFF</color>
+    <color name="about_separator_color">#e1e1e1</color>
+
+    <!-- Social -->
+    <color name="about_facebook_color">#3b5998</color>
+    <color name="about_youtube_color">#cd201f</color>
+
+    <!-- Text -->
+    <color name="about_description_text_color">#595959</color>
+    <color name="about_item_text_color">#7c7c7c</color>
+    <color name="about_text_color">#595959</color>
+    <color name="grey1">#4f4f4f</color>
+    <color name="white">#ffffff</color>
+    <color name="orange">#F4511E</color>
+    <color name="green">#21E43C</color>
+    <color name="grey">#828080</color>
+    <color name="darkgreen">#17bb0b</color>
+    <color name="red">#e50b1f</color>
+    <color name="MulledWine">#493E58</color>
+    <color name="LinkWater">#C8CACC</color>
+    <color name="Venus">#8E8485</color>
+    <color name="EchoBlue">#B8BABE</color>
+    <color name="Cranberry">#FF44C0</color>
+    <color name="Mischka">#A7A8AD</color>
+    <color name="gradient_start">#5770f3</color>
+    <color name="gradient_end">#8e5aeb</color>
+    <color name="profile_desc">#D1D1FF</color>
+    <color name="bg_meta_container">#000000</color>
+    <color name="profile_default_tint">#e0e0e0</color>
+</resources>

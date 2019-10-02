@@ -1,0 +1,65 @@
+package com.p4u.parvarish.galary;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.p4u.parvarish.R;
+
+import static java.util.Objects.requireNonNull;
+
+public class FullImageFragment extends Fragment {
+
+
+
+    private View v;
+    private ImageView showimage;
+    private Button show;
+    private static final String DRAWABLE_RESOURE = "resource";
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        v = inflater.inflate(R.layout.fragment_full_image,container,false);
+
+
+        initViews();
+        showimage = v.findViewById(R.id.img);
+        show = v.findViewById(R.id.btnClose);
+
+        int drawbleResource=getArguments().getInt(DRAWABLE_RESOURE,0);
+        showimage.setImageResource(drawbleResource);
+
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ItemFragment fragment = new ItemFragment();
+                FullImageFragment.this.switchFragment(fragment);
+            }
+        });
+
+
+        return v;
+    }
+    private void switchFragment(Fragment fragment) {
+
+        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack("my_frame").commit();
+
+    }
+    private void initViews(){
+
+    }
+
+
+}

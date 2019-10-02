@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+<RelativeLayout
+
+    android:id="@+id/fragmenent_add_book"
+    android:padding="@dimen/activity_horizontal_margin"
+   android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/tf1"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etBookId"
+            android:hint="@string/Book_Id"
+            android:maxLines="1"
+            android:inputType="textAutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/tf2"
+        android:layout_below="@+id/tf1"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etBookTitle"
+            android:hint="@string/book_title"
+            android:maxLines="1"
+            android:inputType="textAutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/tf3"
+        android:layout_below="@+id/tf2"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etBookAuthor"
+            android:hint="@string/author_name"
+            android:inputType="textAutoComplete"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tf3"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <Spinner
+            style="@style/createuser_textbox_style"
+            android:layout_weight="3"
+            android:id="@+id/spBookSubject"
+            android:entries="@array/subject_list"
+            tools:ignore="RtlSymmetry" />
+        <Spinner
+            style="@style/createuser_textbox_style"
+            android:id="@+id/spBookYear"
+            android:layout_marginStart="5dp"
+            android:layout_weight="7"
+            android:entries="@array/pub_year"
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l1"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="7"
+            android:id="@+id/tf4"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etBookcost"
+                android:hint="@string/book_cost"
+                android:inputType="number"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            android:id="@+id/tf5"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etBookLocation"
+                android:hint="@string/book_location"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/l3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l2"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:id="@+id/tf6"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDonor"
+                android:hint="@string/donor_name"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="5"
+            android:id="@+id/tf7"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDonorMobile"
+                android:hint="@string/donor_mobile"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnAddBook"
+        android:layout_below="@+id/l3"
+        android:text="@string/add"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/colorwhite"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        style="@style/control_type"
+        android:id="@+id/textView"
+        android:layout_below="@+id/btnAddBook"
+        android:text="@string/books_list"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+    <TextView
+        style="@style/control_type"
+        android:layout_below="@+id/textView"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView1"
+        android:text="@string/tap_to_update_and_view_book_details"
+        android:textAlignment="center"/>
+
+</RelativeLayout>
+
+
+
+</ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listViewBooks" />
+</LinearLayout>
