@@ -69,13 +69,9 @@ public class UpdateBookFragment extends Fragment {
                         book.getBookSubject(),
                         book.getBookYear(),
                         book.getBookCost(),
-                        book.getBookAvaibility(),
                         book.getBookLocation(),
                         book.getBookDonor(),
-                        book.getBookDonorMobile(),
-                        book.getBookDonorTime(),
-                        book.getBookHandoverTo(),
-                        book.getBookHandoverTime());
+                        book.getBookDonorMobile());
             }
         });
         //for search book from listview
@@ -156,21 +152,17 @@ public class UpdateBookFragment extends Fragment {
 
     }
 
-    private void updateBook(String bookId,
+    private boolean updateBook(String bookId,
                             String bookTitle,
                             String bookAuthor,
                             String bookSubject,
                             String bookYear,
                             String bookCost,
-                            String bookAvaibility,
                             String bookLocation,
                             String bookDonor,
-                            String bookDonorMobile,
-                            String bookDonorTime,
-                            String bookHandoverTo,
-                            String bookHandoverTime) {
+                            String bookDonorMobile) {
 
-        Book book = new Book (
+    /*    Book book = new Book (
                 bookId,
                 bookTitle,
                 bookAuthor,
@@ -184,9 +176,18 @@ public class UpdateBookFragment extends Fragment {
                 bookDonorTime,
                 bookHandoverTo,
                 bookHandoverTime);
+*/      databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
+        databaseBooks.child("bookTitle").setValue(bookTitle);
+        databaseBooks.child("bookAuthor").setValue(bookAuthor);
+        databaseBooks.child("bookSubject").setValue(bookSubject);
+        databaseBooks.child("bookYear").setValue(bookYear);
+        databaseBooks.child("bookCost").setValue(bookCost);
+        databaseBooks.child("bookLocation").setValue(bookLocation);
+        databaseBooks.child("bookDonor").setValue(bookDonor);
+        databaseBooks.child("bookDonorMobile").setValue(bookDonorMobile);
+        return true;
+       // databaseBooks.child(Objects.requireNonNull(bookId)).setValue(book);
 
-        databaseBooks.child(Objects.requireNonNull(bookId)).setValue(book);
-        Toast.makeText(getContext(), "Book Record Updated", Toast.LENGTH_LONG).show();
     }
     @SuppressLint("InflateParams")
     private void showUpdateDeleteDialog(final String dbookId,
@@ -195,16 +196,12 @@ public class UpdateBookFragment extends Fragment {
                                         final String dbookSubject,
                                         final String dbookYear,
                                         final String dbookCost,
-                                        final String dbookAvaibility,
                                         final String dbookLocation,
                                         final String dbookDonor,
-                                        final String dbookDonorMobile,
-                                        final String dbookDonorTime,
-                                        final String dbookHandoverTo,
-                                        final String dbookHandoverTime) {
+                                        final String dbookDonorMobile) {
         //setting alert dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = getLayoutInflater();
+        final LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.update_dialog, null);
         dialogBuilder.setView(dialogView);
         dialogBuilder.setTitle("Update Book");
@@ -242,11 +239,9 @@ public class UpdateBookFragment extends Fragment {
                 } else {
                     dbookSubject1 = "N/A";
                 }
-                String dbookAvaibility1 = "1";
+
                 String dbookLocation1 = deditBookLocation.getText().toString().toUpperCase();
-                String dbookDonorTime1 = UpdateBookFragment.this.get_current_time();
-                String dbookHandoverTo1 = "CENTER";
-                String dbookHandoverTime1 = UpdateBookFragment.this.get_current_time();
+
                 //checking values
                 if (!TextUtils.isEmpty(dbookAuthor1) &&
                         !TextUtils.isEmpty(dbookTitle1) &&
@@ -256,20 +251,20 @@ public class UpdateBookFragment extends Fragment {
                         !TextUtils.isEmpty(dbookLocation1) &&
                         !TextUtils.isEmpty(dbookDonor1) &&
                         !TextUtils.isEmpty(dbookDonorMobile1)) {
-                    UpdateBookFragment.this.updateBook(dbookId,
+                   boolean ans= updateBook(dbookId,
                             dbookTitle1,
                             dbookAuthor1,
                             dbookSubject1,
                             dbookYear1,
                             dbookCost1,
-                            dbookAvaibility1,
                             dbookLocation1,
                             dbookDonor1,
-                            dbookDonorMobile1,
-                            dbookDonorTime1,
-                            dbookHandoverTo1,
-                            dbookHandoverTime1);
-                    b.dismiss();
+                            dbookDonorMobile1);
+                   if(ans){
+                       Toast.makeText(getContext(), "Book Record Updated", Toast.LENGTH_LONG).show();
+                       b.dismiss();
+                   }
+
                 }
 
             }

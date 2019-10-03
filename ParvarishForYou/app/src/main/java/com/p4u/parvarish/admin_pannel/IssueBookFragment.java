@@ -201,8 +201,8 @@ public class IssueBookFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 b.cancel();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(IssueBookFragment.this.getContext()));
-                final EditText input = new EditText(IssueBookFragment.this.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+                final EditText input = new EditText(getContext());
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input)
                         .setMessage("Enter Aadhar ID:")
@@ -226,25 +226,16 @@ public class IssueBookFragment extends Fragment {
                                     .OnPositiveClicked(new FancyAlertDialogListener() {
                                         @Override
                                         public void OnClick() {
-                                            updateBook(dbookId,
-                                                    dbookTitle,
-                                                    dbookAuthor,
-                                                    dbookSubject,
-                                                    dbookYear,
-                                                    dbookCost,
-                                                    dbookLocation,
-                                                    dbookDonor,
-                                                    dbookDonorMobile,
-                                                    dbookDonorTime,
-                                                    IssueName,
-                                                    get_current_time());
-                                            Toast.makeText(IssueBookFragment.this.getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
+                                            boolean ans=updateBook(dbookId,IssueName);
+                                            if(ans){
+                                                Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     })
                                     .OnNegativeClicked(new FancyAlertDialogListener() {
                                         @Override
                                         public void OnClick() {
-                                            Toast.makeText(IssueBookFragment.this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
                                         }
                                     })
@@ -263,40 +254,17 @@ public class IssueBookFragment extends Fragment {
 
         }
     });
-
     }
 
-    private void updateBook(String bookId,
-                            String bookTitle,
-                            String bookAuthor,
-                            String bookSubject,
-                            String bookYear,
-                            String bookCost,
-                            String bookLocation,
-                            String bookDonor,
-                            String bookDonorMobile,
-                            String bookDonorTime,
-                            String bookHandoverTo,
-                            String bookHandoverTime) {
+private boolean updateBook(String bookId,String issueName){
+    databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
+    databaseBooks.child("bookAvaibility").setValue("0");
+    databaseBooks.child("bookHandoverTo").setValue(issueName);
+    databaseBooks.child("bookHandoverTime").setValue(get_current_time());
+    return true;
 
-        Book book = new Book (
-                bookId,
-                bookTitle,
-                bookAuthor,
-                bookSubject,
-                bookYear,
-                bookCost,
-                "0",
-                bookLocation,
-                bookDonor,
-                bookDonorMobile,
-                bookDonorTime,
-                bookHandoverTo,
-                bookHandoverTime);
 
-        databaseBooks.child(Objects.requireNonNull(bookId)).setValue(book);
-
-    }
+}
     private boolean onClickDialog() {
         new FancyAlertDialog.Builder(getActivity())
                 .setTitle("ParvarishForYou")

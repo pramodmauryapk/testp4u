@@ -23,11 +23,11 @@ public class News {
         this.newsId = newsId;
     }
 
-    String getMarqueeText() {
+    public String getMarqueeText() {
         return marqueeText;
     }
 
-    void setMarqueeText(String marqueeText) {
+    public void setMarqueeText(String marqueeText) {
         this.marqueeText = marqueeText;
     }
 }

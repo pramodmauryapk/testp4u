@@ -39,12 +39,12 @@ public class UserProfileFragment extends Fragment {
     private static final String TAG = "UserProfileFragment";
     private String userID,userName,userEmail,userMobile,userIdentity;
     private String userPassword,userAgainPassword,userRole,userAddress,userStatus,userFeedback,userNews,userTime,userImg;
-  private View v;
-  private EditText username,email,mobile,identity,password,againpassword,feedback,news,time;
-  private TextView location,role;
+    private View v;
+    private EditText username,email,mobile,identity,password,againpassword,feedback,news,time;
+    private TextView location,role;
     private List<Teacher> users;
-private Button save,change;
-private LinearLayout l9;
+    private Button save,change;
+    private LinearLayout l9;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,8 +74,8 @@ private LinearLayout l9;
         save.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserProfileFragment.this.get_values();
-                UserProfileFragment.this.updatedetails(userID,
+                get_values();
+                updatedetails(userID,
                         userName,
                         userEmail,
                         userPassword,
@@ -125,16 +125,6 @@ private LinearLayout l9;
     private void show(DataSnapshot dataSnapshot){
         try {
             for (DataSnapshot ds : dataSnapshot.getChildren ()) {
-
-
-                   // Teacher uInfo = new Teacher ();
-                    //uInfo.setUserRole (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserRole ()); //set the role
-                    //uInfo.setUserName (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserName ()); //set the role
-                   // uInfo.setUserEmail (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserEmail ()); //set the role
-                   // uInfo.setUserMobile (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserMobile ()); //set the role
-                   // uInfo.setUserAddress (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserAddress ()); //set the role
-                   // uInfo.setUserIdentity (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserIdentity ()); //set the role
-                   // uInfo.setImageURL (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getImageURL()); //set the role
                     Teacher uInfo=ds.getValue(Teacher.class);
                     if(requireNonNull(uInfo).getUserId().equals(userID)) {
                         username.setText(requireNonNull(uInfo).getUserName());

@@ -209,18 +209,10 @@ public class SubmitBookFragment extends Fragment {
 
                             @Override
                             public void OnClick() {
-                                updateBook(dbookId,
-                                        dbookTitle,
-                                        dbookAuthor,
-                                        dbookSubject,
-                                        dbookYear,
-                                        dbookCost,
-                                        dbookLocation,
-                                        dbookDonor,
-                                        dbookDonorMobile,
-                                        dbookDonorTime,
-                                        get_current_time());
-
+                                boolean ans=updateBook(dbookId);
+                                if(ans){
+                                    Toast.makeText(getActivity(), "Submission Successfully", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         })
                         .OnNegativeClicked(new FancyAlertDialogListener()  {
@@ -238,35 +230,14 @@ public class SubmitBookFragment extends Fragment {
 
 
     }
-    private void updateBook(String bookId,
-                            String bookTitle,
-                            String bookAuthor,
-                            String bookSubject,
-                            String bookYear,
-                            String bookCost,
-                            String bookLocation,
-                            String bookDonor,
-                            String bookDonorMobile,
-                            String bookDonorTime,
-                            String bookHandoverTime) {
+    private boolean updateBook(String bookId) {
 
-        Book book = new Book (
-                bookId,
-                bookTitle,
-                bookAuthor,
-                bookSubject,
-                bookYear,
-                bookCost,
-                "1",
-                bookLocation,
-                bookDonor,
-                bookDonorMobile,
-                bookDonorTime,
-                "CENTER",
-                bookHandoverTime);
 
-        databaseBooks.child(bookId).setValue(book);
-        Toast.makeText(getActivity(), "Submission Successfully", Toast.LENGTH_SHORT).show();
+        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
+        databaseBooks.child("bookAvaibility").setValue("1");
+        databaseBooks.child("bookHandoverTo").setValue("CENTER");
+        databaseBooks.child("bookHandoverTime").setValue(get_current_time());
+        return true;
 
     }
 

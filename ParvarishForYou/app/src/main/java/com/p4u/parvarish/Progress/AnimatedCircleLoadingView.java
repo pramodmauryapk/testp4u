@@ -20,7 +20,7 @@ import com.p4u.parvarish.R;
 
 public class AnimatedCircleLoadingView extends FrameLayout {
   private static final String TAG = "AnimatedCircleLoadingView";
-  private static final String DEFAULT_HEX_MAIN_COLOR = "#FF9A00";
+  private static final String DEFAULT_HEX_MAIN_COLOR = "#D81B60";
   private static final String DEFAULT_HEX_SECONDARY_COLOR = "#BDBDBD";
   private static final String DEFAULT_HEX_TINT_COLOR = "#FFFFFF";
   private static final String DEFAULT_HEX_TEXT_COLOR = "#FFFFFF";

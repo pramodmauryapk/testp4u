@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,22 +34,15 @@ public class NewsTextFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_news_text, container, false);
         initViews();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String newsId = "-Lozxh9p34me1oPFPFu6";
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("WELCOME_TEXT");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("WELCOME_TEXT").child("marqueeText");
         try {
-            myRef.addValueEventListener(new ValueEventListener() {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String value = (String) dataSnapshot.getValue();
+                    // do your stuff here with value
 
-                 //  for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                   //    News news = ds.getValue(News.class);
-                   //    if (news.getNewsId().equals(newsId)) {
-                   //        text = requireNonNull(news).getMarqueeText();
-                   //        tv.setText(text);
-                   //    }
-                  // }
+                    tv.setText(value);
 
 
                 }
@@ -57,13 +51,15 @@ public class NewsTextFragment extends Fragment {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
+
+
             });
         } catch (Exception e){
-            tv.setText("This is an initiative by alumni of Jawahar Navodaya Vidyalaya. ");
+            tv.setText("error fetching news ");
 
         }finally {
 
-            tv.setSelected(true);  // Set focus to the textview
+            tv.setSelected(true);
         }
         return v;
     }
