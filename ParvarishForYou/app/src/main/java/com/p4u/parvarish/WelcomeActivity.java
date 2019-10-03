@@ -39,7 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
         (requireNonNull (getSupportActionBar ())).hide ();
         animatedCircleLoadingView = findViewById(R.id.circle_loading_view);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("Users");
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
 
 
 

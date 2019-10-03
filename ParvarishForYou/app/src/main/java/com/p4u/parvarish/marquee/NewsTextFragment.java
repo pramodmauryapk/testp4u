@@ -35,7 +35,7 @@ public class NewsTextFragment extends Fragment {
         initViews();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String newsId = "-Lozxh9p34me1oPFPFu6";
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Welcome_text");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("WELCOME_TEXT");
         try {
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -72,7 +72,10 @@ public class NewsTextFragment extends Fragment {
     private void initViews() {
         tv = v.findViewById(R.id.newsmarquee);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 
 }

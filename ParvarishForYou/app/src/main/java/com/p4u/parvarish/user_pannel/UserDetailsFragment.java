@@ -101,6 +101,9 @@ public class UserDetailsFragment extends Fragment {
         int index=random.nextInt(categories.length-1);
         return categories[index];
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

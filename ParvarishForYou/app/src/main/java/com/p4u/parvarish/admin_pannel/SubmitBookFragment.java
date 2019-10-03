@@ -40,7 +40,7 @@ import com.p4u.parvarish.fancydialog.Icon;
 
 public class SubmitBookFragment extends Fragment {
 
-    private static final String TAG = "Submit Book";
+    private static final String TAG = "SubmitBookFragment";
     private ListView listViewBooks;
     private View dialogView;
     private List<Book> books;
@@ -414,7 +414,10 @@ public class SubmitBookFragment extends Fragment {
         }
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");

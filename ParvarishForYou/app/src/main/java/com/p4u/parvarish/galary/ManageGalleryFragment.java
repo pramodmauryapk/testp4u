@@ -34,14 +34,14 @@ public class ManageGalleryFragment extends Fragment {
         openTeachersActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ManageGalleryFragment.this.switchFragment(new ImageItemsFragment());
+                switchFragment(new ImageItemsFragment());
             }
         });
         openUploadActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ManageGalleryFragment.this.startActivity(new Intent(ManageGalleryFragment.this.getContext(), UploadActivity.class));
-                requireNonNull(ManageGalleryFragment.this.getActivity()).finish();
+                startActivity(new Intent(getContext(), UploadActivity.class));
+                requireNonNull(getActivity()).finish();
             }
         });
 
@@ -57,6 +57,10 @@ public class ManageGalleryFragment extends Fragment {
         requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 }

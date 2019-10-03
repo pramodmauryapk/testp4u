@@ -58,14 +58,14 @@ public class AddBookFragment extends Fragment {
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddBookFragment.this.addBooks();
+                addBooks();
             }
         });
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = books.get(i);
-                AddBookFragment.this.showDialog(
+                showDialog(
                         book.getBookId(),
                         book.getBookTitle(),
                         book.getBookCost(),
@@ -87,29 +87,17 @@ public class AddBookFragment extends Fragment {
     private void addBooks() {
 
         //getting the values to save
-        String bookYear,bookSubject;
+
         String bookId=etBookId.getText ().toString ().toUpperCase ().trim ();
         String bookTitle = etBookTitle.getText().toString().toUpperCase().trim();
         String bookCost = etBookCost.getText().toString().trim();
         String bookAuthor= etBookAuthor.getText().toString().toUpperCase().trim();
         String bookDonor= etDonor.getText().toString().toUpperCase().trim();
         String bookDonorMobile= etDonorMobile.getText().toString().trim();
-        if(spBookYear.getSelectedItem ()!=null) {
-            bookYear = spBookYear.getSelectedItem().toString();
+        String bookYear = spBookYear.getSelectedItem().toString();
 
-        }
-        else {
-            bookYear="NA";
+        String bookSubject = spBookSubject.getSelectedItem().toString();
 
-        }
-        if(spBookSubject.getSelectedItem ()!=null)
-        {
-            bookSubject = spBookSubject.getSelectedItem().toString();
-        }
-        else
-        {
-            bookSubject="NA";
-        }
         String bookAvaibility="1";
         String bookLocation=etBookLocation.getText().toString().toUpperCase().trim ();
         String bookDonorTime=get_current_time();
@@ -209,14 +197,14 @@ public class AddBookFragment extends Fragment {
         final AlertDialog b = dialogBuilder.create();
         b.show();
         dBookid.setText (dbookId);
-        dAuthor.setText(dbookAuthor);///field missmath
-        dCost.setText(dbookCost);//mismatch
+        dAuthor.setText(dbookAuthor);
+        dCost.setText(dbookCost);
         dTitle.setText(dbookTitle);
         dLocation.setText(dbookLocation);
         dDonor.setText(dbookDonor);
         dDonorMobile.setText(dbookDonorMobile);
         dYear.setText(dbookYear);
-        dSubject.setText(dbookSubject);//mismatch
+        dSubject.setText(dbookSubject);
         dIssueTo.setText(dbookHandoverTo);
         dIssueTime.setText(dbookHandoverTime);
         dDonorTime.setText(dbookDonorTime);
@@ -270,7 +258,7 @@ public class AddBookFragment extends Fragment {
         // mDrawerLayout.closeDrawer(mDrawerList);
         Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack("my_fragment").commit();
+                .addToBackStack(null).commit();
     }
     @Override
     public void onResume() {

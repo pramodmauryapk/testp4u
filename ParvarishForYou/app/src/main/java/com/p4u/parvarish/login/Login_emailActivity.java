@@ -30,14 +30,16 @@ import java.util.Objects;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.WelcomeActivity;
+import com.p4u.parvarish.user_pannel.ResetPasswordActivity;
+
 
 import static java.util.Objects.requireNonNull;
 
 
-public class Login_email extends AppCompatActivity {
+public class Login_emailActivity extends AppCompatActivity {
 
     ImageView top_curve;
-   private static final String TAG = "Login_email";
+   private static final String TAG = "Login_emailActivity";
     TextInputEditText inputEmail, inputPassword;
     TextInputLayout tf1,tf2;
     private ProgressBar progressBar;
@@ -58,7 +60,7 @@ public class Login_email extends AppCompatActivity {
         setContentView(R.layout.activity_login_email);
         init();
         auth = FirebaseAuth.getInstance();
-        myref = FirebaseDatabase.getInstance().getReference().child("Users");
+        myref = FirebaseDatabase.getInstance().getReference().child("USERS");
 
         Animation top_curve_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.top_down);
         top_curve.startAnimation(top_curve_anim);
@@ -75,9 +77,9 @@ public class Login_email extends AppCompatActivity {
         new_user_layout.startAnimation(new_user_anim);
 
         if(auth.getCurrentUser()!=null){
-           // Toast.makeText(Login_email.this, auth.getUid(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(Login_emailActivity.this, auth.getUid(), Toast.LENGTH_LONG).show();
 
-            startActivity(new Intent(Login_email.this, WelcomeActivity.class));
+            startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
             finish();
         }
 
@@ -101,11 +103,11 @@ public class Login_email extends AppCompatActivity {
     }
 
     public void register(View view) {
-        startActivity(new Intent(this, UserRegistration.class));
+        startActivity(new Intent(this, UserRegistrationActivity.class));
     }
 
     public void loginButton(View view) {
-        //Toast.makeText(this,"Login_mobile Clicked",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Login_mobileActivity Clicked",Toast.LENGTH_SHORT).show();
 
         String email = Objects.requireNonNull(inputEmail.getText()).toString().toLowerCase().trim();
         final String password = Objects.requireNonNull(inputPassword.getText()).toString().trim();
@@ -135,14 +137,14 @@ public class Login_email extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             // there was an error
                             if (password.length() < 6) {
-                                tf2.setError(Login_email.this.getString(R.string.minimum_password));
+                                tf2.setError(Login_emailActivity.this.getString(R.string.minimum_password));
                             } else {
-                                Toast.makeText(Login_email.this, Login_email.this.getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                Toast.makeText(Login_emailActivity.this, Login_emailActivity.this.getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                             }
                         } else {
 
-                            Login_email.this.startActivity(new Intent(Login_email.this, WelcomeActivity.class));
-                            Login_email.this.finish();
+                            Login_emailActivity.this.startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
+                            Login_emailActivity.this.finish();
 
                         }
                     }
@@ -150,12 +152,17 @@ public class Login_email extends AppCompatActivity {
     }
 
     public void skiplogin(View view) {
-        startActivity(new Intent(Login_email.this, WelcomeActivity.class));
+        startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
         finish();
     }
 
     public void login_with_mobile(View view) {
-        startActivity(new Intent(Login_email.this, Login_mobile.class));
+        startActivity(new Intent(Login_emailActivity.this, Login_mobileActivity.class));
+        finish();
+    }
+
+    public void forgot(View view) {
+        startActivity(new Intent(Login_emailActivity.this, ResetPasswordActivity.class));
         finish();
     }
 }

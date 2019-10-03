@@ -44,7 +44,7 @@ public class UserMobileFragment extends Fragment {
 
         v = inflater.inflate
                 (R.layout.fragment_user_mobiles, container, false);
-        databaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        databaseUsers = FirebaseDatabase.getInstance().getReference().child("USERS");
         //getting views
 
         initViews();
@@ -92,6 +92,10 @@ public class UserMobileFragment extends Fragment {
        Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 }

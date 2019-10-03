@@ -53,5 +53,8 @@ public class ImageGalleryFragment extends Fragment {
         return v;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

@@ -30,10 +30,10 @@ import java.util.Stack;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.p4u.parvarish.ExitActivity;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.admin_pannel.FeedbackAddFragment;
+import com.p4u.parvarish.marquee.FeedbackAddFragment;
 import com.p4u.parvarish.contact.ContactUsFragment;
-import com.p4u.parvarish.login.Login_email;
-import com.p4u.parvarish.login.UserRegistration;
+import com.p4u.parvarish.login.Login_emailActivity;
+import com.p4u.parvarish.login.UserRegistrationActivity;
 import com.p4u.parvarish.user_pannel.UserProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -247,11 +247,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }else{
             if (id == R.id.action_update) {
-                startActivity(new Intent(this, UserRegistration.class));
+                startActivity(new Intent(this, UserRegistrationActivity.class));
                 finish();
             }
             if (id == R.id.action_login_logout) {
-                startActivity(new Intent(this, Login_email.class));
+                startActivity(new Intent(this, Login_emailActivity.class));
                 finish();
             }
 

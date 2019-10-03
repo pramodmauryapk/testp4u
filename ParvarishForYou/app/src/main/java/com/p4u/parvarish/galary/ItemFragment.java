@@ -107,7 +107,7 @@ public class ItemFragment extends Fragment {
     }
     private void get_images(){
         FirebaseStorage mStorage = FirebaseStorage.getInstance();
-        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("uploaded_image");
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
 
         //   mAdapter.notifyDataSetChanged();
         ValueEventListener mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -146,5 +146,9 @@ public class ItemFragment extends Fragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

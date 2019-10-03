@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         context = container.getContext();
         assert this.getArguments() != null;
         String role = this.getArguments().getString("user_role");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("uploaded_image");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
         MainActivity my = new MainActivity();
         my.fragmentStack = new Stack<>();
         //inherit child fragment for marquee
@@ -103,6 +103,9 @@ public class HomeFragment extends Fragment {
         });
         recyclerBanner.setAdapter(webBannerAdapter);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

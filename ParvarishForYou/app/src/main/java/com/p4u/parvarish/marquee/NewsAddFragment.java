@@ -32,7 +32,7 @@ public class NewsAddFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Welcome_text");
+        myRef = FirebaseDatabase.getInstance().getReference().child("WELCOME_TEXT");
 
         initViews();
         save.setOnClickListener (new View.OnClickListener() {
@@ -58,6 +58,9 @@ public class NewsAddFragment extends Fragment {
         Toast.makeText(getContext(), "News Updated", Toast.LENGTH_LONG).show();
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

@@ -37,7 +37,7 @@ public class DonorListFragment extends Fragment {
 
         v = inflater.inflate
                 (R.layout.fragment_donor_list, container, false);
-        databaseBooks = FirebaseDatabase.getInstance().getReference().child("books");
+        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
         //getting views
         initViews();
 
@@ -85,7 +85,10 @@ public class DonorListFragment extends Fragment {
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 
 

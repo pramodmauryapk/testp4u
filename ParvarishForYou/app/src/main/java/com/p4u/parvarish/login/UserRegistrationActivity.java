@@ -1,5 +1,6 @@
 package com.p4u.parvarish.login;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -42,15 +43,16 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.WelcomeActivity;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import static java.util.Objects.requireNonNull;
 
-public class UserRegistration extends AppCompatActivity {
+public class UserRegistrationActivity extends AppCompatActivity {
 
     ImageView top_curve;
 
@@ -58,7 +60,7 @@ public class UserRegistration extends AppCompatActivity {
 
     LinearLayout already_have_account_layout;
     CardView register_card;
-    private static final String TAG = "UserRegistration";
+    private static final String TAG = "UserRegistrationActivity";
     TextInputLayout tlname,tlpassword,tlapassword,tlemail,tlmobile,tladdress,tlidentity;
     private TextInputEditText etFullname, etPassword,etaPassword, etEmail, etMobile,etAddress,etIdentity;
     private FirebaseAuth auth;
@@ -70,7 +72,7 @@ public class UserRegistration extends AppCompatActivity {
     private ImageView imageView;
     private Uri mImageUri;
     private final int PICK_IMAGE_REQUEST = 71;
-    private String email,password,aPassword,id,name,role,mobilenumber,address,identity,status;
+    private String email,password,aPassword,id,name,role,mobilenumber,address,identity,status,feedback,news,time;
 
     private StorageReference mStorageRef;
     private StorageTask mUploadTask;
@@ -121,13 +123,13 @@ public class UserRegistration extends AppCompatActivity {
         spRole.setVisibility (View.GONE);
         //get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference("Users_Images");
-        myref = FirebaseDatabase.getInstance().getReference().child("Users");
+        mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
+        myref = FirebaseDatabase.getInstance().getReference().child("USERS");
 
     }
 
     public void login(View view) {
-        startActivity(new Intent(this, Login_email.class));
+        startActivity(new Intent(this, Login_emailActivity.class));
         finish();
     }
     public void registerButton(View view) {
@@ -188,6 +190,9 @@ public class UserRegistration extends AppCompatActivity {
         address= requireNonNull(etAddress.getText()).toString().toUpperCase();
         identity= requireNonNull(etIdentity.getText()).toString().toUpperCase();
         status="1";
+        feedback="";
+        news="";
+        time=get_current_time();
     }
     private Boolean validate(){
         if (TextUtils.isEmpty(name)) {
@@ -196,9 +201,8 @@ public class UserRegistration extends AppCompatActivity {
             return false;
         }
 
-       if (TextUtils.isEmpty(mobilenumber)&&mobilenumber.length ()!=10) {
+       if (mobilenumber.length ()!=10) {
            tlmobile.setError("Enter Mobile Number!");
-
             return false;
         }
 
@@ -207,17 +211,12 @@ public class UserRegistration extends AppCompatActivity {
 
             return false;
         }
-        if(password.equals(aPassword)&&(TextUtils.isEmpty(password))) {
-            tlapassword.setError("Both password are not same!");
-
+        if(password.equals(aPassword)&&(password.length() >= 6)) {
+            tlapassword.setError("Both password are not same! and length should be >=6");
             return false;
 
         }
-        if (password.length() < 6) {
-            tlpassword.setError("Password too short, enter minimum 6 characters!");
 
-            return false;
-        }
         if (TextUtils.isEmpty(address)) {
             tladdress.setError("Enter Address!");
 
@@ -269,15 +268,18 @@ public class UserRegistration extends AppCompatActivity {
                                             address,
                                             identity,
                                             status,
+                                            feedback,
+                                            news,
+                                            time,
                                             uri.toString()
                                     );
 
 
                                     myref.child(Objects.requireNonNull(id)).setValue(upload);
                                     progressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(UserRegistration.this, "User UserRegistration successful", Toast.LENGTH_LONG).show();
-                                    UserRegistration.this.startActivity(new Intent(UserRegistration.this, WelcomeActivity.class));
-                                    UserRegistration.this.finish();
+                                    Toast.makeText(UserRegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(UserRegistrationActivity.this, Login_emailActivity.class));
+                                    finish();
                                 }
                             });
                         }
@@ -285,7 +287,7 @@ public class UserRegistration extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(UserRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserRegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -309,5 +311,9 @@ public class UserRegistration extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    private String get_current_time(){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+        return sdf.format(new Date());
     }
 }

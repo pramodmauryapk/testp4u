@@ -173,7 +173,7 @@ public class AdminMenuFragment extends Fragment {
 
         requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack("my_frame").commit();
+                .addToBackStack(null).commit();
 	/*	FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 		fragmentManager.popBackStack();
 		fragmentManager.beginTransaction()
@@ -250,7 +250,10 @@ public class AdminMenuFragment extends Fragment {
 */
 
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 
 

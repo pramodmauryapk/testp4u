@@ -14,8 +14,8 @@ import com.p4u.parvarish.R;
 
 import static java.util.Objects.requireNonNull;
 
-public class Login_mobile extends AppCompatActivity {
-    private static final String TAG = "Login_mobile";
+public class Login_mobileActivity extends AppCompatActivity {
+    private static final String TAG = "Login_mobileActivity";
     EditText mobile_number;
     TextInputLayout inputLayout;
     @Override
@@ -43,7 +43,7 @@ public class Login_mobile extends AppCompatActivity {
             return;
         }
         mobile_number.setText("");
-        Intent intent = new Intent(Login_mobile.this,OTPConfirmation.class);
+        Intent intent = new Intent(Login_mobileActivity.this, OTPConfirmationActivity.class);
         intent.putExtra("mobile",mobile);
         startActivity(intent);
     }

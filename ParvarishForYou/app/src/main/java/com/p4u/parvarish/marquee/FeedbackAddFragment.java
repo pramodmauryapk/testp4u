@@ -1,4 +1,4 @@
-package com.p4u.parvarish.admin_pannel;
+package com.p4u.parvarish.marquee;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,7 +33,7 @@ public class FeedbackAddFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
 
-        myref = FirebaseDatabase.getInstance().getReference().child("News");
+        myref = FirebaseDatabase.getInstance().getReference().child("NEWS");
 
         initViews();
         textView.setText ("Enter Feedback ");
@@ -47,6 +47,9 @@ public class FeedbackAddFragment extends Fragment {
         button= v.findViewById (R.id.btn_add);
         ratingBar= v.findViewById (R.id.ratingBar);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

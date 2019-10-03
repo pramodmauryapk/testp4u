@@ -42,7 +42,7 @@ public class ListViewActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
-        databaseBooks = FirebaseDatabase.getInstance().getReference().child("books");
+        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
 
       // 2. toolbar
       //  Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);

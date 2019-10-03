@@ -39,7 +39,7 @@ public class FullImageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ItemFragment fragment = new ItemFragment();
-                FullImageFragment.this.switchFragment(fragment);
+                switchFragment(fragment);
             }
         });
 
@@ -50,12 +50,15 @@ public class FullImageFragment extends Fragment {
 
         requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack("my_frame").commit();
+                .addToBackStack(null).commit();
 
     }
     private void initViews(){
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

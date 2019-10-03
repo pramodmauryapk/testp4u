@@ -15,6 +15,9 @@ public class Teacher {
     private String userAddress;
     private String userIdentity;
     private String userStatus;
+    private String userFeedback;
+    private String userNews;
+    private String userTime;
     private String imageURL;
 
 
@@ -26,7 +29,7 @@ public class Teacher {
 
 
 
-    public Teacher(String id, String name, String email,String password, String role, String mobilenumber, String address, String identity, String status, String imageUrl) {
+    public Teacher(String id, String name, String email,String password, String role, String mobilenumber, String address, String identity, String status,String feedback,String news,String time, String imageUrl) {
         this.userId=id;
         this.userName = name;
         this.userEmail = email;
@@ -36,6 +39,9 @@ public class Teacher {
         this.userAddress=address;
         this.userIdentity=identity;
         this.userStatus=status;
+        this.userFeedback=feedback;
+        this.userNews=news;
+        this.userTime=time;
         this.imageURL = imageUrl;
     }
     public String getUserId() {
@@ -66,14 +72,14 @@ public class Teacher {
         this.imageURL = imageURL;
     }
     @Exclude
-    String getKey() {
+    public String getKey() {
         return key;
     }
     @Exclude
     void setKey(String key) {
         this.key = key;
     }
-    String getUserPassword() {
+    public String getUserPassword() {
         return userPassword;
     }
 
@@ -108,10 +114,34 @@ public class Teacher {
         this.userIdentity = userIdentity;
     }
 
-    String getUserStatus() {
+    public String getUserStatus() {
         return userStatus;
     }
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
+    public String getUserFeedback() {
+        return userFeedback;
+    }
+
+    public void setUserFeedback(String userFeedback) {
+        this.userFeedback = userFeedback;
+    }
+
+    public String getUserNews() {
+        return userNews;
+    }
+
+    public void setUserNews(String userNews) {
+        this.userNews = userNews;
+    }
+
+    public String getUserTime() {
+        return userTime;
+    }
+
+    public void setUserTime(String userTime) {
+        this.userTime = userTime;
+    }
+
 }

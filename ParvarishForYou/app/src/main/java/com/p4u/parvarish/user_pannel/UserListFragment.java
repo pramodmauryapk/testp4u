@@ -28,7 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,14 +51,13 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
     private TextInputEditText dtvUsername,dtvEmail, dtvMobile , dtvCenterName, dtvIdentity;
     private TextView dtvRole;
     private Button dbuttonBack,dbuttonDelete,dbuttonUpdate;
-    private View v;
     private FirebaseUser user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_user_list,container,false);
+        View v = inflater.inflate(R.layout.fragment_user_list, container, false);
 
         RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -71,7 +72,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
         mAdapter.setOnItemClickListener(this);
 
         mStorage = FirebaseStorage.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("USERS");
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -192,7 +193,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
         dialogBuilder.setTitle ("User Details");
         final AlertDialog b = dialogBuilder.create ();
         b.show ();
-       dtvUsername.setText (userName);
+        dtvUsername.setText (userName);
         dtvEmail.setText (userEmail);
         dtvMobile.setText (userMobile);
         dtvCenterName.setText (userAddress);
@@ -218,6 +219,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                         requireNonNull(dtvCenterName.getText()).toString().toUpperCase(),
                         requireNonNull(dtvIdentity.getText()).toString().trim(),
                         userStatus,
+
                         userImageURL
                 );
             }
@@ -253,8 +255,10 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                                String Status,
                                String ImageURL) {
         //getting the specified artist reference
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Users").child(Id);
-
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("USERS").child(Id);
+        String Feedback="";
+        String News="";
+        String Time=get_current_time();
         //updating artist
         Teacher user = new Teacher (
                 Id,
@@ -266,9 +270,20 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                 address,
                 Identity,
                 Status,
+                Feedback,
+                News,
+                Time,
                 ImageURL);
 
         dR.setValue(user);
         Toast.makeText(getContext(), "User Updated", Toast.LENGTH_LONG).show();
+    }
+    private String get_current_time(){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+        return sdf.format(new Date());
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

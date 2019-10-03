@@ -1,5 +1,6 @@
 package com.p4u.parvarish.user_pannel;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,9 +37,10 @@ import static java.util.Objects.requireNonNull;
 
 public class UserProfileFragment extends Fragment {
     private static final String TAG = "UserProfileFragment";
-    private String userID,userName,userEmail,userMobile,userIdentity,userPassword,userAgainPassword,userRole,userAddress,userStatus,userImg;
+    private String userID,userName,userEmail,userMobile,userIdentity;
+    private String userPassword,userAgainPassword,userRole,userAddress,userStatus,userFeedback,userNews,userTime,userImg;
   private View v;
-  private EditText username,email,mobile,identity,password,againpassword;
+  private EditText username,email,mobile,identity,password,againpassword,feedback,news,time;
   private TextView location,role;
     private List<Teacher> users;
 private Button save,change;
@@ -51,7 +55,7 @@ private LinearLayout l9;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         //Declare database reference
-        DatabaseReference myRef = mFirebaseDatabase.getReference().child("Users");
+        DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
         final FirebaseUser user = mAuth.getCurrentUser();
         userID = (requireNonNull(user)).getUid();
         myRef.addValueEventListener(new ValueEventListener() {
@@ -80,6 +84,9 @@ private LinearLayout l9;
                         userAddress,
                         userIdentity,
                         userStatus,
+                        userFeedback,
+                        userNews,
+                        userTime,
                         userImg);
             }
         });
@@ -87,7 +94,7 @@ private LinearLayout l9;
        change.setOnClickListener (new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               UserProfileFragment.this.switchFragment(new UpdatePasswordFragment());
+               switchFragment(new UpdatePasswordFragment());
            }
        });
         return v;
@@ -129,14 +136,15 @@ private LinearLayout l9;
                    // uInfo.setUserIdentity (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getUserIdentity ()); //set the role
                    // uInfo.setImageURL (((requireNonNull (ds.child (userID).getValue (Teacher.class)))).getImageURL()); //set the role
                     Teacher uInfo=ds.getValue(Teacher.class);
-                    username.setText (requireNonNull(uInfo).getUserName ());
-                    email.setText (uInfo.getUserEmail ());
-                    mobile.setText (uInfo.getUserMobile ());
-                    location.setText (uInfo.getUserAddress ());
-                    identity.setText (uInfo.getUserIdentity ());
-                    role.setText (uInfo.getUserRole ());
-                    userImg=uInfo.getImageURL();
-
+                    if(requireNonNull(uInfo).getUserId().equals(userID)) {
+                        username.setText(requireNonNull(uInfo).getUserName());
+                        email.setText(uInfo.getUserEmail());
+                        mobile.setText(uInfo.getUserMobile());
+                        location.setText(uInfo.getUserAddress());
+                        identity.setText(uInfo.getUserIdentity());
+                        role.setText(uInfo.getUserRole());
+                        userImg = uInfo.getImageURL();
+                    }
             }
         }catch (Exception e){
             Log.d(TAG, "Failed to retrive values"+e);
@@ -151,9 +159,12 @@ private LinearLayout l9;
                             String Address,
                             String Identity,
                             String Status,
-                               String Img) {
+                            String Feedback,
+                            String News,
+                            String Time,
+                            String Img) {
         //getting the specified artist reference
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("Users").child(ID);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("USERS").child(ID);
         Name=username.getText ().toString ().trim ().toUpperCase ();
         Email=email.getText ().toString ().trim ().toLowerCase();
         Mobile=mobile.getText ().toString ().trim ();
@@ -161,6 +172,9 @@ private LinearLayout l9;
         Role=role.getText ().toString ().toUpperCase ();
         Address=location.getText ().toString ().toUpperCase ();
         Status="1";
+        Feedback="";
+        News="";
+        Time=get_current_time();
         //updating artist
         Teacher user = new Teacher (
                 ID,
@@ -172,10 +186,20 @@ private LinearLayout l9;
                 Address,
                 Identity,
                 Status,
+                Feedback,
+                News,
+                Time,
                 Img);
 
         dR.setValue(user);
         Toast.makeText(getContext(), "User info Updated", Toast.LENGTH_LONG).show();
     }
-
+    private String get_current_time(){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+        return sdf.format(new Date());
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

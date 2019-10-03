@@ -18,8 +18,8 @@ import com.p4u.parvarish.R;
 
 import static java.util.Objects.requireNonNull;
 
-public class OTPConfirmation extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "OTPConfirmation";
+public class OTPConfirmationActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "OTPConfirmationActivity";
 
     private static final String KEY_VERIFY_IN_PROGRESS="key_verify_in_progress";
 

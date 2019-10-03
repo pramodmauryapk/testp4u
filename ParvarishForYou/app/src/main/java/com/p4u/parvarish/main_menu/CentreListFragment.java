@@ -46,7 +46,7 @@ public class CentreListFragment extends Fragment {
 
         v = inflater.inflate
                 (R.layout.fragment_center_list, container, false);
-        databaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        databaseUsers = FirebaseDatabase.getInstance().getReference().child("USERS");
         //getting views
         initViews();
 
@@ -146,5 +146,8 @@ public class CentreListFragment extends Fragment {
         dbuttonBack = dialogView.findViewById(R.id.dbuttonBack);
         dbuttonDelete =  dialogView.findViewById(R.id.dbuttonDelete);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

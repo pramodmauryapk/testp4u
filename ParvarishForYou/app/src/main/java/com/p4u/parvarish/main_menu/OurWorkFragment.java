@@ -30,7 +30,7 @@ public class OurWorkFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_our_work, container, false);
-        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("News");
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("NEWS");
         initViews();
 
 
@@ -40,6 +40,9 @@ public class OurWorkFragment extends Fragment {
     private void initViews(){
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
 }

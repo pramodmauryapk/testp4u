@@ -56,7 +56,7 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
         mAdapter.setOnItemClickListener(ImageItemsFragment.this);
 
         mStorage = FirebaseStorage.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("uploaded_image");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
 
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -112,6 +112,9 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
 

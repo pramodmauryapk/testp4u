@@ -462,4 +462,8 @@ public class UpdateBookFragment extends Fragment {
 
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
