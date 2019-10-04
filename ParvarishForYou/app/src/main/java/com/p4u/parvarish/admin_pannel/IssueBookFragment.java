@@ -438,8 +438,5 @@ private boolean updateBook(String bookId,String issueName){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }

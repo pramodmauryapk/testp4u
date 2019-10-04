@@ -58,9 +58,6 @@ public class ManageGalleryFragment extends Fragment {
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 }

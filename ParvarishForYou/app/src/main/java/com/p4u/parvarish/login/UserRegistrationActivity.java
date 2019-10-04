@@ -211,8 +211,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
             return false;
         }
-        if(password.equals(aPassword)&&(password.length() >= 6)) {
-            tlapassword.setError("Both password are not same! and length should be >=6");
+        if(password.equals(aPassword)) {
+            tlapassword.setError("Both password are not same!");
             return false;
 
         }

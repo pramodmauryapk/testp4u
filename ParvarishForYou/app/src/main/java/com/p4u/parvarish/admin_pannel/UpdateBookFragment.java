@@ -162,21 +162,8 @@ public class UpdateBookFragment extends Fragment {
                             String bookDonor,
                             String bookDonorMobile) {
 
-    /*    Book book = new Book (
-                bookId,
-                bookTitle,
-                bookAuthor,
-                bookSubject,
-                bookYear,
-                bookCost,
-                bookAvaibility,
-                bookLocation,
-                bookDonor,
-                bookDonorMobile,
-                bookDonorTime,
-                bookHandoverTo,
-                bookHandoverTime);
-*/      databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
+
+        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
         databaseBooks.child("bookTitle").setValue(bookTitle);
         databaseBooks.child("bookAuthor").setValue(bookAuthor);
         databaseBooks.child("bookSubject").setValue(bookSubject);
@@ -186,7 +173,7 @@ public class UpdateBookFragment extends Fragment {
         databaseBooks.child("bookDonor").setValue(bookDonor);
         databaseBooks.child("bookDonorMobile").setValue(bookDonorMobile);
         return true;
-       // databaseBooks.child(Objects.requireNonNull(bookId)).setValue(book);
+
 
     }
     @SuppressLint("InflateParams")
@@ -457,8 +444,5 @@ public class UpdateBookFragment extends Fragment {
 
         }
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }

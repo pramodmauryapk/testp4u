@@ -385,10 +385,7 @@ public class SubmitBookFragment extends Fragment {
         }
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");

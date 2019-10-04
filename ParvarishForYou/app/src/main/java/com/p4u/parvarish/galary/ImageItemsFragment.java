@@ -112,9 +112,6 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }
 

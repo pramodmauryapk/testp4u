@@ -49,32 +49,41 @@ public class HomeFragment extends Fragment {
 
         v = inflater.inflate(R.layout.home_fragment,container,false);
         context = container.getContext();
-        assert this.getArguments() != null;
-        String role = this.getArguments().getString("user_role");
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
-        MainActivity my = new MainActivity();
-        my.fragmentStack = new Stack<>();
+        //add banner
+        banner_load();
+        marquee_load();
+        menu_load();
+
+
+        return v;
+    }
+
+    private void marquee_load() {
         //inherit child fragment for marquee
         Fragment child1Fragment = new NewsTextFragment();
         FragmentTransaction transaction1 = getChildFragmentManager().beginTransaction();
         transaction1.replace(R.id.child_fragment_container, child1Fragment).commit();
-        //menu fragment and pass user role
-       Bundle bundle=new Bundle();
-       Fragment child2Fragment = new UserMenuFragment();
+    }
+
+    //menu fragment and pass user role
+    public void menu_load(){
+        assert this.getArguments() != null;
+        String role = this.getArguments().getString("user_role");
+        MainActivity my = new MainActivity();
+        my.fragmentStack = new Stack<>();
+        Bundle bundle=new Bundle();
+        Fragment child2Fragment = new UserMenuFragment();
         bundle.putString("user_role", role);
         child2Fragment.setArguments(bundle);
         my.fragmentStack.push(child2Fragment);
-        FragmentTransaction transaction2 = getChildFragmentManager().beginTransaction();
-        transaction2.replace(R.id.menu_fragment_container, child2Fragment).commit();
-        transaction2.addToBackStack(null);
-        //add banner
-        banner();
-        return v;
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.menu_fragment_container, child2Fragment).commit();
+        transaction.addToBackStack(null);
     }
 
-
-
-    private void banner(){
+    private void banner_load(){
         final BannerLayout recyclerBanner =  v.findViewById(R.id.recycler);
         list = new ArrayList<>();
         webBannerAdapter=new WebBannerAdapter(context,list);
@@ -103,9 +112,6 @@ public class HomeFragment extends Fragment {
         });
         recyclerBanner.setAdapter(webBannerAdapter);
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 }

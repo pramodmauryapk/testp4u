@@ -147,8 +147,5 @@ public class ItemFragment extends Fragment {
         screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }

@@ -22,6 +22,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.p4u.parvarish.fancydialog.Animation;
+import com.p4u.parvarish.fancydialog.FancyAlertDialog;
+import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
+import com.p4u.parvarish.fancydialog.Icon;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -123,9 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
     }
-    //public void myClickMethod(View v){
-      //  userMenuFragment.myClickMethod(v);
-    //}
+
     private void init(){
         // NavigationView Header
         View headerView = navigationView.getHeaderView(0);
@@ -136,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressLint({"SetTextI18n", "ResourceType"})
     public void set_profile(String username,String useremail,String userrole,String imgURL){
 
-         name.setText("Welcome ! " + username);
-          email.setText(useremail);
+         name.setText(username);
+          email.setText(userrole);
           Picasso.get().load(imgURL).into(img);
 
     }
@@ -154,52 +156,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-         super.onBackPressed();
-        fragmentStack.pop();
+        int count = getSupportFragmentManager().getBackStackEntryCount();
 
-        /*
-        HomeFragment test = (HomeFragment) getSupportFragmentManager().findFragmentByTag("Home");
-
-        assert test != null;
-        if((test).isVisible()) {
-
-                    Log.i(TAG, "This is last activity and fragment in the stack");
-                     new FancyAlertDialog.Builder(this)
-                                .setTitle("Rate us if you like the app")
-                                .setMessage("Do you really want to Exit ?")
-                                .setNegativeBtnText("Cancel")
-                                .setPositiveBtnText("Close")
-                                .setAnimation(Animation.POP)
-                                .isCancellable(true)
-                                .setIcon(R.drawable.logo, Icon.Visible)
-                                .OnPositiveClicked(() -> {
-
-                                    finish();
-                                    return true;
-                                })
-                                .OnNegativeClicked(() -> false)
-                                .build();
-
-                    }
-
-
-
-
-            else{
-               // super.onBackPressed();
-            //  fragmentStack.pop();
-            }*/
-
-
-           /* FragmentTransaction ft = fragmentManager.beginTransaction();
-            fragmentStack.lastElement().onPause();
-            ft.remove(fragmentStack.pop());
-            fragmentStack.lastElement().onResume();
-            ft.show(fragmentStack.lastElement());
-            ft.commit();
-*/
-
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
+
+
+    }
 
 
 
@@ -280,9 +247,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_contact_us:newContent=new ContactUsFragment();
                 break;
-            case R.id.nav_exit:Intent ActivityIndent = new Intent(getApplicationContext(), ExitActivity.class);
-                startActivity(ActivityIndent);
-                finish();
+            case R.id.nav_exit:new FancyAlertDialog.Builder(this)
+                    .setTitle("Rate us if you like the app")
+                    .setMessage("Do you really want to Exit ?")
+                    .setNegativeBtnText("Cancel")
+                    .setPositiveBtnText("Close")
+                    .setAnimation(Animation.POP)
+                    .isCancellable(true)
+                    .setIcon(R.drawable.logo, Icon.Visible)
+                    .OnPositiveClicked(new FancyAlertDialogListener() {
+                        @Override
+                        public void OnClick() {
+
+                            Intent ActivityIndent = new Intent(getApplicationContext(), ExitActivity.class);
+                            startActivity(ActivityIndent);
+                            finish();
+                            //return true;
+                        }
+                    })
+                    .OnNegativeClicked(new FancyAlertDialogListener() {
+                        @Override
+                        public void OnClick() {
+                            //false;
+
+
+                        }
+                    })
+                    .build();
                 break;
 
 
@@ -306,13 +297,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .addToBackStack(null)
                 .commit();
 
-       // FragmentTransaction ft = fragmentManager.beginTransaction();
-       // ft.add(R.id.content_frame, fragment);
-       // fragmentStack.lastElement().onPause();
-       // ft.hide(fragmentStack.lastElement());
-       // fragmentStack.push(fragment);
-       // ft.commit();
-    }
+     }
 
 
 }

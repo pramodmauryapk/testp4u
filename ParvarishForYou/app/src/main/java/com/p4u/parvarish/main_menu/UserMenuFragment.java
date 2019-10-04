@@ -235,10 +235,6 @@ public class UserMenuFragment extends HomeFragment{
 
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
 
 }

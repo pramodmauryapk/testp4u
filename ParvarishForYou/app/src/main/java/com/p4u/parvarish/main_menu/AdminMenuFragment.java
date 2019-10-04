@@ -1,6 +1,7 @@
 package com.p4u.parvarish.main_menu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.WelcomeActivity;
 import com.p4u.parvarish.admin_pannel.AddBookFragment;
 import com.p4u.parvarish.admin_pannel.IssueBookFragment;
 import com.p4u.parvarish.admin_pannel.SearchBookFragment;
@@ -136,6 +138,7 @@ public class AdminMenuFragment extends Fragment {
             mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_child_friendly_black_24dp),"Issue Book", 3));
             mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_transfer_within_a_station_black_24dp),"Submit Book", 4));
             mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_phone_in_talk_black_24dp),"User Mobiles", 5));
+            mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_add_book_24dp),"Add Book", 7));
             // mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_report_black_24dp),"Report Book", 23));
         }
        else if(Role.equals("ADMIN")) {
@@ -156,10 +159,6 @@ public class AdminMenuFragment extends Fragment {
 
 
 
-    }
-
-    private void makeToast(String input) {
-        Toast.makeText(getContext(), input, Toast.LENGTH_SHORT).show();
     }
 
     private void getWidthAndHeight() {
@@ -240,6 +239,7 @@ public class AdminMenuFragment extends Fragment {
 					//	switchFragment(newContent);
 
 
+
 						return false;
 					}
 				})
@@ -249,11 +249,6 @@ public class AdminMenuFragment extends Fragment {
 	}
 */
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
 
 

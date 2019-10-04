@@ -31,9 +31,6 @@ public class CapacityBuildingFragment extends Fragment {
     private void initViews(){
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.p4u.parvarish.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -77,11 +78,32 @@ public class Login_emailActivity extends AppCompatActivity {
         new_user_layout.startAnimation(new_user_anim);
 
         if(auth.getCurrentUser()!=null){
-           // Toast.makeText(Login_emailActivity.this, auth.getUid(), Toast.LENGTH_LONG).show();
-
             startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
             finish();
+        //login using catche data
+          // Toast.makeText(Login_emailActivity.this, auth.getUid(), Toast.LENGTH_LONG).show();
+    /*        auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(Objects.requireNonNull(this), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressBar.setVisibility(View.GONE);
+                            if (!task.isSuccessful()) {
+                                // there was an error
+
+                                Toast.makeText(Login_emailActivity.this, Login_emailActivity.this.getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+
+                            } else {
+
+                                Login_emailActivity.this.startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
+                                Login_emailActivity.this.finish();
+
+                            }
+                        }
+                    });
+
+*/
         }
+
 
 
     }
@@ -136,11 +158,9 @@ public class Login_emailActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         if (!task.isSuccessful()) {
                             // there was an error
-                            if (password.length() < 6) {
-                                tf2.setError(Login_emailActivity.this.getString(R.string.minimum_password));
-                            } else {
+
                                 Toast.makeText(Login_emailActivity.this, Login_emailActivity.this.getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                            }
+
                         } else {
 
                             Login_emailActivity.this.startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));

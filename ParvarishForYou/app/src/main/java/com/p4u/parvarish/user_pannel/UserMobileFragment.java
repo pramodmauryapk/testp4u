@@ -93,9 +93,6 @@ public class UserMobileFragment extends Fragment {
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 }

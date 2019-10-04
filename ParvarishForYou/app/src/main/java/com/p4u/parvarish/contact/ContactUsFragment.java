@@ -57,7 +57,7 @@ public class ContactUsFragment extends Fragment {
         final String copyrights = String.format(getString(R.string.copy_right), Calendar.getInstance().get(Calendar.YEAR));
         copyRightsElement.setTitle(copyrights);
         copyRightsElement.setIconDrawable(R.drawable.about_icon_copy_right);
-        copyRightsElement.setIconTint(R.color.about_item_icon_color);
+        copyRightsElement.setIconTint(R.color.colorPrimary);
         copyRightsElement.setIconNightTint();
         copyRightsElement.setGravity(Gravity.CENTER);
         copyRightsElement.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +34,9 @@ import java.util.List;
 import java.util.Objects;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.user_pannel.Teacher;
+
+import static java.util.Objects.requireNonNull;
 
 public class AddBookFragment extends Fragment {
     private static final String TAG = "AddBookFragment";
@@ -43,17 +49,36 @@ public class AddBookFragment extends Fragment {
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
     private Button dBack;
     private View dialogView;
-
+    private String BookID;
+    private DatabaseReference user;
+    private String UserID;
     private DatabaseReference databaseBooks;
-
+    private String booklocation;
+    private int t=0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_add, container, false);
-
-
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
+        DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
+        UserID = (requireNonNull(user)).getUid();
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
         initViews();
+        etBookId.setEnabled(false);
+        etBookLocation.setEnabled(false);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                show(ds);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         books = new ArrayList<>();
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +90,8 @@ public class AddBookFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = books.get(i);
+
+
                 showDialog(
                         book.getBookId(),
                         book.getBookTitle(),
@@ -80,13 +107,45 @@ public class AddBookFragment extends Fragment {
                         book.getBookHandoverTo(),
                         book.getBookHandoverTime());
             }
+
         });
         return v;
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void show(DataSnapshot dataSnapshot){
+        try {
+
+
+            for (DataSnapshot ds : dataSnapshot.getChildren ()) {
+
+                Teacher uInfo=ds.getValue(Teacher.class);
+
+                if(requireNonNull(uInfo).getUserRole().equals("ADMIN")){
+                    etBookId.setEnabled(true);
+                    etBookLocation.setEnabled(true);
+                }
+                if(requireNonNull(uInfo).getUserId().equals(UserID)) {
+
+                   booklocation= uInfo.getUserAddress().substring(0,3);
+                    etBookLocation.setText(uInfo.getUserAddress());
+
+                }
+
+
+
+            }
+
+
+        }catch (Exception e){
+            Log.d(TAG, "Failed to retrive values"+e);
+        }
     }
 
     private void addBooks() {
 
         //getting the values to save
+        String bookYear,bookSubject;
 
         String bookId=etBookId.getText ().toString ().toUpperCase ().trim ();
         String bookTitle = etBookTitle.getText().toString().toUpperCase().trim();
@@ -94,10 +153,16 @@ public class AddBookFragment extends Fragment {
         String bookAuthor= etBookAuthor.getText().toString().toUpperCase().trim();
         String bookDonor= etDonor.getText().toString().toUpperCase().trim();
         String bookDonorMobile= etDonorMobile.getText().toString().trim();
-        String bookYear = spBookYear.getSelectedItem().toString();
-
-        String bookSubject = spBookSubject.getSelectedItem().toString();
-
+        if(spBookYear.getSelectedItem()!=null) {
+            bookYear = spBookYear.getSelectedItem().toString();
+        }else{
+            bookYear="N/A";
+        }
+        if(spBookSubject.getSelectedItem()!=null) {
+            bookSubject = spBookSubject.getSelectedItem().toString();
+        }else{
+            bookSubject="N/A";
+        }
         String bookAvaibility="1";
         String bookLocation=etBookLocation.getText().toString().toUpperCase().trim ();
         String bookDonorTime=get_current_time();
@@ -148,22 +213,26 @@ public class AddBookFragment extends Fragment {
             etDonor.setText("");
 
         } else {
-             Toast.makeText(getContext(), "Please enter a name", Toast.LENGTH_LONG).show();
+             Toast.makeText(getContext(), "Please enter bookId", Toast.LENGTH_LONG).show();
         }
     }
     public void onStart() {
 
         super.onStart();
         databaseBooks.addValueEventListener(new ValueEventListener () {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 books.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Book book = postSnapshot.getValue(Book.class);
                     books.add(book);
+
                 }
                 BookList bookAdapter = new BookList(getActivity(), books);
                 listViewBooks.setAdapter(bookAdapter);
+                t=bookAdapter.getCount();
+                etBookId.setText(booklocation+(t+1));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -260,9 +329,6 @@ public class AddBookFragment extends Fragment {
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 }
