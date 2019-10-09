@@ -40,7 +40,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ItemFragment.newInstance(context, position, scale);
+        return GalleryItemFragment.newInstance(context, position, scale);
     }
 
     @Override

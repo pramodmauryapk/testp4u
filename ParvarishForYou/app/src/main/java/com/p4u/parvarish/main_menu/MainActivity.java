@@ -159,8 +159,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            super.onBackPressed();
-            //additional code
+            //super.onBackPressed();
+            new FancyAlertDialog.Builder(this)
+                    .setTitle("Rate us if you like the app")
+                    .setMessage("Do you really want to Exit ?")
+                    .setNegativeBtnText("Cancel")
+                    .setPositiveBtnText("Close")
+                    .setAnimation(Animation.POP)
+                    .isCancellable(true)
+                    .setIcon(R.drawable.logo, Icon.Visible)
+                    .OnPositiveClicked(new FancyAlertDialogListener() {
+                        @Override
+                        public void OnClick() {
+
+                            Intent ActivityIndent = new Intent(getApplicationContext(), ExitActivity.class);
+                            startActivity(ActivityIndent);
+                            finish();
+                            //return true;
+                        }
+                    })
+                    .OnNegativeClicked(new FancyAlertDialogListener() {
+                        @Override
+                        public void OnClick() {
+                            //false;
+
+
+                        }
+                    })
+                    .build();
         } else {
             getSupportFragmentManager().popBackStack();
         }

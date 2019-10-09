@@ -11,10 +11,7 @@
     <string name="tv_passwordresetinstruction">We just need your registered Email id to send you password reset instructions</string>
     <string name="tv_passwordupdateinstruction">Please enter password minimum 6 characters.</string>
     <string name="username">User Name</string>
-
-
     <string name="mobile_number">Mobile Number</string>
-
     <string name="confirm_password">Confirm Password</string>
     <string name="address">Address</string>
     <string name="identity">Identity</string>
@@ -214,4 +211,6 @@
     <string name="contact_us">Contact Us</string>
     <string name="share">Share</string>
     <string name="exit">Exit</string>
+    <string name="shuting_down">Shuting Down</string>
+    <string name="images_list">Images List</string>
 </resources>

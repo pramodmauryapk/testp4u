@@ -9,16 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +43,8 @@ import static java.util.Objects.requireNonNull;
 
 public class AddBookFragment extends Fragment {
     private static final String TAG = "AddBookFragment";
-    private EditText etBookId,etBookAuthor,etBookTitle,etBookCost,etDonor,etDonorMobile,etBookLocation;
+    private EditText etBookId,etBookAuthor,etBookTitle,etBookCost,etDonor,etDonorMobile;
+    private Spinner spBookLocation;
     private Button btnAddBook;
     private Spinner spBookSubject,spBookYear;
     private ListView listViewBooks;
@@ -49,12 +53,12 @@ public class AddBookFragment extends Fragment {
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
     private Button dBack;
     private View dialogView;
-    private String BookID;
-    private DatabaseReference user;
     private String UserID;
+    private TextInputLayout tf1,tf2,tf3,tf4,tf5,tf6,tf7;
     private DatabaseReference databaseBooks;
     private String booklocation;
-    private int t=0;
+    private String bookYear,bookSubject,bookId,bookTitle,bookCost,bookAuthor,bookDonor,bookDonorMobile,bookAvaibility,bookLocation,bookDonorTime,bookHandoverTo,bookHandoverTime,b;
+    private int t=0,k=0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -67,7 +71,7 @@ public class AddBookFragment extends Fragment {
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
         initViews();
         etBookId.setEnabled(false);
-        etBookLocation.setEnabled(false);
+        spBookLocation.setEnabled(false);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
@@ -90,8 +94,6 @@ public class AddBookFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = books.get(i);
-
-
                 showDialog(
                         book.getBookId(),
                         book.getBookTitle(),
@@ -114,27 +116,32 @@ public class AddBookFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void show(DataSnapshot dataSnapshot){
+        String location=null;
         try {
-
-
+            ArrayList<String> list = new ArrayList<>();
             for (DataSnapshot ds : dataSnapshot.getChildren ()) {
 
                 Teacher uInfo=ds.getValue(Teacher.class);
 
                 if(requireNonNull(uInfo).getUserRole().equals("ADMIN")){
                     etBookId.setEnabled(true);
-                    etBookLocation.setEnabled(true);
+                    spBookLocation.setEnabled(true);
                 }
                 if(requireNonNull(uInfo).getUserId().equals(UserID)) {
 
                    booklocation= uInfo.getUserAddress().substring(0,3);
-                    etBookLocation.setText(uInfo.getUserAddress());
+                   location=uInfo.getUserAddress();
+                   list.add(location);
+
 
                 }
-
+            //    if(uInfo.getUserAddress().equals(location)){
+            //        k++;
+            //    }
 
 
             }
+
 
 
         }catch (Exception e){
@@ -144,46 +151,16 @@ public class AddBookFragment extends Fragment {
 
     private void addBooks() {
 
-        //getting the values to save
-        String bookYear,bookSubject;
-
-        String bookId=etBookId.getText ().toString ().toUpperCase ().trim ();
-        String bookTitle = etBookTitle.getText().toString().toUpperCase().trim();
-        String bookCost = etBookCost.getText().toString().trim();
-        String bookAuthor= etBookAuthor.getText().toString().toUpperCase().trim();
-        String bookDonor= etDonor.getText().toString().toUpperCase().trim();
-        String bookDonorMobile= etDonorMobile.getText().toString().trim();
-        if(spBookYear.getSelectedItem()!=null) {
-            bookYear = spBookYear.getSelectedItem().toString();
-        }else{
-            bookYear="N/A";
-        }
-        if(spBookSubject.getSelectedItem()!=null) {
-            bookSubject = spBookSubject.getSelectedItem().toString();
-        }else{
-            bookSubject="N/A";
-        }
-        String bookAvaibility="1";
-        String bookLocation=etBookLocation.getText().toString().toUpperCase().trim ();
-        String bookDonorTime=get_current_time();
-        String bookHandoverTo="CENTER";
-        String bookHandoverTime=get_current_time();
-        //checking if the value is provided
-        if ((!TextUtils.isEmpty(bookId)) &&
-                (!TextUtils.isEmpty(bookTitle))&&
-                (!TextUtils.isEmpty(bookCost))&&
-                        (!TextUtils.isEmpty(bookAuthor))&&
-                                (!TextUtils.isEmpty(bookDonor))&&
-                                        (!TextUtils.isEmpty(bookDonorMobile)&&bookDonorMobile.length()==10)&&
-                                                (!TextUtils.isEmpty(bookLocation))&&
-                                                    (!TextUtils.isEmpty(bookYear))&&
-                                                            (!TextUtils.isEmpty(bookSubject)))
+        //setting the values to save
+        set_values();
+        //validating
+        boolean ans=validate();
+        if(ans)
         {
 
             //getting a unique id using push().getKey() method
-            //it will create a unique id and we will use it as the Primary Key for our Artist
+            //it will create a unique id and we will use it as the Primary Key for our Book
             //String bookId = databaseBooks.push().getKey();
-
             //creating an Book Object
             Book book = new Book (
                     bookId,
@@ -201,20 +178,77 @@ public class AddBookFragment extends Fragment {
                     bookHandoverTime);
 
             //Saving the Book
-            databaseBooks.child(Objects.requireNonNull(bookId)).setValue(book);
+            databaseBooks.child(requireNonNull(bookId)).setValue(book);
             Toast.makeText(getContext(), "Book added", Toast.LENGTH_LONG).show();
             //setting edittext to blank again
-            etBookId.setText ("");
-            etBookTitle.setText("");
-            etBookAuthor.setText("");
-            etBookCost.setText("");
-            etBookLocation.setText("");
-            etDonorMobile.setText("");
-            etDonor.setText("");
+            set_blank();
 
         } else {
-             Toast.makeText(getContext(), "Please enter bookId", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "fill All required fields ", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean validate() {
+
+        if (!TextUtils.isEmpty(bookTitle)) {
+            tf2.setError("Enter Book Title");
+            return false;
+        }
+        else if (!TextUtils.isEmpty(bookCost)) {
+            tf3.setError("Enter Book Cost");
+            return false;
+        }
+        else if (!TextUtils.isEmpty(bookAuthor)) {
+            tf4.setError("Enter Book Author");
+            return false;
+        }
+        else if (!TextUtils.isEmpty(bookDonor)) {
+            tf5.setError("Enter Book Donor Name");
+            return false;
+        }
+        else if (bookDonorMobile.length() != 10) {
+            tf6.setError("Enter Book Donor Mobile");
+            return false;
+        }
+
+        else
+
+        return true;
+    }
+
+    private void set_values() {
+
+        bookId=etBookId.getText ().toString ().toUpperCase ().trim ();
+        bookTitle = etBookTitle.getText().toString().toUpperCase().trim();
+        bookCost = etBookCost.getText().toString().trim();
+        bookAuthor= etBookAuthor.getText().toString().toUpperCase().trim();
+        bookDonor= etDonor.getText().toString().toUpperCase().trim();
+        bookDonorMobile= etDonorMobile.getText().toString().trim();
+        if(spBookYear.getSelectedItem()!=null) {
+            bookYear = spBookYear.getSelectedItem().toString();
+        }else{
+            bookYear="N/A";
+        }
+        if(spBookSubject.getSelectedItem()!=null) {
+            bookSubject = spBookSubject.getSelectedItem().toString();
+        }else{
+            bookSubject="N/A";
+        }
+        bookAvaibility="1";
+        bookLocation=spBookLocation.getSelectedItem().toString();
+        bookDonorTime=get_current_time();
+        bookHandoverTo="CENTER";
+        bookHandoverTime=get_current_time();
+    }
+    private void set_blank(){
+
+        etBookTitle.setText("");
+        etBookAuthor.setText("");
+        etBookCost.setText("");
+
+        etDonorMobile.setText("");
+        etDonor.setText("");
+
     }
     public void onStart() {
 
@@ -227,7 +261,6 @@ public class AddBookFragment extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Book book = postSnapshot.getValue(Book.class);
                     books.add(book);
-
                 }
                 BookList bookAdapter = new BookList(getActivity(), books);
                 listViewBooks.setAdapter(bookAdapter);
@@ -270,8 +303,8 @@ public class AddBookFragment extends Fragment {
         dCost.setText(dbookCost);
         dTitle.setText(dbookTitle);
         dLocation.setText(dbookLocation);
-        dDonor.setText(dbookDonor);
-        dDonorMobile.setText(dbookDonorMobile);
+        //dDonor.setText(dbookDonor);
+        //dDonorMobile.setText(dbookDonorMobile);
         dYear.setText(dbookYear);
         dSubject.setText(dbookSubject);
         dIssueTo.setText(dbookHandoverTo);
@@ -295,9 +328,17 @@ public class AddBookFragment extends Fragment {
         etBookCost =  v.findViewById(R.id.etBookcost);
         etDonor = v.findViewById(R.id.etDonor);
         etDonorMobile = v.findViewById(R.id.etDonorMobile);
-        etBookLocation =  v.findViewById(R.id.etBookLocation);
+        spBookLocation =  v.findViewById(R.id.etBookLocation);
         spBookSubject =  v.findViewById(R.id.spBookSubject);
         spBookYear =  v.findViewById(R.id.spBookYear);
+
+        tf1=v.findViewById(R.id.tf1);
+        tf2=v.findViewById(R.id.tf2);
+        tf3=v.findViewById(R.id.tf3);
+        tf4=v.findViewById(R.id.tf4);
+        tf6=v.findViewById(R.id.tf6);
+        tf7=v.findViewById(R.id.tf7);
+
         listViewBooks = v.findViewById(R.id.listViewBooks);
         btnAddBook = v.findViewById(R.id.btnAddBook);
     }
@@ -322,13 +363,7 @@ public class AddBookFragment extends Fragment {
         return sdf.format(new Date());
     }
 
-    private void switchFragment(Fragment fragment) {
 
-        // mDrawerLayout.closeDrawer(mDrawerList);
-        Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
-    }
 
 
 }

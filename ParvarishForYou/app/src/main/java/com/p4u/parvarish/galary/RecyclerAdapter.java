@@ -24,7 +24,7 @@ import java.util.List;
 import com.p4u.parvarish.R;
 
 public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
-    private static final String TAG = "RecyclerAdapter";
+    private static final String TAG = "RecyclerAdapter_model";
     private Context mContext;
     private List<Image_Model> imageModels;
     private OnItemClickListener mListener;

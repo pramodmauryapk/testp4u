@@ -54,26 +54,18 @@ import static java.util.Objects.requireNonNull;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
-    ImageView top_curve;
-
-    TextView login_title;
-
-    LinearLayout already_have_account_layout;
-    CardView register_card;
     private static final String TAG = "UserRegistrationActivity";
-    TextInputLayout tlname,tlpassword,tlapassword,tlemail,tlmobile,tladdress,tlidentity;
+    private TextInputLayout tlname,tlpassword,tlapassword,tlemail,tlmobile,tladdress,tlidentity;
     private TextInputEditText etFullname, etPassword,etaPassword, etEmail, etMobile,etAddress,etIdentity;
     private FirebaseAuth auth;
     private Spinner spRole;
     private ProgressBar progressBar;
     private TextInputLayout tvrole;
     private DatabaseReference myref;
-    private Button btnCreatenewuser;
     private ImageView imageView;
     private Uri mImageUri;
     private final int PICK_IMAGE_REQUEST = 71;
-    private String email,password,aPassword,id,name,role,mobilenumber,address,identity,status,feedback,news,time;
-
+    private String email,password,aPassword,id,name,role,mobilenumber,address,identity,status,feedback,news,rating,time;
     private StorageReference mStorageRef;
     private StorageTask mUploadTask;
 
@@ -85,10 +77,10 @@ public class UserRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         (requireNonNull(getSupportActionBar())).hide();
         initViews();
-        top_curve = findViewById(R.id.top_curve);
-        login_title = findViewById(R.id.registration_title);
-        already_have_account_layout = findViewById(R.id.already_have_account_text);
-        register_card = findViewById(R.id.register_card);
+        ImageView top_curve = findViewById(R.id.top_curve);
+        TextView login_title = findViewById(R.id.registration_title);
+        LinearLayout already_have_account_layout = findViewById(R.id.already_have_account_text);
+        CardView register_card = findViewById(R.id.register_card);
 
 
         Animation top_curve_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.top_down);
@@ -192,6 +184,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
         status="1";
         feedback="";
         news="";
+        rating="";
         time=get_current_time();
     }
     private Boolean validate(){
@@ -271,6 +264,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
                                             feedback,
                                             news,
                                             time,
+                                            rating,
                                             uri.toString()
                                     );
 

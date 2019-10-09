@@ -5,7 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="black">#000</color>
     <color name="transparent">#00000000</color>
-    <color name="primary_dark_material_light" tools:ignore="PrivateResource">#ff757575</color>
+    <color name="primary_dark_material_light" >#ff757575</color>
     <color name="reds">#EE3636</color>
 
     <color name="colorEdittextborder">#A9A9A9</color>

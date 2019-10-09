@@ -42,13 +42,13 @@ public class UserDetailsFragment extends Fragment {
         //Intent i=getActivity().getIntent();
         assert getArguments() != null;
         String name= getArguments().getString("NAME_KEY");
-       String email=getArguments().getString("EMAIL_KEY");
-       String imageURL=getArguments().getString("IMAGE_KEY");
-       String mobile=getArguments().getString("MOBILE_KEY");
-       String role=getArguments().getString("ROLE_KEY");
-       String identity=getArguments().getString("IDENTITY_KEY");
-       String address=getArguments().getString("ADDRESS_KEY");
-       String status=getArguments().getString("STATUS_KEY");
+        String email=getArguments().getString("EMAIL_KEY");
+        String imageURL=getArguments().getString("IMAGE_KEY");
+        String mobile=getArguments().getString("MOBILE_KEY");
+        String role=getArguments().getString("ROLE_KEY");
+        String identity=getArguments().getString("IDENTITY_KEY");
+        String address=getArguments().getString("ADDRESS_KEY");
+        String status=getArguments().getString("STATUS_KEY");
 
 
 

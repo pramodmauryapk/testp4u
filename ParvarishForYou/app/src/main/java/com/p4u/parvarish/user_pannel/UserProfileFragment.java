@@ -38,7 +38,7 @@ import static java.util.Objects.requireNonNull;
 public class UserProfileFragment extends Fragment {
     private static final String TAG = "UserProfileFragment";
     private String userID,userName,userEmail,userMobile,userIdentity;
-    private String userPassword,userAgainPassword,userRole,userAddress,userStatus,userFeedback,userNews,userTime,userImg;
+    private String userPassword,userAgainPassword,userRole,userAddress,userStatus,userFeedback,userNews,userTime,userRating,userImg;
     private View v;
     private EditText username,email,mobile,identity,password,againpassword,feedback,news,time;
     private TextView location,role;
@@ -87,6 +87,7 @@ public class UserProfileFragment extends Fragment {
                         userFeedback,
                         userNews,
                         userTime,
+                        userRating,
                         userImg);
             }
         });
@@ -152,6 +153,7 @@ public class UserProfileFragment extends Fragment {
                             String Feedback,
                             String News,
                             String Time,
+                            String Rating,
                             String Img) {
         //getting the specified artist reference
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("USERS").child(ID);
@@ -164,6 +166,7 @@ public class UserProfileFragment extends Fragment {
         Status="1";
         Feedback="";
         News="";
+        Rating="";
         Time=get_current_time();
         //updating artist
         Teacher user = new Teacher (
@@ -179,6 +182,7 @@ public class UserProfileFragment extends Fragment {
                 Feedback,
                 News,
                 Time,
+                Rating,
                 Img);
 
         dR.setValue(user);

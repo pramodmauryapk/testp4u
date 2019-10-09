@@ -16,12 +16,12 @@ import java.util.List;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
-public class CenterList extends ArrayAdapter<Teacher> {
-    private static final String TAG = "CenterList";
+public class CenterList_model extends ArrayAdapter<Teacher> {
+    private static final String TAG = "CenterList_model";
     private Activity context;
     private List<Teacher> users;
 
-   CenterList(Activity context, List<Teacher> users) {
+   CenterList_model(Activity context, List<Teacher> users) {
         super(context, R.layout.layout_all_center, users);
         this.context = context;
         this.users = users;

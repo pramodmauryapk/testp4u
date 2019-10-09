@@ -38,10 +38,10 @@ import com.p4u.parvarish.R;
 
 import static java.util.Objects.requireNonNull;
 
-public class UserListFragment extends Fragment implements RecyclerAdapter.OnItemClickListener{
+public class ManageUserFragment extends Fragment implements RecyclerAdapter_model.OnItemClickListener{
 
-    private static final String TAG = "UserListFragment";
-    private RecyclerAdapter mAdapter;
+    private static final String TAG = "ManageUserFragment";
+    private RecyclerAdapter_model mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
@@ -67,7 +67,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
         mProgressBar.setVisibility(View.VISIBLE);
 
         mTeachers = new ArrayList<>();
-        mAdapter = new RecyclerAdapter (getContext(), mTeachers);
+        mAdapter = new RecyclerAdapter_model(getContext(), mTeachers);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
@@ -149,10 +149,8 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                 user.getUserAddress(),
                 user.getUserIdentity(),
                 user.getUserStatus(),
+                user.getUserRating(),
                 user.getImageURL());
-
-
-
 
     }
 
@@ -166,7 +164,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
             @Override
             public void onSuccess(Void aVoid) {
                 mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(UserListFragment.this.getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManageUserFragment.this.getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -181,6 +179,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                                   final String userAddress,
                                   final String userIdentity,
                                   final String userStatus,
+                                  final String userRating,
                                   final String userImageURL) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (getContext ());
@@ -193,12 +192,7 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
         dialogBuilder.setTitle ("User Details");
         final AlertDialog b = dialogBuilder.create ();
         b.show ();
-        dtvUsername.setText (userName);
-        dtvEmail.setText (userEmail);
-        dtvMobile.setText (userMobile);
-        dtvCenterName.setText (userAddress);
-        dtvIdentity.setText (userIdentity);
-        dtvRole.setText (userRole);
+        setValues(userName,userEmail,userMobile,userAddress,userIdentity,userRole);
         dbuttonDelete.setVisibility (View.GONE);
         dbuttonBack.setOnClickListener (new View.OnClickListener() {
             @Override
@@ -210,21 +204,25 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
             @Override
             public void onClick(View view) {
 //Toast.makeText(getContext(),"hello",Toast.LENGTH_LONG).show();
-                UserListFragment.this.updatedetails(userId,
-                        requireNonNull(dtvUsername.getText()).toString().trim().toUpperCase(),
-                        requireNonNull(dtvEmail.getText()).toString().trim().toLowerCase(),
-                        userPassword,
-                        dtvRole.getText().toString().toUpperCase(),
-                        requireNonNull(dtvMobile.getText()).toString().trim(),
-                        requireNonNull(dtvCenterName.getText()).toString().toUpperCase(),
-                        requireNonNull(dtvIdentity.getText()).toString().trim(),
-                        userStatus,
+               boolean ans= updatedetails(userId);
+               if(ans)
+                   Toast.makeText(getContext(), "User Updated", Toast.LENGTH_LONG).show();
+               else
+                   Toast.makeText(getContext(), "User Not Updated", Toast.LENGTH_LONG).show();
 
-                        userImageURL
-                );
             }
         });
     }
+
+    private void setValues(String userName,String userEmail,String userMobile,String userAddress,String userIdentity,String userRole) {
+        dtvUsername.setText (userName);
+        dtvEmail.setText (userEmail);
+        dtvMobile.setText (userMobile);
+        dtvCenterName.setText (userAddress);
+        dtvIdentity.setText (userIdentity);
+        dtvRole.setText (userRole);
+    }
+
     private void init_dialog_views(){
 
         dtvUsername =  dialogView.findViewById(R.id.etUserName);
@@ -244,23 +242,26 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                 .addToBackStack(null).commit();
 
     }
-    private void updatedetails(String Id,
-                               String Name,
-                               String Email,
-                               String Password,
-                               String Role,
-                               String Mobile,
-                               String address,
-                               String Identity,
-                               String Status,
-                               String ImageURL) {
+    private boolean updatedetails(String Id) {
         //getting the specified artist reference
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("USERS").child(Id);
-        String Feedback="";
-        String News="";
-        String Time=get_current_time();
+        try {
+            dR.child("userName").setValue(requireNonNull(dtvUsername.getText()).toString().trim().toUpperCase());
+            dR.child("userEmail").setValue(requireNonNull(dtvEmail.getText()).toString().trim().toLowerCase());
+            dR.child("userRole").setValue(dtvRole.getText().toString().toUpperCase());
+            dR.child("userMobile").setValue(requireNonNull(dtvMobile.getText()).toString().trim());
+            dR.child("userAddress").setValue(requireNonNull(dtvCenterName.getText()).toString().toUpperCase());
+            dR.child("userIdentity").setValue(requireNonNull(dtvIdentity.getText()).toString().trim());
+            dR.child("userTime").setValue(get_current_time());
+            return  true;
+        }catch (Exception e){
+            return false;
+        }
+     //   String Feedback="";
+     //   String News="";
+     //   String Time=get_current_time();
         //updating artist
-        Teacher user = new Teacher (
+      /*  Teacher user = new Teacher (
                 Id,
                 Name,
                 Email,
@@ -273,10 +274,11 @@ public class UserListFragment extends Fragment implements RecyclerAdapter.OnItem
                 Feedback,
                 News,
                 Time,
+                Rating,
                 ImageURL);
 
-        dR.setValue(user);
-        Toast.makeText(getContext(), "User Updated", Toast.LENGTH_LONG).show();
+        dR.setValue(user);*/
+
     }
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");

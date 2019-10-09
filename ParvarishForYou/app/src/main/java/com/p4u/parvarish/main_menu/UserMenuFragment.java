@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +43,7 @@ public class UserMenuFragment extends HomeFragment{
     private List<Menu> mList = new ArrayList<>();
     private String Role;
     private FirebaseUser user;
-
+private CardView cardView;
     private Context context;
     private int screenWidth;
     private Fragment child2Fragment;
@@ -82,7 +83,8 @@ public class UserMenuFragment extends HomeFragment{
         GridLayoutManager gd=new GridLayoutManager(context,screenWidth/200 );
 
         mRecyclerView.setLayoutManager(gd);
-        GridRecyclerAdapter mAdapter = new GridRecyclerAdapter(getContext(), mList);
+       GridRecyclerAdapter mAdapter = new GridRecyclerAdapter(getContext(), mList);
+
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,11 +149,12 @@ public class UserMenuFragment extends HomeFragment{
         Toast.makeText(getContext(), input, Toast.LENGTH_SHORT).show();
     }
 
-    private void getWidthAndHeight() {
+    public int getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
+        return screenWidth;
     }
     // switching fragment
     private void switchFragment(Fragment fragment) {
@@ -163,13 +166,7 @@ public class UserMenuFragment extends HomeFragment{
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)
                 .commit();
-	/*	FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-		fragmentManager.popBackStack();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment)
-				.addToBackStack("my_frame")
-				.commit();
-*/
+
 
     }
 
@@ -196,42 +193,6 @@ public class UserMenuFragment extends HomeFragment{
 		alert.show();*/
 
 
-	/*
-	private void onClickDialog() {
-		new FancyAlertDialog.Builder(getActivity())
-				.setTitle("Rate us if you like the app")
-				.setMessage("Do you really want to Exit ?")
-				.setNegativeBtnText("Cancel")
-				.setPositiveBtnText("Close")
-				.setAnimation(Animation.POP)
-				.isCancellable(true)
-				.setIcon(R.drawable.logo, Icon.Visible)
-				.OnPositiveClicked(new FancyAlertDialogListener() {
-					@Override
-					public boolean OnClick() {
-
-
-						return false;
-					}
-				})
-				.OnNegativeClicked(new FancyAlertDialogListener() {
-					@Override
-					public boolean OnClick() {
-
-					//	bundle = new Bundle();
-					//	newContent=new HomeFragment();
-					//	newContent.setArguments(bundle);
-					//	switchFragment(newContent);
-
-
-						return false;
-					}
-				})
-				.build();
-
-
-	}
-*/
 
 
 

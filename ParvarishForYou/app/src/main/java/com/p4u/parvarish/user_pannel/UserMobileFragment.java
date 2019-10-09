@@ -75,7 +75,7 @@ public class UserMobileFragment extends Fragment {
 
                         users.add (user);
                 }
-                UserList userAdapter = new UserList(getActivity(), users);
+                UserList_model userAdapter = new UserList_model(getActivity(), users);
                 listViewUsers.setAdapter(userAdapter);
             }
             @Override

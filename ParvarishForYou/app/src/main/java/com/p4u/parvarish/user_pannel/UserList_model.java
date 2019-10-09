@@ -15,12 +15,12 @@ import java.util.List;
 
 import com.p4u.parvarish.R;
 
-public class UserList extends ArrayAdapter<Teacher> {
-    private static final String TAG = "UserList";
+public class UserList_model extends ArrayAdapter<Teacher> {
+    private static final String TAG = "UserList_model";
     private Activity context;
     private List<Teacher> users;
 
-   UserList(Activity context, List<Teacher> users) {
+   UserList_model(Activity context, List<Teacher> users) {
         super(context, R.layout.layout_all_user, users);
         this.context = context;
         this.users = users;

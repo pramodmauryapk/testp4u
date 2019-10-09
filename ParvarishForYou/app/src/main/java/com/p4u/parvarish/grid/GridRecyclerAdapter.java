@@ -2,6 +2,7 @@ package com.p4u.parvarish.grid;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.main_menu.UserMenuFragment;
+
+import static java.util.Objects.requireNonNull;
 
 
 public class GridRecyclerAdapter extends RecyclerView.Adapter<GridRecyclerAdapter.GridItemViewHolder> {
@@ -46,6 +51,8 @@ public class GridRecyclerAdapter extends RecyclerView.Adapter<GridRecyclerAdapte
         holder.mimg.setImageDrawable(items.getmImg());
         holder.mTitle.setText(items.getName());
         holder.mPosition.setText("" + items.getPosition());
+
+
     }
 
 
@@ -68,17 +75,20 @@ public class GridRecyclerAdapter extends RecyclerView.Adapter<GridRecyclerAdapte
 
     public class GridItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mimg;
+
         TextView mTitle, mPosition;
         GridRecyclerAdapter mAdapter;
 
         GridItemViewHolder(View itemView, GridRecyclerAdapter mAdapter) {
             super(itemView);
             this.mAdapter = mAdapter;
-
+            UserMenuFragment um=new UserMenuFragment();
+            CardView cd=itemView.findViewById(R.id.card_view);
             mimg= itemView.findViewById(R.id.img);
             mTitle = itemView.findViewById(R.id.item_title);
             mPosition = itemView.findViewById(R.id.item_position);
-
+            //int w=um.getWidthAndHeight();
+            //cd.setLayoutParams(new CardView.LayoutParams(170,220));
             itemView.setOnClickListener(this);
         }
 

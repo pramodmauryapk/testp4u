@@ -72,7 +72,7 @@ public class DonorListFragment extends Fragment {
                 donors.addAll(hs);
                 //creating adapter
 
-               DonorList donorAdapter = new DonorList(getActivity(), donors);
+               DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);
                listViewdonors.setAdapter(donorAdapter);
 
             }

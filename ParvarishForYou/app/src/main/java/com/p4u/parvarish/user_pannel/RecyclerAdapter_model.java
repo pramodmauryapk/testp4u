@@ -24,13 +24,13 @@ import java.util.List;
 import com.p4u.parvarish.R;
 
 
-public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
-    private static final String TAG = "RecyclerAdapter";
+public  class RecyclerAdapter_model extends RecyclerView.Adapter<RecyclerAdapter_model.RecyclerViewHolder>{
+    private static final String TAG = "RecyclerAdapter_model";
     private Context mContext;
     private List<Teacher> teachers;
     private OnItemClickListener mListener;
 
-    RecyclerAdapter(Context context, List<Teacher> uploads) {
+    RecyclerAdapter_model(Context context, List<Teacher> uploads) {
         mContext = context;
         teachers = uploads;
     }
@@ -46,7 +46,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
         Teacher currentTeacher = teachers.get(position);
         holder.nameTextView.setText(currentTeacher.getUserName());
         holder.descriptionTextView.setText(currentTeacher.getUserEmail());
-        holder.dateTextView.setText(getDateToday());
+        holder.dateTextView.setText(currentTeacher.getUserTime());
         Picasso.get()
                 .load(currentTeacher.getImageURL())
                 .placeholder(R.drawable.logo)

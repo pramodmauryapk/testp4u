@@ -194,62 +194,50 @@ public class UpdateBookFragment extends Fragment {
         dialogBuilder.setTitle("Update Book");
         //initializing views
         init_dialog_views();
-
-
         final AlertDialog b = dialogBuilder.create();
         b.show();
         //setting values in views
-        deditBookAuthor.setText(dbookAuthor);
-        deditBookCost.setText(dbookCost);
-        deditBookTitle.setText(dbookTitle);
-        deditBookLocation.setText(dbookLocation);
-        deditDonor.setText(dbookDonor);
-        deditDonorMobile.setText(dbookDonorMobile);
+        setting_values(dbookAuthor,dbookCost,dbookTitle,dbookLocation,dbookDonor,dbookDonorMobile);
         //update button
         dbuttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //setting values after update
-                String dbookYear1, dbookSubject1;
-                String dbookAuthor1 = deditBookAuthor.getText().toString().toUpperCase().trim();
-                String dbookTitle1 = deditBookTitle.getText().toString().toUpperCase().trim();
-                String dbookCost1 = deditBookCost.getText().toString().trim();
-                String dbookDonor1 = deditDonor.getText().toString().toUpperCase().trim();
-                String dbookDonorMobile1 = deditDonorMobile.getText().toString().trim();
+                String Year, Subject;
+                String Author = deditBookAuthor.getText().toString().toUpperCase().trim();
+                String Title = deditBookTitle.getText().toString().toUpperCase().trim();
+                String Cost = deditBookCost.getText().toString().trim();
+                String Donor = deditDonor.getText().toString().toUpperCase().trim();
+                String DonorMobile = deditDonorMobile.getText().toString().trim();
                 if (dspinnerYear.getSelectedItem() != null) {
-                    dbookYear1 = dspinnerYear.getSelectedItem().toString();
+                    Year = dspinnerYear.getSelectedItem().toString();
                 } else {
-                    dbookYear1 = "N/A";
+                    Year = "N/A";
                 }
                 if (dspinnerSubject.getSelectedItem() != null) {
-                    dbookSubject1 = dspinnerSubject.getSelectedItem().toString().toUpperCase();
+                    Subject = dspinnerSubject.getSelectedItem().toString().toUpperCase();
                 } else {
-                    dbookSubject1 = "N/A";
+                    Subject = "N/A";
                 }
 
-                String dbookLocation1 = deditBookLocation.getText().toString().toUpperCase();
+                String Location = deditBookLocation.getText().toString().toUpperCase();
 
                 //checking values
-                if (!TextUtils.isEmpty(dbookAuthor1) &&
-                        !TextUtils.isEmpty(dbookTitle1) &&
-                        !TextUtils.isEmpty(dbookSubject1) &&
-                        !TextUtils.isEmpty(dbookYear1) &&
-                        !TextUtils.isEmpty(dbookCost1) &&
-                        !TextUtils.isEmpty(dbookLocation1) &&
-                        !TextUtils.isEmpty(dbookDonor1) &&
-                        !TextUtils.isEmpty(dbookDonorMobile1)) {
+                boolean a=validate(Author,Title,Subject,Year,Cost,Location,Donor,DonorMobile);
+                if (a) {
                    boolean ans= updateBook(dbookId,
-                            dbookTitle1,
-                            dbookAuthor1,
-                            dbookSubject1,
-                            dbookYear1,
-                            dbookCost1,
-                            dbookLocation1,
-                            dbookDonor1,
-                            dbookDonorMobile1);
+                            Title,
+                            Author,
+                            Subject,
+                            Year,
+                            Cost,
+                            Location,
+                            Donor,
+                            DonorMobile);
                    if(ans){
                        Toast.makeText(getContext(), "Book Record Updated", Toast.LENGTH_LONG).show();
                        b.dismiss();
+
                    }
 
                 }
@@ -267,7 +255,7 @@ public class UpdateBookFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                UpdateBookFragment.this.deleteBook(dbookId);
+                                deleteBook(dbookId);
                                 dialog.cancel();
 
                             }
@@ -291,6 +279,25 @@ public class UpdateBookFragment extends Fragment {
             }
         });
     }
+private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubject,String dbookYear,String dbookCost,String dbookLocation,String dbookDonor,String dbookDonorMobile){
+    return !TextUtils.isEmpty(dbookAuthor) &&
+            !TextUtils.isEmpty(dbookTitle) &&
+            !TextUtils.isEmpty(dbookSubject) &&
+            !TextUtils.isEmpty(dbookYear) &&
+            !TextUtils.isEmpty(dbookCost) &&
+            !TextUtils.isEmpty(dbookLocation) &&
+            !TextUtils.isEmpty(dbookDonor) &&
+            !TextUtils.isEmpty(dbookDonorMobile);
+
+}
+    private void setting_values(String dbookAuthor,String dbookCost,String dbookTitle,String dbookLocation,String dbookDonor,String dbookDonorMobile) {
+        deditBookAuthor.setText(dbookAuthor);
+        deditBookCost.setText(dbookCost);
+        deditBookTitle.setText(dbookTitle);
+        deditBookLocation.setText(dbookLocation);
+        deditDonor.setText(dbookDonor);
+        deditDonorMobile.setText(dbookDonorMobile);
+    }
 
     private void deleteBook(String book_id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("books").child(book_id);
@@ -311,10 +318,6 @@ public class UpdateBookFragment extends Fragment {
         dbuttonUpdate = dialogView.findViewById(R.id.dbuttonUpdate);
         dbuttonDelete = dialogView.findViewById(R.id.dbuttonDelete);
         dbuttonBack =  dialogView.findViewById(R.id.dbuttonBack);
-    }
-    private String get_current_time(){
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
-        return sdf.format(new Date());
     }
     public void onStart() {
 

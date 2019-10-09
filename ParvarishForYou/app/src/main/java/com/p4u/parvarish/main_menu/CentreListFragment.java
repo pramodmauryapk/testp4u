@@ -90,7 +90,7 @@ public class CentreListFragment extends Fragment {
 
                 users.clear();
                 users.addAll(hs);
-                 CenterList userAdapter = new CenterList (getActivity(), users);
+                 CenterList_model userAdapter = new CenterList_model(getActivity(), users);
                 listViewUsers.setAdapter(userAdapter);
 
             }

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +26,6 @@ import java.util.List;
 import java.util.Objects;
 
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.WelcomeActivity;
 import com.p4u.parvarish.admin_pannel.AddBookFragment;
 import com.p4u.parvarish.admin_pannel.IssueBookFragment;
 import com.p4u.parvarish.admin_pannel.SearchBookFragment;
@@ -36,8 +34,9 @@ import com.p4u.parvarish.admin_pannel.UpdateBookFragment;
 import com.p4u.parvarish.galary.ManageGalleryFragment;
 import com.p4u.parvarish.grid.Menu;
 import com.p4u.parvarish.grid.GridRecyclerAdapter;
+import com.p4u.parvarish.list_style.ListViewActivity;
 import com.p4u.parvarish.marquee.NewsAddFragment;
-import com.p4u.parvarish.user_pannel.UserListFragment;
+import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
 
 import static java.util.Objects.requireNonNull;
@@ -105,7 +104,7 @@ public class AdminMenuFragment extends Fragment {
                         AdminMenuFragment.this.switchFragment(new UserMobileFragment());
                         break;
                     case 6:
-                        AdminMenuFragment.this.switchFragment(new UserListFragment());
+                        AdminMenuFragment.this.switchFragment(new ManageUserFragment());
                         break;
                     case 7:
                         AdminMenuFragment.this.switchFragment(new AddBookFragment());
@@ -118,6 +117,11 @@ public class AdminMenuFragment extends Fragment {
                         break;
                     case 10:
                         AdminMenuFragment.this.switchFragment(new ManageGalleryFragment());
+                        break;
+                    case 11:
+                        Intent ActivityIndent = new Intent(getContext(), ListViewActivity.class);
+                        startActivity(ActivityIndent);
+                        requireNonNull(getActivity()).finish();
                         break;
 
                 }
@@ -150,7 +154,7 @@ public class AdminMenuFragment extends Fragment {
             mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_update_black_24dp),"Update Book", 8));
             mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_library_books_black_24dp),"Manage News", 9));
             mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_image_black_24dp),"Manage Gallery", 10));
-
+            mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_book_black_24dp),"Book List", 11));
             // mList.add(new Menu(Objects.requireNonNull(getActivity()).getDrawable(R.drawable.ic_report_black_24dp),"Report Book", 23));
         }
 
@@ -173,19 +177,7 @@ public class AdminMenuFragment extends Fragment {
         requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
-	/*	FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-		fragmentManager.popBackStack();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment)
-				.addToBackStack("my_frame")
-				.commit();
-*/
-        // FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        // ft.add(R.id.content_frame, fragment);
-        // fragmentStack.lastElement().onPause();
-        // ft.hide(fragmentStack.lastElement());
-        // fragmentStack.push(fragment);
-        // ft.commit();
+
     }
 
 
@@ -209,48 +201,6 @@ public class AdminMenuFragment extends Fragment {
 				});
 		AlertDialog alert = builder.create();
 		alert.show();*/
-
-
-	/*
-	private void onClickDialog() {
-		new FancyAlertDialog.Builder(getActivity())
-				.setTitle("Rate us if you like the app")
-				.setMessage("Do you really want to Exit ?")
-				.setNegativeBtnText("Cancel")
-				.setPositiveBtnText("Close")
-				.setAnimation(Animation.POP)
-				.isCancellable(true)
-				.setIcon(R.drawable.logo, Icon.Visible)
-				.OnPositiveClicked(new FancyAlertDialogListener() {
-					@Override
-					public boolean OnClick() {
-
-
-						return false;
-					}
-				})
-				.OnNegativeClicked(new FancyAlertDialogListener() {
-					@Override
-					public boolean OnClick() {
-
-					//	bundle = new Bundle();
-					//	newContent=new HomeFragment();
-					//	newContent.setArguments(bundle);
-					//	switchFragment(newContent);
-
-
-
-						return false;
-					}
-				})
-				.build();
-
-
-	}
-*/
-
-
-
 
 
 

@@ -30,8 +30,8 @@ import com.p4u.parvarish.R;
 import static java.util.Objects.requireNonNull;
 
 
-public class ItemFragment extends Fragment {
-    private static final String TAG = "ItemFragment";
+public class GalleryItemFragment extends Fragment {
+    private static final String TAG = "GalleryItemFragment";
     private static final String POSITON = "position";
     private static final String SCALE = "scale";
     private static final String DRAWABLE_RESOURE = "resource";
@@ -40,18 +40,18 @@ public class ItemFragment extends Fragment {
     private int screenHeight;
     private List<Image_Model> mImageModels;
     private List<String> list;
-    // private int[] imageArray = new int[]{};
-    private int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
-            R.drawable.image3, R.drawable.image4, R.drawable.image5,
-            R.drawable.image6, R.drawable.image7, R.drawable.image8,
-            R.drawable.image9, R.drawable.image10};
+    //private int[] imageArray = new int[]{};
+     private int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
+             R.drawable.image3, R.drawable.image4, R.drawable.image5,
+             R.drawable.image6, R.drawable.image7, R.drawable.image8,
+             R.drawable.image9, R.drawable.image10};
 
     static Fragment newInstance(ImageGalleryFragment context, int pos, float scale) {
         Bundle b = new Bundle();
         b.putInt(POSITON, pos);
         b.putFloat(SCALE, scale);
 
-        return Fragment.instantiate(requireNonNull(context.getActivity()), ItemFragment.class.getName(), b);
+        return Fragment.instantiate(requireNonNull(context.getActivity()), GalleryItemFragment.class.getName(), b);
     }
 
     @Override
@@ -82,6 +82,7 @@ public class ItemFragment extends Fragment {
         textView.setText("Gallery item: " + postion);
         imageView.setLayoutParams(layoutParams);
         get_images();
+
         imageView.setImageResource(imageArray[postion]);
 
 
@@ -96,7 +97,7 @@ public class ItemFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putInt(DRAWABLE_RESOURE, imageArray[postion]);//
                 fragment.setArguments(args);
-                ItemFragment.this.switchFragment(fragment);
+                GalleryItemFragment.this.switchFragment(fragment);
 
             }
         });
@@ -106,11 +107,11 @@ public class ItemFragment extends Fragment {
         return linearLayout;
     }
     private void get_images(){
-        FirebaseStorage mStorage = FirebaseStorage.getInstance();
+
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
 
         //   mAdapter.notifyDataSetChanged();
-        ValueEventListener mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -123,7 +124,8 @@ public class ItemFragment extends Fragment {
 
 
                 }
-                //   mAdapter.notifyDataSetChanged();
+
+                  // mAdapter.notifyDataSetChanged();
 
             }
 
@@ -137,13 +139,13 @@ public class ItemFragment extends Fragment {
 
         requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
-                .addToBackStack("my_frame").commit();
+                .addToBackStack(null).commit();
 
     }
     
     private void getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screenHeight = displaymetrics.heightPixels;
         screenWidth = displaymetrics.widthPixels;
     }

@@ -16,12 +16,12 @@ import java.util.List;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.admin_pannel.Book;
 
-public class DonorList extends ArrayAdapter<Book> {
-    private static final String TAG = "DonorList";
+public class DonorList_model extends ArrayAdapter<Book> {
+    private static final String TAG = "DonorList_model";
     private Activity context;
     private List<Book> books;
 
-     DonorList(Activity context, List<Book> books) {
+     DonorList_model(Activity context, List<Book> books) {
         super(context, R.layout.layout_all_donor, books);
         this.context = context;
         this.books = books;

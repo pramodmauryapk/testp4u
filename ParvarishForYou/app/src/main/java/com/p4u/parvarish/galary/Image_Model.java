@@ -21,7 +21,7 @@ public class Image_Model {
         this.imageURL = imageUrl;
         this.description = Des;
     }
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
@@ -41,7 +41,7 @@ public class Image_Model {
         this.imageURL = imageUrl;
     }
     @Exclude
-    String getKey() {
+    public String getKey() {
         return key;
     }
     @Exclude

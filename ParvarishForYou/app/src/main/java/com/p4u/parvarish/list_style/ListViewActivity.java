@@ -55,12 +55,14 @@ public class ListViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new spreadLayoutManager());
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
+       // recyclerView.setOnClickListener();
 
         redColor = getResources().getColor(R.color.red);
         int greenColor = getResources().getColor(R.color.green);
 
         appendDataList();
         adapter.notifyDataSetChanged();
+
 
         // 4. refreshLayout
         refreshLayout = findViewById(R.id.refresh_layout);
@@ -99,7 +101,6 @@ public class ListViewActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Book book = ds.getValue(Book.class);
                      dataList.add(book);
-
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -137,6 +138,7 @@ public class ListViewActivity extends AppCompatActivity {
                 MyViewHolder myHolder = (MyViewHolder) holder;
                myHolder.bindData(dataList.get(position));
 
+
           //      if (position == dataList.size() - 1) {
                   //  requestHttp();
                // }
@@ -167,7 +169,7 @@ public class ListViewActivity extends AppCompatActivity {
 
         }
 
-        @SuppressLint("SetTextI18n")
+       @SuppressLint("SetTextI18n")
         void bindData(Book book) {
             bookTitle.setText(book.getBookTitle());
             bookTitle.setTextColor(redColor);
@@ -178,6 +180,20 @@ public class ListViewActivity extends AppCompatActivity {
             bookAuthor.setText(book.getBookAuthor());
            // nameTv.setTextColor(((int) book.getBookAvaibility() > 0) ? redColor : greenColor);
         }
-
+       /* public void bindData(final Book book, final OnItemClickListener listener) {
+            bookTitle.setText(book.getBookTitle());
+            bookTitle.setTextColor(redColor);
+            bookCost.setText(book.getBookCost());
+            sybool.setImageResource(R.drawable.index);
+            //trendFlagIv.setImageResource(stockEntity.getFlag() > 0 ? R.drawable.up_red : R.drawable.down_green);
+            bookSubject.setText(book.getBookSubject());
+            bookAuthor.setText(book.getBookAuthor());
+            // nameTv.setTextColor(((int) book.getBookAvaibility() > 0) ? redColor : greenColor);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                listener.onItemClick(item);
+            }
+        });
+*/
     }
 }
