@@ -190,10 +190,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
     private Boolean validate(){
         if (TextUtils.isEmpty(name)) {
             tlname.setError("Enter full name!");
-
             return false;
         }
-
        if (mobilenumber.length ()!=10) {
            tlmobile.setError("Enter Mobile Number!");
             return false;
@@ -201,23 +199,18 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)) {
             tlemail.setError("Enter email address!");
-
             return false;
         }
-        if(password.equals(aPassword)) {
+        if(!password.equals(aPassword)) {
             tlapassword.setError("Both password are not same!");
             return false;
-
         }
-
         if (TextUtils.isEmpty(address)) {
             tladdress.setError("Enter Address!");
-
             return false;
         }
         if (TextUtils.isEmpty(identity)) {
             tlidentity.setError("Enter aadhar or Voter id !");
-
             return false;
         }
         return true;

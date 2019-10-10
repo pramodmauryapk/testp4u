@@ -15,11 +15,11 @@ import java.util.List;
 
 import com.p4u.parvarish.R;
 
-public class BookList extends ArrayAdapter<Book> {
+public class LayoutBookList extends ArrayAdapter<Book> {
     private Activity context;
     private List<Book> books;
 
-     BookList(Activity context, List<Book> books) {
+     LayoutBookList(Activity context, List<Book> books) {
         super(context, R.layout.layout_all_book, books);
         this.context = context;
         this.books = books;

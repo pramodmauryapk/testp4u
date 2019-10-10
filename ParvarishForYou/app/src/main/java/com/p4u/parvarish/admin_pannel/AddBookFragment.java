@@ -9,12 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
@@ -262,7 +259,7 @@ public class AddBookFragment extends Fragment {
                     Book book = postSnapshot.getValue(Book.class);
                     books.add(book);
                 }
-                BookList bookAdapter = new BookList(getActivity(), books);
+                LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                 listViewBooks.setAdapter(bookAdapter);
                 t=bookAdapter.getCount();
                 etBookId.setText(booklocation+(t+1));

@@ -7,14 +7,13 @@
     android:background="@color/transparent"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cardList"
+
+    <GridView
+        android:id="@+id/grid_view_image_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-
-
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:numColumns="auto_fit" />
 
 
 

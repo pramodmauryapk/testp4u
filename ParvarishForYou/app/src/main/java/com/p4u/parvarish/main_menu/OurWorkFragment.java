@@ -24,17 +24,14 @@ public class OurWorkFragment extends Fragment {
     private EditText editText;
     private TextView textView;
     private Button button;
-    private RatingBar ratingBar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_our_work, container, false);
-        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("NEWS");
+
         initViews();
-
-
-
         return v;
     }
     private void initViews(){

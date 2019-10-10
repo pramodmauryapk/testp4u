@@ -322,7 +322,7 @@ private boolean updateBook(String bookId,String issueName){
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -346,7 +346,7 @@ private boolean updateBook(String bookId,String issueName){
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -370,7 +370,7 @@ private boolean updateBook(String bookId,String issueName){
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -394,7 +394,7 @@ private boolean updateBook(String bookId,String issueName){
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -420,7 +420,7 @@ private boolean updateBook(String bookId,String issueName){
                         }
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }

@@ -28,9 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -335,7 +333,7 @@ private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubjec
 
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }
@@ -360,7 +358,7 @@ private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubjec
 
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }
@@ -385,7 +383,7 @@ private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubjec
 
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }
@@ -410,7 +408,7 @@ private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubjec
 
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }
@@ -434,7 +432,7 @@ private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubjec
 
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }

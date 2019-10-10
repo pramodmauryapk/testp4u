@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
 
 
 
-    private View v;
+    public View v;
 
     private Context context;
     private static final String TAG="HomeFragment";
@@ -64,22 +64,20 @@ public class HomeFragment extends Fragment {
         //inherit child fragment for marquee
         Fragment child1Fragment = new NewsTextFragment();
         FragmentTransaction transaction1 = getChildFragmentManager().beginTransaction();
-        transaction1.replace(R.id.child_fragment_container, child1Fragment).commit();
+        transaction1.add(R.id.child_fragment_container, child1Fragment).commit();
     }
 
     //menu fragment and pass user role
-    public void menu_load(){
+    private void menu_load(){
         assert this.getArguments() != null;
         String role = this.getArguments().getString("user_role");
-        MainActivity my = new MainActivity();
-        my.fragmentStack = new Stack<>();
+
         Bundle bundle=new Bundle();
         Fragment child2Fragment = new UserMenuFragment();
         bundle.putString("user_role", role);
         child2Fragment.setArguments(bundle);
-        my.fragmentStack.push(child2Fragment);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.menu_fragment_container, child2Fragment).commit();
+        transaction.add(R.id.menu_fragment_container, child2Fragment).commit();
         transaction.addToBackStack(null);
     }
 

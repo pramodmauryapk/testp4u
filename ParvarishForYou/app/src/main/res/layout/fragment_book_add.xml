@@ -17,6 +17,8 @@
     android:layout_width="wrap_content">
     <Spinner
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/bg_edittext_focused"
         android:id="@+id/etBookLocation"
         android:layout_height="wrap_content"/>
 
@@ -65,12 +67,14 @@
             android:layout_width="match_parent"
             android:layout_weight="3"
             android:id="@+id/spBookSubject"
+            android:background="@drawable/bg_edittext_focused"
             android:entries="@array/subject_list"
             tools:ignore="RtlSymmetry" />
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spBookYear"
+            android:background="@drawable/bg_edittext_focused"
             android:layout_marginStart="5dp"
             android:layout_weight="7"
             android:entries="@array/pub_year"

@@ -1,4 +1,4 @@
-package com.p4u.parvarish.marquee;
+package com.p4u.parvarish.main_menu;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -60,12 +60,17 @@ public class FeedbackAddFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View view) {
+            if(FirebaseAuth.getInstance().getCurrentUser()!=null){
                 boolean ans=feedback_submit(userID);
                 if(ans)
                     Toast.makeText(getContext(),"Feedback Submitted",Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(getContext(),"Some Problem"+userID,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Some Problem",Toast.LENGTH_LONG).show();
+            }else
+            {
+                Toast.makeText(getContext(),"Login Try Again",Toast.LENGTH_LONG).show();
             }
+        }
         });
         return v;
     }

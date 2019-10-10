@@ -272,7 +272,7 @@ public class SubmitBookFragment extends Fragment {
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -296,7 +296,7 @@ public class SubmitBookFragment extends Fragment {
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -320,7 +320,7 @@ public class SubmitBookFragment extends Fragment {
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -344,7 +344,7 @@ public class SubmitBookFragment extends Fragment {
 
                         }
 
-                        BookList bookAdapter = new BookList(getActivity(), books);
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 
                     }
@@ -372,7 +372,7 @@ public class SubmitBookFragment extends Fragment {
                         }
                     }
 
-                    BookList bookAdapter = new BookList(getActivity(), books);
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
 
                 }

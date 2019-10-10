@@ -34,7 +34,6 @@ import java.util.Stack;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.p4u.parvarish.ExitActivity;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.marquee.FeedbackAddFragment;
 import com.p4u.parvarish.contact.ContactUsFragment;
 import com.p4u.parvarish.login.Login_emailActivity;
 import com.p4u.parvarish.login.UserRegistrationActivity;
@@ -233,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 user_name = "USER";
                 user_email="EMAIL";
                 user_roll="USER";
-               // user_img=null;
+                // user_img=null;
                 set_profile(user_name,user_email,user_roll,user_img);
 
             }
@@ -263,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle = new Bundle();
 
         switch (id){
-            case R.id.nav_home:newContent=new HomeFragment();
+            case R.id.nav_home:onBackPressed();
                 break;
             case R.id.nav_our_work:newContent=new OurWorkFragment();
                 break;

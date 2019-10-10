@@ -143,14 +143,10 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                 user.getUserId(),
                 user.getUserName(),
                 user.getUserEmail(),
-                user.getUserPassword(),
                 user.getUserRole(),
                 user.getUserMobile(),
                 user.getUserAddress(),
-                user.getUserIdentity(),
-                user.getUserStatus(),
-                user.getUserRating(),
-                user.getImageURL());
+                user.getUserIdentity());
 
     }
 
@@ -173,22 +169,15 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     private void showDeleteDialog(final String userId,
                                   final String userName,
                                   final String userEmail,
-                                  final String userPassword,
                                   final String userRole,
                                   final String userMobile,
                                   final String userAddress,
-                                  final String userIdentity,
-                                  final String userStatus,
-                                  final String userRating,
-                                  final String userImageURL) {
-
+                                  final String userIdentity) {
+        init_dialog_views ();
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (getContext ());
         LayoutInflater inflater = getLayoutInflater ();
         dialogView = inflater.inflate (R.layout.manage_user_info, null);
         dialogBuilder.setView (dialogView);
-
-        init_dialog_views ();
-
         dialogBuilder.setTitle ("User Details");
         final AlertDialog b = dialogBuilder.create ();
         b.show ();
@@ -203,7 +192,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         dbuttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//Toast.makeText(getContext(),"hello",Toast.LENGTH_LONG).show();
+
                boolean ans= updatedetails(userId);
                if(ans)
                    Toast.makeText(getContext(), "User Updated", Toast.LENGTH_LONG).show();
@@ -257,27 +246,6 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         }catch (Exception e){
             return false;
         }
-     //   String Feedback="";
-     //   String News="";
-     //   String Time=get_current_time();
-        //updating artist
-      /*  Teacher user = new Teacher (
-                Id,
-                Name,
-                Email,
-                Password,
-                Role,
-                Mobile,
-                address,
-                Identity,
-                Status,
-                Feedback,
-                News,
-                Time,
-                Rating,
-                ImageURL);
-
-        dR.setValue(user);*/
 
     }
     private String get_current_time(){
