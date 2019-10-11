@@ -80,14 +80,15 @@ public class ContactPage {
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
 
         if (ContactPageUtils.isAppInstalled(mContext, "ParvarishForYou")) {
-            intent.setPackage("com.facebook.katana");
+            int versionCode = 0;
+           /* intent.setPackage("com.facebook.katana");
             int versionCode = 0;
             try {
                 versionCode = mContext.getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-
+*/
             if (versionCode >= 3002850) {
                 Uri uri = Uri.parse("fb://facewebmodal/f?href=" + "http://m.facebook.com/" + "https://www.facebook.com/parvarishforyou/");
                 intent.setData(uri);

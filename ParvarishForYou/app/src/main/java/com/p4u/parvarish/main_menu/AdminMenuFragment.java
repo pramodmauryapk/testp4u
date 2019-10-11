@@ -41,16 +41,10 @@ import com.p4u.parvarish.user_pannel.UserMobileFragment;
 
 import static java.util.Objects.requireNonNull;
 
-public class AdminMenuFragment extends Fragment {
+public class AdminMenuFragment extends HomeFragment {
 
     private static final String TAG = "AdminMenuFragment";
     private DatabaseReference myRef;
-    private String Role;
-    private Context context;
-    private int screenWidth;
-    private String[] gridViewString = {} ;
-
-    private int[] gridViewImageId = {};
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -59,27 +53,54 @@ public class AdminMenuFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
         initViews();
-        context= container.getContext();
+        Context context = container.getContext();
         assert this.getArguments() != null;
-        Role = this.getArguments().getString("user_role");
+        String role = this.getArguments().getString("user_role");
         getWidthAndHeight();
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
-        if(Role.equals("HEAD")){
+        String[] gridViewString = {};
+        int[] gridViewImageId = {};
+        assert role != null;
+        if(role.equals("USER")){
 
             gridViewString = new String[]{
                     "Center List",
                     "Search Book",
+                    "Donor List"
+
+            };
+            gridViewImageId = new int[]{
+
+                    R.drawable.ic_list_black_24dp,
+                    R.drawable.ic_youtube_searched_for_black_24dp,
+                    R.drawable.ic_card_giftcard_black_24dp
+
+            };
+
+        }else if(role.equals("HEAD")){
+            gridViewString = new String[]{
+                    "Center List",
+                    "Search Book",
                     "Donor List",
-                    "Add Book"
+                    "Add Book",
+                    "Issue Book",
+                    "Submit Book",
+                    "User Mobiles",
+                    "Book List",
+
             };
             gridViewImageId = new int[]{
 
                     R.drawable.ic_list_black_24dp,
                     R.drawable.ic_youtube_searched_for_black_24dp,
                     R.drawable.ic_card_giftcard_black_24dp,
-                    R.drawable.ic_add_book_24dp
-            };
+                    R.drawable.ic_add_book_24dp,
+                    R.drawable.ic_child_friendly_black_24dp,
+                    R.drawable.ic_transfer_within_a_station_black_24dp,
+                    R.drawable.ic_phone_in_talk_black_24dp,
+                    R.drawable.ic_book_black_24dp,
 
+            };
         }
         else{
             gridViewString = new String[]{
@@ -90,11 +111,11 @@ public class AdminMenuFragment extends Fragment {
                     "Issue Book",
                     "Submit Book",
                     "User Mobiles",
+                    "Book List",
                     "Manage User",
                     "Update Book",
                     "Manage News",
                     "Manage Gallery",
-                    "Book List",
                     "Report Book"
 
             };
@@ -108,11 +129,11 @@ public class AdminMenuFragment extends Fragment {
                     R.drawable.ic_child_friendly_black_24dp,
                     R.drawable.ic_transfer_within_a_station_black_24dp,
                     R.drawable.ic_phone_in_talk_black_24dp,
+                    R.drawable.ic_book_black_24dp,
                     R.drawable.ic_verified_user_black_24dp,
                     R.drawable.ic_update_black_24dp,
                     R.drawable.ic_library_books_black_24dp,
                     R.drawable.ic_image_black_24dp,
-                    R.drawable.ic_book_black_24dp,
                     R.drawable.ic_report_black_24dp
 
             };
@@ -122,7 +143,7 @@ public class AdminMenuFragment extends Fragment {
 
 
         androidGridView.setAdapter(adapterViewAndroid);
-        androidGridView.setColumnWidth(getWidthAndHeight()/4);
+        androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -167,7 +188,6 @@ public class AdminMenuFragment extends Fragment {
                     case 11:
                         Intent ActivityIndent = new Intent(getContext(), ListViewActivity.class);
                         startActivity(ActivityIndent);
-                        requireNonNull(getActivity()).finish();
                         break;
                     case 12:
                         break;
@@ -193,7 +213,7 @@ public class AdminMenuFragment extends Fragment {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int screenHeight = displaymetrics.heightPixels;
-        screenWidth = displaymetrics.widthPixels;
+        int screenWidth = displaymetrics.widthPixels;
         return screenWidth;
     }
     // switching fragment

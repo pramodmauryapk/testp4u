@@ -28,7 +28,7 @@
     <string name="welcome">Welcome</string>
     <string name="add">Add</string>
     <string name="books_list">Books List</string>
-
+    <string name="text_internship_program">ParvarishForYou has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team.</string>
     <string name="tap_to_update_and_view_book_details">Tap to update and view book details</string>
 
     <string name="center_location">Center Location</string>
@@ -90,7 +90,7 @@
 </string>
     <string name="copy_right" translatable="false">Copyrights © %1$d</string>
     <string name="text_tech_partner">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that . So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon .</string>
-    <string name="about_page_description" translatable="false">This is an initiative by alumni of Jawahar Navodaya Vidyalaya and youth from different sectors of working environment, different part of society and also from different geographical area, rural background. We all have same mind set about the problem of remote area and also challenges faced by backward class or other area of society. This mindset gave a positive path to all of us to do something for positive change . This laid the foundation of ParvarishForYou: a helping hand.</string>
+    <string name="about_page_description" translatable="false"></string>
     <string name="about_contact_us">Contact us</string>
 
     <string name="about_facebook">Like us on Facebook</string>
@@ -213,4 +213,28 @@
     <string name="exit">Exit</string>
     <string name="shuting_down">Shuting Down</string>
     <string name="images_list">Images List</string>
+    <string name="about_page_description1" translatable="false">This is an initiative by alumni of Jawahar Navodaya Vidyalaya and youth from different sectors of working environment, different part of society and also from different geographical area, rural background. We all have same mind set about the problem of remote area and also challenges faced by backward class or other area of society. This mindset gave a positive path to all of us to do something for positive change . This laid the foundation of ParvarishForYou: a helping hand.</string>
+    <string name="about_page_description2" translatable="false">♦ Initiative by a Team of Youth having Common Goal for Positive Change.\n♦ Team - From different working Sectors, Environment, Society and Geographical area, rural background.\n♦ Common Goal - Eliminate problems and challenges faced by Backward Class of rural area and Society.\n♦ This noble cause overwhelms and gives us the everlasting motivation, energy and sufficient fuel to laid down the foundation of Parvarish: a helping hand.\n♦ Parvarish - A Helping Hand’ will provide you the Canvas, Colour, Palette and Brush to paint the dreams of a Child.\n♦ Canvas (Life of A child) + Colour, Palette and Brush (Parvarish) = Painting (Dreams with flying Colours).\n</string>
+    <string name="about_page_description3" translatable="false">We are here to work for different sector like education, health, agriculture, organic farming, counselling, behavioural change (Mentioned by P.M. Modi in rajya-sabha on 08 feb 2018), social awareness, to full-fill the gap between government facilities and ground level benefits etc</string>
+    <string name="about_page_description4" translatable="false">♦ Team to impart behavioural changes in society by the way of education.\n♦ To develop an ecosystem of mutualism instead of competetion for sustainable prosperity.\n</string>
+    <string name="about_page_description5" translatable="false">To fulfill the gap between rural and urban population with various mechanism and also to reflect them in government census or survey.</string>
+    <string name="ourwork_page_description1" translatable="false">We are here to work for different sector like education, health, agriculture, organic farming, counselling, behavioural change (Mentioned by P.M. Modi in rajya-sabha on 08 feb 2018), social awareness, to full-fill the gap between government facilities and ground level benefits etc.</string>
+    <string name="ourwork_page_description2" translatable="false">We are working in education field where there is no institutional source of education. As most of the places have schools but there is no carrier guiding or preparation centres. This is the major cause of backwardness there as we think. Most of the people who get education move away from these places. This creates a gap between rural and urban development. We are working to fulfill this gap.</string>
+    <string name="ourwork_page_description3" translatable="false">ParvarishForYou has started this scheme. Under this scheme we are trying to support talent either in academics , sports and any other field of life. Under this scheme organisation support students in different ways.</string>
+    <string name="ourwork_page_description4" translatable="false">1. To support student one year school fee of student who got first position in school. (Already selected two students from two different schools).\n2. Awarding and supporting district topper with cash support and other required support .</string>
+    <string name="ourwork_page_description5" translatable="false">There are several other ways where organisation is working to support real and needy talent.</string>
+    <string name="ourwork_page_description6" translatable="false">Under this scheme we are in the process of establishing libraries at various remote locations where students in need of books.
+These libraries also accept books as donation from around the globe because most of the people gives at no cost .so students can use these books , magazines , reference books, syllabus books from these libraries at very nominal membership fee.
+So , if any one interested to donate books pls send your name and address with city name to our WhatsApp no. We will arrange a pick up from there. This is to create a habit of reading in society which is getting reduce day by day.</string>
+    <string name="ourwork_page_description7" translatable="false">This programme has been started with the vision of reducing or eliminating the gap of international level school and school which do not have sufficient resources. Our team organises different activites and different sessions at school at different time . Also we provide sessions for teachers so that gap can be reduced. If any one interested for parternship please send your name and address to our WhatsApp numner. Our concerned team will contact you soon.</string>
+    <string name="ourwork_page_description8" translatable="false">Under this scheme we are establishing centres where sessions and classes can be arranged by expert to increase capacity of students. As most of problems of society can be solved with this capacity building initiative.
+Currently we are running our capacity building centres which is giving very good response.</string>
+    <string name="ourwork_page_description9" translatable="false">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that .
+So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon . </string>
+    <string name="ourwork_page_description10" translatable="false">ParvarishForYou has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team</string>
+    <string name="ourwork_page_description11" translatable="false">We are working to improve health and aware people about different health issues faced by them. We are organizing various programs at ground level so that maximum people can be benefited. Programs like below:</string>
+    <string name="ourwork_page_description12" translatable="false">♦ Health awareness camps.\n ♦Yoga classes.</string>
+    <string name="ourwork_page_description13" translatable="false">Agriculture is the bone of our economy and it should be taken care. We are working to enrich agricultural field in India. Below are the areas which are being worked upon:</string>
+    <string name="ourwork_page_description14" translatable="false">♦ Farming, Fishery, Beekeeping, Dairy, Horticulture, Animal Husbandry, Pottery \n ♦ Animal health and soil health.\n ♦ Traditional to technological farming.\n ♦ Technology awareness - dip irrigation, soil fertility card.\n ♦ Government policy awareness.\n ♦ Kissan library</string>
+
 </resources>

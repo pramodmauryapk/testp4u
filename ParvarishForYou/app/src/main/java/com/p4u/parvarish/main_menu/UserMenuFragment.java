@@ -1,10 +1,13 @@
 package com.p4u.parvarish.main_menu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +55,7 @@ public class UserMenuFragment extends HomeFragment{
             "Technical Partnership",
             "Capacity Building",
             "Gallery",
-
+            "Internship Program"
 
     } ;
 
@@ -62,7 +65,7 @@ public class UserMenuFragment extends HomeFragment{
             R.drawable.ic_pets_black_24dp,
             R.drawable.ic_business_black_24dp,
             R.drawable.ic_camera_black_24dp,
-
+            R.drawable.ic_transfer_within_a_station_black_24dp
 
     };
 
@@ -83,19 +86,20 @@ public class UserMenuFragment extends HomeFragment{
         LayoutGridView adapterViewAndroid = new LayoutGridView(getContext(), gridViewString, gridViewImageId);
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         androidGridView.setAdapter(adapterViewAndroid);
-        androidGridView.setColumnWidth(getWidthAndHeight()/4);
+
+
+        androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int i, long id) {
-
                 switch (i) {
                     case 0:
                         switchFragment(new TelentSupportFragment());
                         break;
                     case 1:
-                        switchFragment(new AdminMenuFragment());
+                        switch_menu(new AdminMenuFragment());
                         break;
                     case 2:
                         switchFragment(new TechnicalPartnershipFragment());
@@ -106,6 +110,9 @@ public class UserMenuFragment extends HomeFragment{
                     case 4:
                         switchFragment(new ImageGalleryFragment());
                         break;
+                    case 5:
+                        switchFragment(new InternshipProgramFragment());
+                        break;
 
                 }
 
@@ -114,9 +121,6 @@ public class UserMenuFragment extends HomeFragment{
 
         return v;
     }
-
-
-
 
     private void makeToast(String input) {
         Toast.makeText(getContext(), input, Toast.LENGTH_SHORT).show();
@@ -138,7 +142,6 @@ public class UserMenuFragment extends HomeFragment{
                 .addToBackStack(null)
                 .commit();
 
-
     }
     private void switch_menu(Fragment fragment) {
         bundle.putString("user_role",Role);
@@ -149,6 +152,12 @@ public class UserMenuFragment extends HomeFragment{
                 .addToBackStack(null)
                 .commit();
 
+    }
+    public static int getPixelsFromDPs(Activity activity, int dps){
+        Resources r = activity.getResources();
+        int  px = (int) (TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
+        return px;
     }
 
 

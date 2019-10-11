@@ -44,34 +44,31 @@ public class FeedbackAddFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
-
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String userID = (requireNonNull(user)).getUid();
-
-
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         initViews();
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (user != null) {
+                        boolean ans = feedback_submit(userID);
+                        if (ans)
+                            Toast.makeText(getContext(), "Feedback Submitted", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getContext(), "Some Problem", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "Please Login and give feedback", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+
         textView.setText ("Enter Feedback ");
         button.setText ("Submit");
         ratingBar.setVisibility (View.VISIBLE);
-        button.setOnClickListener(new View.OnClickListener() {
-        @Override
-            public void onClick(View view) {
-            if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-                boolean ans=feedback_submit(userID);
-                if(ans)
-                    Toast.makeText(getContext(),"Feedback Submitted",Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(getContext(),"Some Problem",Toast.LENGTH_LONG).show();
-            }else
-            {
-                Toast.makeText(getContext(),"Login Try Again",Toast.LENGTH_LONG).show();
-            }
-        }
-        });
+
         return v;
     }
 
