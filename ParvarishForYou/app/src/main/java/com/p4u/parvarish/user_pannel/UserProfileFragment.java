@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,8 @@ public class UserProfileFragment extends Fragment {
     private List<Teacher> users;
     private Button save,change;
     private LinearLayout l9;
+    private Spinner sp;
+    private String userrole;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,6 +118,7 @@ public class UserProfileFragment extends Fragment {
         role=v.findViewById(R.id.tvRole);
         save=v.findViewById (R.id.dbuttonSave);
         change=v.findViewById (R.id.dbuttonchangepassword);
+        sp=v.findViewById(R.id.sprole);
 
     }
     private void get_values(){
@@ -133,7 +137,16 @@ public class UserProfileFragment extends Fragment {
                         mobile.setText(uInfo.getUserMobile());
                         location.setText(uInfo.getUserAddress());
                         identity.setText(uInfo.getUserIdentity());
-                        role.setText(uInfo.getUserRole());
+                        userrole=uInfo.getUserRole();
+                        if(userrole.equals("ADMIN")){
+                            role.setVisibility(View.GONE);
+                            sp.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            role.setText(uInfo.getUserRole());
+                            role.setEnabled(false);
+                        }
+
                         userImg = uInfo.getImageURL();
                     }
             }
@@ -161,7 +174,11 @@ public class UserProfileFragment extends Fragment {
         Email=email.getText ().toString ().trim ().toLowerCase();
         Mobile=mobile.getText ().toString ().trim ();
         Identity=identity.getText ().toString ().trim ();
-        Role=role.getText ().toString ().toUpperCase ();
+        if(userrole.equals("ADMIN")){
+            Role=sp.getSelectedItem().toString().toUpperCase();
+        }else {
+            Role = role.getText().toString().toUpperCase();
+        }
         Address=location.getText ().toString ().toUpperCase ();
         Status="1";
         Feedback="";

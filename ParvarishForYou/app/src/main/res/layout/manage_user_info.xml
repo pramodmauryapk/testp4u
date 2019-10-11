@@ -84,16 +84,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/l6"
+        android:layout_below="@+id/l5"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tvRole"
             android:hint="@string/role"
             android:maxLines="1"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp"
-            android:layout_below="@+id/l5"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+<Spinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/sprole"
+    android:layout_below="@+id/l6"
+    android:background="@drawable/bg_edittext_focused"
+    android:visibility="gone"
+    android:entries="@array/role_array"/>
 
 
 
@@ -107,7 +120,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
-    android:layout_below="@+id/tvRole"
+    android:layout_below="@+id/sprole"
     android:orientation="horizontal">
     <Button
         style="?attr/buttonBarButtonStyle"

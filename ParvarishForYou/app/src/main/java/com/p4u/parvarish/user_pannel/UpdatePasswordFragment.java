@@ -1,9 +1,7 @@
 package com.p4u.parvarish.user_pannel;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +10,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.main_menu.HomeFragment;
+import com.p4u.parvarish.menu_grid.HomeFragment;
 
 import static java.util.Objects.requireNonNull;
 

@@ -101,12 +101,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sprole"
+        android:background="@drawable/bg_edittext_focused"
+        android:layout_below="@+id/l6"
+        android:visibility="gone"
+        android:entries="@array/role_array"/>
 <LinearLayout
     android:id="@+id/l10"
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/l6"
+    android:layout_below="@+id/sprole"
     android:orientation="horizontal">
     <Button
         style="?attr/buttonBarButtonStyle"

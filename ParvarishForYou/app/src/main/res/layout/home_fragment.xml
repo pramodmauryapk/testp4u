@@ -9,7 +9,7 @@
 
 
 
-        <com.p4u.parvarish.banner.BannerLayout
+        <com.p4u.parvarish.banner_pannel.BannerLayout
 
             android:id="@+id/recycler"
             android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,10 +49,11 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     private ValueEventListener mDBListener;
     private List<Teacher> mTeachers;
     private View dialogView;
-    private TextInputEditText dtvUsername,dtvEmail, dtvMobile , dtvCenterName, dtvIdentity;
-    private TextView dtvRole;
+    private TextInputEditText dtvUsername,dtvEmail, dtvMobile , dtvCenterName, dtvIdentity,dtvRole;
     private Button dbuttonBack,dbuttonDelete,dbuttonUpdate;
     private FirebaseUser user;
+    private Spinner sp;
+    private String role;
 
     @Nullable
     @Override
@@ -124,14 +126,15 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     @Override
     public void onItemClick(int position) {
         Teacher clickedTeacher=mTeachers.get(position);
-        String[] teacherData={clickedTeacher.getUserName(),
+        String[] teacherData={
+                clickedTeacher.getUserName(),
                 clickedTeacher.getUserEmail(),
                 clickedTeacher.getImageURL(),
                 clickedTeacher.getUserMobile(),
-        clickedTeacher.getUserRole(),
-        clickedTeacher.getUserIdentity(),
-        clickedTeacher.getUserAddress(),
-        clickedTeacher.getUserStatus()};
+                clickedTeacher.getUserRole(),
+                clickedTeacher.getUserIdentity(),
+                clickedTeacher.getUserAddress(),
+                clickedTeacher.getUserStatus()};
         openDetailActivity(teacherData);
     }
 
@@ -173,7 +176,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                                   final String userMobile,
                                   final String userAddress,
                                   final String userIdentity) {
-        init_dialog_views ();
+
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (getContext ());
         LayoutInflater inflater = getLayoutInflater ();
         dialogView = inflater.inflate (R.layout.manage_user_info, null);
@@ -181,6 +184,16 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         dialogBuilder.setTitle ("User Details");
         final AlertDialog b = dialogBuilder.create ();
         b.show ();
+        init_dialog_views ();
+        role=userRole;
+       if(userRole.equals("ADMIN")){
+            dtvRole.setVisibility(View.GONE);
+            sp.setVisibility(View.VISIBLE);
+        }
+        else {
+            dtvRole.setText(userRole);
+            dtvRole.setEnabled(false);
+        }
         setValues(userName,userEmail,userMobile,userAddress,userIdentity,userRole);
         dbuttonDelete.setVisibility (View.GONE);
         dbuttonBack.setOnClickListener (new View.OnClickListener() {
@@ -209,7 +222,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         dtvMobile.setText (userMobile);
         dtvCenterName.setText (userAddress);
         dtvIdentity.setText (userIdentity);
-        dtvRole.setText (userRole);
+
     }
 
     private void init_dialog_views(){
@@ -223,6 +236,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         dbuttonBack = dialogView.findViewById(R.id.dbuttonBack);
         dbuttonUpdate=dialogView.findViewById(R.id.dbuttonUpdate);
         dbuttonDelete =  dialogView.findViewById(R.id.dbuttonDelete);
+        sp=dialogView.findViewById(R.id.sprole);
     }
     private void switchFragment(Fragment fragment) {
 
@@ -237,7 +251,11 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         try {
             dR.child("userName").setValue(requireNonNull(dtvUsername.getText()).toString().trim().toUpperCase());
             dR.child("userEmail").setValue(requireNonNull(dtvEmail.getText()).toString().trim().toLowerCase());
-            dR.child("userRole").setValue(dtvRole.getText().toString().toUpperCase());
+            if(role.equals("ADMIN")){
+                dR.child("userRole").setValue(sp.getSelectedItem().toString().toUpperCase());
+            }else {
+                dR.child("userRole").setValue(dtvRole.getText().toString().toUpperCase());
+            }
             dR.child("userMobile").setValue(requireNonNull(dtvMobile.getText()).toString().trim());
             dR.child("userAddress").setValue(requireNonNull(dtvCenterName.getText()).toString().toUpperCase());
             dR.child("userIdentity").setValue(requireNonNull(dtvIdentity.getText()).toString().trim());

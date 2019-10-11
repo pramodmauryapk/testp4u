@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".main_menu.MainActivity"
+    tools:context=".menu_grid.MainActivity"
     tools:openDrawer="start">
 
     <include
