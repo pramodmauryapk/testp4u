@@ -265,8 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle = new Bundle();
 
         switch (id){
-            case R.id.nav_home:onBackPressed();
-                break;
+
             case R.id.nav_our_work:newContent=new OurWorkFragment();
                 break;
             case R.id.nav_about_us:newContent=new AboutUsFragment();

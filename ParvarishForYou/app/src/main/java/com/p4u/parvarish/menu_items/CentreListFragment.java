@@ -119,7 +119,7 @@ public class CentreListFragment extends HomeFragment {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.manage_user_info, null);
+        dialogView = inflater.inflate(R.layout.layout_profile, null);
         dialogBuilder.setView(dialogView);
 
         init_dialog_views();
@@ -137,6 +137,7 @@ public class CentreListFragment extends HomeFragment {
         dtvCenterName.setEnabled(false);
         dtvIdentity.setText(userIdentity);
         dtvRole.setText(userRole);
+        dtvRole.setEnabled(false);
         t1.setVisibility(View.GONE);
         dbuttonDelete.setVisibility(View.GONE);
         dbuttonUpdate.setText("CALL");

@@ -1,5 +1,6 @@
 package com.p4u.parvarish.contact_us;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
@@ -38,7 +40,7 @@ public class ContactUsFragment extends Fragment {
                 .addFacebook()
                 // .addTwitter("medyo80")
                 .addYoutube()
-                // .addPlayStore("com.ideashower.readitlater.pro")
+                // .addPlayStore("com.p4u.parvarish")
                 // .addInstagram("medyo80")
                 // .addGitHub("medyo")
                 .addItem(getCopyRightsElement())
@@ -49,9 +51,7 @@ public class ContactUsFragment extends Fragment {
 
         return contactPage;
     }
-    private void initViews(){
 
-    }
     private Element getCopyRightsElement() {
         Element copyRightsElement = new Element();
         final String copyrights = String.format(getString(R.string.copy_right), Calendar.getInstance().get(Calendar.YEAR));
@@ -68,7 +68,7 @@ public class ContactUsFragment extends Fragment {
         });
         return copyRightsElement;
     }
-/*
+
     private void simulateDayNight() {
         final int DAY = 0;
         final int NIGHT = 1;
@@ -80,6 +80,6 @@ public class ContactUsFragment extends Fragment {
             AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_NO);
         }
-    }*/
+    }
 
 }

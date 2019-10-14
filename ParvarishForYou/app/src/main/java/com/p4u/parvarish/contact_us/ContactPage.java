@@ -88,13 +88,8 @@ public class ContactPage {
                 e.printStackTrace();
             }
 */
-            if (versionCode >= 3002850) {
-                Uri uri = Uri.parse("fb://facewebmodal/f?href=" + "http://m.facebook.com/" + "https://www.facebook.com/parvarishforyou/");
-                intent.setData(uri);
-            } else {
-                Uri uri = Uri.parse("fb://page/" + "https://www.facebook.com/parvarishforyou/");
-                intent.setData(uri);
-            }
+            Uri uri = Uri.parse("fb://page/" + "https://www.facebook.com/parvarishforyou/");
+            intent.setData(uri);
         } else {
             intent.setData(Uri.parse("http://m.facebook.com/" + "https://www.facebook.com/parvarishforyou/"));
         }

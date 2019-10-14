@@ -61,7 +61,7 @@ public class Element {
     }
     @DrawableRes
     @Nullable
-    Integer getIconDrawable() {
+    public Integer getIconDrawable() {
         return iconDrawable;
     }
     void setIconDrawable(@DrawableRes Integer iconDrawable) {
@@ -69,7 +69,7 @@ public class Element {
     }
     @ColorRes
     @Nullable
-    Integer getIconTint() {
+    public Integer getIconTint() {
         return colorDay;
     }
     void setIconTint(@ColorRes Integer color) {
@@ -78,7 +78,7 @@ public class Element {
 
 
     @ColorRes
-    Integer getIconNightTint() {
+    public Integer getIconNightTint() {
         return colorNight;
     }
     void setIconNightTint() {
@@ -103,7 +103,7 @@ public class Element {
         return this;
     }
 
-    Boolean getAutoApplyIconTint() {
+    public Boolean getAutoApplyIconTint() {
         return autoIconColor;
     }
 

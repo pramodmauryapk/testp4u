@@ -33,11 +33,11 @@ public class CenterList_model extends ArrayAdapter<Teacher> {
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_center, null, true);
-        if (position % 2 == 1) {
+      /*  if (position % 2 == 1) {
             listViewItem.setBackgroundColor(Color.YELLOW);
         } else {
             listViewItem.setBackgroundColor(Color.CYAN);
-        }
+        }*/
         TextView textViewCenterName = listViewItem.findViewById(R.id.tv_centername);
         TextView textViewCenterMobile = listViewItem.findViewById(R.id.tv_centermobile);
 

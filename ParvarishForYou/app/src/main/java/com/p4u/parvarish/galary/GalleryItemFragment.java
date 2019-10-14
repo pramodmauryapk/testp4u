@@ -41,10 +41,7 @@ public class GalleryItemFragment extends Fragment {
     private List<Image_Model> mImageModels;
     private List<String> list;
     //private int[] imageArray = new int[]{};
-     private int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
-             R.drawable.image3, R.drawable.image4, R.drawable.image5,
-             R.drawable.image6, R.drawable.image7, R.drawable.image8,
-             R.drawable.image9, R.drawable.image10};
+
 
     static Fragment newInstance(ImageGalleryFragment context, int pos, float scale) {
         Bundle b = new Bundle();
@@ -66,7 +63,10 @@ public class GalleryItemFragment extends Fragment {
         if (container == null) {
             return null;
         }
-
+        int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
+                R.drawable.image3, R.drawable.image4, R.drawable.image5,
+                R.drawable.image6, R.drawable.image7, R.drawable.image8,
+                R.drawable.image9, R.drawable.image10};
         final int postion = requireNonNull(this.getArguments()).getInt(POSITON);
         float scale = this.getArguments().getFloat(SCALE);
 
@@ -93,11 +93,11 @@ public class GalleryItemFragment extends Fragment {
                 //Intent intent = new Intent(getActivity(), ImageDetailsActivity.class);
                 //intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
                 //startActivity(intent);
-                FullImageFragment fragment = new FullImageFragment();
-                Bundle args = new Bundle();
-                args.putInt(DRAWABLE_RESOURE, imageArray[postion]);//
-                fragment.setArguments(args);
-                GalleryItemFragment.this.switchFragment(fragment);
+              //  FullImageFragment fragment = new FullImageFragment();
+              //  Bundle args = new Bundle();
+              //  args.putInt(DRAWABLE_RESOURE, imageArray[postion]);//
+              //  fragment.setArguments(args);
+              //  GalleryItemFragment.this.switchFragment(fragment);
 
             }
         });

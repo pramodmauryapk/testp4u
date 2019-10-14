@@ -44,7 +44,7 @@ public class SubmitBookFragment extends Fragment {
     private ListView listViewBooks;
     private View dialogView;
     private List<Book> books;
-    private DatabaseReference databaseBooks;
+    private DatabaseReference databaseBooks,TempUser;
     private EditText spBookName;
 
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2;
@@ -161,16 +161,16 @@ public class SubmitBookFragment extends Fragment {
 
                             @Override
                             public void OnClick() {
-                                boolean ans=updateBook(dbookId);
+                                boolean ans=updateBook(dbookId,dbookHandoverTo);
                                 if(ans){
-                                    Toast.makeText(getActivity(), "Submission Successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Submission Successfully", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
                         .OnNegativeClicked(new FancyAlertDialogListener()  {
                             @Override
                             public void OnClick() {
-                                Toast.makeText(SubmitBookFragment.this.getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
                             }
                         })
@@ -182,13 +182,15 @@ public class SubmitBookFragment extends Fragment {
 
 
     }
-    private boolean updateBook(String bookId) {
+    private boolean updateBook(String bookId,String userId) {
 
 
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
         databaseBooks.child("bookAvaibility").setValue("1");
         databaseBooks.child("bookHandoverTo").setValue("CENTER");
         databaseBooks.child("bookHandoverTime").setValue(get_current_time());
+        TempUser = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(userId);
+        TempUser.child("bookHaving").setValue("0");
         return true;
 
     }

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +35,10 @@ import java.util.List;
 import java.util.Objects;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.fancydialog.Animation;
+import com.p4u.parvarish.fancydialog.FancyAlertDialog;
+import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
+import com.p4u.parvarish.fancydialog.Icon;
 
 import static java.util.Objects.requireNonNull;
 
@@ -157,13 +160,37 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     public void onDeleteItemClick(int position) {
         Teacher selectedItem = mTeachers.get(position);
         final String selectedKey = selectedItem.getKey();
-
         StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageURL());
-        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+       imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(ManageUserFragment.this.getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                new FancyAlertDialog.Builder(getActivity())
+                        .setTitle("Rate us if you like the app")
+                        .setMessage("Do you really want to Delete User?")
+                        .setNegativeBtnText("Cancel")
+                        .setPositiveBtnText("Delete")
+                        .setAnimation(Animation.POP)
+                        .isCancellable(true)
+                        .setIcon(R.drawable.logo, Icon.Visible)
+                        .OnPositiveClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick() {
+
+                                mDatabaseRef.child(selectedKey).removeValue();
+                                Toast.makeText(ManageUserFragment.this.getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                                //return true;
+                            }
+                        })
+                        .OnNegativeClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                //false;
+
+
+                            }
+                        })
+                        .build();
+
             }
         });
 
@@ -179,7 +206,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (getContext ());
         LayoutInflater inflater = getLayoutInflater ();
-        dialogView = inflater.inflate (R.layout.manage_user_info, null);
+        dialogView = inflater.inflate (R.layout.layout_profile, null);
         dialogBuilder.setView (dialogView);
         dialogBuilder.setTitle ("User Details");
         final AlertDialog b = dialogBuilder.create ();
@@ -254,7 +281,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
             if(role.equals("ADMIN")){
                 dR.child("userRole").setValue(sp.getSelectedItem().toString().toUpperCase());
             }else {
-                dR.child("userRole").setValue(dtvRole.getText().toString().toUpperCase());
+                dR.child("userRole").setValue(requireNonNull(dtvRole.getText()).toString().toUpperCase());
             }
             dR.child("userMobile").setValue(requireNonNull(dtvMobile.getText()).toString().trim());
             dR.child("userAddress").setValue(requireNonNull(dtvCenterName.getText()).toString().toUpperCase());

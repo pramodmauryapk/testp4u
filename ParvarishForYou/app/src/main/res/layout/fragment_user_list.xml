@@ -13,6 +13,15 @@
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorAccent" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select and Long Press for More Options"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorAccent" />
     <ProgressBar
         android:id="@+id/myDataLoaderProgressBar"
         style="?android:attr/progressBarStyleHorizontal"

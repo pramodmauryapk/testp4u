@@ -76,10 +76,6 @@ public class SearchBookFragment extends Fragment {
         });
 
 
-
-
-
-
         spBookName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -96,8 +92,6 @@ public class SearchBookFragment extends Fragment {
 
             }
         });
-
-
         return v;
     }
     @SuppressLint("InflateParams")

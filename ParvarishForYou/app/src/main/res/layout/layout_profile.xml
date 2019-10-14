@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -64,7 +65,7 @@
             android:id="@+id/tvCenterName"
             android:hint="@string/center_location"
             android:maxLines="1"
-            android:inputType="textPostalAddress"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,10 +95,7 @@
             android:id="@+id/tvRole"
             android:hint="@string/role"
             android:maxLines="1"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -105,25 +103,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sprole"
-        android:background="@drawable/bg_edittext_focused"
+        android:layout_margin="10dp"
         android:layout_below="@+id/l6"
+        android:background="@drawable/bg_edittext_focused"
         android:visibility="gone"
         android:entries="@array/role_array"/>
+
+
 <LinearLayout
     android:id="@+id/l10"
-    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
     android:layout_below="@+id/sprole"
     android:orientation="horizontal">
     <Button
         style="?attr/buttonBarButtonStyle"
-        android:id="@+id/dbuttonSave"
+        android:id="@+id/dbuttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:text="@string/save"
+        android:text="@string/update"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/colorwhite"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+    <Button
+        style="?attr/buttonBarButtonStyle"
+        android:id="@+id/dbuttonDelete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:text="@string/delete"
         android:background="@drawable/button_shape"
         android:textColor="@color/colorwhite"
         android:textStyle="bold"
@@ -131,12 +144,12 @@
 
     <Button
         style="?attr/buttonBarButtonStyle"
-        android:id="@+id/dbuttonchangepassword"
+        android:id="@+id/dbuttonBack"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:text="@string/change_password"
+        android:text="@string/back"
         android:background="@drawable/button_shape"
         android:textColor="@color/colorwhite"
         android:textStyle="bold"

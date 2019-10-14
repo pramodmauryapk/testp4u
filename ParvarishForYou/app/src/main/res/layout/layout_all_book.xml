@@ -6,11 +6,14 @@
     android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
+    android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
     android:weightSum="10"
     android:layout_height="wrap_content">
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     android:layout_weight="9"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -21,10 +24,11 @@
 
         <TextView
             android:text="Let Us C"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:id="@+id/textView_BookTitle"
             android:layout_weight="10"
             android:textAlignment="viewStart"
+            android:textStyle="bold"
             android:textColor="@color/colorblack"
            android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>
@@ -57,28 +61,32 @@
         android:orientation="horizontal">
     <TextView
         android:text="Yashwant Kanitkar"
-        android:textColor="@color/colorblack"
+        android:textColor="@color/grey"
         android:textSize="12sp"
+        android:textStyle="italic"
         android:textAlignment="viewStart"
         android:id="@+id/textView_Book_Author"
         android:layout_weight="10"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content" />
+
         <TextView
-            android:text="Rs-"
-            android:textSize="12sp"
-            android:textColor="@color/colorblack"
             android:id="@+id/textView_currency"
+            android:layout_height="match_parent"
             android:layout_weight="0"
+            android:text="₹"
             android:textAlignment="viewEnd"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content" />
         <TextView
             android:text="100"
             android:textSize="12sp"
-            android:textColor="@color/colorblack"
+            android:textColor="@color/grey"
             android:id="@+id/textView_Book_Cost"
             android:layout_weight="0"
+
             android:textAlignment="viewEnd"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
@@ -89,7 +97,8 @@
     <ImageView
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:background="@mipmap/double_arrow_red"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_forward_black_24dp"
         android:id="@+id/nextbutton"/>
 </LinearLayout>

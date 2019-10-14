@@ -44,7 +44,7 @@ public class UserProfileFragment extends Fragment {
     private EditText username,email,mobile,identity,password,againpassword,feedback,news,time;
     private TextView location,role;
     private List<Teacher> users;
-    private Button save,change;
+    private Button save,change,back;
     private LinearLayout l9;
     private Spinner sp;
     private String userrole;
@@ -52,7 +52,7 @@ public class UserProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate (R.layout.show_user, container, false);
+        v = inflater.inflate (R.layout.layout_profile, container, false);
         initViews ();
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -61,6 +61,9 @@ public class UserProfileFragment extends Fragment {
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
         final FirebaseUser user = mAuth.getCurrentUser();
         userID = (requireNonNull(user)).getUid();
+        back.setVisibility(View.GONE);
+        change.setText("Change Password");
+        save.setText("Save");
         myRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -116,9 +119,13 @@ public class UserProfileFragment extends Fragment {
         identity=v.findViewById(R.id.etIdentity);
         location=v.findViewById(R.id.tvCenterName);
         role=v.findViewById(R.id.tvRole);
-        save=v.findViewById (R.id.dbuttonSave);
-        change=v.findViewById (R.id.dbuttonchangepassword);
         sp=v.findViewById(R.id.sprole);
+        back = v.findViewById(R.id.dbuttonBack);
+        change=v.findViewById(R.id.dbuttonUpdate);
+        save=  v.findViewById(R.id.dbuttonDelete);
+        //save=v.findViewById (R.id.dbuttonSave);
+        //change=v.findViewById (R.id.dbuttonchangepassword);
+
 
     }
     private void get_values(){

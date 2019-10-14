@@ -41,7 +41,7 @@ public class BookListActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listview);
+        setContentView(R.layout.activity_booklist);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
 
       // 2. toolbar
@@ -55,7 +55,8 @@ public class BookListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new spreadLayout());
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
-       // recyclerView.setOnClickListener();
+
+        // recyclerView.setOnClickListener();
 
         redColor = getResources().getColor(R.color.red);
         int greenColor = getResources().getColor(R.color.green);

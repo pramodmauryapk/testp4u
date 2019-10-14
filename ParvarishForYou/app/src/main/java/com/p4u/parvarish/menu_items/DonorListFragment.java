@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import com.p4u.parvarish.R;
@@ -56,15 +57,16 @@ public class DonorListFragment extends Fragment {
         databaseBooks.addValueEventListener(new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                donors.clear();
+
+             donors.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Book donor = postSnapshot.getValue(Book.class);
 
                         donors.add(donor);
 
 
-
                 }
+
 
                 HashSet hs = new HashSet(donors); // donor= name of arrayList from which u want to remove duplicates
 
@@ -74,6 +76,7 @@ public class DonorListFragment extends Fragment {
 
                DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);
                listViewdonors.setAdapter(donorAdapter);
+               donorAdapter.notifyDataSetChanged();
 
             }
 

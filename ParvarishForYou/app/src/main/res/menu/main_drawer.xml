@@ -4,10 +4,7 @@
     tools:showIn="nav_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_work_black_24dp"
-            android:title="@string/menu_home" />
+
 
     <item
         android:id="@+id/nav_our_work"

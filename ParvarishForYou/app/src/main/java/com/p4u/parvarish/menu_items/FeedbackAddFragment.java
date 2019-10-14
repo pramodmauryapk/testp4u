@@ -1,5 +1,6 @@
 package com.p4u.parvarish.menu_items;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class FeedbackAddFragment extends Fragment {
     private RatingBar ratingBar;
     private String userID;
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -67,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_weight="3"
             android:id="@+id/spBookSubject"
+            android:padding="10dp"
             android:background="@drawable/bg_edittext_focused"
             android:entries="@array/subject_list"
             tools:ignore="RtlSymmetry" />
@@ -74,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spBookYear"
+            android:padding="10dp"
             android:background="@drawable/bg_edittext_focused"
             android:layout_marginStart="5dp"
             android:layout_weight="7"

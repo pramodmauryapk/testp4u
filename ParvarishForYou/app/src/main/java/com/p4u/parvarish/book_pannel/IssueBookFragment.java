@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,25 +40,28 @@ import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
+import com.p4u.parvarish.user_pannel.TempUser;
+
+import static java.util.Objects.requireNonNull;
 
 public class IssueBookFragment extends Fragment {
 
     private static final String TAG = "IssueBookFragment";
     private ListView listViewBooks;
-    private View dialogView;
+    private View dialogView,issuedialog;
     private List<Book> books;
-    private DatabaseReference databaseBooks;
+    private DatabaseReference databaseBooks,TempUser;
     private EditText spBookSubject,spBookName,spBookAuthor,spBookCost;
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2;
     private View v;
-    private Button btnissue;
-    private String IssueName;
+    private TextInputEditText etFullname,etEmail,etMobile,etAddress,etIdentity,etDepositpaid;
+    private Button btnissue,issue;
+    private String Fullname,Email,Mobile,Address,Identity,Deposit;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
-
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
         //getting views
         initViews();
@@ -153,95 +157,87 @@ public class IssueBookFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 b.cancel();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
-                final EditText input = new EditText(getContext());
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                builder.setView(input)
-                        .setMessage("Enter Aadhar ID:")
-                        .setCancelable(false)
-                        .setPositiveButton("Issue", new DialogInterface.OnClickListener(){
+                AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = getLayoutInflater();
+                issuedialog = inflater.inflate(R.layout.show_issuebook_dialog, null);
+                dialogBuilder1.setView(issuedialog);
+                init_issuedialog_views();
+                dialogBuilder1.setTitle("Receiver Details");
+                final AlertDialog id = dialogBuilder1.create();
+                id.show();
+                issue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        id.cancel();
+                        getValue_from_dialog();
 
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-
-
-                            IssueName = input.getText().toString().toUpperCase();
-                            new FancyAlertDialog.Builder(getActivity())
-                                    .setTitle("ParvarishForYou")
-                                    .setMessage("Want to issue to " + IssueName)
-                                    .setNegativeBtnText("Cancel")
-                                    .setPositiveBtnText("OK")
-                                    .setAnimation(Animation.POP)
-                                    .isCancellable(true)
-                                    .setIcon(R.drawable.logo, Icon.Visible)
-                                    .OnPositiveClicked(new FancyAlertDialogListener() {
-                                        @Override
-                                        public void OnClick() {
-                                            boolean ans=updateBook(dbookId,IssueName);
-                                            if(ans){
-                                                Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
-                                            }
+                        new FancyAlertDialog.Builder(getActivity())
+                                .setTitle("ParvarishForYou")
+                                .setMessage("Want to issue to " + Fullname)
+                                .setNegativeBtnText("Cancel")
+                                .setPositiveBtnText("OK")
+                                .setAnimation(Animation.POP)
+                                .isCancellable(true)
+                                .setIcon(R.drawable.logo, Icon.Visible)
+                                .OnPositiveClicked(new FancyAlertDialogListener() {
+                                    @Override
+                                    public void OnClick() {
+                                        boolean ans=updateBook(dbookId,Mobile,Fullname,Email,Address,Identity,Deposit);
+                                        //boolean ans=true;
+                                        if(ans){
+                                            Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
                                         }
-                                    })
-                                    .OnNegativeClicked(new FancyAlertDialogListener() {
-                                        @Override
-                                        public void OnClick() {
-                                            Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .OnNegativeClicked(new FancyAlertDialogListener() {
+                                    @Override
+                                    public void OnClick() {
+                                        Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
-                                        }
-                                    })
-                                    .build();
-                        }
-            })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int id) {
+                                    }
+                                })
+                                .build();
+                    }
+                });
 
-                    dialog.cancel();
 
-                }
-            });
-            AlertDialog alert = builder.create();
-		    alert.show();
-
-        }
-    });
+            }
+        });
     }
 
-    private boolean updateBook(String bookId,String issueName){
+    private void getValue_from_dialog() {
+        Fullname= Objects.requireNonNull(etFullname.getText()).toString().toUpperCase();
+        Email= Objects.requireNonNull(etEmail.getText()).toString();
+        Mobile = Objects.requireNonNull(etMobile.getText()).toString().toUpperCase();
+        Address= Objects.requireNonNull(etAddress.getText()).toString().toUpperCase();
+        Identity= Objects.requireNonNull(etIdentity.getText()).toString().toUpperCase();
+        Deposit= requireNonNull(etDepositpaid.getText()).toString();
+    }
+
+    private boolean updateBook(String bookId,String Mobile,String Name,String Email,String Address, String Identity,String Deposit){
     databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
+    TempUser = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
+    String UserId=TempUser.push().getKey();
     databaseBooks.child("bookAvaibility").setValue("0");
-    databaseBooks.child("bookHandoverTo").setValue(issueName);
+    databaseBooks.child("bookHandoverTo").setValue(UserId);
     databaseBooks.child("bookHandoverTime").setValue(get_current_time());
+        TempUser user = new TempUser(
+                UserId,
+                Name,
+                Email,
+                Mobile,
+                Address,
+                Identity,
+                bookId,
+                Deposit);
+
+        //Saving the Book
+        TempUser.child(requireNonNull(UserId)).setValue(user);
     return true;
 
 
 }
-    private boolean onClickDialog() {
-        new FancyAlertDialog.Builder(getActivity())
-                .setTitle("ParvarishForYou")
-                .setMessage("Want to issue to "+IssueName)
-                .setNegativeBtnText("Cancel")
-                .setPositiveBtnText("OK")
-                .setAnimation(Animation.POP)
-                .isCancellable(true)
-                .setIcon(R.drawable.logo, Icon.Visible)
-                .OnPositiveClicked(new FancyAlertDialogListener() {
-                    @Override
-                    public void OnClick() {
-                    }
-                })
-                .OnNegativeClicked(new FancyAlertDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        Toast.makeText(IssueBookFragment.this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
-                    }
-                })
-                .build();
-
-            return false;
-    }
     private void init_dialog_views(){
         dBookid=dialogView.findViewById (R.id.tvBookid);
         dTitle =dialogView.findViewById(R.id.tvTitle);
@@ -257,13 +253,23 @@ public class IssueBookFragment extends Fragment {
         dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
         btnissue=dialogView.findViewById(R.id.dbuttonBack);
     }
+    private void init_issuedialog_views(){
+        etFullname = issuedialog.findViewById(R.id.et_fullname);
+        etEmail = issuedialog.findViewById(R.id.et_createemail);
+        etMobile = issuedialog.findViewById(R.id.et_createmobile);
+        etAddress=issuedialog.findViewById(R.id.et_address);
+        etIdentity=issuedialog.findViewById(R.id.et_identity);
+        etDepositpaid=issuedialog.findViewById(R.id.et_depositpaid);
+        issue = issuedialog.findViewById(R.id.dbuttonissue);
+
+
+    }
     public void onStart() {
 
         super.onStart();
         load_list();
 
     }
-
     private void load_list() {
         try{
             if (!spBookName.getText().toString().equals("")) {
@@ -322,7 +328,6 @@ public class IssueBookFragment extends Fragment {
             Log.d(TAG, "Exception in Adding List "+e);
         }
     }
-
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());
