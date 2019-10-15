@@ -177,7 +177,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                             public void OnClick() {
 
                                 mDatabaseRef.child(selectedKey).removeValue();
-                                Toast.makeText(ManageUserFragment.this.getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
                                 //return true;
                             }
                         })
@@ -213,7 +213,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         b.show ();
         init_dialog_views ();
         role=userRole;
-       if(userRole.equals("ADMIN")){
+        if(userRole.equals("ADMIN")){
             dtvRole.setVisibility(View.GONE);
             sp.setVisibility(View.VISIBLE);
         }

@@ -236,5 +236,9 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="ourwork_page_description12" translatable="false">♦ Health awareness camps.\n ♦Yoga classes.</string>
     <string name="ourwork_page_description13" translatable="false">Agriculture is the bone of our economy and it should be taken care. We are working to enrich agricultural field in India. Below are the areas which are being worked upon:</string>
     <string name="ourwork_page_description14" translatable="false">♦ Farming, Fishery, Beekeeping, Dairy, Horticulture, Animal Husbandry, Pottery \n ♦ Animal health and soil health.\n ♦ Traditional to technological farming.\n ♦ Technology awareness - dip irrigation, soil fertility card.\n ♦ Government policy awareness.\n ♦ Kissan library</string>
+    <string name="tagline">शिक्षा से समृद्धि तक</string>
+    <string name="title">परवरिश</string>
+    <string name="forgot_password">Forgot Password</string>
+
 
 </resources>

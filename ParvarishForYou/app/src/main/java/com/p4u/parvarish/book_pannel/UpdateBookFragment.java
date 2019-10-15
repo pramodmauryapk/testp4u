@@ -200,7 +200,7 @@ public class UpdateBookFragment extends Fragment {
         dbuttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(Objects.requireNonNull(UpdateBookFragment.this.getContext()));
+                AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(UpdateBookFragment.this.getContext()));
                 builder.setMessage("Are you sure you want to Delete Book?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -217,7 +217,7 @@ public class UpdateBookFragment extends Fragment {
                                 dialog.cancel();
                             }
                         });
-                androidx.appcompat.app.AlertDialog alert = builder.create();
+                AlertDialog alert = builder.create();
                 alert.show();
 
 

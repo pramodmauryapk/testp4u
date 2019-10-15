@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".login.UserRegistrationActivity"
     android:layout_gravity="center"
     android:gravity="center">
 
@@ -57,7 +56,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:padding="8dp"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/colorwhite"
                     android:layout_gravity="center_horizontal"
                     />
                 <androidx.cardview.widget.CardView
@@ -138,7 +137,6 @@
                                     <Button
                                         android:id="@+id/btnChoose"
                                         android:text="@string/choose"
-                                        android:onClick="chooseimage"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content" />
 
@@ -277,7 +275,7 @@
                                 android:layout_height="match_parent"
                                 android:text="@string/register"
                                 android:textSize="16sp"
-                                android:onClick="registerButton"
+
                                 android:id="@+id/register_button"
                                 android:textStyle="bold"
                                 android:ems="15"
@@ -306,9 +304,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/login"
                         android:textStyle="bold"
+                        android:id="@+id/login"
                         android:textColor="@color/colorRed"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:onClick="login"
                         android:textSize="16sp"/>
                 </LinearLayout>
 

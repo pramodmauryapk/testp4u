@@ -138,8 +138,6 @@ public class AdminMenuFragment extends HomeFragment {
 
         }
         LayoutGridView adapterViewAndroid = new LayoutGridView(getContext(), gridViewString, gridViewImageId);
-
-
         androidGridView.setAdapter(adapterViewAndroid);
         androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -148,7 +146,7 @@ public class AdminMenuFragment extends HomeFragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int i, long id) {
 
-                // Toast.makeText(getContext(), "GridView Item: " + gridViewString[+i], Toast.LENGTH_LONG).show();
+
                 switch (i) {
 
                     case 0:
@@ -225,25 +223,6 @@ public class AdminMenuFragment extends HomeFragment {
 
 
 
-		/*AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull (getContext ()));
-		builder.setMessage("Are you sure you want to exit?")
-				.setCancelable(false)
-				.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						//Objects.requireNonNull (getActivity ()).finishAffinity ();
-
-					}
-				})
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-					//	HomeFragment fragment=new HomeFragment ();
-					//	switchFragment (fragment);
-						dialog.cancel();
-
-					}
-				});
-		AlertDialog alert = builder.create();
-		alert.show();*/
 
 
 

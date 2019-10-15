@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +57,7 @@ public class IssueBookFragment extends Fragment {
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2;
     private View v;
     private TextInputEditText etFullname,etEmail,etMobile,etAddress,etIdentity,etDepositpaid;
+    private TextInputLayout tlname,tlemail,tlmobile,tladdress,tlidentity,tldeposit;
     private Button btnissue,issue;
     private String Fullname,Email,Mobile,Address,Identity,Deposit;
     @Nullable
@@ -169,34 +172,36 @@ public class IssueBookFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         id.cancel();
-                        getValue_from_dialog();
 
-                        new FancyAlertDialog.Builder(getActivity())
-                                .setTitle("ParvarishForYou")
-                                .setMessage("Want to issue to " + Fullname)
-                                .setNegativeBtnText("Cancel")
-                                .setPositiveBtnText("OK")
-                                .setAnimation(Animation.POP)
-                                .isCancellable(true)
-                                .setIcon(R.drawable.logo, Icon.Visible)
-                                .OnPositiveClicked(new FancyAlertDialogListener() {
-                                    @Override
-                                    public void OnClick() {
-                                        boolean ans=updateBook(dbookId,Mobile,Fullname,Email,Address,Identity,Deposit);
-                                        //boolean ans=true;
-                                        if(ans){
-                                            Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
+                        boolean response=getValue_from_dialog();
+                        if(response) {
+                            new FancyAlertDialog.Builder(getActivity())
+                                    .setTitle("ParvarishForYou")
+                                    .setMessage("Want to issue to " + Fullname)
+                                    .setNegativeBtnText("Cancel")
+                                    .setPositiveBtnText("OK")
+                                    .setAnimation(Animation.POP)
+                                    .isCancellable(true)
+                                    .setIcon(R.drawable.logo, Icon.Visible)
+                                    .OnPositiveClicked(new FancyAlertDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            boolean ans = updateBook(dbookId, Mobile, Fullname, Email, Address, Identity, Deposit);
+                                            //boolean ans=true;
+                                            if (ans) {
+                                                Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                })
-                                .OnNegativeClicked(new FancyAlertDialogListener() {
-                                    @Override
-                                    public void OnClick() {
-                                        Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .OnNegativeClicked(new FancyAlertDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 
-                                    }
-                                })
-                                .build();
+                                        }
+                                    })
+                                    .build();
+                        }
                     }
                 });
 
@@ -205,13 +210,42 @@ public class IssueBookFragment extends Fragment {
         });
     }
 
-    private void getValue_from_dialog() {
+    private boolean getValue_from_dialog() {
         Fullname= Objects.requireNonNull(etFullname.getText()).toString().toUpperCase();
         Email= Objects.requireNonNull(etEmail.getText()).toString();
         Mobile = Objects.requireNonNull(etMobile.getText()).toString().toUpperCase();
         Address= Objects.requireNonNull(etAddress.getText()).toString().toUpperCase();
         Identity= Objects.requireNonNull(etIdentity.getText()).toString().toUpperCase();
         Deposit= requireNonNull(etDepositpaid.getText()).toString();
+
+
+        if (TextUtils.isEmpty(Fullname)) {
+            tlname.setError("Enter full name!");
+            return false;
+        }
+        if (Mobile.length ()!=10) {
+            tlmobile.setError("Enter Mobile Number!");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(Email)) {
+            tlemail.setError("Enter email address!");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(Address)) {
+            tladdress.setError("Enter Address!");
+            return false;
+        }
+        if (TextUtils.isEmpty(Identity)) {
+            tlidentity.setError("Enter aadhar or Voter id !");
+            return false;
+        }
+        if (TextUtils.isEmpty(Deposit)) {
+            tldeposit.setError("Enter Valid Amount!");
+            return false;
+        }
+        return true;
     }
 
     private boolean updateBook(String bookId,String Mobile,String Name,String Email,String Address, String Identity,String Deposit){
@@ -261,7 +295,12 @@ public class IssueBookFragment extends Fragment {
         etIdentity=issuedialog.findViewById(R.id.et_identity);
         etDepositpaid=issuedialog.findViewById(R.id.et_depositpaid);
         issue = issuedialog.findViewById(R.id.dbuttonissue);
-
+        tlname=issuedialog.findViewById(R.id.tv_createusername);
+        tlemail=issuedialog.findViewById(R.id.tv_createemail);
+        tlmobile=issuedialog.findViewById(R.id.tv_createmobile);
+        tladdress=issuedialog.findViewById(R.id.tv_address);
+        tlidentity=issuedialog.findViewById(R.id.tv_identity);
+        tldeposit=issuedialog.findViewById(R.id.tv_depositpaid);
 
     }
     public void onStart() {

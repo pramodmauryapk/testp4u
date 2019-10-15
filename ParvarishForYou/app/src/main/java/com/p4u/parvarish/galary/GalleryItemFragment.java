@@ -1,11 +1,15 @@
 package com.p4u.parvarish.galary;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.banner_pannel.WebBannerAdapter;
+import com.squareup.picasso.Picasso;
 
 import static java.util.Objects.requireNonNull;
 
@@ -35,12 +42,14 @@ public class GalleryItemFragment extends Fragment {
     private static final String POSITON = "position";
     private static final String SCALE = "scale";
     private static final String DRAWABLE_RESOURE = "resource";
-
+    private ImageView imageView;
     private int screenWidth;
     private int screenHeight;
     private List<Image_Model> mImageModels;
     private List<String> list;
-    //private int[] imageArray = new int[]{};
+    Context context;
+    private ArrayAdapter mAdapter;
+    private int[] imageArray = new int[]{};
 
 
     static Fragment newInstance(ImageGalleryFragment context, int pos, float scale) {
@@ -63,7 +72,8 @@ public class GalleryItemFragment extends Fragment {
         if (container == null) {
             return null;
         }
-        int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
+
+       int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
                 R.drawable.image3, R.drawable.image4, R.drawable.image5,
                 R.drawable.image6, R.drawable.image7, R.drawable.image8,
                 R.drawable.image9, R.drawable.image10};
@@ -72,45 +82,41 @@ public class GalleryItemFragment extends Fragment {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(screenWidth / 2, screenHeight / 2);
         LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.fragment_image, container, false);
-
-        list = new ArrayList<>();
-
         TextView textView = linearLayout.findViewById(R.id.text);
         CarouselLayout root = linearLayout.findViewById(R.id.root_container);
-        ImageView imageView = linearLayout.findViewById(R.id.pagerImg);
-
+        imageView = linearLayout.findViewById(R.id.pagerImg);
         textView.setText("Gallery item: " + postion);
         imageView.setLayoutParams(layoutParams);
-        get_images();
 
-        imageView.setImageResource(imageArray[postion]);
+       // list = new ArrayList<String>();
+
+       imageView.setImageResource(imageArray[postion]);
+        //String a="https://firebasestorage.googleapis.com/v0/b/p4ulibrary-2ea34.appspot.com/o/UPLOADED_IMAGES%2F1570034052417.jpg?alt=media&token=07c3952d-bc23-412c-8a27-999f21def175";
+        //Uri b=Uri.parse(a);
+        //imageView.setImageURI(b);
+
+        //textView.setText( get_images());
+
+
+
 
 
         //handling click event
         imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(getActivity(), ImageDetailsActivity.class);
-                //intent.putExtra(DRAWABLE_RESOURE, imageArray[postion]);
-                //startActivity(intent);
-              //  FullImageFragment fragment = new FullImageFragment();
-              //  Bundle args = new Bundle();
-              //  args.putInt(DRAWABLE_RESOURE, imageArray[postion]);//
-              //  fragment.setArguments(args);
-              //  GalleryItemFragment.this.switchFragment(fragment);
+        @Override
+        public void onClick(View v) {
+
 
             }
-        });
+       });
 
         root.setScaleBoth(scale);
 
         return linearLayout;
     }
-    private void get_images(){
+    private String get_images(){
 
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
-
-        //   mAdapter.notifyDataSetChanged();
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -124,16 +130,18 @@ public class GalleryItemFragment extends Fragment {
 
 
                 }
-
-                  // mAdapter.notifyDataSetChanged();
+            //imageArray.
+               //mAdapter.notifyDataSetChanged();
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        return  list.get(0);
     }
     private void switchFragment(Fragment fragment) {
 

@@ -5,6 +5,7 @@
     android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
+
     android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

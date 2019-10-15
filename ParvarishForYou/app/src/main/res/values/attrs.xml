@@ -63,4 +63,5 @@
         <!--the pause time when the child view rolling complected-->
         <attr name="rolling_pause" format="integer"/>
     </declare-styleable>
+
 </resources>

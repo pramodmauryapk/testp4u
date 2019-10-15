@@ -20,20 +20,17 @@ import com.p4u.parvarish.R;
 
 public class NewsAddFragment extends Fragment {
     private static final String TAG = "NewsAddFragment";
-    private String newsid,newstext;
     private DatabaseReference myRef;
     private EditText editText;
     private Button save;
     private View v;
-    private FirebaseAuth mAuth;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
-
         myRef = FirebaseDatabase.getInstance().getReference().child("WELCOME_TEXT");
-
         initViews();
         save.setOnClickListener (new View.OnClickListener() {
             @Override

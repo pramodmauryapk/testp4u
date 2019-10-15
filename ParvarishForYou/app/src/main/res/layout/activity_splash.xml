@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="@string/welcome_to"
+        android:text="@string/title"
         android:textColor="@color/colorRed"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="@string/parvarish_knowledge_center"
+        android:text="@string/tagline"
         android:textColor="@color/colorRed"
         android:textSize="30sp"
         android:textStyle="bold" />

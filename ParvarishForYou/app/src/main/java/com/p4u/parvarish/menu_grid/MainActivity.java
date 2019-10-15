@@ -28,6 +28,7 @@ import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
 import com.p4u.parvarish.menu_items.AboutUsFragment;
 import com.p4u.parvarish.menu_items.FeedbackAddFragment;
+import com.p4u.parvarish.menu_items.JoinUsFragment;
 import com.p4u.parvarish.menu_items.OurWorkFragment;
 import com.squareup.picasso.Picasso;
 
@@ -273,6 +274,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_feedback:newContent=new FeedbackAddFragment();
                 break;
             case R.id.nav_contact_us:newContent=new ContactUsFragment();
+                break;
+            case R.id.nav_joinus:newContent=new JoinUsFragment();
                 break;
             case R.id.nav_exit:new FancyAlertDialog.Builder(this)
                     .setTitle("Rate us if you like the app")

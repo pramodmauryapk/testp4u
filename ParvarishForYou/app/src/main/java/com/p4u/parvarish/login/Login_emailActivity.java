@@ -39,8 +39,8 @@ import static java.util.Objects.requireNonNull;
 
 public class Login_emailActivity extends AppCompatActivity {
 
-    ImageView top_curve;
-   private static final String TAG = "Login_emailActivity";
+    private ImageView top_curve;
+    private static final String TAG = "Login_emailActivity";
     TextInputEditText inputEmail, inputPassword;
     TextInputLayout tf1,tf2;
     private ProgressBar progressBar;
@@ -69,7 +69,7 @@ public class Login_emailActivity extends AppCompatActivity {
         Animation field_name_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.field_name_anim);
         login_title.startAnimation(field_name_anim);
 
-       Animation center_reveal_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.center_reveal_anim);
+        Animation center_reveal_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.center_reveal_anim);
         login_card.startAnimation(center_reveal_anim);
 
         Animation new_user_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.down_top);
@@ -80,28 +80,7 @@ public class Login_emailActivity extends AppCompatActivity {
         if(auth.getCurrentUser()!=null){
             startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
             finish();
-        //login using catche data
-          // Toast.makeText(Login_emailActivity.this, auth.getUid(), Toast.LENGTH_LONG).show();
-    /*        auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(Objects.requireNonNull(this), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressBar.setVisibility(View.GONE);
-                            if (!task.isSuccessful()) {
-                                // there was an error
 
-                                Toast.makeText(Login_emailActivity.this, Login_emailActivity.this.getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-
-                            } else {
-
-                                Login_emailActivity.this.startActivity(new Intent(Login_emailActivity.this, WelcomeActivity.class));
-                                Login_emailActivity.this.finish();
-
-                            }
-                        }
-                    });
-
-*/
         }
 
 
@@ -149,13 +128,13 @@ public class Login_emailActivity extends AppCompatActivity {
         }
 
         progressBar.setVisibility(View.VISIBLE);
-
         // Authenticate user
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(Objects.requireNonNull(this), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
+
                         if (!task.isSuccessful()) {
                             // there was an error
 

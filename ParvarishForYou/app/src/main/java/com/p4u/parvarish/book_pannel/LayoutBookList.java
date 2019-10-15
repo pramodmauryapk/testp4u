@@ -3,6 +3,7 @@ package com.p4u.parvarish.book_pannel;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import com.p4u.parvarish.R;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class LayoutBookList extends ArrayAdapter<Book> {
     private Activity context;
@@ -56,9 +59,8 @@ public class LayoutBookList extends ArrayAdapter<Book> {
 
         }
         catch (Exception e){
-            listViewItem.setBackgroundColor(Color.RED);
-        }finally {
-            return listViewItem;
+            Log.d(TAG,"Cannot Fatch record");
         }
+        return listViewItem;
     }
 }

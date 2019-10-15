@@ -90,16 +90,7 @@ public class UserDetailsFragment extends Fragment {
         Status=v.findViewById(R.id.tviewstatus);
         teacherDetailImageView=v.findViewById(R.id.teacherDetailImageView);
     }
-    private String getDateToday(){
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd");
-        Date date=new Date();
-        return dateFormat.format(date);
-    }
-    private String getRandomCategory(){
-        String[] categories={"ZEN","BUDHIST","YOGA"};
-        Random random=new Random();
-        int index=random.nextInt(categories.length-1);
-        return categories[index];
-    }
+
+
 
 }

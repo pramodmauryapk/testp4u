@@ -3,6 +3,7 @@ package com.p4u.parvarish.user_pannel;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,28 +35,24 @@ public class UserList_model extends ArrayAdapter<Teacher> {
         Teacher user = users.get(position);
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_user, null, true);
 
-            if (position % 2 == 1) {
+      /*      if (position % 2 == 1) {
                 listViewItem.setBackgroundColor(Color.CYAN);
             } else {
                 listViewItem.setBackgroundColor(Color.YELLOW);
-            }
-            TextView textViewName = listViewItem.findViewById(R.id.tv_username);
-            TextView textViewRole = listViewItem.findViewById(R.id.tv_userrole);
-            TextView textViewMobile = listViewItem.findViewById(R.id.tv_usermobile);
+            }*/
+      try {
+          TextView textViewName = listViewItem.findViewById(R.id.tv_username);
+          TextView textViewRole = listViewItem.findViewById(R.id.tv_userrole);
+          TextView textViewMobile = listViewItem.findViewById(R.id.tv_usermobile);
+          textViewName.setText(user.getUserName());
+          textViewRole.setText(user.getUserRole());
+          textViewMobile.setText(user.getUserMobile());
+      }catch (Exception e){
+          Log.d(TAG,"Cannot fetch data");
+      }
 
 
-            textViewName.setText(user.getUserName());
-            textViewRole.setText(user.getUserRole());
-            textViewMobile.setText(user.getUserMobile());
 
-
-
-    //    }
-       // else
-       // {
-    //        listViewItem.setVisibility(View.GONE);
-
-      //}
 
         return listViewItem;
 

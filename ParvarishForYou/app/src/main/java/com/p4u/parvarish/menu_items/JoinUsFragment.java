@@ -1,4 +1,4 @@
-package com.p4u.parvarish.login;
+package com.p4u.parvarish.menu_items;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -8,23 +8,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,78 +40,49 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.login.Login_emailActivity;
+import com.p4u.parvarish.login.UserRegistrationActivity;
+import com.p4u.parvarish.user_pannel.Teacher;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.user_pannel.Teacher;
-
+import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
-public class UserRegistrationActivity extends AppCompatActivity {
+public class JoinUsFragment extends Fragment {
 
-    private static final String TAG = "UserRegistrationActivity";
+    private static final String TAG = "JoinUsFragment";
+    private EditText editText;
+    private TextView textView;
+    private Button button,btnChoose,btnregister;
+    private View v;
+    private ImageView top_curve;
     private TextInputLayout tlname,tlpassword,tlapassword,tlemail,tlmobile,tladdress,tlidentity;
     private TextInputEditText etFullname, etPassword,etaPassword, etEmail, etMobile,etAddress,etIdentity;
     private FirebaseAuth auth;
     private Spinner spRole;
-    private Button btnChoose,btnregister;
     private ProgressBar progressBar;
+    private TextView login;
     private TextInputLayout tvrole;
     private DatabaseReference myref;
     private ImageView imageView;
-    private TextView login;
     private Uri mImageUri;
     private final int PICK_IMAGE_REQUEST = 71;
     private String email,password,aPassword,id,name,role,mobilenumber,address,identity,status,feedback,news,rating,time;
     private StorageReference mStorageRef;
     private StorageTask mUploadTask;
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        setContentView(R.layout.activity_registration);
-        (requireNonNull(getSupportActionBar())).hide();
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        v = inflater.inflate(R.layout.activity_registration, container, false);
+
         initViews();
-        ImageView top_curve = findViewById(R.id.top_curve);
-        TextView login_title = findViewById(R.id.registration_title);
-        LinearLayout already_have_account_layout = findViewById(R.id.already_have_account_text);
-        CardView register_card = findViewById(R.id.register_card);
-
-
-        Animation top_curve_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.top_down);
-        top_curve.startAnimation(top_curve_anim);
-
-        Animation editText_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.edittext_anim);
-        etFullname.startAnimation(editText_anim);
-        etPassword.startAnimation(editText_anim);
-        etaPassword.startAnimation(editText_anim);
-        spRole .startAnimation(editText_anim);
-        etEmail.startAnimation(editText_anim);
-        etMobile.startAnimation(editText_anim);
-        etAddress.startAnimation(editText_anim);
-        etIdentity.startAnimation(editText_anim);
-
-        Animation field_name_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.field_name_anim);
-        tlname.startAnimation(field_name_anim);
-        tlemail.startAnimation(field_name_anim);
-        tlidentity.startAnimation(field_name_anim);
-        tladdress.startAnimation(field_name_anim);
-        tlapassword.startAnimation(field_name_anim);
-        tlpassword.startAnimation(field_name_anim);
-        tlmobile.startAnimation(field_name_anim);
-        login_title.startAnimation(field_name_anim);
-
-        Animation center_reveal_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.center_reveal_anim);
-        register_card.startAnimation(center_reveal_anim);
-
-        Animation new_user_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.down_top);
-        already_have_account_layout.startAnimation(new_user_anim);
+        top_curve.setVisibility(View.GONE);
         tvrole.setVisibility (View.GONE);
         spRole.setVisibility (View.GONE);
         //get Firebase auth instance
@@ -128,50 +98,49 @@ public class UserRegistrationActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserRegistrationActivity.this, Login_emailActivity.class));
-                finish();
+                startActivity(new Intent(getContext(), Login_emailActivity.class));
+                requireNonNull(getActivity()).finish();
             }
         });
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(UserRegistrationActivity.this, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
 
                 }
             }
         });
-
+        return v;
     }
-
 
     private void initViews(){
-        etFullname = findViewById(R.id.et_fullname);
-        etPassword =findViewById(R.id.et_createpassword);
-        etaPassword= findViewById(R.id.et_confirmpassword);
-        spRole = findViewById(R.id.sp_role);
-        etEmail = findViewById(R.id.et_createemail);
-        etMobile = findViewById(R.id.et_createmobile);
-        etAddress=findViewById(R.id.et_address);
-        etIdentity=findViewById(R.id.et_identity);
-        tvrole=findViewById (R.id.tv_role);
-        tlname=findViewById(R.id.tv_createusername);
-        tlemail=findViewById(R.id.tv_createemail);
-        tlmobile=findViewById(R.id.tv_createmobile);
-        tlpassword=findViewById(R.id.tv_createpassword);
-        tlapassword=findViewById(R.id.tv_comfirmpassword);
-        tladdress=findViewById(R.id.tv_address);
-        tlidentity=findViewById(R.id.tv_identity);
-        progressBar = findViewById(R.id.pb);
-        btnChoose = findViewById(R.id.btnChoose);
-        login=findViewById(R.id.login);
-        btnregister=findViewById(R.id.register_button);
-        imageView = findViewById(R.id.imgView);
+        top_curve = v.findViewById(R.id.top_curve);
+
+        etFullname = v.findViewById(R.id.et_fullname);
+        etPassword =v.findViewById(R.id.et_createpassword);
+        etaPassword= v.findViewById(R.id.et_confirmpassword);
+        spRole = v.findViewById(R.id.sp_role);
+        etEmail =v. findViewById(R.id.et_createemail);
+        etMobile = v.findViewById(R.id.et_createmobile);
+        etAddress=v.findViewById(R.id.et_address);
+        etIdentity=v.findViewById(R.id.et_identity);
+        tvrole=v.findViewById (R.id.tv_role);
+        tlname=v.findViewById(R.id.tv_createusername);
+        tlemail=v.findViewById(R.id.tv_createemail);
+        tlmobile=v.findViewById(R.id.tv_createmobile);
+        tlpassword=v.findViewById(R.id.tv_createpassword);
+        tlapassword=v.findViewById(R.id.tv_comfirmpassword);
+        tladdress=v.findViewById(R.id.tv_address);
+        tlidentity=v.findViewById(R.id.tv_identity);
+        progressBar = v.findViewById(R.id.pb);
+        btnChoose = v.findViewById(R.id.btnChoose);
+        btnregister=v.findViewById(R.id.register_button);
+        login=v.findViewById(R.id.login);
+        imageView = v.findViewById(R.id.imgView);
     }
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -185,7 +154,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
         }
     }
     private String getFileExtension(Uri uri) {
-        ContentResolver cR = requireNonNull(getContentResolver());
+        ContentResolver cR = requireNonNull(requireNonNull(getActivity()).getContentResolver());
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
@@ -209,8 +178,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
             tlname.setError("Enter full name!");
             return false;
         }
-       if (mobilenumber.length ()!=10) {
-           tlmobile.setError("Enter Mobile Number!");
+        if (mobilenumber.length ()!=10) {
+            tlmobile.setError("Enter Mobile Number!");
             return false;
         }
 
@@ -256,7 +225,6 @@ public class UserRegistrationActivity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             progressBar.setVisibility(View.VISIBLE);
-
                                             progressBar.setIndeterminate(false);
                                             progressBar.setProgress(0);
                                         }
@@ -282,9 +250,9 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
                                     myref.child(Objects.requireNonNull(id)).setValue(upload);
                                     progressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(UserRegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(UserRegistrationActivity.this, Login_emailActivity.class));
-                                    finish();
+                                    Toast.makeText(getContext(), "Registration successful", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getContext(), Login_emailActivity.class));
+                                    requireNonNull(getActivity()).finish();
                                 }
                             });
                         }
@@ -292,7 +260,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(UserRegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -306,12 +274,12 @@ public class UserRegistrationActivity extends AppCompatActivity {
             });
         }
         else {
-            Toast.makeText(this, "You haven't Selected Any file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "You haven't Selected Any file selected", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    public void chooseimage(View view) {
+    private void chooseimage(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

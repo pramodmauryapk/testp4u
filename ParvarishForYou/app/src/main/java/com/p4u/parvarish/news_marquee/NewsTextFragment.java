@@ -66,10 +66,7 @@ public class NewsTextFragment extends Fragment {
     private void initViews() {
         tv = v.findViewById(R.id.newsmarquee);
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 
 }
