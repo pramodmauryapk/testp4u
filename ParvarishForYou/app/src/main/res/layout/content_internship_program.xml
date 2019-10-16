@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textStyle="bold"
+        android:textSize="16sp"
         android:text="@string/text_internship_program" />
 
 </androidx.core.widget.NestedScrollView>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
@@ -88,6 +90,16 @@ public class AddBookFragment extends Fragment {
                 addBooks();
             }
         });
+        spBookLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                load_list(spBookLocation.getSelectedItem().toString());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+
+        });
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -112,6 +124,38 @@ public class AddBookFragment extends Fragment {
         return v;
     }
 
+    private void load_list(final String location) {
+        if (!location.isEmpty()) {
+            databaseBooks.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    books.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        Book book = postSnapshot.getValue(Book.class);
+                        if (Objects.requireNonNull(book).getBookLocation().contains(location))
+                        {
+                            books.add(book);
+                        }
+
+
+                    }
+
+                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                    listViewBooks.setAdapter(bookAdapter);
+                    t=bookAdapter.getCount();
+                    etBookId.setText(booklocation+(t+1));
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private void show(DataSnapshot dataSnapshot){
         String location=null;
@@ -130,7 +174,9 @@ public class AddBookFragment extends Fragment {
                    booklocation= uInfo.getUserAddress().substring(0,3);
                    location=uInfo.getUserAddress();
                    list.add(location);
-
+                    ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, list);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spBookLocation.setAdapter(adapter);
 
                 }
 
@@ -186,28 +232,29 @@ public class AddBookFragment extends Fragment {
 
     private boolean validate() {
 
-        if (!TextUtils.isEmpty(bookTitle)) {
+        if (TextUtils.isEmpty(bookTitle)) {
             tf2.setError("Enter Book Title");
+
             return false;
         }
-        else if (!TextUtils.isEmpty(bookCost)) {
+        if (TextUtils.isEmpty(bookCost)) {
             tf3.setError("Enter Book Cost");
             return false;
         }
-        else if (!TextUtils.isEmpty(bookAuthor)) {
+        if (TextUtils.isEmpty(bookAuthor)) {
             tf4.setError("Enter Book Author");
             return false;
         }
-        else if (!TextUtils.isEmpty(bookDonor)) {
+        if (TextUtils.isEmpty(bookDonor)) {
             tf5.setError("Enter Book Donor Name");
             return false;
         }
-        else if (bookDonorMobile.length() != 10) {
+        if (bookDonorMobile.length() != 10) {
             tf6.setError("Enter Book Donor Mobile");
             return false;
         }
 
-        else
+
 
         return true;
     }
@@ -215,10 +262,10 @@ public class AddBookFragment extends Fragment {
     private void set_values() {
 
         bookId=etBookId.getText ().toString ().toUpperCase ().trim ();
-        bookTitle = etBookTitle.getText().toString().toUpperCase().trim();
-        bookCost = etBookCost.getText().toString().trim();
-        bookAuthor= etBookAuthor.getText().toString().toUpperCase().trim();
-        bookDonor= etDonor.getText().toString().toUpperCase().trim();
+        bookTitle = etBookTitle.getText().toString().toUpperCase();
+        bookCost = etBookCost.getText().toString();
+        bookAuthor= etBookAuthor.getText().toString().toUpperCase();
+        bookDonor= etDonor.getText().toString().toUpperCase();
         bookDonorMobile= etDonorMobile.getText().toString().trim();
         if(spBookYear.getSelectedItem()!=null) {
             bookYear = spBookYear.getSelectedItem().toString();
@@ -242,7 +289,6 @@ public class AddBookFragment extends Fragment {
         etBookTitle.setText("");
         etBookAuthor.setText("");
         etBookCost.setText("");
-
         etDonorMobile.setText("");
         etDonor.setText("");
 
@@ -250,7 +296,8 @@ public class AddBookFragment extends Fragment {
     public void onStart() {
 
         super.onStart();
-        databaseBooks.addValueEventListener(new ValueEventListener () {
+
+      /*  databaseBooks.addValueEventListener(new ValueEventListener () {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -269,7 +316,7 @@ public class AddBookFragment extends Fragment {
 
             }
         });
-
+*/
     }
 
     @SuppressLint("InflateParams")

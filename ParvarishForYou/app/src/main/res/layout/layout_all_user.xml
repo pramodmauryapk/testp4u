@@ -13,42 +13,42 @@
     tools:ignore="RtlSymmetry">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="8"
-            android:text="@string/name"
-            android:textSize="16sp"
-            android:gravity="start|center_vertical"
-            android:textStyle="bold"
-            android:textColor="@color/colorblack"
-            android:id="@+id/tv_username"
-            android:textAlignment="viewStart" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:id="@+id/tv_userrole"
-            android:textAlignment="viewEnd"
-            android:layout_gravity="end|center_vertical"
-            android:textColor="@color/colorblack"
-            android:layout_height="wrap_content"
-            android:text="@string/role"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:layout_gravity="end|center_vertical"
-            android:textColor="@color/colorblack"
-            android:textAlignment="viewEnd"
-            android:id="@+id/tv_usermobile"
-            android:layout_height="wrap_content"
-            android:text="@string/mobile_number"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:text="@string/name"
+        android:textSize="16sp"
+        android:gravity="start|center_vertical"
+        android:textStyle="bold"
+        android:textColor="@color/colorblack"
+        android:id="@+id/tv_username"
+        android:textAlignment="viewStart" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:id="@+id/tv_userrole"
+        android:textAlignment="viewEnd"
+        android:layout_gravity="end|center_vertical"
+        android:textColor="@color/colorblack"
+        android:layout_height="wrap_content"
+        android:text="@string/role"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:layout_gravity="end|center_vertical"
+        android:textColor="@color/colorblack"
+        android:textAlignment="viewEnd"
+        android:id="@+id/tv_usermobile"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile_number"/>
     <ImageView
         android:layout_width="20dp"
         android:layout_weight="0"
         android:layout_height="16dp"
         android:layout_gravity="end|center_vertical"
-        android:background="@drawable/ic_forward_black_24dp"/>
-    </LinearLayout>
+        android:background="@drawable/ic_chevron_right_black_24dp"/>
+</LinearLayout>
 

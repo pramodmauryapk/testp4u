@@ -92,7 +92,7 @@ public class UserMenuFragment extends HomeFragment {
                         switchFragment(new CapacityBuildingFragment());
                         break;
                     case 4:
-                        switchFragment(new ImageGalleryFragment());
+                        switchFragment(new GalleryFragment());//new ImageGalleryFragment()
                         break;
                     case 5:
                         switchFragment(new InternshipProgramFragment());
