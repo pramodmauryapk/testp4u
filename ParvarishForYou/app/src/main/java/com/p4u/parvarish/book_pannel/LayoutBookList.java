@@ -37,11 +37,7 @@ public class LayoutBookList extends ArrayAdapter<Book> {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_book, null, true);
         try {
-           /* if (position % 2 == 1) {
-                listViewItem.setBackgroundColor(Color.YELLOW);
-            } else {
-                listViewItem.setBackgroundColor(Color.CYAN);
-            }*/
+
             TextView textViewid = listViewItem.findViewById(R.id.tvbookidd);
             TextView textViewAuthor = listViewItem.findViewById(R.id.textView_Book_Author);
             TextView textViewTitle = listViewItem.findViewById(R.id.textView_BookTitle);

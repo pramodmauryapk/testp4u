@@ -78,6 +78,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("USERS");
+
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

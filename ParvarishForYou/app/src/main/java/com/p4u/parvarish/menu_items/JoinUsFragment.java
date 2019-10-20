@@ -89,6 +89,7 @@ public class JoinUsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
         myref = FirebaseDatabase.getInstance().getReference().child("USERS");
+
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

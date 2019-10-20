@@ -42,6 +42,7 @@ public class FeedbackAddFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
         initViews();
 
             button.setOnClickListener(new View.OnClickListener() {

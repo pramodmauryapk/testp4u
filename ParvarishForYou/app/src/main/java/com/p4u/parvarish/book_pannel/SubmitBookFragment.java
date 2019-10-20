@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,9 +45,9 @@ public class SubmitBookFragment extends Fragment {
     private ListView listViewBooks;
     private View dialogView;
     private List<Book> books;
-    private DatabaseReference databaseBooks,TempUser;
+    private DatabaseReference databaseBooks,temp_User;
     private EditText spBookName;
-
+    private RelativeLayout rl;
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2;
     private View v;
     private Button btnissue;
@@ -57,16 +58,18 @@ public class SubmitBookFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
-        initViews();
 
+        initViews();
+        rl.setVisibility(View.GONE);
         tv2.setText("Tap to Book Handover to center");
         //list to store books
         books = new ArrayList<>();
+
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = books.get(i);
-                SubmitBookFragment.this.showDialog(
+                showDialog(
                         book.getBookId(),
                         book.getBookTitle(),
                         book.getBookAuthor(),
@@ -92,6 +95,7 @@ public class SubmitBookFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 onStart();
+
             }
 
             @Override
@@ -106,7 +110,7 @@ public class SubmitBookFragment extends Fragment {
         spBookName =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
         listViewBooks =  v.findViewById(R.id.view_list);
-
+        rl=v.findViewById(R.id.userlayout);
     }
     @SuppressLint("InflateParams")
     private void showDialog(final String dbookId,
@@ -132,19 +136,10 @@ public class SubmitBookFragment extends Fragment {
         dialogBuilder.setTitle("Book Record");
         final AlertDialog b = dialogBuilder.create();
         b.show();
-        dBookid.setText(dbookId);
-        dAuthor.setText(dbookAuthor);
-        dCost.setText(dbookCost);
-        dTitle.setText(dbookTitle);
-        dLocation.setText(dbookLocation);
-        dDonor.setText(dbookDonor);
-        dDonorMobile.setText(dbookDonorMobile);
-        dYear.setText(dbookYear);
-        dSubject.setText(dbookSubject);
-        dIssueTo.setText(dbookHandoverTo);
-        dIssueTime.setText(dbookHandoverTime);
-        dDonorTime.setText(dbookDonorTime);
-        btnissue.setText("Handover");
+
+        set_dialog_values(dbookId,dbookAuthor,dbookCost,dbookTitle,dbookLocation,
+                dbookDonor,dbookDonorMobile,dbookYear,dbookSubject,dbookHandoverTo,
+                dbookHandoverTime,dbookDonorTime);
         btnissue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,6 +159,8 @@ public class SubmitBookFragment extends Fragment {
                                 boolean ans=updateBook(dbookId,dbookHandoverTo);
                                 if(ans){
                                     Toast.makeText(getContext(), "Submission Successfully", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
@@ -182,19 +179,48 @@ public class SubmitBookFragment extends Fragment {
 
 
     }
-    private boolean updateBook(String bookId,String userId) {
 
-
-        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
-        databaseBooks.child("bookAvaibility").setValue("1");
-        databaseBooks.child("bookHandoverTo").setValue("CENTER");
-        databaseBooks.child("bookHandoverTime").setValue(get_current_time());
-        TempUser = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(userId);
-        TempUser.child("bookHaving").setValue("0");
-        return true;
-
+    private void set_dialog_values(String dbookId,String dbookAuthor,String dbookCost,String dbookTitle,String dbookLocation,
+                                   String dbookDonor,String dbookDonorMobile, String dbookYear,String dbookSubject,String dbookHandoverTo,
+                                   String dbookHandoverTime,String dbookDonorTime) {
+        dBookid.setText(dbookId);
+        dAuthor.setText(dbookAuthor);
+        dCost.setText(dbookCost);
+        dTitle.setText(dbookTitle);
+        dLocation.setText(dbookLocation);
+        dDonor.setText(dbookDonor);
+        dDonorMobile.setText(dbookDonorMobile);
+        dYear.setText(dbookYear);
+        dSubject.setText(dbookSubject);
+        dIssueTo.setText(dbookHandoverTo);
+        dIssueTime.setText(dbookHandoverTime);
+        dDonorTime.setText(dbookDonorTime);
+        btnissue.setText("Handover");
     }
 
+
+    private boolean updateBook(String bookId,String UserId) {
+
+        try {
+            databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
+            databaseBooks.child("bookAvaibility").setValue("1");
+            databaseBooks.child("bookHandoverTo").setValue("CENTER");
+            databaseBooks.child("bookHandoverTime").setValue(get_current_time());
+            temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(UserId);
+            temp_User.child("bookHaving").setValue("0");
+
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+    public void onStart() {
+
+        super.onStart();
+        load_list();
+
+    }
     private void init_dialog_views(){
         dBookid=dialogView.findViewById (R.id.tvBookid);
         dTitle =dialogView.findViewById(R.id.tvTitle);
@@ -210,14 +236,6 @@ public class SubmitBookFragment extends Fragment {
         dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
         btnissue=dialogView.findViewById(R.id.dbuttonBack);
     }
-    public void onStart() {
-        super.onStart();
-
-       load_list();
-
-
-    }
-
     private void load_list() {
         try {
 
@@ -277,8 +295,6 @@ public class SubmitBookFragment extends Fragment {
             Log.d(TAG, "Exception in Adding List "+e);
         }
     }
-
-
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());

@@ -50,6 +50,7 @@ public class CentreListFragment extends HomeFragment {
         v = inflater.inflate
                 (R.layout.fragment_center_list, container, false);
         databaseUsers = FirebaseDatabase.getInstance().getReference().child("USERS");
+
         //getting views
         initViews();
 

@@ -59,6 +59,7 @@ public class UserProfileFragment extends Fragment {
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         //Declare database reference
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
+
         final FirebaseUser user = mAuth.getCurrentUser();
         userID = (requireNonNull(user)).getUid();
         back.setVisibility(View.GONE);

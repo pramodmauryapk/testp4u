@@ -1,116 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorwhite"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="0dp"
-    android:layout_marginLeft="0dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="0dp"
-    android:layout_marginRight="0dp"
-    android:layout_marginBottom="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_gravity="center">
+       <TextView
+           android:layout_width="wrap_content"
+           android:id="@+id/tvuserid"
+           android:textStyle="bold"
+           android:textSize="14sp"
+           android:text="You Have To Pay Security Deposit 100 Additionally"
+           android:layout_height="wrap_content">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_margin="5dp"
-                    android:id="@+id/tv_createusername"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_fullname"
-                        android:hint="@string/username"
-                        android:maxLines="1"
-                        android:inputType="textPersonName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:ignore="TooDeepLayout" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_margin="5dp"
-                    android:id="@+id/tv_createemail"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_createemail"
-                        android:hint="@string/email"
-                        android:maxLines="1"
-                        android:inputType="textEmailAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="4"
-                android:id="@+id/tv_createmobile"
-
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_createmobile"
-                    android:hint="@string/mobile_number"
-                    android:maxLines="1"
-                    android:inputType="phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:id="@+id/tv_address"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_address"
-                android:hint="@string/address"
-                android:maxLines="1"
-                android:inputType="textPostalAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:id="@+id/tv_identity"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_identity"
-                android:hint="@string/aadhar_id_voter_id"
-                android:maxLines="1"
-                android:inputType="text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+       </TextView>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -129,15 +36,15 @@
     <Button
         android:id="@+id/dbuttonissue"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:layout_margin="2dp"
         android:layout_gravity="center_horizontal"
-        android:text="HANDOVER TO"
+        android:text="HANDOVER"
         android:background="@drawable/button_shape"
         android:textColor="@color/colorwhite"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
 </LinearLayout>
-</ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+

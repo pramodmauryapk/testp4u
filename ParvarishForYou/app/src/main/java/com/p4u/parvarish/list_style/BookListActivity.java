@@ -26,6 +26,7 @@ import java.util.Objects;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.Book;
+import com.p4u.parvarish.galary.RecyclerAdapter;
 
 public class BookListActivity extends AppCompatActivity {
 
@@ -44,19 +45,13 @@ public class BookListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booklist);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
 
-      // 2. toolbar
-      //  Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-       Objects.requireNonNull(getSupportActionBar()).hide();
-       // setSupportActionBar(toolbar);
-       // Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
         recyclerView = findViewById(R.id.main_recycler_view);
         recyclerView.setLayoutManager(new spreadLayout());
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
 
-        // recyclerView.setOnClickListener();
+       // recyclerView.setOnClickListener();
 
         redColor = getResources().getColor(R.color.red);
         int greenColor = getResources().getColor(R.color.green);
@@ -139,7 +134,6 @@ public class BookListActivity extends AppCompatActivity {
                 MyViewHolder myHolder = (MyViewHolder) holder;
                myHolder.bindData(dataList.get(position));
 
-
           //      if (position == dataList.size() - 1) {
                   //  requestHttp();
                // }
@@ -171,7 +165,7 @@ public class BookListActivity extends AppCompatActivity {
         }
 
        @SuppressLint("SetTextI18n")
-        void bindData(Book book) {
+        void bindData(final Book book) {
             bookTitle.setText(book.getBookTitle());
             bookTitle.setTextColor(redColor);
             bookCost.setText(book.getBookCost());
@@ -180,7 +174,9 @@ public class BookListActivity extends AppCompatActivity {
             bookSubject.setText(book.getBookSubject());
             bookAuthor.setText(book.getBookAuthor());
            // nameTv.setTextColor(((int) book.getBookAvaibility() > 0) ? redColor : greenColor);
+
         }
+
        /* public void bindData(final Book book, final OnItemClickListener listener) {
             bookTitle.setText(book.getBookTitle());
             bookTitle.setTextColor(redColor);

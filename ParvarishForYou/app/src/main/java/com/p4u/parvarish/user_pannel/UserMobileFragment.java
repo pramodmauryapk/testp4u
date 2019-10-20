@@ -45,6 +45,7 @@ public class UserMobileFragment extends Fragment {
         v = inflater.inflate
                 (R.layout.fragment_user_mobiles, container, false);
         databaseUsers = FirebaseDatabase.getInstance().getReference().child("USERS");
+
         //getting views
 
         initViews();

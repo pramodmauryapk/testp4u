@@ -31,6 +31,7 @@ public class NewsAddFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
         myRef = FirebaseDatabase.getInstance().getReference().child("WELCOME_TEXT");
+
         initViews();
         save.setOnClickListener (new View.OnClickListener() {
             @Override

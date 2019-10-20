@@ -39,6 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
         animatedCircleLoadingView = findViewById(R.id.circle_loading_view);
         user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
+
         startLoading();
         startPercentMockThread();
         if(user!=null){

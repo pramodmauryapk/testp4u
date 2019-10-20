@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class UpdateBookFragment extends Fragment {
     private EditText deditBookAuthor,deditBookTitle,deditBookCost,deditDonor,deditDonorMobile,deditBookLocation;
     private Spinner dspinnerYear,dspinnerSubject;
     private EditText spBookName;
-
+    private RelativeLayout rl;
     private TextView tv2;
     private Button dbuttonUpdate,dbuttonDelete,dbuttonBack;
     private View dialogView;
@@ -55,14 +56,17 @@ public class UpdateBookFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+
         initViews();
+        rl.setVisibility(View.GONE);
         tv2.setText("Tap to Book for Update");
         books = new ArrayList<>();
+
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = books.get(i);
-                UpdateBookFragment.this.showUpdateDeleteDialog(
+                showUpdateDeleteDialog(
                         book.getBookId(),
                         book.getBookTitle(),
                         book.getBookAuthor(),
@@ -100,6 +104,7 @@ public class UpdateBookFragment extends Fragment {
         spBookName =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
         listViewBooks = v.findViewById(R.id.view_list);
+        rl=v.findViewById(R.id.userlayout);
 
     }
 
@@ -230,7 +235,13 @@ public class UpdateBookFragment extends Fragment {
             }
         });
     }
-private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubject,String dbookYear,String dbookCost,String dbookLocation,String dbookDonor,String dbookDonorMobile){
+    public void onStart() {
+
+        super.onStart();
+        load_list();
+
+    }
+    private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubject,String dbookYear,String dbookCost,String dbookLocation,String dbookDonor,String dbookDonorMobile){
     return !TextUtils.isEmpty(dbookAuthor) &&
             !TextUtils.isEmpty(dbookTitle) &&
             !TextUtils.isEmpty(dbookSubject) &&
@@ -270,11 +281,7 @@ private boolean validate(String dbookAuthor,String dbookTitle,String dbookSubjec
         dbuttonDelete = dialogView.findViewById(R.id.dbuttonDelete);
         dbuttonBack =  dialogView.findViewById(R.id.dbuttonBack);
     }
-    public void onStart() {
 
-        super.onStart();
-       load_list();
-    }
 
     private void load_list() {
         try {

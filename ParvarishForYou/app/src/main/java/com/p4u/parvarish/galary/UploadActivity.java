@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,14 +48,14 @@ public class UploadActivity extends AppCompatActivity {
     Intent intent;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-
+    private Spinner spimagelist;
     private StorageTask mUploadTask;
- //   View v;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_image_fragment);
-        //v = inflater.inflate(R.layout.upload_image_fragment,container,false);
+
 
 
         Button chooseImageBtn = findViewById(R.id.button_choose_image);
@@ -62,9 +64,26 @@ public class UploadActivity extends AppCompatActivity {
         descriptionEditText = findViewById ( R.id.descriptionEditText );
         chosenImageView = findViewById(R.id.chosenImageView);
         uploadProgressBar =findViewById(R.id.progress_bar);
+        spimagelist=findViewById(R.id.spimagelist);
+        spimagelist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spimagelist.getSelectedItem().equals("UPLOADED_IMAGES")){
+                    mStorageRef = FirebaseStorage.getInstance().getReference("UPLOADED_IMAGES");
+                    mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
+                }else{
+                    mStorageRef = FirebaseStorage.getInstance().getReference("ADS");
+                    mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("ADS");
+                }
+            }
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("UPLOADED_IMAGES");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mStorageRef = FirebaseStorage.getInstance().getReference("UPLOADED_IMAGES");
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
+            }
+        });
+
 
         chooseImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +142,6 @@ public class UploadActivity extends AppCompatActivity {
 
             uploadProgressBar.setVisibility(View.VISIBLE);
             uploadProgressBar.setIndeterminate(true);
-
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +38,7 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
     private List<Image_Model> mImageModels;
-
+    private Spinner spimagelist;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -49,15 +51,40 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
 
         mProgressBar = v. findViewById(R.id.myDataLoaderProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
-
+        spimagelist=v.findViewById(R.id.spimagelist);
         mImageModels = new ArrayList<> ();
         mAdapter = new RecyclerAdapter (getContext(), mImageModels);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(ImageItemsFragment.this);
 
         mStorage = FirebaseStorage.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
 
+        spimagelist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spimagelist.getSelectedItem().equals("UPLOADED_IMAGES")){
+                    mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
+
+                    load_list();
+                }else{
+                    mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("ADS");
+                    load_list();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("ADS");
+                load_list();
+            }
+        });
+
+
+
+    return v;
+    }
+
+    private void load_list() {
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,7 +106,6 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
         });
-    return v;
     }
 
 

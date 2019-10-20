@@ -68,6 +68,7 @@ public class AddBookFragment extends Fragment {
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
         UserID = (requireNonNull(user)).getUid();
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+
         initViews();
         etBookTitle.requestFocus();
         etBookId.setEnabled(false);
@@ -97,6 +98,7 @@ public class AddBookFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                load_list(spBookLocation.getItemAtPosition(0).toString());
             }
 
         });
@@ -123,7 +125,6 @@ public class AddBookFragment extends Fragment {
         });
         return v;
     }
-
     private void load_list(final String location) {
         if (!location.isEmpty()) {
             databaseBooks.addValueEventListener(new ValueEventListener() {
@@ -155,7 +156,6 @@ public class AddBookFragment extends Fragment {
 
         }
     }
-
     @SuppressLint("SetTextI18n")
     private void show(DataSnapshot dataSnapshot){
         String location=null;
@@ -190,7 +190,6 @@ public class AddBookFragment extends Fragment {
             Log.d(TAG, "Failed to retrive values"+e);
         }
     }
-
     private void addBooks() {
 
         //setting the values to save
@@ -229,7 +228,6 @@ public class AddBookFragment extends Fragment {
             Toast.makeText(getContext(), "fill All required fields ", Toast.LENGTH_LONG).show();
         }
     }
-
     private boolean validate() {
 
         if (TextUtils.isEmpty(bookTitle)) {
@@ -258,7 +256,6 @@ public class AddBookFragment extends Fragment {
 
         return true;
     }
-
     private void set_values() {
 
         bookId=etBookId.getText ().toString ().toUpperCase ().trim ();
@@ -293,32 +290,6 @@ public class AddBookFragment extends Fragment {
         etDonor.setText("");
 
     }
-    public void onStart() {
-
-        super.onStart();
-
-      /*  databaseBooks.addValueEventListener(new ValueEventListener () {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                books.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Book book = postSnapshot.getValue(Book.class);
-                    books.add(book);
-                }
-                LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                listViewBooks.setAdapter(bookAdapter);
-                t=bookAdapter.getCount();
-                etBookId.setText(booklocation+(t+1));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-*/
-    }
-
     @SuppressLint("InflateParams")
     private void showDialog(final String dbookId,
                                         final String dbookTitle,
@@ -342,6 +313,19 @@ public class AddBookFragment extends Fragment {
         dialogBuilder.setTitle("Book Record");
         final AlertDialog b = dialogBuilder.create();
         b.show();
+        set_dialog_values(dbookId,dbookAuthor,dbookCost,dbookTitle,dbookLocation,dbookYear,dbookSubject,dbookHandoverTo,dbookHandoverTime,dbookDonorTime);
+
+        dBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.cancel();
+            }
+        });
+
+
+    }
+
+    private void set_dialog_values(String dbookId, String dbookAuthor, String dbookCost, String dbookTitle, String dbookLocation, String dbookYear, String dbookSubject, String dbookHandoverTo, String dbookHandoverTime, String dbookDonorTime) {
         dBookid.setText (dbookId);
         dAuthor.setText(dbookAuthor);
         dCost.setText(dbookCost);
@@ -354,17 +338,7 @@ public class AddBookFragment extends Fragment {
         dIssueTo.setText(dbookHandoverTo);
         dIssueTime.setText(dbookHandoverTime);
         dDonorTime.setText(dbookDonorTime);
-        dBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                b.cancel();
-            }
-        });
-
-
     }
-
-
     private void initViews(){
         etBookId=v.findViewById (R.id.etBookId);
         etBookAuthor = v.findViewById(R.id.etBookAuthor);
@@ -401,7 +375,6 @@ public class AddBookFragment extends Fragment {
         dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
         dBack=dialogView.findViewById(R.id.dbuttonBack);
     }
-
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());

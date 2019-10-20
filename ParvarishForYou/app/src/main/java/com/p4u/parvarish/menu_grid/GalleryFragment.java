@@ -50,34 +50,19 @@ public class GalleryFragment extends Fragment {
 
         initViews();
         context = container.getContext();
-        //Objects.requireNonNull(getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
-        int orientation=this.getResources().getConfiguration().orientation;
-        if(orientation== Configuration.ORIENTATION_PORTRAIT){
-            //code for portrait mode
-            //Objects.requireNonNull(getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-        else{
-            //code for landscape mode
-        }
-        //add banner
+
         banner_load();
-
-
         return v;
     }
     private void initViews(){
-       // mRecyclerView= v.findViewById(R.id.recyclerView);
-       // mRecyclerView.setHasFixedSize(true);
-       // mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-       // mFirebaseDatabse=FirebaseDatabase.getInstance();
-       // mref=mFirebaseDatabse.getReference("UPLOADED_IMAGES");
+
 
     }
     private void banner_load(){
         final BannerLayout recyclerBanner =  v.findViewById(R.id.recycler);
         recyclerBanner.setOrientation(1);
+
         list = new ArrayList<>();
         webBannerAdapter=new WebBannerAdapter(context,list);
         list.clear();

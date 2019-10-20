@@ -33,6 +33,7 @@ public class NewsTextFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_news_text, container, false);
         initViews();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("WELCOME_TEXT").child("marqueeText");
+
         try {
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class SearchBookFragment extends Fragment {
     private List<Book> books;
     private DatabaseReference databaseBooks;
     private EditText spBookName;
-
+    private RelativeLayout rl;
     private View v;
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
     private Button dBack;
@@ -49,9 +50,10 @@ public class SearchBookFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
 
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+
         //getting views
         initViews();
-
+        rl.setVisibility(View.GONE);
         //list to store books
         books = new ArrayList<>();
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,7 +161,7 @@ public class SearchBookFragment extends Fragment {
     private void initViews(){
 
          spBookName =  v.findViewById(R.id.sp_Book_Name);
-
+        rl=v.findViewById(R.id.userlayout);
         listViewBooks =  v.findViewById(R.id.view_list);
 
     }

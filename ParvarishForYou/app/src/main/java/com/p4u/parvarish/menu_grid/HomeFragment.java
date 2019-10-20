@@ -50,7 +50,8 @@ public class HomeFragment extends Fragment {
         v = inflater.inflate(R.layout.home_fragment,container,false);
         context = container.getContext();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("ADS");
+
         //add banner
         banner_load();
         marquee_load();
@@ -71,7 +72,6 @@ public class HomeFragment extends Fragment {
     private void menu_load(){
         assert this.getArguments() != null;
         String role = this.getArguments().getString("user_role");
-
         Bundle bundle=new Bundle();
         Fragment child2Fragment = new UserMenuFragment();
         bundle.putString("user_role", role);
@@ -89,12 +89,10 @@ public class HomeFragment extends Fragment {
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-        for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren()) {
-            Image_Model upload = teacherSnapshot.getValue(Image_Model.class);
-            Objects.requireNonNull(upload).setKey(teacherSnapshot.getKey());
-            list.add(upload.getImageUrl());
+            for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren()) {
+                Image_Model upload = teacherSnapshot.getValue(Image_Model.class);
+                Objects.requireNonNull(upload).setKey(teacherSnapshot.getKey());
+                list.add(upload.getImageUrl());
 
                 }
 

@@ -3,30 +3,166 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
 <RelativeLayout
 
     android:layout_width="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
     android:layout_height="wrap_content"
-    android:id="@+id/search_book_fragment">
-
-
+    android:id="@+id/userlayout">
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"
-        android:text="Book Search"
+        android:text="NEW BENEFICIARY"
         android:textColor="@color/colorRed"
         android:textSize="20sp" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_margin="5dp"
         android:layout_below="@+id/tv1"
+        android:id="@+id/tv_createusername"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_fullname"
+            android:hint="@string/username"
+            android:maxLines="1"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/tv_createemail"
+        android:layout_below="@+id/tv_createusername"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_createemail"
+            android:hint="@string/email"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:id="@+id/tv_address"
+        android:layout_below="@+id/tv_createemail"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_address"
+            android:hint="@string/address"
+            android:maxLines="1"
+            android:inputType="textPostalAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/layout2"
+        android:layout_below="@id/tv_address"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="5"
+        android:id="@+id/tv_createmobile"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_createmobile"
+            android:hint="@string/mobile_number"
+            android:maxLines="1"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="5"
+        android:id="@+id/tv_identity"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_identity"
+            android:hint="@string/aadhar_id_voter_id"
+            android:maxLines="1"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_below="@+id/layout2"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btnAdd"
+        android:text="Add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/colorwhite"
+        android:layout_marginStart="5dp"
+        android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnsearch"
+            android:text="Search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:textColor="@color/colorwhite"
+            android:layout_marginStart="5dp"
+
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnreset"
+            android:text="Reset"
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:textColor="@color/colorwhite"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/userlayout"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="List of Books"
+        android:textColor="@color/colorRed"
+        android:textSize="20sp" />
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/tv2"
         android:id="@+id/tf1"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -38,24 +174,10 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/tf1"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="List of Books"
-        android:textColor="@color/colorRed"
-        android:textSize="20sp" />
-
-</RelativeLayout>
     <ListView
         android:id="@+id/view_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/search_book_fragment" />
+        android:layout_below="@+id/tf1" />
 
 </RelativeLayout>

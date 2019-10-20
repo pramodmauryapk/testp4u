@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ public class ManageGalleryFragment extends Fragment {
     private Button openTeachersActivityBtn,openUploadActivityBtn;
     private View v;
     private RatingBar ratingBar;
+    private Spinner spimagelist;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class ManageGalleryFragment extends Fragment {
     private void initViews(){
         openTeachersActivityBtn = v.findViewById ( R.id.openTeachersActivityBtn );
         openUploadActivityBtn = v.findViewById ( R.id.openUploadActivityBtn );
+
     }
     private void switchFragment(Fragment fragment) {
 
