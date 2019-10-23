@@ -57,14 +57,21 @@ public class IssueBookFragment extends Fragment {
     private DatabaseReference myref,mRef;
     private EditText spBookName;
     private Spinner spbenfiary;
-    private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2,tv1;
+    private TextView tv2;
+    private TextView tv1;
     private View v;
     private TextInputEditText etFullname,etEmail,etMobile,etAddress,etIdentity,etDepositpaid;
     private TextInputLayout tlname,tlemail,tlmobile,tladdress,tlidentity,tldeposit;
-    private Button btnissue,handover,btnadd,btnsearch,buttonback,btnreset;
+    private Button handover;
+    private Button btnadd;
+    private Button btnsearch;
+    private Button buttonback;
+    private Button btnreset;
+
     private String Userid,Fullname,Email,Mobile,Address,Identity,Deposit,beneficaiary_mobile;
     private int noofbooks;
-    Boolean amount_validation=false;
+    private Boolean amount_validation=false;
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,6 +133,7 @@ public class IssueBookFragment extends Fragment {
 
 
         btnadd.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("InflateParams")
             @Override
             public void onClick(View view) {
                 get_values();
@@ -177,6 +185,7 @@ public class IssueBookFragment extends Fragment {
         });
 
         btnsearch.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("InflateParams")
             @Override
             public void onClick(View view) {
                 //enable_all();
@@ -271,7 +280,7 @@ public class IssueBookFragment extends Fragment {
     }
 
     private void load_beneficiary() {
-        try{
+
             mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -279,13 +288,15 @@ public class IssueBookFragment extends Fragment {
                     benefiary.clear();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         TempUser beneficiary = postSnapshot.getValue(TempUser.class);
-
-                        assert beneficiary != null;
-                        benefiary.add(beneficiary.getMobile());
-
+                        try {
+                            assert beneficiary != null;
+                            benefiary.add(beneficiary.getMobile());
+                        }catch(Exception e){
+                            Log.d(TAG, "Exception in Adding List "+e);
+                        }
 
                     }
-                    ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, benefiary);
+                    ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<String>(requireNonNull(getContext()),android.R.layout.simple_spinner_item, benefiary);
                     spbenfiary.setAdapter(beneficiary_adapter);
 
                 }
@@ -297,9 +308,7 @@ public class IssueBookFragment extends Fragment {
             });
 
 
-        }catch(Exception e){
 
-        }
     }
 
     private void blank_all() {
@@ -410,7 +419,7 @@ public class IssueBookFragment extends Fragment {
 
     }
     private void load_list() {
-        try{
+
             if (!spBookName.getText().toString().equals("")) {
                 myref.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -418,11 +427,19 @@ public class IssueBookFragment extends Fragment {
                         books.clear();
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Book book = postSnapshot.getValue(Book.class);
+                            if (Objects.requireNonNull(book).getBookAvaibility().equals("1")){
                             if (Objects.requireNonNull(book).getBookTitle().startsWith(spBookName.getText().toString().toUpperCase()) ||
                                     Objects.requireNonNull(book).getBookAuthor().startsWith(spBookName.getText().toString().toUpperCase()) ||
                                     Objects.requireNonNull(book).getBookSubject().startsWith(spBookName.getText().toString().toUpperCase()) ||
                                     Objects.requireNonNull(book).getBookCost().equals(spBookName.getText().toString())) {
-                                books.add(book);
+                                try {
+
+                                    books.add(book);
+                                }catch (Exception e)
+                                {
+                                    Log.d(TAG, "Exception in Adding List "+e);
+                                }
+                            }
                             }
 
                         }
@@ -446,7 +463,13 @@ public class IssueBookFragment extends Fragment {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Book book = postSnapshot.getValue(Book.class);
                             if (Objects.requireNonNull(book).getBookAvaibility().equals("1")) {
-                                books.add(book);
+                                try {
+
+                                    books.add(book);
+                                }catch (Exception e)
+                                {
+                                    Log.d(TAG, "Exception in Adding List "+e);
+                                }
                             }
                         }
 
@@ -462,16 +485,13 @@ public class IssueBookFragment extends Fragment {
                 });
 
             }
-        }
-        catch (Exception e){
-            Log.d(TAG, "Exception in Adding List "+e);
-        }
+
     }
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());
     }
-    @SuppressLint("InflateParams")
+    @SuppressLint({"InflateParams", "SetTextI18n"})
     private void showDialog(final String dbookId,
                             final String dbookTitle,
                             final String dbookAuthor,
@@ -490,19 +510,19 @@ public class IssueBookFragment extends Fragment {
         dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);
         //init dialog views
-        dBookid=dialogView.findViewById (R.id.tvBookid);
-        dTitle =dialogView.findViewById(R.id.tvTitle);
-        dCost = dialogView.findViewById(R.id.tvCost);
-        dAuthor =dialogView.findViewById(R.id.tvAuthor);
-        dYear = dialogView.findViewById(R.id.tvYear);
-        dSubject = dialogView.findViewById(R.id.tvSubject);
-        dLocation = dialogView.findViewById(R.id.tvLocation);
-        dDonor = dialogView.findViewById(R.id.tvDonor);
-        dDonorMobile = dialogView.findViewById(R.id.tvDonorMobile);
-        dDonorTime = dialogView.findViewById(R.id.tvDonateTime);
-        dIssueTo =  dialogView.findViewById(R.id.tvBookIssueto);
-        dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
-        btnissue=dialogView.findViewById(R.id.dbuttonBack);
+        TextView dBookid = dialogView.findViewById(R.id.tvBookid);
+        TextView dTitle = dialogView.findViewById(R.id.tvTitle);
+        TextView dCost = dialogView.findViewById(R.id.tvCost);
+        TextView dAuthor = dialogView.findViewById(R.id.tvAuthor);
+        TextView dYear = dialogView.findViewById(R.id.tvYear);
+        TextView dSubject = dialogView.findViewById(R.id.tvSubject);
+        TextView dLocation = dialogView.findViewById(R.id.tvLocation);
+        TextView dDonor = dialogView.findViewById(R.id.tvDonor);
+        TextView dDonorMobile = dialogView.findViewById(R.id.tvDonorMobile);
+        TextView dDonorTime = dialogView.findViewById(R.id.tvDonateTime);
+        TextView dIssueTo = dialogView.findViewById(R.id.tvBookIssueto);
+        TextView dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
+        Button btnissue = dialogView.findViewById(R.id.dbuttonBack);
 
         dialogBuilder.setTitle("Book Record");
         final AlertDialog b = dialogBuilder.create();
@@ -540,7 +560,7 @@ public class IssueBookFragment extends Fragment {
                                 @Override
                                 public void OnClick() {
                                     boolean ans = updateBook(Userid, dbookId);
-
+                                   // load_list();
                                     if (ans) {
                                         Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
                                     } else {
@@ -576,7 +596,8 @@ public class IssueBookFragment extends Fragment {
                 Address,
                 Identity,
                 "0",
-                Deposit);
+                Deposit,
+                "0");
 
         //Saving the Book
         temp_User.child(requireNonNull(UserId)).setValue(user);
@@ -594,6 +615,7 @@ public class IssueBookFragment extends Fragment {
             issueref.child("bookHandoverTime").setValue(get_current_time());
             noofbooks=noofbooks+1;
             temp_User.child("bookHaving").setValue(String.valueOf(noofbooks));
+
 
             return true;
         }catch (Exception e){

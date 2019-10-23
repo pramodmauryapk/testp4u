@@ -30,7 +30,6 @@ import static java.util.Objects.requireNonNull;
 
 public class UserMenuFragment extends HomeFragment {
 
-    private static final String TAG = "UserMenuFragment";
     private String Role;
     private Bundle bundle;
     private String[] gridViewString = {
@@ -64,7 +63,6 @@ public class UserMenuFragment extends HomeFragment {
 
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
         bundle=new Bundle();
-        Context context = container.getContext();
         assert this.getArguments() != null;
         Role = this.getArguments().getString("user_role");
         LayoutGridView adapterViewAndroid = new LayoutGridView(getContext(), gridViewString, gridViewImageId);
@@ -107,14 +105,10 @@ public class UserMenuFragment extends HomeFragment {
         return v;
     }
 
-    private void makeToast(String input) {
-        Toast.makeText(getContext(), input, Toast.LENGTH_SHORT).show();
-    }
-
     private int getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int screenHeight = displaymetrics.heightPixels;
+
         return displaymetrics.widthPixels;
     }
     // switching fragment
@@ -137,12 +131,6 @@ public class UserMenuFragment extends HomeFragment {
                 .addToBackStack(null)
                 .commit();
 
-    }
-    public static int getPixelsFromDPs(Activity activity, int dps){
-        Resources r = activity.getResources();
-        int  px = (int) (TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
-        return px;
     }
 
 

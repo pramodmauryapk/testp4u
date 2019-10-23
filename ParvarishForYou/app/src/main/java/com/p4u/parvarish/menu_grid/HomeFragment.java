@@ -18,17 +18,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.banner_pannel.BannerLayout;
 import com.p4u.parvarish.banner_pannel.WebBannerAdapter;
 import com.p4u.parvarish.galary.Image_Model;
-import com.p4u.parvarish.menu_grid.UserMenuFragment;
 import com.p4u.parvarish.news_marquee.NewsTextFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
@@ -38,7 +36,6 @@ public class HomeFragment extends Fragment {
     public View v;
 
     private Context context;
-    private static final String TAG="HomeFragment";
     private List<String> list;
     private WebBannerAdapter webBannerAdapter;
     private DatabaseReference mDatabaseRef;

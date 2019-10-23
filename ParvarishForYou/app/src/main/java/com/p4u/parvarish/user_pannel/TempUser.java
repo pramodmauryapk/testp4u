@@ -14,6 +14,10 @@ public class TempUser {
     private String BookHaving;
     private String BookDeposit;
 
+
+
+    private String BookRefund;
+
     public TempUser() {
         //empty constructor needed
     }
@@ -84,8 +88,14 @@ public class TempUser {
     public void setBookDeposit(String bookDeposit) {
         BookDeposit = bookDeposit;
     }
+    public String getBookRefund() {
+        return BookRefund;
+    }
 
-    public TempUser(String id, String name, String email, String mobilenumber, String address, String identity, String bookHaving, String bookDeposit) {
+    public void setBookRefund(String bookRefund) {
+        BookRefund = bookRefund;
+    }
+    public TempUser(String id, String name, String email, String mobilenumber, String address, String identity, String bookHaving, String bookDeposit,String bookRefund) {
         this.Id=id;
         this.Name = name;
         this.Email = email;
@@ -94,6 +104,7 @@ public class TempUser {
         this.Identity=identity;
         this.BookHaving=bookHaving;
         this.BookDeposit=bookDeposit;
+        this.BookRefund=bookRefund;
 
     }
 

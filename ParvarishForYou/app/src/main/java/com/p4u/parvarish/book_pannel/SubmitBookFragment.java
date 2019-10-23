@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,28 +41,41 @@ import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
 
+
+import static java.util.Objects.requireNonNull;
+
 public class SubmitBookFragment extends Fragment {
 
     private static final String TAG = "SubmitBookFragment";
     private ListView listViewBooks;
-    private View dialogView;
+    private View dialogView,handover_dialog;
     private List<Book> books;
-    private DatabaseReference databaseBooks,temp_User;
+    private DatabaseReference databaseBooks;
     private EditText spBookName;
     private RelativeLayout rl;
-    private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2;
+    private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2,tv;
     private View v;
-    private Button btnissue;
+    private Button btnissue,handover;
+    private int noofbook,userdeposit,userrefund;
+    private TextInputEditText et_deposit_paid;
+    private TextInputLayout tv1;
+    private String userid=null;
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
-
         initViews();
         rl.setVisibility(View.GONE);
+
+        assert this.getArguments() != null;
+        userid = this.getArguments().getString("user_id");
+        noofbook=Integer.parseInt(requireNonNull(this.getArguments().getString("user_noofbooks")));
+        userdeposit=Integer.parseInt(requireNonNull(this.getArguments().getString("user_deposit")));
+        userrefund=Integer.parseInt(requireNonNull(this.getArguments().getString("user_refund")));
         tv2.setText("Tap to Book Handover to center");
         //list to store books
         books = new ArrayList<>();
@@ -68,7 +83,7 @@ public class SubmitBookFragment extends Fragment {
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Book book = books.get(i);
+                final Book book = books.get(i);
                 showDialog(
                         book.getBookId(),
                         book.getBookTitle(),
@@ -82,6 +97,8 @@ public class SubmitBookFragment extends Fragment {
                         book.getBookDonorTime(),
                         book.getBookHandoverTo(),
                         book.getBookHandoverTime());
+
+
             }
         });
 
@@ -140,39 +157,67 @@ public class SubmitBookFragment extends Fragment {
         set_dialog_values(dbookId,dbookAuthor,dbookCost,dbookTitle,dbookLocation,
                 dbookDonor,dbookDonorMobile,dbookYear,dbookSubject,dbookHandoverTo,
                 dbookHandoverTime,dbookDonorTime);
+
+
+
         btnissue.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 b.cancel();
-                new FancyAlertDialog.Builder(getActivity())
-                        .setTitle("ParvarishForYou")
-                        .setMessage("Want to Submit to Center")
-                        .setNegativeBtnText("Cancel")
-                        .setPositiveBtnText("OK")
-                        .setAnimation(Animation.POP)
-                        .isCancellable(true)
-                        .setIcon(R.drawable.logo, Icon.Visible)
-                        .OnPositiveClicked(new FancyAlertDialogListener() {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = getLayoutInflater();
+                handover_dialog = inflater.inflate(R.layout.show_issuebook_dialog, null);
+                dialogBuilder.setView(handover_dialog);
+                init_dialog_views();
+                dialogBuilder.setTitle("Amount To be Paid");
+                final AlertDialog dialog = dialogBuilder.create();
+                dialog.show();
 
-                            @Override
-                            public void OnClick() {
-                                boolean ans=updateBook(dbookId,dbookHandoverTo);
-                                if(ans){
-                                    Toast.makeText(getContext(), "Submission Successfully", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        })
-                        .OnNegativeClicked(new FancyAlertDialogListener()  {
-                            @Override
-                            public void OnClick() {
-                                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                et_deposit_paid=dialog.findViewById(R.id.et_depositpaid);
+                handover=dialog.findViewById(R.id.dbuttonissue);
+                tv1=dialog.findViewById(R.id.tv_depositpaid);
+                tv=dialog.findViewById(R.id.tvuserid);
+                tv.setText("ISSUE DATE:"+dbookHandoverTime);
+                tv1.setHint("Refund Money");
 
-                            }
-                        })
-                        .build();
+                handover.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                        new FancyAlertDialog.Builder(getActivity())
+                                .setTitle("ParvarishForYou")
+                                .setMessage("Want to Submit to Center")
+                                .setNegativeBtnText("Cancel")
+                                .setPositiveBtnText("OK")
+                                .setAnimation(Animation.POP)
+                                .isCancellable(true)
+                                .setIcon(R.drawable.logo, Icon.Visible)
+                                .OnPositiveClicked(new FancyAlertDialogListener() {
 
+                                    @Override
+                                    public void OnClick() {
+                                        boolean ans=updateBook(dbookId,dbookHandoverTo, requireNonNull(et_deposit_paid.getText()).toString());
+                                       // load_list();
+                                        if(ans){
+                                            Toast.makeText(getContext(), "Submission Successfully", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                })
+                                .OnNegativeClicked(new FancyAlertDialogListener()  {
+                                    @Override
+                                    public void OnClick() {
+                                        Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                })
+                                .build();
+
+
+                    }
+                });
 
             }
         });
@@ -180,9 +225,11 @@ public class SubmitBookFragment extends Fragment {
 
     }
 
-    private void set_dialog_values(String dbookId,String dbookAuthor,String dbookCost,String dbookTitle,String dbookLocation,
-                                   String dbookDonor,String dbookDonorMobile, String dbookYear,String dbookSubject,String dbookHandoverTo,
-                                   String dbookHandoverTime,String dbookDonorTime) {
+
+    @SuppressLint("SetTextI18n")
+    private void set_dialog_values(String dbookId, String dbookAuthor, String dbookCost, String dbookTitle, String dbookLocation,
+                                   String dbookDonor, String dbookDonorMobile, String dbookYear, String dbookSubject, String dbookHandoverTo,
+                                   String dbookHandoverTime, String dbookDonorTime) {
         dBookid.setText(dbookId);
         dAuthor.setText(dbookAuthor);
         dCost.setText(dbookCost);
@@ -199,15 +246,19 @@ public class SubmitBookFragment extends Fragment {
     }
 
 
-    private boolean updateBook(String bookId,String UserId) {
+    private boolean updateBook(String bookId, final String UserId,String amount) {
 
         try {
             databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
             databaseBooks.child("bookAvaibility").setValue("1");
             databaseBooks.child("bookHandoverTo").setValue("CENTER");
             databaseBooks.child("bookHandoverTime").setValue(get_current_time());
-            temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(UserId);
-            temp_User.child("bookHaving").setValue("0");
+            DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(UserId);
+
+            noofbook = noofbook - 1;
+            temp_User.child("bookHaving").setValue(String.valueOf(noofbook));
+            temp_User.child("bookDeposit").setValue(userdeposit-Integer.parseInt(amount));
+            temp_User.child("bookRefund").setValue(userrefund+Integer.parseInt(amount));
 
             return true;
         }catch (Exception e){
@@ -237,7 +288,7 @@ public class SubmitBookFragment extends Fragment {
         btnissue=dialogView.findViewById(R.id.dbuttonBack);
     }
     private void load_list() {
-        try {
+
 
             if (!spBookName.getText().toString().equals("")) {
                 databaseBooks.addValueEventListener(new ValueEventListener() {
@@ -246,11 +297,19 @@ public class SubmitBookFragment extends Fragment {
                         books.clear();
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Book book = postSnapshot.getValue(Book.class);
+                            if(Objects.requireNonNull(book).getBookAvaibility().equals("0")&&(book.getBookHandoverTo().equals(userid))){
                             if(Objects.requireNonNull(book).getBookTitle().startsWith(spBookName.getText().toString().toUpperCase())||
                                     Objects.requireNonNull(book).getBookAuthor().startsWith(spBookName.getText().toString().toUpperCase())||
                                     Objects.requireNonNull(book).getBookSubject().startsWith(spBookName.getText().toString().toUpperCase())||
                                     Objects.requireNonNull(book).getBookCost().equals(spBookName.getText().toString())) {
-                                books.add(book);
+                                try {
+
+                                    books.add(book);
+                                }catch (Exception e)
+                                {
+                                    Log.d(TAG, "Exception in Adding List "+e);
+                                }
+                            }
                             }
 
                         }
@@ -273,8 +332,15 @@ public class SubmitBookFragment extends Fragment {
                         books.clear();
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Book book = postSnapshot.getValue(Book.class);
-                            if (Objects.requireNonNull(book).getBookAvaibility().equals("0")) {
-                                books.add(book);
+                            if (Objects.requireNonNull(book).getBookAvaibility().equals("0")&&(book.getBookHandoverTo().equals(userid))) {
+                                try {
+
+                                    books.add(book);
+                                }catch (Exception e)
+                                {
+                                    Log.d(TAG, "Exception in Adding List "+e);
+                                }
+
                             }
                         }
 
@@ -290,10 +356,7 @@ public class SubmitBookFragment extends Fragment {
                 });
 
             }
-        }catch (Exception e)
-        {
-            Log.d(TAG, "Exception in Adding List "+e);
-        }
+
     }
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");

@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
+import com.p4u.parvarish.book_pannel.BenficiaryFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.SubmitBookFragment;
@@ -168,8 +169,8 @@ public class AdminMenuFragment extends HomeFragment {
                         break;
                     case 5: switchFragment(new IssueBookFragment());
                         break;
-                    case 6:
-                        switchFragment(new SubmitBookFragment());
+                    case 6:switchFragment(new BenficiaryFragment());
+                       // switchFragment(new SubmitBookFragment());
                         break;
                     case 7:switchFragment(new UserMobileFragment());
 
