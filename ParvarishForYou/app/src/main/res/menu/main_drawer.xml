@@ -4,16 +4,14 @@
     tools:showIn="nav_view">
 
     <group android:checkableBehavior="single">
-
-
+        <item
+            android:id="@+id/nav_about_us"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/about_us" />
     <item
         android:id="@+id/nav_our_work"
         android:icon="@drawable/ic_work_black_24dp"
         android:title="@string/our_work" />
-    <item
-        android:id="@+id/nav_about_us"
-        android:icon="@drawable/ic_person_black_24dp"
-        android:title="@string/about_us" />
 
     <item
         android:id="@+id/nav_contact_us"

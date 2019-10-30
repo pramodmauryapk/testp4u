@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +47,7 @@ public class UpdateBookFragment extends Fragment {
     private EditText deditBookAuthor,deditBookTitle,deditBookCost,deditDonor,deditDonorMobile,deditBookLocation;
     private Spinner dspinnerYear,dspinnerSubject;
     private EditText spBookName;
-    private RelativeLayout rl;
+
     private TextView tv2;
     private Button dbuttonUpdate,dbuttonDelete,dbuttonBack;
     private View dialogView;
@@ -58,7 +60,7 @@ public class UpdateBookFragment extends Fragment {
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
 
         initViews();
-        rl.setVisibility(View.GONE);
+
         tv2.setText("Tap to Book for Update");
         books = new ArrayList<>();
 
@@ -104,7 +106,7 @@ public class UpdateBookFragment extends Fragment {
         spBookName =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
         listViewBooks = v.findViewById(R.id.view_list);
-        rl=v.findViewById(R.id.userlayout);
+
 
     }
 

@@ -46,7 +46,7 @@ public class AddBookFragment extends Fragment {
     private Spinner spBookLocation;
     private Button btnAddBook;
     private Spinner spBookSubject,spBookYear;
-    private ListView listViewBooks;
+
     private List<Book> books;
     private View v;
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
@@ -94,15 +94,15 @@ public class AddBookFragment extends Fragment {
         spBookLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                load_list(spBookLocation.getSelectedItem().toString());
+                //load_list(spBookLocation.getSelectedItem().toString());
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                load_list(spBookLocation.getItemAtPosition(0).toString());
+                //load_list(spBookLocation.getItemAtPosition(0).toString());
             }
 
         });
-        listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = books.get(i);
@@ -122,9 +122,9 @@ public class AddBookFragment extends Fragment {
                         book.getBookHandoverTime());
             }
 
-        });
+        });*/
         return v;
-    }
+    }/*
     private void load_list(final String location) {
         if (!location.isEmpty()) {
             databaseBooks.addValueEventListener(new ValueEventListener() {
@@ -155,7 +155,7 @@ public class AddBookFragment extends Fragment {
             });
 
         }
-    }
+    }*/
     @SuppressLint("SetTextI18n")
     private void show(DataSnapshot dataSnapshot){
         String location=null;
@@ -290,7 +290,7 @@ public class AddBookFragment extends Fragment {
         etDonor.setText("");
 
     }
-    @SuppressLint("InflateParams")
+ /*   @SuppressLint("InflateParams")
     private void showDialog(final String dbookId,
                                         final String dbookTitle,
                                         final String dbookCost,
@@ -338,7 +338,7 @@ public class AddBookFragment extends Fragment {
         dIssueTo.setText(dbookHandoverTo);
         dIssueTime.setText(dbookHandoverTime);
         dDonorTime.setText(dbookDonorTime);
-    }
+    }*/
     private void initViews(){
         etBookId=v.findViewById (R.id.etBookId);
         etBookAuthor = v.findViewById(R.id.etBookAuthor);
@@ -357,7 +357,7 @@ public class AddBookFragment extends Fragment {
         tf6=v.findViewById(R.id.tf6);
         tf7=v.findViewById(R.id.tf7);
 
-        listViewBooks = v.findViewById(R.id.listViewBooks);
+       // listViewBooks = v.findViewById(R.id.listViewBooks);
         btnAddBook = v.findViewById(R.id.btnAddBook);
     }
     private void init_dialog_views(){

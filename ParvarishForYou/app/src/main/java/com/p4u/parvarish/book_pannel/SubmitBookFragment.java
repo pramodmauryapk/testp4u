@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,6 @@ public class SubmitBookFragment extends Fragment {
     private List<Book> books;
     private DatabaseReference databaseBooks;
     private EditText spBookName;
-    private RelativeLayout rl;
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2,tv;
     private View v;
     private Button btnissue,handover;
@@ -69,7 +70,7 @@ public class SubmitBookFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
         initViews();
-        rl.setVisibility(View.GONE);
+
 
         assert this.getArguments() != null;
         userid = this.getArguments().getString("user_id");
@@ -127,7 +128,6 @@ public class SubmitBookFragment extends Fragment {
         spBookName =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
         listViewBooks =  v.findViewById(R.id.view_list);
-        rl=v.findViewById(R.id.userlayout);
     }
     @SuppressLint("InflateParams")
     private void showDialog(final String dbookId,
@@ -302,14 +302,10 @@ public class SubmitBookFragment extends Fragment {
                                     Objects.requireNonNull(book).getBookAuthor().startsWith(spBookName.getText().toString().toUpperCase())||
                                     Objects.requireNonNull(book).getBookSubject().startsWith(spBookName.getText().toString().toUpperCase())||
                                     Objects.requireNonNull(book).getBookCost().equals(spBookName.getText().toString())) {
-                                try {
 
                                     books.add(book);
-                                }catch (Exception e)
-                                {
-                                    Log.d(TAG, "Exception in Adding List "+e);
+
                                 }
-                            }
                             }
 
                         }
@@ -333,13 +329,8 @@ public class SubmitBookFragment extends Fragment {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Book book = postSnapshot.getValue(Book.class);
                             if (Objects.requireNonNull(book).getBookAvaibility().equals("0")&&(book.getBookHandoverTo().equals(userid))) {
-                                try {
+                                     books.add(book);
 
-                                    books.add(book);
-                                }catch (Exception e)
-                                {
-                                    Log.d(TAG, "Exception in Adding List "+e);
-                                }
 
                             }
                         }

@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_grid;
+package com.p4u.parvarish.menu_items;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,8 +28,6 @@ import com.p4u.parvarish.book_pannel.SubmitBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.galary.ManageGalleryFragment;
 import com.p4u.parvarish.list_style.BookListActivity;
-import com.p4u.parvarish.menu_items.CentreListFragment;
-import com.p4u.parvarish.menu_items.DonorListFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -170,7 +168,7 @@ public class AdminMenuFragment extends HomeFragment {
                     case 5: switchFragment(new IssueBookFragment());
                         break;
                     case 6:switchFragment(new BenficiaryFragment());
-                       // switchFragment(new SubmitBookFragment());
+                        //switchFragment(new SubmitBookFragment());
                         break;
                     case 7:switchFragment(new UserMobileFragment());
 

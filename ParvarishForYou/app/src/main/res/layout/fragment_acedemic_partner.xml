@@ -46,11 +46,14 @@
             app:srcCompat="@android:drawable/ic_dialog_email" />
     -->
 
-    <include layout="@layout/content_aboutus" />
+    <include layout="@layout/content_academic_partner" />
 
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
 
 
 

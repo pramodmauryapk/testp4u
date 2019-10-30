@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#009688">
+    android:background="@color/colorwhite">
 
    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -12,16 +12,14 @@
 
         app:cardCornerRadius="3dp"
         app:cardElevation="5dp"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <ImageView
                 android:id="@+id/teacherDetailImageView"
@@ -108,7 +106,10 @@
                     android:minLines="1"
                     android:text="@string/teacher_status" />
             </LinearLayout>
-        </LinearLayout>
-        </ScrollView>
+       </LinearLayout>
    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+
+
+
+
+</ScrollView>

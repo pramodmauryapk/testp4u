@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_grid;
+package com.p4u.parvarish.menu_items;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -26,10 +26,6 @@ import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
-import com.p4u.parvarish.menu_items.AboutUsFragment;
-import com.p4u.parvarish.menu_items.FeedbackAddFragment;
-import com.p4u.parvarish.menu_items.JoinUsFragment;
-import com.p4u.parvarish.menu_items.OurWorkFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/fragment_our_work">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lay0"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:id="@+id/txt1"
+            android:text="Our Work"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:id="@+id/txt_education"
+            android:text="Education"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ourwork_page_description2"
+            style="@style/about_description"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:id="@+id/txt_talentsupportscheme"
+            android:text="♦ParvarishForYou Talent Support Scheme"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description4"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:id="@+id/txt_knowledgecenter"
+            android:text="♦ParvarishForYou Knowledge Center"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description6"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:id="@+id/txt_academicpartnership"
+            android:text="♦ParvarishForYou Academic Partnership Program"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description7"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:id="@+id/txt_capacitybuildingcenter"
+            android:text="♦ParvarishForYou Capacity Building Center"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description8"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:id="@+id/txt_technicalpartnership"
+            android:text="♦ParvarishForYou Technical Partnership Program"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description9"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="15sp"
+            android:id="@+id/txt_internshipprogram"
+            android:text="♦ParvarishForYou Internship Program"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:id="@+id/txt3"
+            android:text="Health"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description11"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description12"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:id="@+id/txt4"
+            android:text="Agriculture"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description13"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/about_description"
+            android:text="@string/ourwork_page_description14"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

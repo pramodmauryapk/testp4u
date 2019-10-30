@@ -1,18 +1,13 @@
-package com.p4u.parvarish.menu_grid;
+package com.p4u.parvarish.menu_items;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +15,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.galary.ImageGalleryFragment;
-import com.p4u.parvarish.menu_items.CapacityBuildingFragment;
-import com.p4u.parvarish.menu_items.InternshipProgramFragment;
-import com.p4u.parvarish.menu_items.TechnicalPartnershipFragment;
-import com.p4u.parvarish.menu_items.TelentSupportFragment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -38,7 +28,8 @@ public class UserMenuFragment extends HomeFragment {
             "Technical Partnership",
             "Capacity Building",
             "Gallery",
-            "Internship Program"
+            "Internship Program",
+            "Academic Partner"
 
     } ;
 
@@ -48,7 +39,8 @@ public class UserMenuFragment extends HomeFragment {
             R.drawable.ic_pets_black_24dp,
             R.drawable.ic_business_black_24dp,
             R.drawable.ic_camera_black_24dp,
-            R.drawable.ic_transfer_within_a_station_black_24dp
+            R.drawable.ic_transfer_within_a_station_black_24dp,
+            R.drawable.ic_school_black_24dp,
 
     };
 
@@ -94,6 +86,9 @@ public class UserMenuFragment extends HomeFragment {
                         break;
                     case 5:
                         switchFragment(new InternshipProgramFragment());
+                        break;
+                    case 6:
+                        switchFragment(new AcedemicPartnerFragment());
                         break;
 
 

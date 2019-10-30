@@ -1,7 +1,5 @@
 package com.p4u.parvarish.user_pannel;
 
-import com.google.firebase.database.Exclude;
-
 public class TempUser {
 
 
@@ -13,9 +11,6 @@ public class TempUser {
     private String Identity;
     private String BookHaving;
     private String BookDeposit;
-
-
-
     private String BookRefund;
 
     public TempUser() {

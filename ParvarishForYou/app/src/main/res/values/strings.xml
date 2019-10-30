@@ -248,6 +248,8 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="you_have_to_pay_security_deposit_100_additionally">You Have To Pay Security Deposit 100 Additionally</string>
     <string name="deposit_paid">Deposit Paid</string>
     <string name="handover">HANDOVER</string>
+    <string name="book_title_author_subject_cost">Book-Title/Author/Subject/Cost</string>
+    <string name="list_of_books">List of Books</string>
 
 
 </resources>

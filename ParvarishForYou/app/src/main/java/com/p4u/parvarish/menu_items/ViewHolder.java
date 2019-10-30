@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_grid;
+package com.p4u.parvarish.menu_items;
 
 import android.content.Context;
 import android.view.View;

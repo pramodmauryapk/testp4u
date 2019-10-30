@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,6 @@ import java.util.Objects;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.Book;
-import com.p4u.parvarish.galary.RecyclerAdapter;
 
 public class BookListActivity extends AppCompatActivity {
 
@@ -51,7 +51,7 @@ public class BookListActivity extends AppCompatActivity {
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
 
-       // recyclerView.setOnClickListener();
+
 
         redColor = getResources().getColor(R.color.red);
         int greenColor = getResources().getColor(R.color.green);
@@ -70,6 +70,7 @@ public class BookListActivity extends AppCompatActivity {
                 BookListActivity.this.requestHttp();
             }
         });
+
     }
 
     private void requestHttp() {
@@ -125,7 +126,7 @@ public class BookListActivity extends AppCompatActivity {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = inflater.inflate(R.layout.wega_recycler_item, parent, false);
+                View view = inflater.inflate(R.layout.layout_wega_item, parent, false);
                 return new MyViewHolder(view);
             }
 
@@ -174,6 +175,7 @@ public class BookListActivity extends AppCompatActivity {
             bookSubject.setText(book.getBookSubject());
             bookAuthor.setText(book.getBookAuthor());
            // nameTv.setTextColor(((int) book.getBookAvaibility() > 0) ? redColor : greenColor);
+
 
         }
 

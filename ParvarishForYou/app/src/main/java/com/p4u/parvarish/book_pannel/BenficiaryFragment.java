@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -21,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,11 +41,11 @@ import static java.util.Objects.requireNonNull;
 public class BenficiaryFragment extends Fragment {
 
     private static final String TAG = "BeneficiaryFragment";
-    private DatabaseReference mRef;
     private View dialogView;
-    private RelativeLayout rl;
+
     private TextView tv2;
     private List<TempUser> users;
+
     private ListView beneficiarylist;
     private TextInputEditText search_beneficiary;
     private TextInputLayout tf1;
@@ -55,20 +58,39 @@ public class BenficiaryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_search, container, false);
-
         initViews();
-        mRef= FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
-        initViews();
-        rl.setVisibility(View.GONE);
         tv2.setText("Tap to User to Return Book");
         tf1.setHint("Beneficiary-Name/Mobile/Email");
         //list to store books
         users = new ArrayList<>();
+        load_list();
+        TextWatcher watch = new TextWatcher(){
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                //import com.google.firebase.database.Exclude; TODO Auto-generated method stub
+                load_list();
+                //Toast.makeText(getApplicationContext(), "Maximum Limit Reached", Toast.LENGTH_SHORT).show();
+            }
 
-      beneficiarylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int a, int b, int c) {
+                // TODO Auto-generated method stub
+
+
+
+            }};
+        search_beneficiary.addTextChangedListener(watch);
+        beneficiarylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final TempUser user = users.get(i);
+                TempUser user = users.get(i);
                 showDialog(
                         user.getId(),
                         user.getName(),
@@ -85,101 +107,74 @@ public class BenficiaryFragment extends Fragment {
         });
 
 
-        search_beneficiary.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                onStart();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         return v;
     }
     private void initViews(){
         search_beneficiary =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
         beneficiarylist =  v.findViewById(R.id.view_list);
-        rl=v.findViewById(R.id.userlayout);
         tf1=v.findViewById(R.id.tf1);
 
     }
-    public void onStart() {
 
-        super.onStart();
-        load_list();
-
-    }
     private void load_list() {
 
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
+        final Layoutbeneficiary_details beneficiary_adapter = new Layoutbeneficiary_details(getActivity(), users);
 
-            if (!requireNonNull(search_beneficiary.getText()).toString().equals("")) {
-                mRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        users.clear();
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            TempUser user = postSnapshot.getValue(TempUser.class);
-                            if(Objects.requireNonNull(user).getName().startsWith(search_beneficiary.getText().toString().toUpperCase())||
-                                    Objects.requireNonNull(user).getMobile().startsWith(search_beneficiary.getText().toString())||
-                                    Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString())) {
-                                try {
-                                    users.add(user);
-                                }catch (Exception e)
-                                {
-                                    Log.d(TAG, "Exception in Adding List "+e);
-                                }
-                            }
+        if (!requireNonNull(search_beneficiary.getText()).toString().toUpperCase().equals("")) {
 
-                        }
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    users.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        TempUser user = postSnapshot.getValue(TempUser.class);
+                        if(Objects.requireNonNull(user).getName().startsWith(search_beneficiary.getText().toString().toUpperCase())||
+                                Objects.requireNonNull(user).getMobile().startsWith(search_beneficiary.getText().toString())||
+                                Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString())&&Integer.parseInt(user.getBookHaving())>0) {
 
-                        Layoutbeneficiary_details UserAdapter = new Layoutbeneficiary_details(getActivity(), users);
-                        beneficiarylist.setAdapter(UserAdapter);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }else {
-                mRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        users.clear();
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            TempUser user = postSnapshot.getValue(TempUser.class);
-                            try {
                                 users.add(user);
-                            }catch (Exception e)
-                            {
-                                Log.d(TAG, "Exception in Adding List "+e);
-                            }
-
+                            beneficiarylist.setAdapter(beneficiary_adapter);
                         }
 
-                        Layoutbeneficiary_details UserAdapter = new Layoutbeneficiary_details(getActivity(), users);
-                        beneficiarylist.setAdapter(UserAdapter);
-
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    beneficiarylist.setAdapter(beneficiary_adapter);
 
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }else {
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                users.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    TempUser user = postSnapshot.getValue(TempUser.class);
+                    assert user != null;
+                    if(Integer.parseInt(user.getBookHaving())>0) {
+                        users.add(user);
+                        beneficiarylist.setAdapter(beneficiary_adapter);
                     }
-                });
+
+                }
+
+                beneficiary_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+        });
+        }
 
     }
     private void init_dialog_views(){

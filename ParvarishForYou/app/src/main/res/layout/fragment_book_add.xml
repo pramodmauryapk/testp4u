@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+
+
 <RelativeLayout
 
     android:id="@+id/fragmenent_add_book"
     android:padding="@dimen/activity_horizontal_margin"
-   android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
     <Spinner
         android:layout_width="match_parent"
         android:layout_margin="5dp"
@@ -175,7 +173,7 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
-
+<!--
     <TextView
         style="@style/control_type"
         android:layout_below="@+id/btnAddBook"
@@ -183,15 +181,14 @@
         android:id="@+id/textView1"
         android:text="@string/tap_to_update_and_view_book_details"
         android:textAlignment="center"/>
-
+-->
 </RelativeLayout>
 
 
 
 </ScrollView>
-    <ListView
+  <!--  <ListView
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:layout_height="match_parent"
-        android:id="@+id/listViewBooks" />
-</LinearLayout>
+        android:id="@+id/listViewBooks" />-->
