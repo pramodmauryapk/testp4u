@@ -135,12 +135,13 @@ public class BenficiaryFragment extends Fragment {
                                 Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString())&&Integer.parseInt(user.getBookHaving())>0) {
 
                                 users.add(user);
-                            beneficiarylist.setAdapter(beneficiary_adapter);
+
                         }
 
                     }
 
                     beneficiarylist.setAdapter(beneficiary_adapter);
+                    beneficiary_adapter.notifyDataSetChanged();
 
                 }
 
@@ -161,11 +162,11 @@ public class BenficiaryFragment extends Fragment {
                     assert user != null;
                     if(Integer.parseInt(user.getBookHaving())>0) {
                         users.add(user);
-                        beneficiarylist.setAdapter(beneficiary_adapter);
+
                     }
 
                 }
-
+                beneficiarylist.setAdapter(beneficiary_adapter);
                 beneficiary_adapter.notifyDataSetChanged();
             }
 

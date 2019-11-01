@@ -1,7 +1,6 @@
 package com.p4u.parvarish.menu_items;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,10 +23,9 @@ import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BenficiaryFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
-import com.p4u.parvarish.book_pannel.SubmitBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
+import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.galary.ManageGalleryFragment;
-import com.p4u.parvarish.list_style.BookListActivity;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -51,8 +49,8 @@ public class AdminMenuFragment extends HomeFragment {
         String role = this.getArguments().getString("user_role");
         getWidthAndHeight();
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
-        String[] gridViewString = {};
-        int[] gridViewImageId = {};
+        String[] gridViewString;
+        int[] gridViewImageId;
         assert role != null;
         if(role.equals("USER")){
 
@@ -158,9 +156,9 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new DonorListFragment());
                         break;
                     case 3:
-                        Intent ActivityIndent = new Intent(getContext(), BookListActivity.class);
-                        startActivity(ActivityIndent);
-
+                       // Intent ActivityIndent = new Intent(getContext(), BookListActivity.class);
+                        //startActivity(ActivityIndent);
+                        switchFragment(new BookListFragment());
                         break;
                     case 4: switchFragment(new AddBookFragment());
 

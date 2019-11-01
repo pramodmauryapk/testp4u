@@ -1,7 +1,6 @@
 package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,9 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,20 +41,34 @@ public class AddBookFragment extends Fragment {
     private static final String TAG = "AddBookFragment";
     private EditText etBookId,etBookAuthor,etBookTitle,etBookCost,etDonor,etDonorMobile;
     private Spinner spBookLocation;
-    private Button btnAddBook;
+    private Button btnAddBook,btnlistbook;
     private Spinner spBookSubject,spBookYear;
 
-    private List<Book> books;
     private View v;
-    private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
-    private Button dBack;
-    private View dialogView;
     private String UserID;
-    private TextInputLayout tf1,tf2,tf3,tf4,tf5,tf6,tf7;
+    private TextInputLayout tf2;
+    private TextInputLayout tf3;
+    private TextInputLayout tf4;
+    private TextInputLayout tf5;
+    private TextInputLayout tf6;
     private DatabaseReference databaseBooks;
+    private List<Book> books;
+    private String bookYear;
+    private String bookSubject;
+    private String bookId;
+    private String bookTitle;
+    private String bookCost;
+    private String bookAuthor;
+    private String bookDonor;
+    private String bookDonorMobile;
+    private String bookAvaibility;
+    private String bookLocation;
+    private String bookDonorTime;
+    private String bookHandoverTo;
+    private String bookHandoverTime;
     private String booklocation;
-    private String bookYear,bookSubject,bookId,bookTitle,bookCost,bookAuthor,bookDonor,bookDonorMobile,bookAvaibility,bookLocation,bookDonorTime,bookHandoverTo,bookHandoverTime,b;
-    private int t=0,k=0;
+    private int t=0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -76,7 +87,7 @@ public class AddBookFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
-                show(ds);
+                load_spinner_items(ds);
             }
 
             @Override
@@ -91,43 +102,32 @@ public class AddBookFragment extends Fragment {
                 addBooks();
             }
         });
+        btnlistbook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchFragment(new BookListFragment());
+            }
+        });
         spBookLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //load_list(spBookLocation.getSelectedItem().toString());
+
+                load_bookid(spBookLocation.getSelectedItem().toString());
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                //load_list(spBookLocation.getItemAtPosition(0).toString());
+
+                load_bookid(spBookLocation.getItemAtPosition(0).toString());
             }
 
         });
-       /* listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Book book = books.get(i);
-                showDialog(
-                        book.getBookId(),
-                        book.getBookTitle(),
-                        book.getBookCost(),
-                        book.getBookAuthor(),
-                        book.getBookYear(),
-                        book.getBookSubject(),
-                        book.getBookAvaibility(),
-                        book.getBookLocation(),
-                        book.getBookDonor(),
-                        book.getBookDonorMobile(),
-                        book.getBookDonorTime(),
-                        book.getBookHandoverTo(),
-                        book.getBookHandoverTime());
-            }
 
-        });*/
         return v;
-    }/*
-    private void load_list(final String location) {
+    }
+    private void load_bookid(final String location) {
         if (!location.isEmpty()) {
             databaseBooks.addValueEventListener(new ValueEventListener() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     books.clear();
@@ -142,7 +142,7 @@ public class AddBookFragment extends Fragment {
                     }
 
                     LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                    listViewBooks.setAdapter(bookAdapter);
+
                     t=bookAdapter.getCount();
                     etBookId.setText(booklocation+(t+1));
 
@@ -155,10 +155,13 @@ public class AddBookFragment extends Fragment {
             });
 
         }
-    }*/
+    }
+
+
+
     @SuppressLint("SetTextI18n")
-    private void show(DataSnapshot dataSnapshot){
-        String location=null;
+    private void load_spinner_items(DataSnapshot dataSnapshot){
+        String location;
         try {
             ArrayList<String> list = new ArrayList<>();
             for (DataSnapshot ds : dataSnapshot.getChildren ()) {
@@ -171,12 +174,13 @@ public class AddBookFragment extends Fragment {
                 }
                 if(requireNonNull(uInfo).getUserId().equals(UserID)) {
 
-                   booklocation= uInfo.getUserAddress().substring(0,3);
+                    booklocation = uInfo.getUserAddress().substring(0, 3);
                    location=uInfo.getUserAddress();
                    list.add(location);
-                    ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, list);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spBookLocation.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
                 }
 
@@ -290,55 +294,7 @@ public class AddBookFragment extends Fragment {
         etDonor.setText("");
 
     }
- /*   @SuppressLint("InflateParams")
-    private void showDialog(final String dbookId,
-                                        final String dbookTitle,
-                                        final String dbookCost,
-                                        final String dbookAuthor,
-                                        final String dbookYear,
-                                        final String dbookSubject,
-                                        final String dbookAvaibility,
-                                        final String dbookLocation,
-                                        final String dbookDonor,
-                                        final String dbookDonorMobile,
-                                        final String dbookDonorTime,
-                                        final String dbookHandoverTo,
-                                        final String dbookHandoverTime) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.show_book_dialog, null);
-        dialogBuilder.setView(dialogView);
-        init_dialog_views();
-        dialogBuilder.setTitle("Book Record");
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
-        set_dialog_values(dbookId,dbookAuthor,dbookCost,dbookTitle,dbookLocation,dbookYear,dbookSubject,dbookHandoverTo,dbookHandoverTime,dbookDonorTime);
-
-        dBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                b.cancel();
-            }
-        });
-
-
-    }
-
-    private void set_dialog_values(String dbookId, String dbookAuthor, String dbookCost, String dbookTitle, String dbookLocation, String dbookYear, String dbookSubject, String dbookHandoverTo, String dbookHandoverTime, String dbookDonorTime) {
-        dBookid.setText (dbookId);
-        dAuthor.setText(dbookAuthor);
-        dCost.setText(dbookCost);
-        dTitle.setText(dbookTitle);
-        dLocation.setText(dbookLocation);
-        //dDonor.setText(dbookDonor);
-        //dDonorMobile.setText(dbookDonorMobile);
-        dYear.setText(dbookYear);
-        dSubject.setText(dbookSubject);
-        dIssueTo.setText(dbookHandoverTo);
-        dIssueTime.setText(dbookHandoverTime);
-        dDonorTime.setText(dbookDonorTime);
-    }*/
     private void initViews(){
         etBookId=v.findViewById (R.id.etBookId);
         etBookAuthor = v.findViewById(R.id.etBookAuthor);
@@ -350,36 +306,28 @@ public class AddBookFragment extends Fragment {
         spBookSubject =  v.findViewById(R.id.spBookSubject);
         spBookYear =  v.findViewById(R.id.spBookYear);
 
-        tf1=v.findViewById(R.id.tf1);
+
         tf2=v.findViewById(R.id.tf2);
         tf3=v.findViewById(R.id.tf3);
         tf4=v.findViewById(R.id.tf4);
         tf6=v.findViewById(R.id.tf6);
-        tf7=v.findViewById(R.id.tf7);
 
-       // listViewBooks = v.findViewById(R.id.listViewBooks);
         btnAddBook = v.findViewById(R.id.btnAddBook);
+        btnlistbook=v.findViewById(R.id.btnlistBook);
     }
-    private void init_dialog_views(){
-        dBookid=dialogView.findViewById (R.id.tvBookid);
-        dTitle =  dialogView.findViewById(R.id.tvTitle);
-        dCost =  dialogView.findViewById(R.id.tvCost);
-        dAuthor = dialogView.findViewById(R.id.tvAuthor);
-        dYear =  dialogView.findViewById(R.id.tvYear);
-        dSubject = dialogView.findViewById(R.id.tvSubject);
-        dLocation = dialogView.findViewById(R.id.tvLocation);
-        dDonor =  dialogView.findViewById(R.id.tvDonor);
-        dDonorMobile = dialogView.findViewById(R.id.tvDonorMobile);
-        dDonorTime = dialogView.findViewById(R.id.tvDonateTime);
-        dIssueTo = dialogView.findViewById(R.id.tvBookIssueto);
-        dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
-        dBack=dialogView.findViewById(R.id.dbuttonBack);
-    }
+
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());
     }
+    // switching fragment
+    private void switchFragment(Fragment fragment) {
 
+        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(null).commit();
+
+    }
 
 
 

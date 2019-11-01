@@ -51,7 +51,7 @@ public class IssueBookFragment extends Fragment {
     private View dialogView,issuedialog,benefiarydialog;
     private List<Book> books;
     private ArrayList<String> benefiary;
-    private DatabaseReference myref,mRef;
+    private DatabaseReference mRef;
     private EditText spBookName;
     private Spinner spbenfiary;
     private TextView tv2;
@@ -66,7 +66,6 @@ public class IssueBookFragment extends Fragment {
     private Button btnreset;
     private Bundle bundle;
     private String Userid,Fullname,Email,Mobile,Address,Identity,Deposit,beneficaiary_mobile,name;
-    private int noofbooks;
     private Boolean amount_validation=false;
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -74,14 +73,13 @@ public class IssueBookFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_issue,container,false);
-        myref = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("BOOKS");
 
         //getting views
         initViews();
         blank_all();
         bundle=new Bundle();
-        //list to store books
-       // books = new ArrayList<>();
+
         benefiary = new ArrayList<>();
 
         btnadd.setOnClickListener(new View.OnClickListener() {
@@ -217,7 +215,7 @@ public class IssueBookFragment extends Fragment {
             });
 
 
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
     }
@@ -246,8 +244,9 @@ public class IssueBookFragment extends Fragment {
 
 
                 }
-                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<String>(requireNonNull(getContext()),android.R.layout.simple_spinner_item, benefiary);
+                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, benefiary);
                 spbenfiary.setAdapter(beneficiary_adapter);
+                beneficiary_adapter.notifyDataSetChanged();
 
             }
 
@@ -310,8 +309,6 @@ public class IssueBookFragment extends Fragment {
         btnsearch=v.findViewById(R.id.btnsearch);
         btnreset=v.findViewById(R.id.btnreset);
         tv1=v.findViewById(R.id.tv1);
-
-
         etFullname=v.findViewById(R.id.et_fullname);
         etEmail=v.findViewById(R.id.et_createemail);
         etAddress=v.findViewById(R.id.et_address);
@@ -380,7 +377,7 @@ public class IssueBookFragment extends Fragment {
         DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
         String UserId = temp_User.push().getKey();
         name=Fullname;
-        noofbooks=0;
+
         TempUser user = new TempUser(
                 UserId,
                 Fullname,

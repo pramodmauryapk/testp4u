@@ -3,6 +3,7 @@ package com.p4u.parvarish.user_pannel;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,15 +50,14 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     private RecyclerAdapter_model mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;
-    private DatabaseReference mDatabaseRef;
-    private ValueEventListener mDBListener;
+    private DatabaseReference mDatabaseRef,mRef;
+    private ValueEventListener mDBListener,mlistner;
     private List<Teacher> mTeachers;
     private View dialogView;
     private TextInputEditText dtvUsername,dtvEmail, dtvMobile , dtvCenterName, dtvIdentity,dtvRole;
     private Button dbuttonBack,dbuttonDelete,dbuttonUpdate;
-    private FirebaseUser user;
     private Spinner sp;
-    private String role;
+    private String role,UID;
 
     @Nullable
     @Override
@@ -78,7 +79,19 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("USERS");
+        mRef=FirebaseDatabase.getInstance().getReference().child("USERS");
+        UID= requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        mlistner=mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                show(dataSnapshot);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -120,7 +133,20 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         switchFragment(fragment);
     }
 
+    private void show(DataSnapshot dataSnapshot){
+        try {
+            for (DataSnapshot ds : dataSnapshot.getChildren ()) {
+                Teacher uInfo=ds.getValue(Teacher.class);
+                if(requireNonNull(uInfo).getUserId().equals(UID)) {
 
+                    role=uInfo.getUserRole();
+
+                }
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Failed to retrive values"+e);
+        }
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -179,13 +205,13 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
                                 mDatabaseRef.child(selectedKey).removeValue();
                                 Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
-                                //return true;
+
                             }
                         })
                         .OnNegativeClicked(new FancyAlertDialogListener() {
                             @Override
                             public void OnClick() {
-                                //false;
+
 
 
                             }
@@ -213,15 +239,8 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         final AlertDialog b = dialogBuilder.create ();
         b.show ();
         init_dialog_views ();
-        role=userRole;
-        if(userRole.equals("ADMIN")){
-            dtvRole.setVisibility(View.GONE);
-            sp.setVisibility(View.VISIBLE);
-        }
-        else {
-            dtvRole.setText(userRole);
-            dtvRole.setEnabled(false);
-        }
+
+
         setValues(userName,userEmail,userMobile,userAddress,userIdentity,userRole);
         dbuttonDelete.setVisibility (View.GONE);
         dbuttonBack.setOnClickListener (new View.OnClickListener() {
@@ -251,6 +270,16 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         dtvCenterName.setText (userAddress);
         dtvIdentity.setText (userIdentity);
 
+        if(role.equals("ADMIN")){
+            dtvRole.setVisibility(View.GONE);
+            sp.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            dtvRole.setText(userRole);
+            dtvRole.setEnabled(false);
+        }
+
     }
 
     private void init_dialog_views(){
@@ -278,7 +307,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("USERS").child(Id);
         try {
             dR.child("userName").setValue(requireNonNull(dtvUsername.getText()).toString().trim().toUpperCase());
-            dR.child("userEmail").setValue(requireNonNull(dtvEmail.getText()).toString().trim().toLowerCase());
+            dR.child("userEmail").setValue(requireNonNull(dtvEmail.getText()).toString());
             if(role.equals("ADMIN")){
                 dR.child("userRole").setValue(sp.getSelectedItem().toString().toUpperCase());
             }else {

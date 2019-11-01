@@ -48,9 +48,7 @@ public class SelectBookFragment extends Fragment {
 
     private static final String TAG = "IssueBookFragment";
     private ListView listViewBooks;
-    private View dialogView;
     private List<Book> books;
-    private ArrayList<String> benefiary;
     private DatabaseReference myref;
     private EditText spBookName;
 
@@ -58,9 +56,10 @@ public class SelectBookFragment extends Fragment {
 
     private View v;
 
-    private String Userid=null,name,Fullname,Email,Mobile,Address,Identity,Deposit,beneficaiary_mobile;
+    private String Userid=null;
+
     private int noofbooks;
-    private Boolean amount_validation=false;
+
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
@@ -74,7 +73,7 @@ public class SelectBookFragment extends Fragment {
 
         assert this.getArguments() != null;
         Userid = this.getArguments().getString("Beneficiary_Id");
-        name = this.getArguments().getString("Beneficiary_Name");
+        String name = this.getArguments().getString("Beneficiary_Name");
         tv2.setText("Tap to Book for Issue");
         //list to store books
         books = new ArrayList<>();
@@ -172,6 +171,7 @@ public class SelectBookFragment extends Fragment {
 
                     LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
+                    bookAdapter.notifyDataSetChanged();
 
                 }
 
@@ -197,6 +197,7 @@ public class SelectBookFragment extends Fragment {
 
                     LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                     listViewBooks.setAdapter(bookAdapter);
+                    bookAdapter.notifyDataSetChanged();
 
                 }
 
@@ -229,7 +230,7 @@ public class SelectBookFragment extends Fragment {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.show_book_dialog, null);
+        View dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);
         //init dialog views
         TextView dBookid = dialogView.findViewById(R.id.tvBookid);

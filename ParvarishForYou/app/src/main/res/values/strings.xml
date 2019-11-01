@@ -96,7 +96,7 @@
 </string>
     <string name="copy_right" translatable="false">Copyrights © %1$d</string>
     <string name="text_tech_partner">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that . So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon .</string>
-    <string name="about_page_description" translatable="false"></string>
+    <string name="about_page_description" translatable="false" />
     <string name="about_contact_us">Contact us</string>
 
     <string name="about_facebook">Like us on Facebook</string>
@@ -250,6 +250,9 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="handover">HANDOVER</string>
     <string name="book_title_author_subject_cost">Book-Title/Author/Subject/Cost</string>
     <string name="list_of_books">List of Books</string>
+    <string name="search_books">Search Books</string>
+    <string name="book_list">Book List</string>
+    <string name="green_color_available_red_color_unavailable">(Green Color-Available,Red Color-Unavailable)</string>
 
 
 </resources>

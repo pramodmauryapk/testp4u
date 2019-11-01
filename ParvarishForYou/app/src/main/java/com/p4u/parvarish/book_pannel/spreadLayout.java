@@ -1,4 +1,4 @@
-package com.p4u.parvarish.list_style;
+package com.p4u.parvarish.book_pannel;
 
 import android.graphics.Rect;
 import android.util.SparseArray;
@@ -10,6 +10,7 @@ import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+@SuppressWarnings("deprecation")
 public class spreadLayout extends RecyclerView.LayoutManager {
     private static final String TAG = "spreadLayout";
     private int scroll = 0;
@@ -63,6 +64,7 @@ public class spreadLayout extends RecyclerView.LayoutManager {
             int viewType = adapter.getItemViewType(i);
             int itemHeight;
             if (viewTypeHeightMap.containsKey(viewType)) {
+                //noinspection ConstantConditions
                 itemHeight = viewTypeHeightMap.get(viewType);
             } else {
                 View itemView = recycler.getViewForPosition(i);

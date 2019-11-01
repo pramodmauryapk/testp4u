@@ -198,7 +198,7 @@ public class SubmitBookFragment extends Fragment {
                                     @Override
                                     public void OnClick() {
                                         boolean ans=updateBook(dbookId,dbookHandoverTo, requireNonNull(et_deposit_paid.getText()).toString());
-                                       // load_list();
+
                                         if(ans){
                                             Toast.makeText(getContext(), "Submission Successfully", Toast.LENGTH_SHORT).show();
                                         }else {
@@ -257,8 +257,8 @@ public class SubmitBookFragment extends Fragment {
 
             noofbook = noofbook - 1;
             temp_User.child("bookHaving").setValue(String.valueOf(noofbook));
-            temp_User.child("bookDeposit").setValue(userdeposit-Integer.parseInt(amount));
-            temp_User.child("bookRefund").setValue(userrefund+Integer.parseInt(amount));
+            temp_User.child("bookDeposit").setValue(String.valueOf(userdeposit-Integer.parseInt(amount)));
+            temp_User.child("bookRefund").setValue(String.valueOf(userrefund+Integer.parseInt(amount)));
 
             return true;
         }catch (Exception e){
@@ -312,6 +312,7 @@ public class SubmitBookFragment extends Fragment {
 
                         LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
+                        bookAdapter.notifyDataSetChanged();
 
                     }
 
@@ -337,7 +338,7 @@ public class SubmitBookFragment extends Fragment {
 
                         LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
-
+                        bookAdapter.notifyDataSetChanged();
                     }
 
                     @Override

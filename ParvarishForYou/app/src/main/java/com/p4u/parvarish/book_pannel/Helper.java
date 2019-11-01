@@ -1,4 +1,4 @@
-package com.p4u.parvarish.list_style;
+package com.p4u.parvarish.book_pannel;
 
 
 import android.view.View;
@@ -14,7 +14,6 @@ public class Helper extends LinearSnapHelper {
     public int[] calculateDistanceToFinalSnap(@NonNull RecyclerView.LayoutManager layoutManager,
                                               @NonNull View targetView) {
         int[] out = new int[2];
-        out[0] = 0;
         out[1] = ((spreadLayout) layoutManager).getSnapHeight();
         return out;
     }

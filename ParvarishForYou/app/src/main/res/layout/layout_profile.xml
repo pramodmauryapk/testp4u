@@ -99,11 +99,13 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </com.google.android.material.textfield.TextInputLayout>
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sprole"
+        android:padding="10dp"
         android:layout_margin="10dp"
         android:layout_below="@+id/l6"
         android:background="@drawable/bg_edittext_focused"

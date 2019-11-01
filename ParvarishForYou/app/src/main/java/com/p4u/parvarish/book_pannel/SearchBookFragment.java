@@ -40,7 +40,6 @@ public class SearchBookFragment extends Fragment {
     private List<Book> books;
     private DatabaseReference databaseBooks;
     private EditText spBookName;
-
     private View v;
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
     private Button dBack;
@@ -101,10 +100,10 @@ public class SearchBookFragment extends Fragment {
     @SuppressLint("InflateParams")
     private void showDialog(final String dbookId,
                             final String dbookTitle,
-                            final String dbookAuthor,
-                            final String dbookSubject,
-                            final String dbookYear,
                             final String dbookCost,
+                            final String dbookAuthor,
+                            final String dbookYear,
+                            final String dbookSubject,
                             final String dbookAvaibility,
                             final String dbookLocation,
                             final String dbookDonor,
@@ -120,18 +119,18 @@ public class SearchBookFragment extends Fragment {
 
         init_dialog_views();
 
-        dialogBuilder.setTitle("Book Record");
+        dialogBuilder.setTitle("Book Details");
         final AlertDialog b = dialogBuilder.create();
         b.show();
         dBookid.setText (dbookId);
-        dAuthor.setText(dbookSubject);///field missmath
-        dCost.setText(dbookAuthor);//mismatch
         dTitle.setText(dbookTitle);
+        dCost.setText(dbookCost);
+        dAuthor.setText(dbookAuthor);
+        dYear.setText(dbookYear);
+        dSubject.setText(dbookSubject);
         dLocation.setText(dbookLocation);
         dDonor.setText(dbookDonor);
         dDonorMobile.setText(dbookDonorMobile);
-        dYear.setText(dbookYear);
-        dSubject.setText(dbookCost);//mismatch
         dIssueTo.setText(dbookHandoverTo);
         dIssueTime.setText(dbookHandoverTime);
         dDonorTime.setText(dbookDonorTime);
@@ -195,6 +194,7 @@ public class SearchBookFragment extends Fragment {
 
                         LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
+                        bookAdapter.notifyDataSetChanged();
 
                     }
 
@@ -217,6 +217,7 @@ public class SearchBookFragment extends Fragment {
 
                         LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
+                        bookAdapter.notifyDataSetChanged();
 
                     }
 

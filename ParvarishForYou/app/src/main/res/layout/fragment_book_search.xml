@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/list_of_books"
+        android:text="@string/search_books"
         android:textColor="@color/colorRed"
         android:textSize="20sp" />
     <com.google.android.material.textfield.TextInputLayout

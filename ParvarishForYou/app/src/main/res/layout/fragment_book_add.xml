@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent">
 
@@ -16,7 +15,7 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_margin="5dp"
-        android:padding="10dp"
+        android:padding="16dp"
         android:background="@drawable/bg_edittext_focused"
         android:id="@+id/etBookLocation"
         android:layout_height="wrap_content"/>
@@ -88,7 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/l1"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:baselineAligned="false">
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -162,33 +162,40 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/l3"
+       android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
     <Button
         android:id="@+id/btnAddBook"
-        android:layout_below="@+id/l3"
+
         android:text="@string/add"
+        android:layout_width="150dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/colorwhite"
+        android:textStyle="bold"
+
+        android:layout_marginTop="10dp"
+        tools:ignore="ButtonStyle" />
+    <Button
+        android:id="@+id/btnlistBook"
+
+        android:text="@string/books_list"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"
         android:textColor="@color/colorwhite"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
-<!--
-    <TextView
-        style="@style/control_type"
-        android:layout_below="@+id/btnAddBook"
-        android:gravity="center_horizontal"
-        android:id="@+id/textView1"
-        android:text="@string/tap_to_update_and_view_book_details"
-        android:textAlignment="center"/>
--->
+
+        android:layout_marginTop="10dp"
+        tools:ignore="ButtonStyle" />
+    </LinearLayout>
 </RelativeLayout>
 
 
 
 </ScrollView>
-  <!--  <ListView
-        android:layout_width="match_parent"
-        android:layout_margin="5dp"
-        android:layout_height="match_parent"
-        android:id="@+id/listViewBooks" />-->
+
