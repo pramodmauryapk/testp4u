@@ -68,7 +68,7 @@ public class BenficiaryFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable arg0) {
                 //import com.google.firebase.database.Exclude; TODO Auto-generated method stub
-                load_list();
+
                 //Toast.makeText(getApplicationContext(), "Maximum Limit Reached", Toast.LENGTH_SHORT).show();
             }
 
@@ -82,7 +82,7 @@ public class BenficiaryFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int a, int b, int c) {
                 // TODO Auto-generated method stub
-
+                load_list();
 
 
             }};
@@ -132,9 +132,10 @@ public class BenficiaryFragment extends Fragment {
                         TempUser user = postSnapshot.getValue(TempUser.class);
                         if(Objects.requireNonNull(user).getName().startsWith(search_beneficiary.getText().toString().toUpperCase())||
                                 Objects.requireNonNull(user).getMobile().startsWith(search_beneficiary.getText().toString())||
-                                Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString())&&Integer.parseInt(user.getBookHaving())>0) {
-
-                                users.add(user);
+                                Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString().toUpperCase())) {
+                                if(Integer.parseInt(user.getBookHaving())>0) {
+                                    users.add(user);
+                                }
 
                         }
 
@@ -224,7 +225,7 @@ public class BenficiaryFragment extends Fragment {
         dialogBuilder.setTitle("Benficiary Details");
         final AlertDialog b = dialogBuilder.create();
         b.show();
-
+        b.setCancelable(false);
         set_dialog_values(duserId,duserName,duserEmail,duserMobile,duserAddress,duserIdentity,duserBookHaving,duserBookDeposit,duserBookRefund);
         btnselect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,6 +253,5 @@ public class BenficiaryFragment extends Fragment {
                 .addToBackStack(null).commit();
 
     }
-
 
 }

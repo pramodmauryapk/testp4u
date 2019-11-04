@@ -1,7 +1,6 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.unused;
 
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.p4u.parvarish.R;
-
-import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 

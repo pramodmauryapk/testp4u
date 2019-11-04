@@ -1,10 +1,8 @@
 package com.p4u.parvarish.menu_items;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,7 @@ public class LayoutGridView extends BaseAdapter {
     private final String[] gridViewString;
     private final int[] gridViewImageId;
 
-    public LayoutGridView(Context context, String[] gridViewString, int[] gridViewImageId) {
+    LayoutGridView(Context context, String[] gridViewString, int[] gridViewImageId) {
         mContext = context;
         this.gridViewImageId = gridViewImageId;
         this.gridViewString = gridViewString;
@@ -44,6 +42,7 @@ public class LayoutGridView extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("InflateParams")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
@@ -52,10 +51,10 @@ public class LayoutGridView extends BaseAdapter {
 
         if (convertView == null) {
 
-            gridViewAndroid = new View(mContext);
+            new View(mContext);
             gridViewAndroid = requireNonNull(inflater).inflate(R.layout.menu_layout, null);
-            TextView textViewAndroid = (TextView) gridViewAndroid.findViewById(R.id.android_gridview_text);
-            ImageView imageViewAndroid = (ImageView) gridViewAndroid.findViewById(R.id.android_gridview_image);
+            TextView textViewAndroid = gridViewAndroid.findViewById(R.id.android_gridview_text);
+            ImageView imageViewAndroid = gridViewAndroid.findViewById(R.id.android_gridview_image);
             // Get the TextView LayoutParams
           //  LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) textViewAndroid.getLayoutParams();
 
@@ -72,17 +71,10 @@ public class LayoutGridView extends BaseAdapter {
             textViewAndroid.setText(gridViewString[i]);
             imageViewAndroid.setImageResource(gridViewImageId[i]);
         } else {
-            gridViewAndroid = (View) convertView;
+            gridViewAndroid = convertView;
         }
 
         return gridViewAndroid;
-    }
-    // Method for converting DP value to pixels
-    public static int getPixelsFromDPs(Activity activity, int dps){
-        Resources r = activity.getResources();
-        int  px = (int) (TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
-        return px;
     }
 
 }

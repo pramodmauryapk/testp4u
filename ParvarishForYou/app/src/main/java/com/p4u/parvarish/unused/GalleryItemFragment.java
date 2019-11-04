@@ -1,9 +1,7 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.unused;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -19,20 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.banner_pannel.WebBannerAdapter;
-import com.squareup.picasso.Picasso;
+import com.p4u.parvarish.galary.Image_Model;
 
 import static java.util.Objects.requireNonNull;
 

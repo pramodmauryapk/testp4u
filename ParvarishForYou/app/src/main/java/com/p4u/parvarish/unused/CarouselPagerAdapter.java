@@ -1,4 +1,4 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.unused;
 
 
 import androidx.annotation.NonNull;

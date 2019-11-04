@@ -8,18 +8,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".WelcomeActivity"
-    android:background="@color/cardview_dark_background">
+    android:background="@color/white">
 
     <com.p4u.parvarish.splash_activity.AnimatedCircleLoadingView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/circle_loading_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:background="@color/transparent"
         android:layout_centerInParent="true"
-        app:animCircleLoadingView_mainColor="@color/main_color"
+        app:animCircleLoadingView_mainColor="@color/colorRed"
         app:animCircleLoadingView_secondaryColor="@color/secondary_color"
-        app:animCircleLoadingView_textColor="@android:color/white"
+        app:animCircleLoadingView_textColor="@color/colorRed"
         />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textColor="@color/colorwhite"
+        android:textColor="@color/colorRed"
         android:textSize="30sp"/>
 
 

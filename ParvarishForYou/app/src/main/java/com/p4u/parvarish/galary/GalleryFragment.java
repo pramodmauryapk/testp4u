@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish.galary;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -33,11 +33,11 @@ import java.util.Objects;
 
 public class GalleryFragment extends Fragment {
 
-    private static final String TAG = "OurWorkFragment";
+    private static final String TAG = "GalleryFragment";
 
 
     private Context context;
-
+    private BannerLayout recyclerBanner;
     private List<String> list;
     private WebBannerAdapter webBannerAdapter;
     private DatabaseReference mDatabaseRef;
@@ -50,17 +50,17 @@ public class GalleryFragment extends Fragment {
 
         initViews();
         context = container.getContext();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
-
         banner_load();
         return v;
     }
     private void initViews(){
 
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
+        recyclerBanner =  v.findViewById(R.id.recycler);
 
     }
     private void banner_load(){
-        final BannerLayout recyclerBanner =  v.findViewById(R.id.recycler);
+
         recyclerBanner.setOrientation(1);
 
         list = new ArrayList<>();

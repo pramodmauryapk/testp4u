@@ -135,7 +135,7 @@
     <string name="verify">Verify</string>
     <string name="login_here">Login Here</string>
     <string name="new_user">New User?</string>
-    <string name="join_us">Join Us</string>
+
     <string-array name="pub_year">
         <item>Year</item>
         <item>2000</item>
@@ -253,6 +253,11 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="search_books">Search Books</string>
     <string name="book_list">Book List</string>
     <string name="green_color_available_red_color_unavailable">(Green Color-Available,Red Color-Unavailable)</string>
+    <string name="gallery_images">Gallery Images</string>
+    <string name="add_new">Add New</string>
+    <string name="view_all">View All</string>
+    <string name="send_information">Send Information</string>
+    <string name="join_us">Join Us</string>
 
 
 </resources>

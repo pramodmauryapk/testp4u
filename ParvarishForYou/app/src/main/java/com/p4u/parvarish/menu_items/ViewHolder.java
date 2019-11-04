@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-   View mView;
+   private View mView;
 
 
 

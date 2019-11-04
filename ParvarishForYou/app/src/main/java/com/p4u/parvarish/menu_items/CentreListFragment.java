@@ -1,7 +1,12 @@
 package com.p4u.parvarish.menu_items;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,7 +96,8 @@ public class CentreListFragment extends HomeFragment {
                     }
                 }
 
-                HashSet hs = new HashSet(users); // users= name of arrayList from which u want to remove duplicates
+                HashSet<Teacher> hs; // users= name of arrayList from which u want to remove duplicates
+                hs = new HashSet<>(users);
 
                 users.clear();
                 users.addAll(hs);
@@ -110,12 +116,12 @@ public class CentreListFragment extends HomeFragment {
 
     @SuppressLint({"InflateParams", "SetTextI18n"})
     private void showDeleteDialog(
-                                  final String userName,
-                                  final String userEmail,
-                                  final String userRole,
-                                  final String userMobile,
-                                  final String userAddress,
-                                  final String userIdentity) {
+            final String userName,
+            final String userEmail,
+            final String userRole,
+            final String userMobile,
+            final String userAddress,
+            final String userIdentity) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -147,8 +153,67 @@ public class CentreListFragment extends HomeFragment {
                 b.cancel();
             }
         });
+        dbuttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                // Creating alert Dialog with two Buttons
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                // Setting Dialog Title
+                alertDialog.setTitle("Do you want to call?");
+                // Setting Dialog Message
+                alertDialog.setMessage(userMobile);
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.drawable.ic_phone_in_talk_black_24dp);
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                // Write your code here to execute after dialog
+                                dialog.cancel();
+                            }
+                        });
+                // Setting Positive "Yes" Button
+                alertDialog.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                // Write your code here to execute after dialog
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                callIntent.setData(Uri.parse("tel:" + userMobile));
+                                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+
+                                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+
+                                    //    Activity#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for Activity#requestPermissions for more details.
+                                }else {
+                                    Objects.requireNonNull(getContext()).startActivity(callIntent);
+                                    dialog.cancel();
+                                }
+
+
+                            }
+
+                            private int checkSelfPermission(String callPhone) {
+                                return 0;
+                            }
+                        });
+
+                // Showing Alert Message
+                alertDialog.show();
+            }
+        });
     }
+
+
 
     private void init_dialog_views(){
 

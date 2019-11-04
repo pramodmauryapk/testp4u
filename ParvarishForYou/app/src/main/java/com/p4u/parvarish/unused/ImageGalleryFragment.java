@@ -1,4 +1,4 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.unused;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.Objects;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.unused.CarouselPagerAdapter;
 
 public class ImageGalleryFragment extends Fragment {
     private static final String TAG = "ImageGalleryFragment";

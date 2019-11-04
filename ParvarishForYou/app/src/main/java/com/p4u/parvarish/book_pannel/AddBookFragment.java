@@ -43,9 +43,7 @@ public class AddBookFragment extends Fragment {
     private Spinner spBookLocation;
     private Button btnAddBook,btnlistbook;
     private Spinner spBookSubject,spBookYear;
-
     private View v;
-    private String UserID;
     private TextInputLayout tf2;
     private TextInputLayout tf3;
     private TextInputLayout tf4;
@@ -53,34 +51,21 @@ public class AddBookFragment extends Fragment {
     private TextInputLayout tf6;
     private DatabaseReference databaseBooks;
     private List<Book> books;
-    private String bookYear;
-    private String bookSubject;
-    private String bookId;
-    private String bookTitle;
-    private String bookCost;
-    private String bookAuthor;
-    private String bookDonor;
-    private String bookDonorMobile;
-    private String bookAvaibility;
-    private String bookLocation;
-    private String bookDonorTime;
-    private String bookHandoverTo;
-    private String bookHandoverTime;
-    private String booklocation;
+    private String UserID,bookYear,bookSubject,bookId,bookTitle,bookCost,bookAuthor,bookDonor,bookDonorMobile,bookAvaibility,bookLocation;
+    private String bookDonorTime,bookHandoverTo,bookHandoverTime,booklocation;
     private int t=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_add, container, false);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        final FirebaseUser user = mAuth.getCurrentUser();
-        DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
-        UserID = (requireNonNull(user)).getUid();
-        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
 
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("USERS");
+        UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+        //initilize views
         initViews();
+
         etBookTitle.requestFocus();
         etBookId.setEnabled(false);
         spBookLocation.setEnabled(false);
@@ -175,8 +160,8 @@ public class AddBookFragment extends Fragment {
                 if(requireNonNull(uInfo).getUserId().equals(UserID)) {
 
                     booklocation = uInfo.getUserAddress().substring(0, 3);
-                   location=uInfo.getUserAddress();
-                   list.add(location);
+                    location=uInfo.getUserAddress();
+                    list.add(location);
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spBookLocation.setAdapter(adapter);

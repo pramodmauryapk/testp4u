@@ -1,4 +1,4 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.unused;
 
 import android.content.Context;
 import android.graphics.Canvas;

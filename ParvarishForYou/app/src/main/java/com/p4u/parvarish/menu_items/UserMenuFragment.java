@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.galary.GalleryFragment;
 
 import static java.util.Objects.requireNonNull;
 

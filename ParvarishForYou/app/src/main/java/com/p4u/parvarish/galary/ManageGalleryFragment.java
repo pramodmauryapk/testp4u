@@ -22,8 +22,7 @@ public class ManageGalleryFragment extends Fragment {
     private static final String TAG = "ManageGalleryFragment";
     private Button openTeachersActivityBtn,openUploadActivityBtn;
     private View v;
-    private RatingBar ratingBar;
-    private Spinner spimagelist;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

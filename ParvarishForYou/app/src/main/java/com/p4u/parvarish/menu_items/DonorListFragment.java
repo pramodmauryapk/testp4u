@@ -18,9 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.Book;
@@ -71,10 +69,10 @@ public class DonorListFragment extends Fragment {
 
                 // Create a new ArrayList
 
-                   // HashSet hs = new HashSet(donors); // donor= name of arrayList from which u want to remove duplicates
+                HashSet<Book> hs = new HashSet<>(donors); // donor= name of arrayList from which u want to remove duplicates
 
-               // donors.clear();
-               // donors.addAll(hs);
+                donors.clear();
+                donors.addAll(hs);
                 //creating adapter
 
                DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);

@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.p4u.parvarish.book_pannel.BenficiaryFragment;
 import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String user_name,user_email,user_roll,user_img;
     private Intent intent;
     private TextView name,email;
-    private UserMenuFragment userMenuFragment;
     public CircleImageView img;
     public FirebaseUser user;
     public Stack<Fragment> fragmentStack;
@@ -81,10 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         user_roll=intent.getStringExtra("user_role");
         if(intent.getStringExtra("user_img")!=null) {
             user_img = intent.getStringExtra("user_img");
-        }else{
+        }// user_img= getApplication().getResources().getDrawable(R.drawable.logo).toString();
 
-            // user_img= getApplication().getResources().getDrawable(R.drawable.logo).toString();
-        }
         set_profile(user_name,user_email,user_roll,user_img);
         //settting floation action button
        // FloatingActionButton fab = findViewById(R.id.fab);
@@ -180,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .OnNegativeClicked(new FancyAlertDialogListener() {
                         @Override
                         public void OnClick() {
-                            //false;
 
+                        //return false;
 
                         }
                     })
@@ -271,7 +269,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_contact_us:newContent=new ContactUsFragment();
                 break;
-            case R.id.nav_joinus:newContent=new JoinUsFragment();
+            case R.id.nav_joinus:
+                Bundle bundle=new Bundle();
+                bundle.putString("user_name",user_email);
+                bundle.putString("user_role",user_roll);
+                bundle.putString("user_name",user_name);
+                bundle.putString("user_img",user_img);
+                newContent=new JoinUsFragment();
+                newContent.setArguments(bundle);
+
                 break;
             case R.id.nav_exit:new FancyAlertDialog.Builder(this)
                     .setTitle("Rate us if you like the app")

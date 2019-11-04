@@ -47,14 +47,11 @@ import static java.util.Objects.requireNonNull;
 public class IssueBookFragment extends Fragment {
 
     private static final String TAG = "IssueBookFragment";
-    private ListView listViewBooks;
-    private View dialogView,issuedialog,benefiarydialog;
-    private List<Book> books;
-    private ArrayList<String> benefiary;
+    private View dialogView;
+    private View beneficiarydialog;
+    private ArrayList<String> beneficiary_list;
     private DatabaseReference mRef;
-    private EditText spBookName;
-    private Spinner spbenfiary;
-    private TextView tv2;
+    private Spinner spbeneficiary;
     private TextView tv1;
     private View v;
     private TextInputEditText etFullname,etEmail,etMobile,etAddress,etIdentity,etDepositpaid;
@@ -73,14 +70,14 @@ public class IssueBookFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_issue,container,false);
-        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+
 
         //getting views
         initViews();
         blank_all();
         bundle=new Bundle();
 
-        benefiary = new ArrayList<>();
+        beneficiary_list = new ArrayList<>();
 
         btnadd.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("InflateParams")
@@ -146,10 +143,10 @@ public class IssueBookFragment extends Fragment {
                 Userid=null;
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
                 LayoutInflater inflater = getLayoutInflater();
-                benefiarydialog = inflater.inflate(R.layout.beneficiary_dialog, null);
-                dialogBuilder.setView(benefiarydialog);
-                spbenfiary=benefiarydialog.findViewById(R.id.beneficiry_list);
-                buttonback=benefiarydialog.findViewById(R.id.dbuttonBack);
+                beneficiarydialog = inflater.inflate(R.layout.beneficiary_dialog, null);
+                dialogBuilder.setView(beneficiarydialog);
+                spbeneficiary=beneficiarydialog.findViewById(R.id.beneficiry_list);
+                buttonback=beneficiarydialog.findViewById(R.id.dbuttonBack);
                 dialogBuilder.setTitle("Beneficiary List");
                 final AlertDialog b = dialogBuilder.create();
                 b.show();
@@ -161,11 +158,11 @@ public class IssueBookFragment extends Fragment {
 
                     }
                 });
-                spbenfiary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                spbeneficiary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        beneficaiary_mobile=spbenfiary.getSelectedItem().toString();
+                        beneficaiary_mobile=spbeneficiary.getSelectedItem().toString();
 
                         load_values(beneficaiary_mobile);
                         disable_all();
@@ -235,17 +232,17 @@ public class IssueBookFragment extends Fragment {
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                benefiary.clear();
+                beneficiary_list.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     TempUser beneficiary = postSnapshot.getValue(TempUser.class);
 
                     assert beneficiary != null;
-                    benefiary.add(beneficiary.getMobile());
+                    beneficiary_list.add(beneficiary.getMobile());
 
 
                 }
-                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, benefiary);
-                spbenfiary.setAdapter(beneficiary_adapter);
+                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, beneficiary_list);
+                spbeneficiary.setAdapter(beneficiary_adapter);
                 beneficiary_adapter.notifyDataSetChanged();
 
             }

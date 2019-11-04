@@ -34,15 +34,9 @@ public class DonorList_model extends ArrayAdapter<Book> {
     public View getView(int position, View convertView,@NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_all_donor, null, true);
-      /*  if (position % 2 == 1) {
-            listViewItem.setBackgroundColor(Color.YELLOW);
-        } else {
-            listViewItem.setBackgroundColor(Color.CYAN);
-        }*/
+
         TextView textViewDonorName = listViewItem.findViewById(R.id.textView_DonorName);
         TextView textViewDonorMobile = listViewItem.findViewById(R.id.textView_DonorMobile);
-
-
         Book book = books.get(position);
         textViewDonorName.setText(book.getBookDonor());
         textViewDonorMobile.setText(book.getBookDonorMobile());
