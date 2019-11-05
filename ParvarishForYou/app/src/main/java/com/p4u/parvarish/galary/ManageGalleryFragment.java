@@ -1,5 +1,6 @@
 package com.p4u.parvarish.galary;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ public class ManageGalleryFragment extends Fragment {
     private static final String TAG = "ManageGalleryFragment";
     private Button openTeachersActivityBtn,openUploadActivityBtn;
     private View v;
+    private Context context;
 
     @Nullable
     @Override
@@ -29,7 +31,7 @@ public class ManageGalleryFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_manage_gallery,container,false);
 
-
+        context = container.getContext();
         initViews();
 
         openTeachersActivityBtn.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +43,7 @@ public class ManageGalleryFragment extends Fragment {
         openUploadActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), UploadActivity.class));
+                startActivity(new Intent(context, UploadActivity.class));
                 requireNonNull(getActivity()).finish();
             }
         });
@@ -55,10 +57,11 @@ public class ManageGalleryFragment extends Fragment {
 
     }
     private void switchFragment(Fragment fragment) {
-
-        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
+        if(getActivity()!=null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
     }
 
 

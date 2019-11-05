@@ -1,6 +1,7 @@
 package com.p4u.parvarish.menu_items;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +28,12 @@ import static java.util.Objects.requireNonNull;
 public class FeedbackAddFragment extends Fragment {
     private static final String TAG = "FeedbackAddFragment";
 
-    private DatabaseReference myRef;
     private EditText editText;
     private TextView textView;
     private Button button;
     private View v;
     private RatingBar ratingBar;
-    private String userID;
+    private Context context;
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -41,26 +41,19 @@ public class FeedbackAddFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
+        final String userID = requireNonNull(user).getUid();
+        context = container.getContext();
         initViews();
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (user != null) {
-                        boolean ans = feedback_submit(userID);
-                        if (ans)
-                            Toast.makeText(getContext(), "Feedback Submitted", Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(getContext(), "Some Problem", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), "Please Login and give feedback", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
-
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean ans = feedback_submit(userID);
+                if (ans)
+                    Toast.makeText(context, "Feedback Submitted", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(context, "Some Problem", Toast.LENGTH_LONG).show();
+            }
+        });
         textView.setText ("Enter Feedback ");
         button.setText ("Submit");
         ratingBar.setVisibility (View.VISIBLE);

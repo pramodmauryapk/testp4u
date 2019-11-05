@@ -1,6 +1,7 @@
 package com.p4u.parvarish.user_pannel;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,11 +49,13 @@ public class UserProfileFragment extends Fragment {
     private LinearLayout l9;
     private Spinner sp;
     private String userrole;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate (R.layout.layout_profile, container, false);
+        context = container.getContext();
         initViews ();
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -131,9 +134,9 @@ public class UserProfileFragment extends Fragment {
     }
     private void get_values(){
         userName=username.getText ().toString ().trim ().toUpperCase ();
-        userEmail=email.getText ().toString ().trim ().toUpperCase ();
+        userEmail=email.getText ().toString ().trim ();
         userMobile=mobile.getText ().toString ().trim ();
-        userIdentity=identity.getText ().toString ().trim ();
+        userIdentity=identity.getText ().toString ().trim ().toUpperCase();
     }
     private void show(DataSnapshot dataSnapshot){
         try {
@@ -211,7 +214,7 @@ public class UserProfileFragment extends Fragment {
                 Img);
 
         dR.setValue(user);
-        Toast.makeText(getContext(), "User info Updated", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "User info Updated", Toast.LENGTH_LONG).show();
     }
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");

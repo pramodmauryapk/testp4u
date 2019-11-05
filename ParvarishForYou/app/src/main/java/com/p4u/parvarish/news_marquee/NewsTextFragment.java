@@ -1,6 +1,7 @@
 package com.p4u.parvarish.news_marquee;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +25,14 @@ public class NewsTextFragment extends Fragment {
     private TextView tv;
     private View v;
     private String text;
-
+    private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_news_text, container, false);
+        context = container.getContext();
         initViews();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("WELCOME_TEXT").child("marqueeText");
 

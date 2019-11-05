@@ -1,5 +1,6 @@
 package com.p4u.parvarish.menu_items;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,7 @@ import com.p4u.parvarish.R;
 
 public class CapacityBuildingFragment extends Fragment {
 
-
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class CapacityBuildingFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_capacity_building, container, false);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
+        context = container.getContext();
         initViews();
 
 

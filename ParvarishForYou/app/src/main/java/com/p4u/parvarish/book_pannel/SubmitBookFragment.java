@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -61,6 +62,7 @@ public class SubmitBookFragment extends Fragment {
     private TextInputEditText et_deposit_paid;
     private TextInputLayout tv1;
     private String userid=null;
+    private Context context;
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -69,6 +71,7 @@ public class SubmitBookFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+        context = container.getContext();
         initViews();
 
 
@@ -143,7 +146,7 @@ public class SubmitBookFragment extends Fragment {
                             final String dbookHandoverTo,
                             final String dbookHandoverTime) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);
@@ -165,7 +168,7 @@ public class SubmitBookFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 b.cancel();
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                 LayoutInflater inflater = getLayoutInflater();
                 handover_dialog = inflater.inflate(R.layout.show_issuebook_dialog, null);
                 dialogBuilder.setView(handover_dialog);
@@ -185,35 +188,37 @@ public class SubmitBookFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         dialog.cancel();
-                        new FancyAlertDialog.Builder(getActivity())
-                                .setTitle("ParvarishForYou")
-                                .setMessage("Want to Submit to Center")
-                                .setNegativeBtnText("Cancel")
-                                .setPositiveBtnText("OK")
-                                .setAnimation(Animation.POP)
-                                .isCancellable(true)
-                                .setIcon(R.drawable.logo, Icon.Visible)
-                                .OnPositiveClicked(new FancyAlertDialogListener() {
 
-                                    @Override
-                                    public void OnClick() {
-                                        boolean ans=updateBook(dbookId,dbookHandoverTo, requireNonNull(et_deposit_paid.getText()).toString());
+                            new FancyAlertDialog.Builder(getActivity())
+                                    .setTitle("ParvarishForYou")
+                                    .setMessage("Want to Submit to Center")
+                                    .setNegativeBtnText("Cancel")
+                                    .setPositiveBtnText("OK")
+                                    .setAnimation(Animation.POP)
+                                    .isCancellable(true)
+                                    .setIcon(R.drawable.logo, Icon.Visible)
+                                    .OnPositiveClicked(new FancyAlertDialogListener() {
 
-                                        if(ans){
-                                            Toast.makeText(getContext(), "Submission Successfully", Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                                        @Override
+                                        public void OnClick() {
+                                            boolean ans = updateBook(dbookId, dbookHandoverTo, requireNonNull(et_deposit_paid.getText()).toString());
+
+                                            if (ans) {
+                                                Toast.makeText(context, "Submission Successfully", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                })
-                                .OnNegativeClicked(new FancyAlertDialogListener()  {
-                                    @Override
-                                    public void OnClick() {
-                                        Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .OnNegativeClicked(new FancyAlertDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
 
-                                    }
-                                })
-                                .build();
+                                        }
+                                    })
+                                    .build();
+
 
 
                     }
@@ -309,10 +314,11 @@ public class SubmitBookFragment extends Fragment {
                             }
 
                         }
-
-                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                        listViewBooks.setAdapter(bookAdapter);
-                        bookAdapter.notifyDataSetChanged();
+                        if (getActivity() != null) {
+                            LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                            listViewBooks.setAdapter(bookAdapter);
+                            bookAdapter.notifyDataSetChanged();
+                        }
 
                     }
 
@@ -335,10 +341,11 @@ public class SubmitBookFragment extends Fragment {
 
                             }
                         }
-
-                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                        listViewBooks.setAdapter(bookAdapter);
-                        bookAdapter.notifyDataSetChanged();
+                        if (getActivity() != null) {
+                            LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                            listViewBooks.setAdapter(bookAdapter);
+                            bookAdapter.notifyDataSetChanged();
+                        }
                     }
 
                     @Override

@@ -1,5 +1,6 @@
 package com.p4u.parvarish.user_pannel;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,14 +39,14 @@ public class UserMobileFragment extends Fragment {
     private View v;
     private Builder builder;
     private String Name,Email,Mobile,location,Identity,Role,status;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate
-                (R.layout.fragment_user_mobiles, container, false);
+        v = inflater.inflate(R.layout.fragment_user_mobiles, container, false);
         databaseUsers = FirebaseDatabase.getInstance().getReference().child("USERS");
-
+        context = container.getContext();
         //getting views
 
         initViews();
@@ -61,7 +62,6 @@ public class UserMobileFragment extends Fragment {
 
         listViewUsers = v.findViewById(R.id.view_list);
 
-
     }
     public void onStart() {
 
@@ -76,8 +76,10 @@ public class UserMobileFragment extends Fragment {
 
                         users.add (user);
                 }
-                UserList_model userAdapter = new UserList_model(getActivity(), users);
-                listViewUsers.setAdapter(userAdapter);
+                if(getActivity()!=null) {
+                    UserList_model userAdapter = new UserList_model(getActivity(), users);
+                    listViewUsers.setAdapter(userAdapter);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -89,10 +91,11 @@ public class UserMobileFragment extends Fragment {
 
 
     private void switchFragment(Fragment fragment) {
-
-       Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
+        if(getActivity()!=null) {
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
     }
 
 

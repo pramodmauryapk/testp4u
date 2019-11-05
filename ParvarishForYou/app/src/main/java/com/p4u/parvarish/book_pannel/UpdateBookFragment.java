@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -52,16 +53,17 @@ public class UpdateBookFragment extends Fragment {
     private Button dbuttonUpdate,dbuttonDelete,dbuttonBack;
     private View dialogView;
     private View v;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
-
+        context = container.getContext();
         initViews();
 
-        tv2.setText("Tap to Book for Update");
+        tv2.setText(R.string.tap_to_book_for_update);
         books = new ArrayList<>();
 
         listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,7 +147,7 @@ public class UpdateBookFragment extends Fragment {
                                         final String dbookDonor,
                                         final String dbookDonorMobile) {
         //setting alert dialog
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         final LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.update_dialog, null);
         dialogBuilder.setView(dialogView);
@@ -193,7 +195,7 @@ public class UpdateBookFragment extends Fragment {
                             Donor,
                             DonorMobile);
                    if(ans){
-                       Toast.makeText(getContext(), "Book Record Updated", Toast.LENGTH_LONG).show();
+                       Toast.makeText(context, "Book Record Updated", Toast.LENGTH_LONG).show();
                        b.dismiss();
 
                    }
@@ -207,7 +209,7 @@ public class UpdateBookFragment extends Fragment {
         dbuttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(UpdateBookFragment.this.getContext()));
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Are you sure you want to Delete Book?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -266,7 +268,7 @@ public class UpdateBookFragment extends Fragment {
     private void deleteBook(String book_id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("books").child(book_id);
         dR.removeValue();
-        Toast.makeText(getContext(), "Book Deleted", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Book Deleted", Toast.LENGTH_LONG).show();
 
     }
     private void init_dialog_views(){
@@ -303,7 +305,7 @@ public class UpdateBookFragment extends Fragment {
 
 
                         }
-
+                        assert getActivity() != null;
                         LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
                         listViewBooks.setAdapter(bookAdapter);
 

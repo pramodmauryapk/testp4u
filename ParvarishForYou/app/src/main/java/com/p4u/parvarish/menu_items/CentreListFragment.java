@@ -3,6 +3,7 @@ package com.p4u.parvarish.menu_items;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -46,6 +47,7 @@ public class CentreListFragment extends HomeFragment {
     private androidx.appcompat.app.AlertDialog.Builder builder;
     private TextInputLayout t1;
     private View v;
+    private Context context;
 
     @Nullable
     @Override
@@ -54,7 +56,7 @@ public class CentreListFragment extends HomeFragment {
         v = inflater.inflate
                 (R.layout.fragment_center_list, container, false);
         databaseUsers = FirebaseDatabase.getInstance().getReference().child("USERS");
-
+        context = container.getContext();
         //getting views
         initViews();
 
@@ -123,7 +125,7 @@ public class CentreListFragment extends HomeFragment {
             final String userAddress,
             final String userIdentity) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.layout_profile, null);
         dialogBuilder.setView(dialogView);
@@ -195,7 +197,7 @@ public class CentreListFragment extends HomeFragment {
                                     // to handle the case where the user grants the permission. See the documentation
                                     // for Activity#requestPermissions for more details.
                                 }else {
-                                    Objects.requireNonNull(getContext()).startActivity(callIntent);
+                                    Objects.requireNonNull(context).startActivity(callIntent);
                                     dialog.cancel();
                                 }
 

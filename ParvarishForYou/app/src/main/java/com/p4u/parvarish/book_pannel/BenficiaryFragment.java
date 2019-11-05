@@ -42,22 +42,22 @@ public class BenficiaryFragment extends Fragment {
 
     private static final String TAG = "BeneficiaryFragment";
     private View dialogView;
-
     private TextView tv2;
     private List<TempUser> users;
-
     private ListView beneficiarylist;
     private TextInputEditText search_beneficiary;
     private TextInputLayout tf1;
     private TextView duserid,dtvname,dtvemail,dtvmobile,dtvaddress,dtvidentity,dtvbookshaving,dtvdeposit,dtvrefund;
     private View v;
     private Button btnselect;
+    private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_book_search, container, false);
+        context = container.getContext();
         initViews();
         tv2.setText("Tap to User to Return Book");
         tf1.setHint("Beneficiary-Name/Mobile/Email");
@@ -120,6 +120,7 @@ public class BenficiaryFragment extends Fragment {
     private void load_list() {
 
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
+
         final Layoutbeneficiary_details beneficiary_adapter = new Layoutbeneficiary_details(getActivity(), users);
 
         if (!requireNonNull(search_beneficiary.getText()).toString().toUpperCase().equals("")) {
@@ -215,7 +216,7 @@ public class BenficiaryFragment extends Fragment {
                             final String duserBookDeposit,
                             final String duserBookRefund) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.show_beneficiary_dialog, null);
         dialogBuilder.setView(dialogView);
@@ -247,11 +248,11 @@ public class BenficiaryFragment extends Fragment {
 
     // switching fragment
     private void switchFragment(Fragment fragment) {
-
-        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
-
+        if (getActivity() != null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
     }
 
 }

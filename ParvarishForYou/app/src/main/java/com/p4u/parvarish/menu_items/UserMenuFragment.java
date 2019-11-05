@@ -1,5 +1,6 @@
 package com.p4u.parvarish.menu_items;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,7 +25,7 @@ public class UserMenuFragment extends HomeFragment {
     private String Role;
     private Bundle bundle;
     private String[] gridViewString = {
-            "Telent Support",
+            "Talent Support",
             "Knowledge Center",
             "Technical Partnership",
             "Capacity Building",
@@ -45,7 +46,7 @@ public class UserMenuFragment extends HomeFragment {
 
     };
 
-
+    private Context context;
 
 
 
@@ -55,10 +56,11 @@ public class UserMenuFragment extends HomeFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
+        context = container.getContext();
         bundle=new Bundle();
         assert this.getArguments() != null;
         Role = this.getArguments().getString("user_role");
-        LayoutGridView adapterViewAndroid = new LayoutGridView(getContext(), gridViewString, gridViewImageId);
+        LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         androidGridView.setAdapter(adapterViewAndroid);
 
@@ -121,11 +123,13 @@ public class UserMenuFragment extends HomeFragment {
     private void switch_menu(Fragment fragment) {
         bundle.putString("user_role",Role);
         fragment.setArguments(bundle);
-        requireNonNull(getActivity()).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.menu_fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
+        if(getActivity()!=null) {
+            requireNonNull(getActivity()).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.menu_fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
 
     }
 

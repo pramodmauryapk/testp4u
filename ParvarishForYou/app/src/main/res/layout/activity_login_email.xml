@@ -54,8 +54,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/logo"
-                android:contentDescription="@string/parvarish_knowledge_center"
-                android:layout_margin="24dp"/>
+                android:contentDescription="@string/parvarish_knowledge_center" />
 
             <TextView
                 android:id="@+id/login_text"

@@ -1,5 +1,6 @@
 package com.p4u.parvarish.menu_items;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class DonorListFragment extends Fragment {
     private static final String TAG = "DonorListFragment";
     private ListView listViewdonors;
     private List<Book> donors;
-
+    private Context context;
     private DatabaseReference databaseBooks;
     private View v;
     @Nullable
@@ -38,6 +39,7 @@ public class DonorListFragment extends Fragment {
         v = inflater.inflate
                 (R.layout.fragment_donor_list, container, false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+        context = container.getContext();
         //getting views
         initViews();
 
@@ -74,10 +76,11 @@ public class DonorListFragment extends Fragment {
                 donors.clear();
                 donors.addAll(hs);
                 //creating adapter
-
-               DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);
-               listViewdonors.setAdapter(donorAdapter);
-               donorAdapter.notifyDataSetChanged();
+                if(getActivity()!=null) {
+                    DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);
+                    listViewdonors.setAdapter(donorAdapter);
+                    donorAdapter.notifyDataSetChanged();
+                }
 
             }
 

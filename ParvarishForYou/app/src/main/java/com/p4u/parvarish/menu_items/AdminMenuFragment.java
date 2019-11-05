@@ -36,7 +36,7 @@ public class AdminMenuFragment extends HomeFragment {
 
     private static final String TAG = "AdminMenuFragment";
     private DatabaseReference myRef;
-
+    private Context context;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -44,7 +44,7 @@ public class AdminMenuFragment extends HomeFragment {
 
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
         initViews();
-        Context context = container.getContext();
+        context = container.getContext();
         assert this.getArguments() != null;
         String role = this.getArguments().getString("user_role");
         getWidthAndHeight();
@@ -134,7 +134,7 @@ public class AdminMenuFragment extends HomeFragment {
             };
 
         }
-        LayoutGridView adapterViewAndroid = new LayoutGridView(getContext(), gridViewString, gridViewImageId);
+        LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         androidGridView.setAdapter(adapterViewAndroid);
         androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -156,7 +156,7 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new DonorListFragment());
                         break;
                     case 3:
-                       // Intent ActivityIndent = new Intent(getContext(), BookListActivity.class);
+                       // Intent ActivityIndent = new Intent(context, BookListActivity.class);
                         //startActivity(ActivityIndent);
                         switchFragment(new BookListFragment());
                         break;
@@ -201,7 +201,7 @@ public class AdminMenuFragment extends HomeFragment {
 
     }
     private void makeToast(String input) {
-        Toast.makeText(getContext(), input, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, input, Toast.LENGTH_SHORT).show();
     }
     private int getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();

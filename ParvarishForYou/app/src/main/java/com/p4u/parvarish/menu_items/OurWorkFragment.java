@@ -1,5 +1,6 @@
 package com.p4u.parvarish.menu_items;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +21,13 @@ public class OurWorkFragment extends Fragment {
     private EditText editText;
     private TextView textView;
     private Button button;
-
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_our_work, container, false);
-
+        context = container.getContext();
         initViews();
         return v;
     }

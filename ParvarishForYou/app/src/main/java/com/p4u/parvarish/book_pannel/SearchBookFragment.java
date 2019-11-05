@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,6 +45,7 @@ public class SearchBookFragment extends Fragment {
     private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime;
     private Button dBack;
     private View dialogView;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class SearchBookFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
 
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
-
+        context = container.getContext();
         //getting views
         initViews();
 
@@ -112,7 +114,7 @@ public class SearchBookFragment extends Fragment {
                             final String dbookHandoverTo,
                             final String dbookHandoverTime) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);
@@ -191,10 +193,11 @@ public class SearchBookFragment extends Fragment {
 
 
                         }
-
-                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                        listViewBooks.setAdapter(bookAdapter);
-                        bookAdapter.notifyDataSetChanged();
+                        if (getActivity() != null) {
+                            LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                            listViewBooks.setAdapter(bookAdapter);
+                            bookAdapter.notifyDataSetChanged();
+                        }
 
                     }
 
@@ -214,10 +217,11 @@ public class SearchBookFragment extends Fragment {
                             books.add(book);
 
                         }
-
-                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                        listViewBooks.setAdapter(bookAdapter);
-                        bookAdapter.notifyDataSetChanged();
+                        if (getActivity() != null) {
+                            LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                            listViewBooks.setAdapter(bookAdapter);
+                            bookAdapter.notifyDataSetChanged();
+                        }
 
                     }
 

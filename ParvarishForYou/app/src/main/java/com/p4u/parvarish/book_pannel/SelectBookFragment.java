@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -59,7 +60,7 @@ public class SelectBookFragment extends Fragment {
     private String Userid=null;
 
     private int noofbooks;
-
+    private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
@@ -67,7 +68,7 @@ public class SelectBookFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_book_search,container,false);
         myref = FirebaseDatabase.getInstance().getReference().child("BOOKS");
-
+        context = container.getContext();
         //getting views
         initViews();
 
@@ -168,10 +169,11 @@ public class SelectBookFragment extends Fragment {
                         }
 
                     }
-
-                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                    listViewBooks.setAdapter(bookAdapter);
-                    bookAdapter.notifyDataSetChanged();
+                    if (getActivity() != null) {
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                        listViewBooks.setAdapter(bookAdapter);
+                        bookAdapter.notifyDataSetChanged();
+                    }
 
                 }
 
@@ -194,10 +196,11 @@ public class SelectBookFragment extends Fragment {
 
                         }
                     }
-
-                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                    listViewBooks.setAdapter(bookAdapter);
-                    bookAdapter.notifyDataSetChanged();
+                    if(getActivity()!=null) {
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                        listViewBooks.setAdapter(bookAdapter);
+                        bookAdapter.notifyDataSetChanged();
+                    }
 
                 }
 
@@ -228,7 +231,7 @@ public class SelectBookFragment extends Fragment {
                             final String dbookHandoverTo,
                             final String dbookHandoverTime) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);
@@ -285,16 +288,16 @@ public class SelectBookFragment extends Fragment {
                                     boolean ans = updateBook(Userid, dbookId);
                                     // load_list();
                                     if (ans) {
-                                        Toast.makeText(getContext(), "Book Issued Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Book Issued Successfully", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             })
                             .OnNegativeClicked(new FancyAlertDialogListener() {
                                 @Override
                                 public void OnClick() {
-                                    Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
 
                                 }
                             })

@@ -1,5 +1,6 @@
 package com.p4u.parvarish.user_pannel;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -31,10 +32,11 @@ public class UpdatePasswordFragment extends Fragment {
     private String password,apassword;
     private EditText txtpass,txtapass;
     private TextInputLayout tf1,tf2;
-
+    private Context context;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_update_password, container, false);
+        context = container.getContext();
         txtpass = v.findViewById(R.id.et_oldpass);
         txtapass = v.findViewById(R.id.et_newpass);
         Button btnsave = v.findViewById(R.id.btn_save);
@@ -62,7 +64,7 @@ public class UpdatePasswordFragment extends Fragment {
 
                 else{
                     myref.setValue(apassword);
-                    Toast.makeText(getContext(),"Password Updated",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Password Updated",Toast.LENGTH_LONG).show();
                 }
 
 

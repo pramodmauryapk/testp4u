@@ -1,5 +1,6 @@
 package com.p4u.parvarish.news_marquee;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +25,14 @@ public class NewsAddFragment extends Fragment {
     private EditText editText;
     private Button save;
     private View v;
-
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
         myRef = FirebaseDatabase.getInstance().getReference().child("WELCOME_TEXT");
-
+        context = container.getContext();
         initViews();
         save.setOnClickListener (new View.OnClickListener() {
             @Override
@@ -53,7 +54,7 @@ public class NewsAddFragment extends Fragment {
         String newstext = editText.getText ().toString ();
         News news= new News(newsid, newstext);
         myRef.setValue(news);
-        Toast.makeText(getContext(), "News Updated", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "News Updated", Toast.LENGTH_LONG).show();
 
     }
     @Override

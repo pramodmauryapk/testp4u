@@ -27,7 +27,7 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           app:autoPlaying="true"
-          app:centerScale="1.8"
+          app:centerScale="1.6"
           app:itemSpace="30"
           app:moveSpeed="1.8"/>
       </LinearLayout>

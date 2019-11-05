@@ -41,10 +41,9 @@ public class GalleryItemFragment extends Fragment {
     private int screenHeight;
     private List<Image_Model> mImageModels;
     private List<String> list;
-    Context context;
+    private Context context;
     private ArrayAdapter mAdapter;
     private int[] imageArray = new int[]{};
-
 
     static Fragment newInstance(ImageGalleryFragment context, int pos, float scale) {
         Bundle b = new Bundle();
@@ -66,7 +65,7 @@ public class GalleryItemFragment extends Fragment {
         if (container == null) {
             return null;
         }
-
+        context = container.getContext();
        int[] imageArray = new int[]{R.drawable.image1, R.drawable.image2,
                 R.drawable.image3, R.drawable.image4, R.drawable.image5,
                 R.drawable.image6, R.drawable.image7, R.drawable.image8,
@@ -131,7 +130,7 @@ public class GalleryItemFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

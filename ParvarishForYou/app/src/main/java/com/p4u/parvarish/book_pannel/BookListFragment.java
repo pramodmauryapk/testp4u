@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class BookListFragment extends Fragment {
     private DatabaseReference databaseBooks;
     private RecyclerView recyclerView;
     private View v;
+    private Context context;
     private final View.OnClickListener mOnClickListener = new MyOnClickListener();
     @Nullable
     @Override
@@ -48,7 +50,7 @@ public class BookListFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_booklist, container, false);
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
-
+        context = container.getContext();
         initViews();
         recyclerView.setLayoutManager(new spreadLayout());
         adapter = getAdapter();
@@ -119,7 +121,7 @@ public class BookListFragment extends Fragment {
     */
     @NonNull
     private RecyclerView.Adapter getAdapter() {
-        final LayoutInflater inflater = LayoutInflater.from(getContext());
+        final LayoutInflater inflater = LayoutInflater.from(context);
         return new RecyclerView.Adapter() {
             @NonNull
             @Override
@@ -129,7 +131,7 @@ public class BookListFragment extends Fragment {
              /*   view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(),"hi"+viewType,Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,"hi"+viewType,Toast.LENGTH_LONG).show();
                     }
                 });*/
                 return new MyViewHolder(view);
@@ -226,7 +228,7 @@ public class BookListFragment extends Fragment {
                             final String dbookHandoverTo,
                             final String dbookHandoverTime) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.show_book_dialog, null);
         dialogBuilder.setView(dialogView);

@@ -1,6 +1,7 @@
 package com.p4u.parvarish.user_pannel;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,13 +31,14 @@ public class UserDetailsFragment extends Fragment {
     private TextView Mobile,Identity,Address,Status;
     private ImageView teacherDetailImageView;
     private View v;
-
+    private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_user_detail,container,false);
+        context = container.getContext();
         initializeWidgets();
         //RECEIVE DATA FROM ITEMSACTIVITY VIA INTENT
         //Intent i=getActivity().getIntent();

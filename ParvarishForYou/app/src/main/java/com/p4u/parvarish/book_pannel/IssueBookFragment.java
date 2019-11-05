@@ -2,6 +2,7 @@ package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -64,6 +65,7 @@ public class IssueBookFragment extends Fragment {
     private Bundle bundle;
     private String Userid,Fullname,Email,Mobile,Address,Identity,Deposit,beneficaiary_mobile,name;
     private Boolean amount_validation=false;
+    private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
@@ -71,7 +73,7 @@ public class IssueBookFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_book_issue,container,false);
 
-
+        context = container.getContext();
         //getting views
         initViews();
         blank_all();
@@ -86,7 +88,7 @@ public class IssueBookFragment extends Fragment {
                 get_values();
                 boolean res=validate();
                 if(res) {
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = getLayoutInflater();
                     dialogView = inflater.inflate(R.layout.show_issuebook_dialog, null);
                     dialogBuilder.setView(dialogView);
@@ -118,7 +120,7 @@ public class IssueBookFragment extends Fragment {
                                         Userid=create_user(Fullname,Email,Address,Mobile,Identity,Deposit);
                                         disable_all();
                                         tv1.setText("BENEFICIARY REGISTRED");
-                                        Toast.makeText(getContext(), "Beneficiary Created", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Beneficiary Created", Toast.LENGTH_SHORT).show();
                                         switchFragment(new SelectBookFragment());
                                     }
 
@@ -141,7 +143,7 @@ public class IssueBookFragment extends Fragment {
                 tv1.setText("BENEFICIARY DETAILS");
 
                 Userid=null;
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                 LayoutInflater inflater = getLayoutInflater();
                 beneficiarydialog = inflater.inflate(R.layout.beneficiary_dialog, null);
                 dialogBuilder.setView(beneficiarydialog);
@@ -185,9 +187,37 @@ public class IssueBookFragment extends Fragment {
                 tv1.setText("NEW BENEFICIARY");
             }
         });
+        change_listner(etFullname,tlname);
+        change_listner(etEmail,tlemail);
+        change_listner(etMobile,tlmobile);
+        change_listner(etAddress,tladdress);
+        change_listner(etIdentity,tlidentity);
         return v;
     }
+    public void onResume(){
+        super.onResume();
+        blank_all();
 
+    }
+    private void change_listner(final TextView v,final TextInputLayout til){
+
+
+
+        v.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                 til.setErrorEnabled(false);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+
+            }
+
+        });
+    }
     private void load_values(final String beneficaiary_mobile) {
         try {
             mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
@@ -241,7 +271,7 @@ public class IssueBookFragment extends Fragment {
 
 
                 }
-                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, beneficiary_list);
+                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<>(requireNonNull(context), android.R.layout.simple_spinner_item, beneficiary_list);
                 spbeneficiary.setAdapter(beneficiary_adapter);
                 beneficiary_adapter.notifyDataSetChanged();
 
@@ -393,13 +423,15 @@ public class IssueBookFragment extends Fragment {
     }
     // switching fragment
     private void switchFragment(Fragment fragment) {
-        bundle.putString("Beneficiary_Id",Userid);
-        bundle.putString("Beneficiary_Name",name);
+        bundle.putString("Beneficiary_Id", Userid);
+        bundle.putString("Beneficiary_Name", name);
         fragment.setArguments(bundle);
-        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
+        if (getActivity() != null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
 
+        }
     }
 
 

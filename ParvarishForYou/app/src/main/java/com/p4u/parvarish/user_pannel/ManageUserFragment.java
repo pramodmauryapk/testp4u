@@ -2,6 +2,7 @@ package com.p4u.parvarish.user_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,22 +59,23 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     private Button dbuttonBack,dbuttonDelete,dbuttonUpdate;
     private Spinner sp;
     private String role,UID;
+    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_user_list, container, false);
-
+        context = container.getContext();
         RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         mProgressBar = v.findViewById(R.id.myDataLoaderProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
 
         mTeachers = new ArrayList<>();
-        mAdapter = new RecyclerAdapter_model(getContext(), mTeachers);
+        mAdapter = new RecyclerAdapter_model(context, mTeachers);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
@@ -204,7 +206,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                             public void OnClick() {
 
                                 mDatabaseRef.child(selectedKey).removeValue();
-                                Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
 
                             }
                         })
@@ -231,7 +233,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                                   final String userAddress,
                                   final String userIdentity) {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (getContext ());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (context);
         LayoutInflater inflater = getLayoutInflater ();
         dialogView = inflater.inflate (R.layout.layout_profile, null);
         dialogBuilder.setView (dialogView);
@@ -255,9 +257,9 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
                boolean ans= updatedetails(userId);
                if(ans)
-                   Toast.makeText(getContext(), "User Updated", Toast.LENGTH_LONG).show();
+                   Toast.makeText(context, "User Updated", Toast.LENGTH_LONG).show();
                else
-                   Toast.makeText(getContext(), "User Not Updated", Toast.LENGTH_LONG).show();
+                   Toast.makeText(context, "User Not Updated", Toast.LENGTH_LONG).show();
 
             }
         });

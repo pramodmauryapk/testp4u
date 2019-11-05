@@ -1,5 +1,6 @@
 package com.p4u.parvarish.unused;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class FullImageFragment extends Fragment {
     public CarouselPagerAdapter adapter;
     ViewPager pager;
     static int count = 10;
-
+    private Context context;
     static int FIRST_PAGE = 10;
 
     @Nullable
@@ -34,7 +35,7 @@ public class FullImageFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_full_image, container, false);
 
-
+        context = container.getContext();
         initViews();
         ImageView showimage = v.findViewById(R.id.img);
         Button close = v.findViewById(R.id.btnClose);
@@ -68,10 +69,11 @@ public class FullImageFragment extends Fragment {
         return v;
     }
     private void switchFragment(Fragment fragment) {
-
-        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
+        if(getActivity()!=null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
 
     }
     private void initViews(){

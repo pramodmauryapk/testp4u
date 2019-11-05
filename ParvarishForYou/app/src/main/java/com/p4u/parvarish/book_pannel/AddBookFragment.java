@@ -1,8 +1,12 @@
 package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,14 +52,14 @@ public class AddBookFragment extends Fragment {
     private TextInputLayout tf2;
     private TextInputLayout tf3;
     private TextInputLayout tf4;
-    private TextInputLayout tf5;
     private TextInputLayout tf6;
+    private TextInputLayout tf7;
     private DatabaseReference databaseBooks;
     private List<Book> books;
     private String UserID,bookYear,bookSubject,bookId,bookTitle,bookCost,bookAuthor,bookDonor,bookDonorMobile,bookAvaibility,bookLocation;
     private String bookDonorTime,bookHandoverTo,bookHandoverTime,booklocation;
     private int t=0;
-
+    private Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,6 +68,7 @@ public class AddBookFragment extends Fragment {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("USERS");
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+        context = container.getContext();
         //initilize views
         initViews();
 
@@ -106,7 +112,11 @@ public class AddBookFragment extends Fragment {
             }
 
         });
-
+        change_listner(etBookTitle,tf2);
+        change_listner(etBookAuthor,tf4);
+        change_listner(etBookCost,tf3);
+        change_listner(etDonor,tf6);
+        change_listner(etDonorMobile,tf7);
         return v;
     }
     private void load_bookid(final String location) {
@@ -118,19 +128,18 @@ public class AddBookFragment extends Fragment {
                     books.clear();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Book book = postSnapshot.getValue(Book.class);
-                        if (Objects.requireNonNull(book).getBookLocation().contains(location))
-                        {
+                        if (Objects.requireNonNull(book).getBookLocation().contains(location)) {
                             books.add(book);
                         }
 
 
                     }
+                    if (getActivity() != null) {
+                        LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
+                        t = bookAdapter.getCount();
+                        etBookId.setText(booklocation + (t + 1));
 
-                    LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-
-                    t=bookAdapter.getCount();
-                    etBookId.setText(booklocation+(t+1));
-
+                    }
                 }
 
                 @Override
@@ -141,7 +150,25 @@ public class AddBookFragment extends Fragment {
 
         }
     }
+    private void change_listner(final TextView v, final TextInputLayout til){
 
+
+
+        v.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                til.setErrorEnabled(false);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+
+            }
+
+        });
+    }
 
 
     @SuppressLint("SetTextI18n")
@@ -154,7 +181,7 @@ public class AddBookFragment extends Fragment {
                 Teacher uInfo=ds.getValue(Teacher.class);
 
                 if(requireNonNull(uInfo).getUserRole().equals("ADMIN")){
-                    etBookId.setEnabled(true);
+                    //etBookId.setEnabled(true);
                     spBookLocation.setEnabled(true);
                 }
                 if(requireNonNull(uInfo).getUserId().equals(UserID)) {
@@ -162,7 +189,7 @@ public class AddBookFragment extends Fragment {
                     booklocation = uInfo.getUserAddress().substring(0, 3);
                     location=uInfo.getUserAddress();
                     list.add(location);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireNonNull(getContext()), android.R.layout.simple_spinner_item, list);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireNonNull(context), android.R.layout.simple_spinner_item, list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spBookLocation.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
@@ -209,12 +236,12 @@ public class AddBookFragment extends Fragment {
 
             //Saving the Book
             databaseBooks.child(requireNonNull(bookId)).setValue(book);
-            Toast.makeText(getContext(), "Book added", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Book added", Toast.LENGTH_LONG).show();
             //setting edittext to blank again
             set_blank();
 
         } else {
-            Toast.makeText(getContext(), "fill All required fields ", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "fill All required fields ", Toast.LENGTH_LONG).show();
         }
     }
     private boolean validate() {
@@ -233,11 +260,11 @@ public class AddBookFragment extends Fragment {
             return false;
         }
         if (TextUtils.isEmpty(bookDonor)) {
-            tf5.setError("Enter Book Donor Name");
+            tf6.setError("Enter Book Donor Name");
             return false;
         }
         if (bookDonorMobile.length() != 10) {
-            tf6.setError("Enter Book Donor Mobile");
+            tf7.setError("Enter Book Donor Mobile");
             return false;
         }
 
@@ -295,8 +322,9 @@ public class AddBookFragment extends Fragment {
         tf2=v.findViewById(R.id.tf2);
         tf3=v.findViewById(R.id.tf3);
         tf4=v.findViewById(R.id.tf4);
-        tf6=v.findViewById(R.id.tf6);
 
+        tf6=v.findViewById(R.id.tf6);
+        tf7=v.findViewById(R.id.tf7);
         btnAddBook = v.findViewById(R.id.btnAddBook);
         btnlistbook=v.findViewById(R.id.btnlistBook);
     }
@@ -307,11 +335,11 @@ public class AddBookFragment extends Fragment {
     }
     // switching fragment
     private void switchFragment(Fragment fragment) {
-
-        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
-
+        if (getActivity() != null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
     }
 
 

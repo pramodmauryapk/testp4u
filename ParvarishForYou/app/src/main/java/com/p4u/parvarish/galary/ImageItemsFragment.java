@@ -1,5 +1,6 @@
 package com.p4u.parvarish.galary;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,21 +40,22 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
     private ValueEventListener mDBListener;
     private List<Image_Model> mImageModels;
     private Spinner spimagelist;
+    private Context context;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_image_items, container, false);
-
+        context = container.getContext();
 
         RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         mProgressBar = v. findViewById(R.id.myDataLoaderProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
         spimagelist=v.findViewById(R.id.spimagelist);
         mImageModels = new ArrayList<> ();
-        mAdapter = new RecyclerAdapter (getContext(), mImageModels);
+        mAdapter = new RecyclerAdapter (context, mImageModels);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(ImageItemsFragment.this);
 
@@ -129,7 +131,7 @@ public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnIt
             @Override
             public void onSuccess(Void aVoid) {
                 mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(ImageItemsFragment.this.getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
             }
         });
 

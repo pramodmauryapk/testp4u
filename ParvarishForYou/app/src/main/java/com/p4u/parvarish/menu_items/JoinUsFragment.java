@@ -2,6 +2,7 @@ package com.p4u.parvarish.menu_items;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -75,7 +76,7 @@ public class JoinUsFragment extends Fragment {
     private String email;
     private Intent intent;
     private String name,user_name,user_email,user_roll,user_img;
-
+    private Context context;
     private String mobilenumber;
     private String address;
 
@@ -85,7 +86,7 @@ public class JoinUsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_joinus, container, false);
-
+        context = container.getContext();
         initViews();
 
         //get Firebase auth instance
@@ -182,7 +183,7 @@ public class JoinUsFragment extends Fragment {
             );
             myref.child(Objects.requireNonNull(id)).setValue(upload);
             progressBar.setVisibility(View.INVISIBLE);
-            Toast.makeText(getContext(), "Request Send Successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Request Send Successfully", Toast.LENGTH_LONG).show();
 
             //login default homefragment
             fragmentStack = new Stack<>();
@@ -205,7 +206,7 @@ public class JoinUsFragment extends Fragment {
 
 
         else {
-            Toast.makeText(getContext(), "Request Cannot send", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Request Cannot send", Toast.LENGTH_SHORT).show();
         }
 
     }
