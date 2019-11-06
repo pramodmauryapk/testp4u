@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.p4u.parvarish.book_pannel.BenficiaryFragment;
 import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        // FloatingActionButton fab = findViewById(R.id.fab);
 
         //setting title
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Parvarish4You");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
         //adding menus in navigationview
         addMenuItemInNavMenuDrawer();
         //login default homefragment
@@ -185,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     })
                     .build();
         } else {
+
             getSupportFragmentManager().popBackStack();
         }
 

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<ScrollView
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/sv1"
-    android:layout_height="wrap_content">
+    android:background="@color/colorwhite"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
 
         android:layout_width="match_parent"
@@ -19,7 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:layout_centerHorizontal="true"
-            android:text="NEW BENEFICIARY"
+            android:text="@string/new_beneficiary"
             android:textColor="@color/colorRed"
             android:textSize="20sp" />
 
@@ -78,7 +76,8 @@
             android:layout_below="@id/tv_address"
             android:orientation="horizontal"
             android:weightSum="10"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:baselineAligned="false">
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -120,32 +119,35 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btnAdd"
-                android:text="Add"
+                android:text="@string/add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/colorwhite"
                 android:layout_marginStart="5dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/btnsearch"
-                android:text="Search"
+                android:text="@string/search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/colorwhite"
                 android:layout_marginStart="5dp"
 
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/btnreset"
-                android:text="Reset"
+                android:text="@string/reset"
                 android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/colorwhite"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
 
@@ -153,4 +155,4 @@
 </ScrollView>
 
 
-</RelativeLayout>
+

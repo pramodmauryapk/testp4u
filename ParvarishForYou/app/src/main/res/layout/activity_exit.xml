@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_vertical"
+    android:background="@color/colorwhite"
     android:orientation="vertical"
     tools:context=".ExitActivity">
     <TextView

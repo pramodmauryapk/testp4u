@@ -16,11 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DatabaseReference;
-
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
-import com.p4u.parvarish.book_pannel.BenficiaryFragment;
+import com.p4u.parvarish.book_pannel.BeneficiaryAddFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
@@ -35,7 +33,8 @@ import static java.util.Objects.requireNonNull;
 public class AdminMenuFragment extends HomeFragment {
 
     private static final String TAG = "AdminMenuFragment";
-    private DatabaseReference myRef;
+    private String role;
+    private Bundle bundle;
     private Context context;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -46,7 +45,7 @@ public class AdminMenuFragment extends HomeFragment {
         initViews();
         context = container.getContext();
         assert this.getArguments() != null;
-        String role = this.getArguments().getString("user_role");
+        role = this.getArguments().getString("user_role");
         getWidthAndHeight();
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         String[] gridViewString;
@@ -156,33 +155,32 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new DonorListFragment());
                         break;
                     case 3:
-                       // Intent ActivityIndent = new Intent(context, BookListActivity.class);
-                        //startActivity(ActivityIndent);
                         switchFragment(new BookListFragment());
                         break;
-                    case 4: switchFragment(new AddBookFragment());
-
+                    case 4:
+                        switchFragment(new AddBookFragment());
                         break;
-                    case 5: switchFragment(new IssueBookFragment());
+                    case 5:
+                        switchFragment(new BeneficiaryAddFragment());
                         break;
-                    case 6:switchFragment(new BenficiaryFragment());
-                        //switchFragment(new SubmitBookFragment());
+                    case 6:
+                        switchFragment(new IssueBookFragment());
                         break;
-                    case 7:switchFragment(new UserMobileFragment());
-
+                    case 7:
+                        switchFragment(new UserMobileFragment());
                         break;
-                    case 8:switchFragment(new ManageUserFragment());
-
+                    case 8:
+                        switchFragment(new ManageUserFragment());
                         break;
-                    case 9:switchFragment(new UpdateBookFragment());
-
+                    case 9:
+                        switchFragment(new UpdateBookFragment());
                         break;
-                    case 10:switchFragment(new NewsAddFragment());
-
+                    case 10:
+                        switchFragment(new NewsAddFragment());
                         break;
-                    case 11:switchFragment(new ManageGalleryFragment());
+                    case 11:
+                        switchFragment(new ManageGalleryFragment());
                         break;
-
                     case 12:
                         break;
 
@@ -200,6 +198,12 @@ public class AdminMenuFragment extends HomeFragment {
     private void initViews(){
 
     }
+
+
+
+
+
+
     private void makeToast(String input) {
         Toast.makeText(context, input, Toast.LENGTH_SHORT).show();
     }
@@ -211,10 +215,23 @@ public class AdminMenuFragment extends HomeFragment {
     }
     // switching fragment
     private void switchFragment(Fragment fragment) {
+        if(getActivity()!=null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
 
-        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null).commit();
+    }
+    private void switch_menu(Fragment fragment) {
+        bundle.putString("user_role",role);
+        fragment.setArguments(bundle);
+        if(getActivity()!=null) {
+            requireNonNull(getActivity()).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.menu_fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
 
     }
 

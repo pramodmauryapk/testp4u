@@ -17,7 +17,7 @@
             android:orientation="horizontal">
             <TextView
                 android:padding="5dp"
-                android:text="ID"
+                android:text="@string/id"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -37,7 +37,7 @@
             android:orientation="horizontal">
             <TextView
                 android:padding="5dp"
-                android:text="NAME"
+                android:text="@string/name"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -54,7 +54,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="EMAIL"
+                android:text="@string/email"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -73,7 +73,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="MOBILE"
+                android:text="@string/mobile"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -90,7 +90,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="ADDRESS"
+                android:text="@string/address"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -107,7 +107,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="IDENTITY"
+                android:text="@string/identity"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -124,7 +124,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="BOOKS COUNT"
+                android:text="@string/book_count"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -142,7 +142,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Donor Mobile     "
+                android:text="@string/donor_mobile"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -160,7 +160,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Donate time"
+                android:text="@string/donate_time"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -177,7 +177,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="DEPOSIT RS"
+                android:text="@string/deposit_rs"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -194,7 +194,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="REFUND RS"
+                android:text="@string/refund_rs"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -211,7 +211,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal"
-            android:text="SELECT"
+            android:text="@string/select"
             android:background="@drawable/button_shape"
             android:textColor="@color/colorwhite"
             android:textStyle="bold"

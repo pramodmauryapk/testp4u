@@ -29,6 +29,7 @@ public class DonorListFragment extends Fragment {
     private static final String TAG = "DonorListFragment";
     private ListView listViewdonors;
     private List<Book> donors;
+
     private Context context;
     private DatabaseReference databaseBooks;
     private View v;
@@ -64,15 +65,14 @@ public class DonorListFragment extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                   Book donor = postSnapshot.getValue(Book.class);
 
-                   donors.add(donor);
-
+                   // mobiles.add(donor.getBookDonorMobile());
+                    donors.add(donor);
 
               }
 
                 // Create a new ArrayList
 
                 HashSet<Book> hs = new HashSet<>(donors); // donor= name of arrayList from which u want to remove duplicates
-
                 donors.clear();
                 donors.addAll(hs);
                 //creating adapter

@@ -29,10 +29,9 @@ public class UserMenuFragment extends HomeFragment {
             "Knowledge Center",
             "Technical Partnership",
             "Capacity Building",
-            "Gallery",
             "Internship Program",
-            "Academic Partner"
-
+            "Academic Partner",
+            "Gallery"
     } ;
 
     private int[] gridViewImageId = {
@@ -40,14 +39,11 @@ public class UserMenuFragment extends HomeFragment {
             R.drawable.ic_account_balance_black_24dp,
             R.drawable.ic_pets_black_24dp,
             R.drawable.ic_business_black_24dp,
-            R.drawable.ic_camera_black_24dp,
             R.drawable.ic_transfer_within_a_station_black_24dp,
             R.drawable.ic_school_black_24dp,
+            R.drawable.ic_camera_black_24dp
 
     };
-
-    private Context context;
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -56,15 +52,13 @@ public class UserMenuFragment extends HomeFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
-        context = container.getContext();
+        Context context = container.getContext();
         bundle=new Bundle();
         assert this.getArguments() != null;
         Role = this.getArguments().getString("user_role");
         LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         androidGridView.setAdapter(adapterViewAndroid);
-
-
         androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -85,13 +79,13 @@ public class UserMenuFragment extends HomeFragment {
                         switchFragment(new CapacityBuildingFragment());
                         break;
                     case 4:
-                        switchFragment(new GalleryFragment());//new ImageGalleryFragment()
-                        break;
-                    case 5:
                         switchFragment(new InternshipProgramFragment());
                         break;
-                    case 6:
+                    case 5:
                         switchFragment(new AcedemicPartnerFragment());
+                        break;
+                    case 6:
+                        switchFragment(new GalleryFragment());//new ImageGalleryFragment()
                         break;
 
 
@@ -106,7 +100,6 @@ public class UserMenuFragment extends HomeFragment {
     private int getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-
         return displaymetrics.widthPixels;
     }
     // switching fragment

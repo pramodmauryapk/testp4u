@@ -47,7 +47,7 @@ import static java.util.Objects.requireNonNull;
 
 public class SelectBookFragment extends Fragment {
 
-    private static final String TAG = "IssueBookFragment";
+    private static final String TAG = "BeneficiaryAddFragment";
     private ListView listViewBooks;
     private List<Book> books;
     private DatabaseReference myref;

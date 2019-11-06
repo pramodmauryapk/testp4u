@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -144,6 +146,14 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 }
             }
         });
+        change_listner(etFullname,tlname);
+        change_listner(etEmail,tlemail);
+        change_listner(etMobile,tlmobile);
+        change_listner(etPassword,tlpassword);
+        change_listner(etaPassword,tlapassword);
+        change_listner(etAddress,tladdress);
+        change_listner(etIdentity,tlidentity);
+
 
     }
 
@@ -232,6 +242,25 @@ public class UserRegistrationActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    private void change_listner(final TextView v, final TextInputLayout til){
+
+
+
+        v.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                til.setErrorEnabled(false);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+
+            }
+
+        });
     }
     private void uploadFile() {
         get_values();

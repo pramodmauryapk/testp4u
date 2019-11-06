@@ -17,7 +17,7 @@
             android:orientation="horizontal">
             <TextView
                 android:padding="5dp"
-                android:text="ID"
+                android:text="@string/id"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -35,7 +35,7 @@
             android:orientation="horizontal">
             <TextView
                 android:padding="5dp"
-                android:text="Title"
+                android:text="@string/book_title"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -53,7 +53,7 @@
             android:orientation="horizontal">
             <TextView
                 android:padding="5dp"
-                android:text="Author"
+                android:text="@string/author_name"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -70,7 +70,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Category"
+                android:text="@string/category"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -89,7 +89,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Year"
+                android:text="@string/year"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -106,7 +106,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Cost     "
+                android:text="@string/cost"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -123,7 +123,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Location     "
+                android:text="@string/location"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -140,7 +140,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Donor    "
+                android:text="@string/donor"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -158,7 +158,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Donor Mobile     "
+                android:text="@string/donor_mobile"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -176,7 +176,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Donate time"
+                android:text="@string/donate_time"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -193,7 +193,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Book Issue to"
+                android:text="@string/book_issue_to"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -210,7 +210,7 @@
             android:weightSum="10">
             <TextView
                 android:padding="5dp"
-                android:text="Issue time"
+                android:text="@string/issue_time"
                 android:layout_weight="6"
                 style="@style/createuser_control_style"/>
             <TextView
@@ -227,7 +227,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:layout_gravity="center_horizontal"
-            android:text="Back"
+            android:text="@string/back"
             android:background="@drawable/button_shape"
             android:textColor="@color/colorwhite"
             android:textStyle="bold"

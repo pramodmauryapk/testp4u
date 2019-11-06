@@ -4,7 +4,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/transparent"
+    android:background="@color/colorwhite"
     android:orientation="vertical">
 
 
@@ -19,7 +19,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:textColor="#001EFF"
-            android:text="This is an initiative by alumni of Jawahar Navodaya Vidyalaya. "
+            android:text="@string/this_is_an_initiative_by_alumni_of_jawahar_navodaya_vidyalaya"
             android:textStyle="bold"
             android:textSize="18sp"
             android:singleLine="true" />

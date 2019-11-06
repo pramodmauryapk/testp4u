@@ -5,19 +5,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,21 +23,16 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.fancydialog.Animation;
-import com.p4u.parvarish.fancydialog.FancyAlertDialog;
-import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
-import com.p4u.parvarish.fancydialog.Icon;
 import com.p4u.parvarish.user_pannel.TempUser;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,192 +40,111 @@ import static java.util.Objects.requireNonNull;
 
 public class IssueBookFragment extends Fragment {
 
-    private static final String TAG = "IssueBookFragment";
+    private static final String TAG = "BeneficiaryFragment";
     private View dialogView;
-    private View beneficiarydialog;
-    private ArrayList<String> beneficiary_list;
-    private DatabaseReference mRef;
-    private Spinner spbeneficiary;
-    private TextView tv1;
+    private TextView tv2;
+    private List<TempUser> users;
+    private ListView beneficiarylist;
+    private TextInputEditText search_beneficiary;
+    private TextInputLayout tf1;
+    private TextView duserid,dtvname,dtvemail,dtvmobile,dtvaddress,dtvidentity,dtvbookshaving,dtvdeposit,dtvrefund;
     private View v;
-    private TextInputEditText etFullname,etEmail,etMobile,etAddress,etIdentity,etDepositpaid;
-    private TextInputLayout tlname,tlemail,tlmobile,tladdress,tlidentity,tldeposit;
-    private Button handover;
-    private Button btnadd;
-    private Button btnsearch;
-    private Button buttonback;
-    private Button btnreset;
-    private Bundle bundle;
-    private String Userid,Fullname,Email,Mobile,Address,Identity,Deposit,beneficaiary_mobile,name;
-    private Boolean amount_validation=false;
+    private Button btnselect;
     private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_book_issue,container,false);
-
+        v = inflater.inflate(R.layout.fragment_book_search, container, false);
         context = container.getContext();
-        //getting views
         initViews();
-        blank_all();
-        bundle=new Bundle();
-
-        beneficiary_list = new ArrayList<>();
-
-        btnadd.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("InflateParams")
+        tv2.setText("Tap to User to Return Book");
+        tf1.setHint("Beneficiary-Name/Mobile/Email");
+        //list to store books
+        users = new ArrayList<>();
+        load_list();
+        TextWatcher watch = new TextWatcher(){
             @Override
-            public void onClick(View view) {
-                get_values();
-                boolean res=validate();
-                if(res) {
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-                    LayoutInflater inflater = getLayoutInflater();
-                    dialogView = inflater.inflate(R.layout.show_issuebook_dialog, null);
-                    dialogBuilder.setView(dialogView);
-                    init_dialog_views();
-                    dialogBuilder.setTitle("Amount To be Paid");
-                    final AlertDialog dialog = dialogBuilder.create();
-                    dialog.show();
+            public void afterTextChanged(Editable arg0) {
+                //import com.google.firebase.database.Exclude; TODO Auto-generated method stub
 
-                    etDepositpaid.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //Toast.makeText(getApplicationContext(), "Maximum Limit Reached", Toast.LENGTH_SHORT).show();
+            }
 
-                        }
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
 
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                            get_dialog_values();
-                            amount_validation=validate_deposit();
+            }
 
-                        }
+            @Override
+            public void onTextChanged(CharSequence s, int a, int b, int c) {
+                // TODO Auto-generated method stub
+                load_list();
 
-                        @Override
-                        public void afterTextChanged(Editable editable) {
-                            if (amount_validation) {
-                                handover.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        dialog.cancel();
-                                        Userid=create_user(Fullname,Email,Address,Mobile,Identity,Deposit);
-                                        disable_all();
-                                        tv1.setText("BENEFICIARY REGISTRED");
-                                        Toast.makeText(context, "Beneficiary Created", Toast.LENGTH_SHORT).show();
-                                        switchFragment(new SelectBookFragment());
-                                    }
 
-                                });
-                            }
-                        }
-                    });
+            }};
+        search_beneficiary.addTextChangedListener(watch);
+        beneficiarylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TempUser user = users.get(i);
+                showDialog(
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAddress(),
+                        user.getMobile(),
+                        user.getIdentity(),
+                        user.getBookHaving(),
+                        user.getBookDeposit(),
+                        user.getBookRefund());
 
-                }
 
             }
         });
 
-        btnsearch.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("InflateParams")
-            @Override
-            public void onClick(View view) {
 
-                blank_all();
-                tv1.setText("BENEFICIARY DETAILS");
-
-                Userid=null;
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = getLayoutInflater();
-                beneficiarydialog = inflater.inflate(R.layout.beneficiary_dialog, null);
-                dialogBuilder.setView(beneficiarydialog);
-                spbeneficiary=beneficiarydialog.findViewById(R.id.beneficiry_list);
-                buttonback=beneficiarydialog.findViewById(R.id.dbuttonBack);
-                dialogBuilder.setTitle("Beneficiary List");
-                final AlertDialog b = dialogBuilder.create();
-                b.show();
-                load_beneficiary();
-                buttonback.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        b.cancel();
-
-                    }
-                });
-                spbeneficiary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        beneficaiary_mobile=spbeneficiary.getSelectedItem().toString();
-
-                        load_values(beneficaiary_mobile);
-                        disable_all();
-                      //  btnadd.setEnabled(false);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-            }
-        });
-        btnreset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                blank_all();
-                enable_all();
-                tv1.setText("NEW BENEFICIARY");
-            }
-        });
-        change_listner(etFullname,tlname);
-        change_listner(etEmail,tlemail);
-        change_listner(etMobile,tlmobile);
-        change_listner(etAddress,tladdress);
-        change_listner(etIdentity,tlidentity);
         return v;
     }
-    public void onResume(){
-        super.onResume();
-        blank_all();
+    private void initViews(){
+        search_beneficiary =  v.findViewById(R.id.sp_Book_Name);
+        tv2=v.findViewById(R.id.tv2);
+        beneficiarylist =  v.findViewById(R.id.view_list);
+        tf1=v.findViewById(R.id.tf1);
 
     }
-    private void change_listner(final TextView v,final TextInputLayout til){
 
+    private void load_list() {
 
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
 
-        v.addTextChangedListener(new TextWatcher() {
+        final Layoutbeneficiary_details beneficiary_adapter = new Layoutbeneficiary_details(getActivity(), users);
 
-            public void afterTextChanged(Editable s) {
-                 til.setErrorEnabled(false);
-            }
+        if (!requireNonNull(search_beneficiary.getText()).toString().toUpperCase().equals("")) {
 
-            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start,int before, int count) {
-
-            }
-
-        });
-    }
-    private void load_values(final String beneficaiary_mobile) {
-        try {
-            mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    users.clear();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        TempUser beneficiary = postSnapshot.getValue(TempUser.class);
-                        if(beneficaiary_mobile.equals(requireNonNull(beneficiary).getMobile())){
-                            set_values(beneficiary.getId(),beneficiary.getName(),beneficiary.getEmail(),beneficiary.getAddress(),beneficiary.getMobile(),beneficiary.getIdentity());
+                        TempUser user = postSnapshot.getValue(TempUser.class);
+                        if(Objects.requireNonNull(user).getName().startsWith(search_beneficiary.getText().toString().toUpperCase())||
+                                Objects.requireNonNull(user).getMobile().startsWith(search_beneficiary.getText().toString())||
+                                Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString().toUpperCase())) {
+                                if(Integer.parseInt(user.getBookHaving())>0) {
+                                    users.add(user);
+                                }
+
                         }
 
-
-
                     }
+
+                    beneficiarylist.setAdapter(beneficiary_adapter);
+                    beneficiary_adapter.notifyDataSetChanged();
+
                 }
 
                 @Override
@@ -241,40 +153,23 @@ public class IssueBookFragment extends Fragment {
                 }
             });
 
+        }else {
 
-        }catch (Exception ignored){
-
-        }
-    }
-    private void set_values(String id, String name, String email, String address, String mobile, String identity) {
-        Userid=id;
-        amount_validation=false;
-        Fullname=name;
-        etFullname.setText(name);
-        etEmail.setText(email);
-        etMobile.setText(mobile);
-        etAddress.setText(address);
-        etIdentity.setText(identity);
-    }
-    private void load_beneficiary() {
-
-        mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                beneficiary_list.clear();
+                users.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    TempUser beneficiary = postSnapshot.getValue(TempUser.class);
+                    TempUser user = postSnapshot.getValue(TempUser.class);
+                    assert user != null;
+                    if(Integer.parseInt(user.getBookHaving())>0) {
+                        users.add(user);
 
-                    assert beneficiary != null;
-                    beneficiary_list.add(beneficiary.getMobile());
-
+                    }
 
                 }
-                ArrayAdapter<String> beneficiary_adapter = new ArrayAdapter<>(requireNonNull(context), android.R.layout.simple_spinner_item, beneficiary_list);
-                spbeneficiary.setAdapter(beneficiary_adapter);
+                beneficiarylist.setAdapter(beneficiary_adapter);
                 beneficiary_adapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -282,160 +177,82 @@ public class IssueBookFragment extends Fragment {
 
             }
         });
-
-
-
-    }
-    private void blank_all() {
-        Userid=null;
-        Deposit="";
-        Fullname=null;
-        etFullname.setText("");
-        etEmail.setText("");
-        etMobile.setText("");
-        etAddress.setText("");
-        etIdentity.setText("");
-    }
-    private void disable_all() {
-        etFullname.setEnabled(false);
-        etEmail.setEnabled(false);
-        etMobile.setEnabled(false);
-        etAddress.setEnabled(false);
-        etIdentity.setEnabled(false);
-        if(!etFullname.isEnabled()){
-            btnadd.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View view) {
-                    switchFragment(new SelectBookFragment());
-                }
-            });
         }
 
-    }
-    private void enable_all() {
-        etFullname.setEnabled(true);
-        etEmail.setEnabled(true);
-        etMobile.setEnabled(true);
-        etAddress.setEnabled(true);
-        etIdentity.setEnabled(true);
-        btnadd.setEnabled(true);
-        amount_validation=false;
-        Userid=null;
-
-    }
-    private void get_dialog_values() {
-
-        Deposit= requireNonNull(etDepositpaid.getText()).toString();
-
-    }
-    private void initViews(){
-
-
-        btnadd=v.findViewById(R.id.btnAdd);
-        btnsearch=v.findViewById(R.id.btnsearch);
-        btnreset=v.findViewById(R.id.btnreset);
-        tv1=v.findViewById(R.id.tv1);
-        etFullname=v.findViewById(R.id.et_fullname);
-        etEmail=v.findViewById(R.id.et_createemail);
-        etAddress=v.findViewById(R.id.et_address);
-        etMobile=v.findViewById(R.id.et_createmobile);
-        etIdentity=v.findViewById(R.id.et_identity);
-        tlname=v.findViewById(R.id.tv_createusername);
-        tlemail=v.findViewById(R.id.tv_createemail);
-        tladdress=v.findViewById(R.id.tv_address);
-        tlmobile=v.findViewById(R.id.tv_createmobile);
-        tlidentity=v.findViewById(R.id.tv_identity);
-
-
-    }
-    private void get_values(){
-        Fullname= Objects.requireNonNull(etFullname.getText()).toString().toUpperCase();
-        Email= Objects.requireNonNull(etEmail.getText()).toString();
-        Mobile = Objects.requireNonNull(etMobile.getText()).toString().toUpperCase();
-        Address= Objects.requireNonNull(etAddress.getText()).toString().toUpperCase();
-        Identity= Objects.requireNonNull(etIdentity.getText()).toString().toUpperCase();
-
-
-    }
-    private boolean validate() {
-
-
-        if (TextUtils.isEmpty(Fullname)) {
-            tlname.setError("Enter full name!");
-            return false;
-        }
-        if (Mobile.length ()!=10) {
-            tlmobile.setError("Enter Mobile Number!");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(Email)) {
-            tlemail.setError("Enter email address!");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(Address)) {
-            tladdress.setError("Enter Address!");
-            return false;
-        }
-        if (TextUtils.isEmpty(Identity)) {
-            tlidentity.setError("Enter aadhar or Voter id !");
-            return false;
-        }
-
-        return true;
-    }
-    private boolean validate_deposit(){
-        if (TextUtils.isEmpty(Deposit)) {
-            tldeposit.setError("Enter Valid Amount!");
-            return false;
-        }
-        return true;
     }
     private void init_dialog_views(){
+        duserid=dialogView.findViewById (R.id.tvUserId);
+        dtvname = dialogView.findViewById(R.id.tvName);
+        dtvemail =dialogView.findViewById(R.id.tvEmail);
+        dtvmobile = dialogView.findViewById(R.id.tvMobile);
+        dtvaddress = dialogView.findViewById(R.id.tvAddress);
+        dtvidentity = dialogView.findViewById(R.id.tvIdentity);
+        dtvbookshaving = dialogView.findViewById(R.id.tvBooksHaving);
+        dtvdeposit = dialogView.findViewById(R.id.tvDeposit);
+        dtvrefund = dialogView.findViewById(R.id.tvRefund);
+        btnselect=dialogView.findViewById(R.id.dbuttonSelect);
+    }
+    private void set_dialog_values(String Id,String Name,String Email,String Mobile,String Address,String Identity,String booksCount,String Deposit,String Refund ) {
+        duserid.setText(Id);
+        dtvname.setText(Name);
+        dtvemail.setText(Email);
+        dtvmobile.setText(Mobile);
+        dtvaddress.setText(Address);
+        dtvidentity.setText(Identity);
+        dtvbookshaving.setText(booksCount);
+        dtvdeposit.setText(Deposit);
+        dtvrefund.setText(Refund);
 
-        etDepositpaid=dialogView.findViewById(R.id.et_depositpaid);
-        handover = dialogView.findViewById(R.id.dbuttonissue);
-        tldeposit=dialogView.findViewById(R.id.tv_depositpaid);
 
     }
-    private String create_user(String Fullname,String Email,String Address,String Mobile,String Identity,String Deposit) {
-        DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
-        String UserId = temp_User.push().getKey();
-        name=Fullname;
+    @SuppressLint("InflateParams")
+    private void showDialog(final String duserId,
+                            final String duserName,
+                            final String duserEmail,
+                            final String duserMobile,
+                            final String duserAddress,
+                            final String duserIdentity,
+                            final String duserBookHaving,
+                            final String duserBookDeposit,
+                            final String duserBookRefund) {
 
-        TempUser user = new TempUser(
-                UserId,
-                Fullname,
-                Email,
-                Mobile,
-                Address,
-                Identity,
-                "0",
-                Deposit,
-                "0");
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.show_beneficiary_dialog, null);
+        dialogBuilder.setView(dialogView);
 
-        //Saving the Book
-        temp_User.child(requireNonNull(UserId)).setValue(user);
+        init_dialog_views();
 
-        return UserId;
+        dialogBuilder.setTitle("Benficiary Details");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+        b.setCancelable(false);
+        set_dialog_values(duserId,duserName,duserEmail,duserMobile,duserAddress,duserIdentity,duserBookHaving,duserBookDeposit,duserBookRefund);
+        btnselect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.cancel();
+                Bundle bundle=new Bundle();
+                Fragment newfragment = new SubmitBookFragment();
+                bundle.putString("user_id", duserId);
+                bundle.putString("user_noofbooks", duserBookHaving);
+                bundle.putString("user_deposit", duserBookDeposit);
+                bundle.putString("user_refund", duserBookRefund);
+                newfragment.setArguments(bundle);
+                switchFragment(newfragment);
+            }
+        });
+
+
     }
+
     // switching fragment
     private void switchFragment(Fragment fragment) {
-        bundle.putString("Beneficiary_Id", Userid);
-        bundle.putString("Beneficiary_Name", name);
-        fragment.setArguments(bundle);
         if (getActivity() != null) {
             requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .addToBackStack(null).commit();
-
         }
     }
-
-
-
-
 
 }

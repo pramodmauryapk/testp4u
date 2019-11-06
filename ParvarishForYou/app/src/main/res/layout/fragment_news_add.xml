@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorwhite"
     android:id="@+id/search_book_fragment"
     style="@style/Relative_layout_style">
 <LinearLayout
@@ -17,7 +18,7 @@
             android:textSize="20sp"
             android:paddingBottom="20dp"
             android:id="@+id/txt1"
-            android:text="Type News to Add in Marquee"/>
+            android:text="@string/type_news_to_add_in_marquee"/>
     <EditText
         android:id="@+id/marqueetext"
         android:layout_width="match_parent"
@@ -30,8 +31,9 @@
         android:background="@drawable/bg_edittext"
         android:maxLines="10"
         android:scrollbars="vertical"
-        android:hint="Add new tagline.."
-        android:inputType="textMultiLine"/>
+        android:hint="@string/add_new_tagline"
+        android:inputType="textMultiLine"
+        android:importantForAutofill="no" />
 
     <RatingBar
         android:id="@+id/ratingBar"

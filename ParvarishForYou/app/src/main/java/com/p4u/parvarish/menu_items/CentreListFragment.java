@@ -65,7 +65,7 @@ public class CentreListFragment extends HomeFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Teacher user = users.get(i);
-                CentreListFragment.this.showDeleteDialog(
+                showDeleteDialog(
                         //  user.getUserId (),
                         user.getUserName(),
                         user.getUserEmail(),

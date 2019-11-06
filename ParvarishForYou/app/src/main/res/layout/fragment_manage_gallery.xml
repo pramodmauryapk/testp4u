@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/search_book_fragment"
+    android:background="@color/colorwhite"
     style="@style/Relative_layout_style">
 
 <LinearLayout
@@ -19,7 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:paddingBottom="20dp"
             android:id="@+id/txt1"
-            android:text="Add Image to Gallery"/>
+            android:text="@string/add_image_to_gallery"/>
 
 
 
@@ -46,7 +48,8 @@
             android:layout_marginEnd="5dp"
             android:text="@string/view_all"
             android:background="@drawable/button_shape"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/openUploadActivityBtn"
@@ -58,7 +61,8 @@
             android:background="@drawable/button_shape"
             android:text="@string/add_new"
             android:textColor="@color/black"
-            android:focusable="true" />
+            android:focusable="true"
+            tools:ignore="ButtonStyle" />
 
 
 

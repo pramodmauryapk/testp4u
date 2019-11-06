@@ -11,7 +11,7 @@
 
 
     </array>
-    <string name="app_name">Parvarish4You</string>
+    <string name="app_name">Parvarish4U</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="tv_passwordresetinstruction">We just need your registered Email id to send you password reset instructions</string>
@@ -27,21 +27,21 @@
     <string name="login">Login</string>
     <string name="forget_password">Forget Password</string>
     <string name="reset_password">Reset Password</string>
-    <string name="back">Back</string>
+
     <string name="welcome_to">Welcome To</string>
-    <string name="parvarish_knowledge_center">Parvarish4You</string>
-    <string name="todo">TODO</string>
+    <string name="parvarish_knowledge_center">Parvarish4U</string>
+
     <string name="welcome">Welcome</string>
     <string name="add">Add</string>
     <string name="books_list">Books List</string>
-    <string name="text_internship_program">ParvarishForYou has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team.</string>
+    <string name="text_internship_program">Parvarish4U has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team.</string>
     <string name="tap_to_update_and_view_book_details">Tap to update and view book details</string>
 
     <string name="center_location">Center Location</string>
     <string name="name">Name</string>
     <string name="search_by_author">Search By Author</string>
     <string name="search_by_cost">Search By Cost</string>
-    <string name="save">Save</string>
+
     <string name="navigation_drawer_open">Drawer open</string>
     <string name="navigation_drawer_close">Drawer close</string>
     <string name="menu_home">Home</string>
@@ -51,11 +51,11 @@
     <string name="nav_header_title">Welcome User!</string>
     <string name="nav_header_subtitle">Email Id</string>
     <string name="user_corner">User Corner</string>
-    <string name="update">Update</string>
+
     <string name="change_password">Change Password</string>
     <string name="Book_Id">Book Id</string>
     <string name="bookidd">Book Id-</string>
-    <string name="delete">Delete</string>
+
     <string name="mobile">Mobile No</string>
     <string name="menu_feedback">Feedback</string>
     <string name="search_by_subject">Search By Subject</string>
@@ -66,7 +66,7 @@
     <string name="book_cost">Book Cost</string>
     <string name="book_location">Book Location</string>
     <string name="donor_name">Donor Name</string>
-    <string name="donor_mobile">Donor Mobile</string>
+
     <string name="search_by_name">Search By Name</string>
     <string name="large_text">
         "Under this scheme we are establishing centres where sessions"
@@ -79,7 +79,7 @@
 
     <string name="text_telent_support">
 
-    "ParvarishForYou has started this scheme. Under this scheme"
+    "Parvarish4U has started this scheme. Under this scheme"
     "we are trying to support talent either in academics , "
     "sports and any other field of life. Under this scheme "
     "organisation support students in different ways."
@@ -103,10 +103,7 @@
     <string name="about_youtube">Watch us on Youtube</string>
     <string name="about_website">Visit our website</string>
     <string name="chose_one_of_them_to_search">Chose one of them to search</string>
-    <string name="category">Category</string>
-    <string name="teacher_name">Teacher Name</string>
-    <string name="description">Description</string>
-    <string name="date">Date</string>
+
     <string name="user_name">User Name</string>
     <string name="role">Role</string>
     <string name="email">Email</string>
@@ -226,7 +223,7 @@
     <string name="about_page_description5" translatable="false">To fulfill the gap between rural and urban population with various mechanism and also to reflect them in government census or survey.</string>
     <string name="ourwork_page_description1" translatable="false">We are here to work for different sector like education, health, agriculture, organic farming, counselling, behavioural change (Mentioned by P.M. Modi in rajya-sabha on 08 feb 2018), social awareness, to full-fill the gap between government facilities and ground level benefits etc.</string>
     <string name="ourwork_page_description2" translatable="false">We are working in education field where there is no institutional source of education. As most of the places have schools but there is no carrier guiding or preparation centres. This is the major cause of backwardness there as we think. Most of the people who get education move away from these places. This creates a gap between rural and urban development. We are working to fulfill this gap.</string>
-    <string name="ourwork_page_description3" translatable="false">ParvarishForYou has started this scheme. Under this scheme we are trying to support talent either in academics , sports and any other field of life. Under this scheme organisation support students in different ways.</string>
+    <string name="ourwork_page_description3" translatable="false">Parvarish4U has started this scheme. Under this scheme we are trying to support talent either in academics , sports and any other field of life. Under this scheme organisation support students in different ways.</string>
     <string name="ourwork_page_description4" translatable="false">1. To support student one year school fee of student who got first position in school. (Already selected two students from two different schools).\n2. Awarding and supporting district topper with cash support and other required support .</string>
     <string name="ourwork_page_description5" translatable="false">There are several other ways where organisation is working to support real and needy talent.</string>
     <string name="ourwork_page_description6" translatable="false">Under this scheme we are in the process of establishing libraries at various remote locations where students in need of books.
@@ -237,7 +234,7 @@ So , if any one interested to donate books pls send your name and address with c
 Currently we are running our capacity building centres which is giving very good response.</string>
     <string name="ourwork_page_description9" translatable="false">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that .
 So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon . </string>
-    <string name="ourwork_page_description10" translatable="false">ParvarishForYou has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team</string>
+    <string name="ourwork_page_description10" translatable="false">Parvarish4U has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team</string>
     <string name="ourwork_page_description11" translatable="false">We are working to improve health and aware people about different health issues faced by them. We are organizing various programs at ground level so that maximum people can be benefited. Programs like below:</string>
     <string name="ourwork_page_description12" translatable="false">♦ Health awareness camps.\n ♦Yoga classes.</string>
     <string name="ourwork_page_description13" translatable="false">Agriculture is the bone of our economy and it should be taken care. We are working to enrich agricultural field in India. Below are the areas which are being worked upon:</string>
@@ -259,6 +256,51 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="send_information">Send Information</string>
     <string name="join_us">Join Us</string>
     <string name="tap_to_book_for_update">Tap to Book for Update</string>
+    <string name="type_news_to_add_in_marquee">Type News to Add in Marquee</string>
+    <string name="add_new_tagline">Add new tagline..</string>
+    <string name="this_is_an_initiative_by_alumni_of_jawahar_navodaya_vidyalaya">This is an initiative by alumni of Jawahar Navodaya Vidyalaya.</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="save">Save</string>
+
+    <string name="select_and_long_press_for_more_options">Select and Long Press for More Options</string>
+    <string name="todo">TODO</string>
+    <string name="teacher_name">Teacher Name</string>
+    <string name="date">Date</string>
+
+    <string name="id">ID</string>
+    <string name="book_count">book count</string>
+
+    <string name="deposit_rs">Deposit Rs.</string>
+    <string name="refund_rs">Refund Rs.</string>
+    <string name="select">select</string>
+    <string name="category">Category</string>
+    <string name="year">Year</string>
+    <string name="cost">Cost</string>
+    <string name="location">Location</string>
+    <string name="donor">Donor</string>
+    <string name="donor_mobile">Donor Mobile</string>
+    <string name="donate_time">Donate time</string>
+    <string name="book_issue_to">Book Issue to</string>
+    <string name="issue_time">Issue time</string>
+    <string name="back">Back</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="description">Description</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="upload">Upload</string>
+    <string name="enter_image_details">Enter Image Details</string>
+    <string name="close">Close</string>
+    <string name="update_password">Update Password</string>
+    <string name="donor_list">Donor List</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="enter_mobile_no">Enter Mobile No.</string>
+    <string name="submit">Submit</string>
+    <string name="new_beneficiary">NEW BENEFICIARY</string>
+    <string name="add">Add</string>
+    <string name="search">Search</string>
+    <string name="reset">Reset</string>
+    <string name="add_image_to_gallery">Add Image to Gallery</string>
 
 
 </resources>

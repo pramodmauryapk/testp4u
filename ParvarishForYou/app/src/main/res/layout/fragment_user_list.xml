@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/colorwhite"
     android:orientation="vertical">
 
     <TextView
@@ -18,7 +18,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select and Long Press for More Options"
+        android:text="@string/select_and_long_press_for_more_options"
         android:textAlignment="center"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"

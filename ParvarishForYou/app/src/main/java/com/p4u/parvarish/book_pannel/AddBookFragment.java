@@ -306,7 +306,6 @@ public class AddBookFragment extends Fragment {
         etDonor.setText("");
 
     }
-
     private void initViews(){
         etBookId=v.findViewById (R.id.etBookId);
         etBookAuthor = v.findViewById(R.id.etBookAuthor);
@@ -328,7 +327,6 @@ public class AddBookFragment extends Fragment {
         btnAddBook = v.findViewById(R.id.btnAddBook);
         btnlistbook=v.findViewById(R.id.btnlistBook);
     }
-
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());
