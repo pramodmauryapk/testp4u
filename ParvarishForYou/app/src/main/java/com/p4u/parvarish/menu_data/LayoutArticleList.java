@@ -52,7 +52,7 @@ public class LayoutArticleList extends ArrayAdapter<Article_Model>{
             if(articles.getImageUrl()!=null) {
                 Picasso.get()
                         .load(articles.getImageUrl())
-                        .placeholder(R.drawable.loading)
+                        .placeholder(R.drawable.logo)
                         .fit()
                         .into(img);
             }else{

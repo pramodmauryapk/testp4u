@@ -11,14 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.p4u.parvarish.R;
 
 import static java.util.Objects.requireNonNull;
@@ -77,7 +74,7 @@ public class ManageArticleFragment extends Fragment {
         btnupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchFragment(new ManageArticleContentFragment());
+                switchFragment(new ManageContentFragment());
             }
         });
 

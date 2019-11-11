@@ -20,10 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.p4u.parvarish.R;
 
-import static java.util.Objects.requireNonNull;
+import java.util.Objects;
 
 public class FeedbackAddFragment extends Fragment {
     private static final String TAG = "FeedbackAddFragment";
@@ -40,18 +39,21 @@ public class FeedbackAddFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_news_add,container,false);
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String userID = requireNonNull(user).getUid();
+
         context = container.getContext();
         initViews();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean ans = feedback_submit(userID);
-                if (ans)
-                    Toast.makeText(context, "Feedback Submitted", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(context, "Some Problem", Toast.LENGTH_LONG).show();
+                if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
+                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    final String userID = Objects.requireNonNull(user).getUid();
+                    feedback_submit(userID);
+
+
+                }else{
+                    Toast.makeText(context, "Please Register", Toast.LENGTH_LONG).show();
+                }
             }
         });
         textView.setText ("Enter Feedback ");
@@ -61,14 +63,18 @@ public class FeedbackAddFragment extends Fragment {
         return v;
     }
 
-    private boolean feedback_submit(String userID) {
-        DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS").child(userID);
+    private void feedback_submit(String userID) {
+
         try{
-        myref.child("userFeedback").setValue(editText.getText().toString());
-        myref.child("userRating").setValue(String.valueOf(ratingBar.getRating()));
-        return true;
+
+            DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS").child(userID);
+            myref.child("userFeedback").setValue(editText.getText().toString());
+            myref.child("userRating").setValue(String.valueOf(ratingBar.getRating()));
+            Toast.makeText(context, "Feedback Submitted", Toast.LENGTH_LONG).show();
+
         }catch (Exception e){
-            return false;
+
+            Toast.makeText(context, "Please Register", Toast.LENGTH_LONG).show();
         }
 
     }

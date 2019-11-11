@@ -22,6 +22,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,12 +33,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import com.p4u.parvarish.R;
 
 public class UserMobileFragment extends Fragment {
     private static final String TAG = "UserMobileFragment";
@@ -147,7 +148,7 @@ public class UserMobileFragment extends Fragment {
         dbuttonChange.setVisibility(View.GONE);
         dbuttonUpload.setVisibility(View.GONE);
         l12.setVisibility(View.GONE);
-        l13.setVisibility(View.GONE);
+
         txt.setVisibility(View.GONE);
         dbuttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,33 +174,38 @@ public class UserMobileFragment extends Fragment {
                 // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
+                            private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE =1 ;
+
                             public void onClick(DialogInterface dialog,
                                                 int which) {
                                 // Write your code here to execute after dialog
                                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                callIntent.setData(Uri.parse("tel:" + userMobile));
+                                callIntent.setData(Uri.parse("tel:" +userMobile));
                                 callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()),
+                                        Manifest.permission.CALL_PHONE)
+                                        != PackageManager.PERMISSION_GRANTED) {
 
-                                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                    // TODO: Consider calling
-                                    Objects.requireNonNull(context).startActivity(callIntent);
-                                    dialog.cancel();
-                                    //    Activity#requestPermissions
-                                    // here to request the missing permissions, and then overriding
-                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                    //                                          int[] grantResults)
-                                    // to handle the case where the user grants the permission. See the documentation
-                                    // for Activity#requestPermissions for more details.
-                                }else {
+                                    ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()),
+                                            new String[]{Manifest.permission.CALL_PHONE},
+                                            MY_PERMISSIONS_REQUEST_CALL_PHONE);
 
+                                    // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
+                                    // app-defined int constant. The callback method gets the
+                                    // result of the request.
+                                } else {
+                                    //You already have permission
+                                    try {
+                                        startActivity(callIntent);
+                                        dialog.cancel();
+                                    } catch (SecurityException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
 
-
                             }
 
-                            private int checkSelfPermission(String callPhone) {
-                                return 0;
-                            }
+
                         });
 
                 // Showing Alert Message
@@ -219,7 +225,7 @@ public class UserMobileFragment extends Fragment {
         dbuttonUpload =  dialogView.findViewById(R.id.upload_button);
         txt=dialogView.findViewById(R.id.txt);
         l12=dialogView.findViewById(R.id.l12);
-        l13=dialogView.findViewById(R.id.l13);
+
 
     }
 

@@ -70,7 +70,7 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
-public class ManageArticleContentFragment extends Fragment implements ARecyclerAdapter_model.OnItemClickListener{
+public class ManageContentFragment extends Fragment implements ARecyclerAdapter_model.OnItemClickListener{
 
     private static final String TAG = "ManageArticlesFragment";
     private ARecyclerAdapter_model mAdapter;
@@ -366,7 +366,7 @@ public class ManageArticleContentFragment extends Fragment implements ARecyclerA
         descriptionEditText.setText(Desc);
         Picasso.get()
                 .load(Url)
-                .placeholder(R.drawable.loading)
+                .placeholder(R.drawable.logo)
                 .fit()
                 .into(img);
 

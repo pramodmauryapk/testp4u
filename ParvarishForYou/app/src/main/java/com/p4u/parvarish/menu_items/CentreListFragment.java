@@ -14,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -26,14 +29,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.user_pannel.Teacher;
 
 
 public class CentreListFragment extends HomeFragment {
@@ -42,10 +44,12 @@ public class CentreListFragment extends HomeFragment {
     private List<Teacher> users;
     private View dialogView;
     private TextView dtvUsername, dtvEmail, dtvMobile, dtvCenterName, dtvIdentity, dtvRole;
-    private Button dbuttonBack, dbuttonDelete, dbuttonUpdate;
+    private Button dbuttonSave, dbuttonChange, dbuttonUpload;
     private DatabaseReference databaseUsers;
     private androidx.appcompat.app.AlertDialog.Builder builder;
     private TextInputLayout t1;
+    private TextView txt;
+    private LinearLayout l12,l13;
     private View v;
     private Context context;
 
@@ -143,19 +147,16 @@ public class CentreListFragment extends HomeFragment {
         dtvMobile.setEnabled(false);
         dtvCenterName.setText(userAddress);
         dtvCenterName.setEnabled(false);
-        dtvIdentity.setText(userIdentity);
+        //dtvIdentity.setText(userIdentity);
         dtvRole.setText(userRole);
         dtvRole.setEnabled(false);
-        t1.setVisibility(View.GONE);
-        dbuttonDelete.setVisibility(View.GONE);
-        dbuttonUpdate.setText("CALL");
-        dbuttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                b.cancel();
-            }
-        });
-        dbuttonUpdate.setOnClickListener(new View.OnClickListener() {
+        dbuttonSave.setText("CALL");
+        dbuttonChange.setVisibility(View.GONE);
+        dbuttonUpload.setVisibility(View.GONE);
+        l12.setVisibility(View.GONE);
+
+        txt.setVisibility(View.GONE);
+        dbuttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
@@ -179,19 +180,34 @@ public class CentreListFragment extends HomeFragment {
                 // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
+                            private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE =1 ;
+                            public void onClick(DialogInterface dialog,int which) {
                                 // Write your code here to execute after dialog
                                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                callIntent.setData(Uri.parse("tel:" + userMobile));
+                                callIntent.setData(Uri.parse("tel:" +userMobile));
                                 callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                Objects.requireNonNull(context).startActivity(callIntent);
-                                dialog.cancel();
+                                if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),
+                                        Manifest.permission.CALL_PHONE)
+                                        != PackageManager.PERMISSION_GRANTED) {
 
+                                    ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()),
+                                            new String[]{Manifest.permission.CALL_PHONE},
+                                            MY_PERMISSIONS_REQUEST_CALL_PHONE);
 
+                                    // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
+                                    // app-defined int constant. The callback method gets the
+                                    // result of the request.
+                                } else {
+                                    //You already have permission
+                                    try {
+                                        startActivity(callIntent);
+                                        dialog.cancel();
+                                    } catch (SecurityException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
 
                             }
-
 
                         });
 
@@ -209,12 +225,13 @@ public class CentreListFragment extends HomeFragment {
         dtvEmail = dialogView.findViewById(R.id.etEmailID);
         dtvMobile =  dialogView.findViewById(R.id.etMobile);
         dtvCenterName =  dialogView.findViewById(R.id.tvCenterName);
-        dtvIdentity = dialogView.findViewById(R.id.etIdentity);
         dtvRole =  dialogView.findViewById(R.id.tvRole);
-        dbuttonBack = dialogView.findViewById(R.id.dbuttonBack);
-        dbuttonUpdate=dialogView.findViewById(R.id.dbuttonUpdate);
-        dbuttonDelete =  dialogView.findViewById(R.id.dbuttonDelete);
-        t1=dialogView.findViewById(R.id.l5);
+        dbuttonSave = dialogView.findViewById(R.id.dbuttonsave);
+        dbuttonChange=dialogView.findViewById(R.id.dbuttonchange);
+        dbuttonUpload =  dialogView.findViewById(R.id.upload_button);
+        txt=dialogView.findViewById(R.id.txt);
+        l12=dialogView.findViewById(R.id.l12);
+
 
     }
 
