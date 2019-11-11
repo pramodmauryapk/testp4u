@@ -23,7 +23,8 @@ import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
-import com.p4u.parvarish.galary.ManageGalleryFragment;
+import com.p4u.parvarish.galary.ManagegalaryFragment;
+import com.p4u.parvarish.menu_data.ManageArticleFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -110,7 +111,8 @@ public class AdminMenuFragment extends HomeFragment {
                     "Update Book",
                     "Manage News",
                     "Manage Gallery",
-                    "Report Book"
+                    "Report Book",
+                    "Manage Articles"
 
             };
 
@@ -128,7 +130,8 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_update_black_24dp,
                     R.drawable.ic_library_books_black_24dp,
                     R.drawable.ic_image_black_24dp,
-                    R.drawable.ic_report_black_24dp
+                    R.drawable.ic_report_black_24dp,
+                    R.drawable.ic_burst_mode_black_24dp
 
             };
 
@@ -179,9 +182,13 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new NewsAddFragment());
                         break;
                     case 11:
-                        switchFragment(new ManageGalleryFragment());
+                        switchFragment(new ManagegalaryFragment());
                         break;
                     case 12:
+                        break;
+                    case 13:
+                        switchFragment(new ManageArticleFragment());
+
                         break;
 
                 }

@@ -18,9 +18,9 @@ import com.p4u.parvarish.R;
 
 import static java.util.Objects.requireNonNull;
 
-public class ManageGalleryFragment extends Fragment {
+public class ManagegalaryFragment extends Fragment {
 
-    private static final String TAG = "ManageGalleryFragment";
+    private static final String TAG = "ManagegalaryFragment";
     private Button openTeachersActivityBtn,openUploadActivityBtn;
     private View v;
     private Context context;

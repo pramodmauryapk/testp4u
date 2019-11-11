@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,14 +44,16 @@ public class UserMobileFragment extends Fragment {
     private List<Teacher> users;
     private View dialogView;
     private DatabaseReference databaseUsers;
-    private EditText dtvUsername,dtvEmail, dtvMobile , dtvCenterName, dtvIdentity ;
-    private TextView dtvRole;
-    private Button dbuttonBack,dbuttonDelete,dbuttonUpdate;
+    private EditText dtvUsername,dtvEmail, dtvMobile , dtvCenterName;
+    private TextInputEditText dtvRole;
+    private Button dbuttonSave,dbuttonChange,dbuttonUpload;
     private View v;
+    private TextView txt;
     private Builder builder;
     private String Name,Email,Mobile,location,Identity,Role,status;
     private Context context;
     private TextInputLayout t1;
+    private LinearLayout l12,l13;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -136,19 +140,16 @@ public class UserMobileFragment extends Fragment {
         dtvMobile.setEnabled(false);
         dtvCenterName.setText(userAddress);
         dtvCenterName.setEnabled(false);
-        dtvIdentity.setText(userIdentity);
+        //dtvIdentity.setText(userIdentity);
         dtvRole.setText(userRole);
         dtvRole.setEnabled(false);
-        t1.setVisibility(View.GONE);
-        dbuttonDelete.setVisibility(View.GONE);
-        dbuttonUpdate.setText("CALL");
-        dbuttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                b.cancel();
-            }
-        });
-        dbuttonUpdate.setOnClickListener(new View.OnClickListener() {
+        dbuttonSave.setText("CALL");
+        dbuttonChange.setVisibility(View.GONE);
+        dbuttonUpload.setVisibility(View.GONE);
+        l12.setVisibility(View.GONE);
+        l13.setVisibility(View.GONE);
+        txt.setVisibility(View.GONE);
+        dbuttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
@@ -181,7 +182,8 @@ public class UserMobileFragment extends Fragment {
 
                                 if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                     // TODO: Consider calling
-
+                                    Objects.requireNonNull(context).startActivity(callIntent);
+                                    dialog.cancel();
                                     //    Activity#requestPermissions
                                     // here to request the missing permissions, and then overriding
                                     //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -189,8 +191,7 @@ public class UserMobileFragment extends Fragment {
                                     // to handle the case where the user grants the permission. See the documentation
                                     // for Activity#requestPermissions for more details.
                                 }else {
-                                    Objects.requireNonNull(context).startActivity(callIntent);
-                                    dialog.cancel();
+
                                 }
 
 
@@ -212,12 +213,13 @@ public class UserMobileFragment extends Fragment {
         dtvEmail = dialogView.findViewById(R.id.etEmailID);
         dtvMobile =  dialogView.findViewById(R.id.etMobile);
         dtvCenterName =  dialogView.findViewById(R.id.tvCenterName);
-        dtvIdentity = dialogView.findViewById(R.id.etIdentity);
         dtvRole =  dialogView.findViewById(R.id.tvRole);
-        dbuttonBack = dialogView.findViewById(R.id.dbuttonBack);
-        dbuttonUpdate=dialogView.findViewById(R.id.dbuttonUpdate);
-        dbuttonDelete =  dialogView.findViewById(R.id.dbuttonDelete);
-        t1=dialogView.findViewById(R.id.l5);
+        dbuttonSave = dialogView.findViewById(R.id.dbuttonsave);
+        dbuttonChange=dialogView.findViewById(R.id.dbuttonchange);
+        dbuttonUpload =  dialogView.findViewById(R.id.upload_button);
+        txt=dialogView.findViewById(R.id.txt);
+        l12=dialogView.findViewById(R.id.l12);
+        l13=dialogView.findViewById(R.id.l13);
 
     }
 

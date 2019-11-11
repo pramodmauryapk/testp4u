@@ -1,9 +1,15 @@
 package com.p4u.parvarish.user_pannel;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -11,8 +17,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,7 +31,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,29 +45,51 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.login.Login_emailActivity;
+import com.p4u.parvarish.login.UserRegistrationActivity;
+import com.p4u.parvarish.menu_data.Article_Model;
+import com.p4u.parvarish.menu_data.upload_article;
+import com.squareup.picasso.Picasso;
 
+import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
 public class UserProfileFragment extends Fragment {
     private static final String TAG = "UserProfileFragment";
-    private String userID,userName,userEmail,userMobile,userIdentity;
+    private String userID;
     private String userPassword,userAgainPassword,userRole,userAddress,userStatus,userFeedback,userNews,userTime,userRating,userImg;
     private View v;
-    private EditText username,email,mobile,identity,password,againpassword,feedback,news,time;
-    private TextInputLayout l1,l2,l3,l4,l5;
+    private EditText username;
+    private EditText email;
+    private EditText mobile;
+    private TextInputLayout l1;
+    private TextInputLayout l2;
+    private TextInputLayout l3;
+    private TextInputLayout l4;
     private TextView location,role;
-    private List<Teacher> users;
-    private Button save,change,back;
-    private LinearLayout l9;
+    private Button save;
+    private Button change,choose,upload;
     private Spinner sp;
-    private String userrole;
+    private String userrole,id;
     private Context context;
+    private ImageView imageView;
+    private Uri filePath;
+    private final int PICK_IMAGE_REQUEST = 71;
+    private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
+    private DatabaseReference myRef;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
@@ -67,13 +102,16 @@ public class UserProfileFragment extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         //Declare database reference
-        DatabaseReference myRef = mFirebaseDatabase.getReference().child("USERS");
+        myRef = mFirebaseDatabase.getReference().child("USERS");
 
         final FirebaseUser user = mAuth.getCurrentUser();
         userID = (requireNonNull(user)).getUid();
-        back.setVisibility(View.GONE);
-        change.setText("Change Password");
-        save.setText("Save");
+
+        change_listner(username,l1);
+        change_listner(email,l2);
+        change_listner(mobile,l3);
+        change_listner(location,l4);
+
         myRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -90,10 +128,7 @@ public class UserProfileFragment extends Fragment {
         save.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                get_values();
-                updatedetails(userID,
-                        userPassword,
-                        userImg);
+                updatedetails(userID,userPassword,userImg);
             }
         });
 
@@ -103,13 +138,49 @@ public class UserProfileFragment extends Fragment {
                switchFragment(new UpdatePasswordFragment());
            }
        });
-        change_listner(username,l1);
-        change_listner(email,l2);
-        change_listner(mobile,l3);
-        change_listner(location,l4);
-        change_listner(identity,l5);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseimage(view);
+            }
+        });
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                     Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
+                } else {
+                uploadFile();
+
+                }
+            }
+        });
         return v;
     }
+
+
+       @Override
+       public void onActivityResult(int requestCode, int resultCode, Intent data) {
+           super.onActivityResult(requestCode, resultCode, data);
+           if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                   && data != null && data.getData() != null) {
+               filePath = data.getData();
+               try {
+                   Bitmap bitmap= MediaStore.Images.Media.getBitmap(context.getContentResolver(),filePath);
+                   imageView.setImageBitmap(bitmap);
+
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+
+
+           }
+       }
+       private String getFileExtension(Uri uri) {
+           ContentResolver cR = requireNonNull(context.getContentResolver());
+           MimeTypeMap mime = MimeTypeMap.getSingleton();
+           return mime.getExtensionFromMimeType(cR.getType(uri));
+       }
     private void change_listner(final TextView v, final TextInputLayout til){
 
 
@@ -139,40 +210,81 @@ public class UserProfileFragment extends Fragment {
         username=v.findViewById(R.id.etUserName);
         email=v.findViewById(R.id.etEmailID);
         mobile=v.findViewById(R.id.etMobile);
-        identity=v.findViewById(R.id.etIdentity);
         location=v.findViewById(R.id.tvCenterName);
         role=v.findViewById(R.id.tvRole);
         sp=v.findViewById(R.id.sprole);
-        back = v.findViewById(R.id.dbuttonBack);
-        change=v.findViewById(R.id.dbuttonUpdate);
-        save=  v.findViewById(R.id.dbuttonDelete);
-
+        imageView=v.findViewById(R.id.imgView);
+        change=v.findViewById(R.id.dbuttonchange);
+        save=  v.findViewById(R.id.dbuttonsave);
+        choose=  v.findViewById(R.id.btnChoose);
+        upload=  v.findViewById(R.id.upload_button);
         l1=v.findViewById(R.id.l1);
         l2=v.findViewById(R.id.l2);
         l3=v.findViewById(R.id.l3);
         l4=v.findViewById(R.id.l4);
-        l5=v.findViewById(R.id.l5);
-        //save=v.findViewById (R.id.dbuttonSave);
-        //change=v.findViewById (R.id.dbuttonchangepassword);
+    }
+    private void uploadFile() {
+
+        if (filePath != null) {
+            final ProgressDialog progressDialog=new ProgressDialog(context);
+            progressDialog.setTitle("Uploading");
+            progressDialog.show();
+            mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
+            final StorageReference sRef = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(filePath));
+
+            sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            progressDialog.dismiss();
+                            myRef.child(id).child("imageURL").setValue(uri.toString());
+                            //displaying success toast
+                            Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
+
+                        }
+
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                            //displaying the upload progress
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                        }
+                    });
+        } else{
+            Toast.makeText(context, "You haven't Selected Any file", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
-    }
-    private void get_values(){
-        userName=username.getText ().toString ().trim ().toUpperCase ();
-        userEmail=email.getText ().toString ().trim ();
-        userMobile=mobile.getText ().toString ().trim ();
-        userIdentity=identity.getText ().toString ().trim ().toUpperCase();
-    }
+   private void chooseimage(View view) {
+       Intent intent = new Intent();
+       intent.setType("image/*");
+       intent.setAction(Intent.ACTION_GET_CONTENT);
+       startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+   }
     private void show(DataSnapshot dataSnapshot){
         try {
             for (DataSnapshot ds : dataSnapshot.getChildren ()) {
                     Teacher uInfo=ds.getValue(Teacher.class);
                     if(requireNonNull(uInfo).getUserId().equals(userID)) {
+                        id=uInfo.getUserId();
                         username.setText(requireNonNull(uInfo).getUserName());
                         email.setText(uInfo.getUserEmail());
                         mobile.setText(uInfo.getUserMobile());
                         location.setText(uInfo.getUserAddress());
-                        identity.setText(uInfo.getUserIdentity());
                         userrole=uInfo.getUserRole();
                         if(userrole.equals("ADMIN")){
                             role.setVisibility(View.GONE);
@@ -190,14 +302,12 @@ public class UserProfileFragment extends Fragment {
             Log.d(TAG, "Failed to retrive values"+e);
         }
     }
-    private void updatedetails(String ID,
-                               String Password,
-                               String Img) {
+    private void updatedetails(String ID,String Password,String Img) {
 
         String Name = username.getText().toString().trim().toUpperCase();
         String Email = email.getText().toString().trim().toLowerCase();
         String Mobile = mobile.getText().toString().trim();
-        String Identity = identity.getText().toString().trim().toUpperCase();
+        String Identity = "";
         String Role;
         if(userrole.equals("ADMIN")){
             Role =sp.getSelectedItem().toString().toUpperCase();
@@ -211,7 +321,7 @@ public class UserProfileFragment extends Fragment {
         String Rating = "";
         String Time = get_current_time();
         //updating artist
-        boolean ans=validate(Name, Email, Mobile, Identity, Role, Address, Status, Feedback, News, Rating, Time);
+        boolean ans=validate(Name, Email, Mobile, Address);
         if(ans) {
             //getting the specified artist reference
             DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("USERS").child(ID);
@@ -230,13 +340,11 @@ public class UserProfileFragment extends Fragment {
                     Time,
                     Rating,
                     Img);
-
             dR.setValue(user);
             Toast.makeText(context, "User info Updated", Toast.LENGTH_LONG).show();
         }
     }
-
-    private boolean validate(String name, String email, String mobile, String identity, String role, String address, String status, String feedback, String news, String rating, String time) {
+    private boolean validate(String name, String email, String mobile, String address) {
 
         if (TextUtils.isEmpty(name)) {
             l1.setError("Enter Name");
@@ -250,10 +358,6 @@ public class UserProfileFragment extends Fragment {
             l4.setError("Enter Address");
             return false;
         }
-        if (TextUtils.isEmpty(identity)) {
-            l5.setError("Enter identity");
-            return false;
-        }
         if (mobile.length() != 10) {
             l3.setError("Enter Mobile");
             return false;
@@ -262,7 +366,6 @@ public class UserProfileFragment extends Fragment {
 
         return true;
     }
-
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());

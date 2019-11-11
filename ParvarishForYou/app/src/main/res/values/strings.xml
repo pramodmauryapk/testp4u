@@ -11,6 +11,13 @@
 
 
     </array>
+    <array name="PAGES">
+        <item>TELENT SUPPORT</item>
+        <item>TECHNICAL PARTNERSHIP</item>
+        <item>CAPACITY BUILDING</item>
+        <item>INTERNSHIP PROGRAM</item>
+        <item>ACADEMIC PARTNER</item>
+    </array>
     <string name="app_name">Parvarish4U</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
@@ -27,21 +34,16 @@
     <string name="login">Login</string>
     <string name="forget_password">Forget Password</string>
     <string name="reset_password">Reset Password</string>
-
     <string name="welcome_to">Welcome To</string>
     <string name="parvarish_knowledge_center">Parvarish4U</string>
-
     <string name="welcome">Welcome</string>
-    <string name="add">Add</string>
     <string name="books_list">Books List</string>
     <string name="text_internship_program">Parvarish4U has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team.</string>
     <string name="tap_to_update_and_view_book_details">Tap to update and view book details</string>
-
     <string name="center_location">Center Location</string>
     <string name="name">Name</string>
     <string name="search_by_author">Search By Author</string>
     <string name="search_by_cost">Search By Cost</string>
-
     <string name="navigation_drawer_open">Drawer open</string>
     <string name="navigation_drawer_close">Drawer close</string>
     <string name="menu_home">Home</string>
@@ -51,11 +53,9 @@
     <string name="nav_header_title">Welcome User!</string>
     <string name="nav_header_subtitle">Email Id</string>
     <string name="user_corner">User Corner</string>
-
     <string name="change_password">Change Password</string>
     <string name="Book_Id">Book Id</string>
     <string name="bookidd">Book Id-</string>
-
     <string name="mobile">Mobile No</string>
     <string name="menu_feedback">Feedback</string>
     <string name="search_by_subject">Search By Subject</string>
@@ -66,7 +66,6 @@
     <string name="book_cost">Book Cost</string>
     <string name="book_location">Book Location</string>
     <string name="donor_name">Donor Name</string>
-
     <string name="search_by_name">Search By Name</string>
     <string name="large_text">
         "Under this scheme we are establishing centres where sessions"
@@ -98,12 +97,10 @@
     <string name="text_tech_partner">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that . So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon .</string>
     <string name="about_page_description" translatable="false" />
     <string name="about_contact_us">Contact us</string>
-
     <string name="about_facebook">Like us on Facebook</string>
     <string name="about_youtube">Watch us on Youtube</string>
     <string name="about_website">Visit our website</string>
     <string name="chose_one_of_them_to_search">Chose one of them to search</string>
-
     <string name="user_name">User Name</string>
     <string name="role">Role</string>
     <string name="email">Email</string>
@@ -132,7 +129,6 @@
     <string name="verify">Verify</string>
     <string name="login_here">Login Here</string>
     <string name="new_user">New User?</string>
-
     <string-array name="pub_year">
         <item>Year</item>
         <item>2000</item>
@@ -180,12 +176,12 @@
         <item>MEDICAL</item>
         <item>ART</item>
         <item>PYSICAL SCIENCE</item>
+        <item>OTHERS</item>
     </string-array>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="start">Start Service</string>
     <string name="stop">Stop service</string>
-
     <string name="item_name">Name</string>
     <string name="item_position">Position</string>
     <string name="profile_desc">Rowan Sebastian Atkinson CBE is an English actor,  comedian and screenwriter</string>
@@ -262,15 +258,12 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="new_password">New Password</string>
     <string name="old_password">Old Password</string>
     <string name="save">Save</string>
-
     <string name="select_and_long_press_for_more_options">Select and Long Press for More Options</string>
     <string name="todo">TODO</string>
     <string name="teacher_name">Teacher Name</string>
     <string name="date">Date</string>
-
     <string name="id">ID</string>
     <string name="book_count">book count</string>
-
     <string name="deposit_rs">Deposit Rs.</string>
     <string name="refund_rs">Refund Rs.</string>
     <string name="select">select</string>
@@ -292,7 +285,6 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="enter_image_details">Enter Image Details</string>
     <string name="close">Close</string>
     <string name="update_password">Update Password</string>
-    <string name="donor_list">Donor List</string>
     <string name="mobile_no">Mobile No.</string>
     <string name="enter_mobile_no">Enter Mobile No.</string>
     <string name="submit">Submit</string>
@@ -301,6 +293,8 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="search">Search</string>
     <string name="reset">Reset</string>
     <string name="add_image_to_gallery">Add Image to Gallery</string>
+    <string name="select_image_for_profile_photo">Select image for Profile photo</string>
+
 
 
 </resources>

@@ -32,7 +32,7 @@ public class ContactUsFragment extends Fragment {
         contactPage = new ContactPage(getActivity())
                 .isRTL()
                 .setImage(R.drawable.logowithtitle)
-                .addItem(new Element().setTitle("Version 1.1"))
+                .addItem(new Element().setTitle("Version 1.0"))
                 .addItem(adsElement)
                 .addGroup()
                 .addEmail()

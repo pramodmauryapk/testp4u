@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.galary.GalleryFragment;
+import com.p4u.parvarish.menu_data.menudataFragment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -67,25 +68,25 @@ public class UserMenuFragment extends HomeFragment {
                                     int i, long id) {
                 switch (i) {
                     case 0:
-                        switchFragment(new TelentSupportFragment());
+                        switchFragment(new menudataFragment(),0);
                         break;
                     case 1:
                         switch_menu(new AdminMenuFragment());
                         break;
                     case 2:
-                        switchFragment(new TechnicalPartnershipFragment());
+                        switchFragment(new menudataFragment(),2);
                         break;
                     case 3:
-                        switchFragment(new CapacityBuildingFragment());
+                        switchFragment(new menudataFragment(),3);
                         break;
                     case 4:
-                        switchFragment(new InternshipProgramFragment());
+                        switchFragment(new menudataFragment(),4);
                         break;
                     case 5:
-                        switchFragment(new AcedemicPartnerFragment());
+                        switchFragment(new menudataFragment(),5);
                         break;
                     case 6:
-                        switchFragment(new GalleryFragment());//new ImageGalleryFragment()
+                        switchFragment(new GalleryFragment(),6);//new ImageGalleryFragment()
                         break;
 
 
@@ -103,8 +104,9 @@ public class UserMenuFragment extends HomeFragment {
         return displaymetrics.widthPixels;
     }
     // switching fragment
-    private void switchFragment(Fragment fragment) {
+    private void switchFragment(Fragment fragment,int position) {
         bundle.putString("user_role",Role);
+        bundle.putString("position",String.valueOf(position));
         fragment.setArguments(bundle);
         requireNonNull(getActivity()).getSupportFragmentManager()
                 .beginTransaction()

@@ -185,28 +185,14 @@ public class CentreListFragment extends HomeFragment {
                                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                                 callIntent.setData(Uri.parse("tel:" + userMobile));
                                 callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Objects.requireNonNull(context).startActivity(callIntent);
+                                dialog.cancel();
 
-
-                                if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                    // TODO: Consider calling
-
-                                    //    Activity#requestPermissions
-                                    // here to request the missing permissions, and then overriding
-                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                    //                                          int[] grantResults)
-                                    // to handle the case where the user grants the permission. See the documentation
-                                    // for Activity#requestPermissions for more details.
-                                }else {
-                                    Objects.requireNonNull(context).startActivity(callIntent);
-                                    dialog.cancel();
-                                }
 
 
                             }
 
-                            private int checkSelfPermission(String callPhone) {
-                                return 0;
-                            }
+
                         });
 
                 // Showing Alert Message

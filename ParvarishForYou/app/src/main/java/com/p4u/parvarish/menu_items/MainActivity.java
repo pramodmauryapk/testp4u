@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void OnClick() {
 
-                            Intent ActivityIndent = new Intent(getApplicationContext(), ExitActivity.class);
+                            Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
                             startActivity(ActivityIndent);
                             finish();
                             //return true;

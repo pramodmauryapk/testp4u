@@ -193,8 +193,8 @@ public class UploadActivity extends AppCompatActivity {
 
     }
     private void openImagesActivity(){
-       // switchFragment(new ManageGalleryFragment());
-        startActivity(new Intent(this, ManageGalleryFragment.class));
+       // switchFragment(new ManagePageFragment());
+        startActivity(new Intent(this, ManagegalaryFragment.class));
         finish();
     }
 

@@ -215,8 +215,9 @@ public class UpdateBookFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                deleteBook(dbookId);
                                 dialog.cancel();
+                                deleteBook(dbookId);
+
 
                             }
                         })
@@ -266,7 +267,7 @@ public class UpdateBookFragment extends Fragment {
     }
 
     private void deleteBook(String book_id) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("books").child(book_id);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(book_id);
         dR.removeValue();
         Toast.makeText(context, "Book Deleted", Toast.LENGTH_LONG).show();
 

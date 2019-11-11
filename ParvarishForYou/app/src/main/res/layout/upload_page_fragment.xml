@@ -19,17 +19,17 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="@string/enter_image_details"
+        android:text="Enter Article Details"
         android:textSize="20sp" />
 
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:entries="@array/IMAGES"
+        android:entries="@array/PAGES"
         android:layout_marginTop="@dimen/dimen_20dp"
         android:padding="5dp"
-        android:id="@+id/spimagelist"
+        android:id="@+id/sppagelist"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_edittext_focused"
         android:layout_height="wrap_content">
@@ -38,13 +38,13 @@
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
         android:id="@+id/tf1"
 
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameEditText"
-            android:hint="@string/name"
+            android:hint="Article Tittle"
             android:maxLines="1"
             android:inputType="text"
             android:layout_width="match_parent"
@@ -57,60 +57,63 @@
         android:id="@+id/tf2"
 
         android:layout_height="wrap_content">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/descriptionEditText"
             android:hint="@string/description"
-            android:minLines="3"
-            android:inputType="text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="160sp"
+            style="@style/createuser_textbox_style"
+            android:lines="8"
+            android:minLines="6"
+            android:gravity="top|start"
+            android:background="@drawable/bg_edittext"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+
+            android:inputType="textMultiLine"
+            android:importantForAutofill="no" />
     </com.google.android.material.textfield.TextInputLayout>
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="52dp" />
+
     <ImageView
         android:id="@+id/chosenImageView"
         android:layout_width="match_parent"
-        android:layout_margin="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/placeholder"
         android:layout_height="200dp"
         android:contentDescription="@string/todo" />
 
+
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/button_choose_image"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:textColor="@color/white"
             android:background="@drawable/button_shape"
             android:text="@string/choose_image"
             tools:ignore="ButtonStyle" />
         <Button
             android:id="@+id/uploadBtn"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/button_shape"
             android:textColor="@color/white"
             android:text="@string/upload"
             tools:ignore="ButtonStyle" />
 
+
     </LinearLayout>
-
-
-
-
-
-
 
 </LinearLayout>
 </ScrollView>

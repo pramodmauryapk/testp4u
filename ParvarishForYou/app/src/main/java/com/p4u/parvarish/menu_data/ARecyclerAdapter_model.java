@@ -1,4 +1,4 @@
-package com.p4u.parvarish.user_pannel;
+package com.p4u.parvarish.menu_data;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.user_pannel.Teacher;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -21,60 +23,57 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.p4u.parvarish.R;
 
-
-public  class RecyclerAdapter_model extends RecyclerView.Adapter<RecyclerAdapter_model.RecyclerViewHolder>{
+public  class ARecyclerAdapter_model extends RecyclerView.Adapter<ARecyclerAdapter_model.RecyclerViewHolder>{
     private static final String TAG = "RecyclerAdapter_model";
     private Context mContext;
-    private List<Teacher> teachers;
+    private List<Article_Model> articles;
     private OnItemClickListener mListener;
 
-    RecyclerAdapter_model(Context context, List<Teacher> uploads) {
+    ARecyclerAdapter_model(Context context, List<Article_Model> uploads) {
         mContext = context;
-        teachers = uploads;
+        articles = uploads;
     }
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.row_model, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_article, parent, false);
         return new RecyclerViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        Teacher currentTeacher = teachers.get(position);
-        holder.nameTextView.setText(currentTeacher.getUserName());
-        holder.descriptionTextView.setText(currentTeacher.getUserEmail());
-        holder.dateTextView.setText(currentTeacher.getUserTime());
+        Article_Model article = articles.get(position);
+        holder.Title.setText(article.getTitle());
+        holder.Article.setText(article.getDescription());
+
         Picasso.get()
-                .load(currentTeacher.getImageURL())
+                .load(article.getImageUrl())
                 .placeholder(R.drawable.logo)
                 .fit()
-                .centerCrop()
-                .into(holder.teacherImageView);
+                .into(holder.img);
+
     }
 
     @Override
     public int getItemCount() {
-        return teachers.size();
+        return articles.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
 
-        TextView nameTextView,descriptionTextView,dateTextView;
-        ImageView teacherImageView;
+        TextView Title,Article;
+        ImageView img;
 
         RecyclerViewHolder(View itemView) {
             super(itemView);
-            nameTextView =itemView.findViewById ( R.id.nameTextView );
-            descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
-            teacherImageView = itemView.findViewById(R.id.teacherImageView);
+            Title = itemView.findViewById(R.id.headingTv);
+            Article = itemView.findViewById(R.id.articleTv);
+            img = itemView.findViewById(R.id.rImageView);
 
-            itemView.setOnClickListener(this);
-            itemView.setOnCreateContextMenuListener(this);
+            img.setOnClickListener(this);
+            img.setOnCreateContextMenuListener(this);
         }
 
         @Override

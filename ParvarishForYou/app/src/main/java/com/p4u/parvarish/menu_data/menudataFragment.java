@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish.menu_data;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -26,13 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TelentSupportFragment extends Fragment {
+
+public class menudataFragment extends Fragment {
     private Context context;
     private List<Article_Model> article_array;
     private DatabaseReference myRef;
     private ListView listViewArticles;
     private View v;
-    private static final String TAG = "TelentSupportFragment";
+
+    private static final String TAG = "menudataFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,13 +48,13 @@ public class TelentSupportFragment extends Fragment {
         switch(Integer.parseInt(Objects.requireNonNull(s))){
             case 0: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("TELENT_SUPPORT");
                 break;
-            case 2: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("TECHNICAL PARTNERSHIP");
+            case 2: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("TECHNICAL_PARTNERSHIP");
                 break;
-            case 3: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("CAPACITY BUILDING");
+            case 3: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("CAPACITY_BUILDING");
                 break;
-            case 4: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("INTERNSHIP PROGRAM");
+            case 4: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("INTERNSHIP_PROGRAM");
                 break;
-            case 5: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("ACADEMIC PARTNER");
+            case 5: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("ACADEMIC_PARTNER");
                 break;
         }
 
@@ -76,31 +78,31 @@ public class TelentSupportFragment extends Fragment {
     private void load_list() {
         try {
 
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    article_array.clear();
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        Article_Model article = postSnapshot.getValue(Article_Model.class);
-                        article_array.add(article);
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        article_array.clear();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            Article_Model article = postSnapshot.getValue(Article_Model.class);
+                            article_array.add(article);
+
+                        }
+
+                            LayoutArticleList articleAdapter = new LayoutArticleList(getActivity(), article_array);
+
+                            listViewArticles.setAdapter(articleAdapter);
+                            articleAdapter.notifyDataSetChanged();
+
+
+
 
                     }
 
-                    LayoutArticleList articleAdapter = new LayoutArticleList(getActivity(), article_array);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    listViewArticles.setAdapter(articleAdapter);
-                    articleAdapter.notifyDataSetChanged();
-
-
-
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+                    }
+                });
 
 
         }catch (Exception e){
