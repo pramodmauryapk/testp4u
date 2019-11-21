@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:paddingStart="@dimen/activity_horizontal_margin"
+
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
     android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
@@ -60,7 +60,7 @@
             android:weightSum="10"
             android:orientation="horizontal">
             <TextView
-                android:text="Yashwant Kanitkar"
+                android:text="@string/yashwant_kanitkar"
                 android:textColor="@color/grey"
                 android:textSize="12sp"
                 android:textStyle="italic"
@@ -74,19 +74,18 @@
                 android:id="@+id/textView_currency"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:text="₹"
+                android:text="@string/rupee"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/grey"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content" />
             <TextView
-                android:text="100"
+                android:text="@string/_100"
                 android:textSize="12sp"
                 android:textColor="@color/grey"
                 android:id="@+id/textView_Book_Cost"
                 android:layout_weight="0"
-
                 android:textAlignment="viewEnd"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content" />

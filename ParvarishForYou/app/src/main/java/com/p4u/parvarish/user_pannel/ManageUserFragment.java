@@ -43,14 +43,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.p4u.parvarish.R;
@@ -58,6 +50,13 @@ import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
@@ -148,7 +147,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         Bundle args = new Bundle();
         args.putString("NAME_KEY", data[0]);
         args.putString("EMAIL_KEY", data[1]);
-        args.putString("IMAfGE_KEY", data[2]);
+        args.putString("IMAGE_KEY", data[2]);
         args.putString("MOBILE_KEY", data[3]);
         args.putString("ROLE_KEY",data[4]);
         args.putString("IDENTITY_KEY",data[5]);
@@ -258,8 +257,6 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                             @Override
                             public void OnClick() {
 
-
-
                             }
                         })
                         .build();
@@ -289,7 +286,12 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         change.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchFragment(new UpdatePasswordFragment());
+                UpdatePasswordFragment fragment = new UpdatePasswordFragment();
+                Bundle args = new Bundle();
+                args.putString("ID_KEY", userId);
+                fragment.setArguments(args);
+                switchFragment(fragment);
+                b.cancel();
             }
         });
         save.setOnClickListener(new View.OnClickListener() {

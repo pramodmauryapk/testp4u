@@ -2,7 +2,7 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".galary.UploadActivity"
+    tools:context=".galary.UploadImage"
     android:background="@color/colorwhite"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="Enter Article Details"
+        android:text="@string/enter_article_details"
         android:textSize="20sp" />
 
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameEditText"
-            android:hint="Article Tittle"
+            android:hint="@string/article_tittle"
             android:maxLines="1"
             android:inputType="text"
             android:layout_width="match_parent"
@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
+            android:ems="7"
             android:textColor="@color/white"
             android:background="@drawable/button_shape"
             android:text="@string/choose_image"
@@ -107,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp"
+            android:ems="7"
             android:background="@drawable/button_shape"
             android:textColor="@color/white"
             android:text="@string/upload"

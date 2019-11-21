@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.user_pannel.Teacher;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -73,7 +72,9 @@ public  class ARecyclerAdapter_model extends RecyclerView.Adapter<ARecyclerAdapt
             img = itemView.findViewById(R.id.rImageView);
 
             img.setOnClickListener(this);
+            Title.setOnCreateContextMenuListener(this);
             img.setOnCreateContextMenuListener(this);
+            Article.setOnCreateContextMenuListener(this);
         }
 
         @Override

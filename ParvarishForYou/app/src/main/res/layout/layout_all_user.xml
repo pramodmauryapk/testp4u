@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
     android:layout_width="match_parent"
@@ -14,9 +13,9 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="8"
+        android:layout_weight="7"
         android:text="@string/name"
         android:textSize="16sp"
         android:gravity="start|center_vertical"
@@ -26,29 +25,32 @@
         android:textAlignment="viewStart" />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_weight="1"
         android:textSize="14sp"
+        android:layout_weight="1"
+        android:ems="5"
         android:id="@+id/tv_userrole"
         android:textAlignment="viewEnd"
-        android:layout_gravity="end|center_vertical"
+        android:gravity="end|center_vertical"
         android:textColor="@color/colorblack"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="@string/role"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_weight="1"
         android:textSize="14sp"
-        android:layout_gravity="end|center_vertical"
+        android:layout_weight="2"
+        android:ems="10"
+        android:gravity="end|center_vertical"
         android:textColor="@color/colorblack"
         android:textAlignment="viewEnd"
         android:id="@+id/tv_usermobile"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="@string/mobile_number"/>
     <ImageView
         android:layout_width="20dp"
         android:layout_weight="0"
         android:layout_height="16dp"
         android:layout_gravity="end|center_vertical"
-        android:background="@drawable/ic_chevron_right_black_24dp"/>
+        android:background="@drawable/ic_chevron_right_black_24dp"
+        android:contentDescription="@string/parvarish_knowledge_center" />
 </LinearLayout>
 

@@ -6,11 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorwhite"
     android:orientation="vertical">
-
-
-
-
-        <TextView
+       <TextView
             android:id="@+id/newsmarquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

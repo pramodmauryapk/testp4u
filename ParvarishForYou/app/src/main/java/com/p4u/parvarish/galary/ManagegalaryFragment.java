@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +41,7 @@ public class ManagegalaryFragment extends Fragment {
         openUploadActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, UploadActivity.class));
+                startActivity(new Intent(context, UploadImage.class));
                 requireNonNull(getActivity()).finish();
             }
         });

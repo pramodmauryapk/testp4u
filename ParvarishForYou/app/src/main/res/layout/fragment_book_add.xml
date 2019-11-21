@@ -172,25 +172,25 @@
         android:id="@+id/btnAddBook"
 
         android:text="@string/add"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_marginEnd="@dimen/dimen_20dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"
         android:textColor="@color/colorwhite"
         android:textStyle="bold"
-
+        android:ems="7"
         android:layout_marginTop="10dp"
         tools:ignore="ButtonStyle" />
     <Button
         android:id="@+id/btnlistBook"
 
         android:text="@string/books_list"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"
         android:textColor="@color/colorwhite"
         android:textStyle="bold"
-
+        android:ems="7"
         android:layout_marginTop="10dp"
         tools:ignore="ButtonStyle" />
     </LinearLayout>

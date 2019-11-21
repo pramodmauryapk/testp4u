@@ -22,22 +22,21 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.contact_us.ContactUsFragment;
 import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
+import com.p4u.parvarish.login.Login_emailActivity;
+import com.p4u.parvarish.login.UserRegistrationActivity;
+import com.p4u.parvarish.user_pannel.UserProfileFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 import java.util.Stack;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.p4u.parvarish.ExitActivity;
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.contact_us.ContactUsFragment;
-import com.p4u.parvarish.login.Login_emailActivity;
-import com.p4u.parvarish.login.UserRegistrationActivity;
-import com.p4u.parvarish.user_pannel.UserProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressLint({"SetTextI18n", "ResourceType"})
     public void set_profile(String username,String useremail,String userrole,String imgURL){
 
-         name.setText(username);
+          name.setText(username);
           email.setText(userrole);
           Picasso.get().load(imgURL).into(img);
 
@@ -168,17 +167,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void OnClick() {
 
-                            Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
-                            startActivity(ActivityIndent);
+                            //Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
+                            //startActivity(ActivityIndent);
                             finish();
-                            //return true;
+
                         }
                     })
                     .OnNegativeClicked(new FancyAlertDialogListener() {
                         @Override
                         public void OnClick() {
 
-                        //return false;
+
 
                         }
                     })
@@ -204,6 +203,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (FirebaseAuth.getInstance().getCurrentUser() == null){
             menu.findItem(R.id.action_login_logout).setTitle("Login");
             menu.findItem(R.id.action_update).setTitle("Register");
+
+
         }
         else {
             menu.findItem(R.id.action_login_logout).setTitle("Logout");
@@ -232,6 +233,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 user_roll="USER";
                 // user_img=null;
                 set_profile(user_name,user_email,user_roll,user_img);
+
+
+
 
             }
 
@@ -279,6 +283,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 newContent.setArguments(bundle);
 
                 break;
+
+            case R.id.nav_share:
+                shareApp();
+                break;
             case R.id.nav_exit:new FancyAlertDialog.Builder(this)
                     .setTitle("Rate us if you like the app")
                     .setMessage("Do you really want to Exit ?")
@@ -291,21 +299,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void OnClick() {
 
-                            Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
-                            startActivity(ActivityIndent);
+                            //Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
+                            //startActivity(ActivityIndent);
                             finish();
-                            //return true;
+
                         }
                     })
                     .OnNegativeClicked(new FancyAlertDialogListener() {
                         @Override
                         public void OnClick() {
-                            //false;
+
 
 
                         }
                     })
                     .build();
+
                 break;
 
 
@@ -330,6 +339,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .commit();
 
      }
+    private void shareApp() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        String shareSubText = "Kindly install our android app Parvarish4U: From ParvarishForYou Team ";
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareSubText + "https://play.google.com/store/apps/details?id=com.p4u.parvarish&hl=en");
+        startActivity(Intent.createChooser(shareIntent,"Share link using"));
+    }
+
+
+
 
 
 }

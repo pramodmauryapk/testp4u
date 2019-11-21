@@ -19,7 +19,7 @@ import com.p4u.parvarish.login.Login_emailActivity;
 
 public class SplashActivity extends Activity {
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 5000;
+    private static int SPLASH_TIME_OUT = 3000;
     private static final String TAG="SplashActivity";
    // private AdView mAdView;
     @Override
@@ -29,6 +29,7 @@ public class SplashActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_splash);
+
         //init views
         ImageView imageView=findViewById(R.id.image1);
         TextView textView1=findViewById(R.id.welcomtext1);

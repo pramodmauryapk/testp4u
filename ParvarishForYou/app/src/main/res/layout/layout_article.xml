@@ -21,7 +21,7 @@
         android:id="@+id/rImageView"
         android:scaleType="fitXY"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/loading"
+        android:background="@drawable/logo"
         android:contentDescription="@string/todo" />
        <TextView
            android:id="@+id/headingTv"
@@ -32,11 +32,12 @@
            android:hint="@string/add_new_tagline"
            android:textColor="@color/colorRed"
            android:textStyle="bold"
-           android:textSize="18sp"
+           android:textSize="20sp"
            android:importantForAutofill="no"/>
 
     <TextView
         android:id="@+id/articleTv"
+        style="@style/about_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title"

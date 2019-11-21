@@ -15,6 +15,22 @@
           android:text="@string/donor_list"
           android:textColor="@color/colorRed"
           android:textSize="20sp" />
+      <com.google.android.material.textfield.TextInputLayout
+          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+          android:layout_width="match_parent"
+          android:layout_marginTop="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
+          android:id="@+id/tf1"
+          android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtName"
+                android:inputType="text"
+                android:hint="@string/donor_name"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+      </com.google.android.material.textfield.TextInputLayout>
       <LinearLayout
           android:layout_width="match_parent"
           android:paddingLeft="@dimen/activity_horizontal_margin"

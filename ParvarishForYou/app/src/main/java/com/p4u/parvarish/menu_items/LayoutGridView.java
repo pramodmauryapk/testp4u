@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -56,17 +57,18 @@ public class LayoutGridView extends BaseAdapter {
             TextView textViewAndroid = gridViewAndroid.findViewById(R.id.android_gridview_text);
             ImageView imageViewAndroid = gridViewAndroid.findViewById(R.id.android_gridview_image);
             // Get the TextView LayoutParams
-          //  LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) textViewAndroid.getLayoutParams();
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) textViewAndroid.getLayoutParams();
 
             // Set the width of TextView widget (item of GridView)
-     //       params.width = getPixelsFromDPs((Activity) gridViewAndroid.getContext(), 100);
+          //  params.width = getPixelsFromDPs((Activity) gridViewAndroid.getContext(), 100);
 
             // Set the TextView height (GridView item/row equal height)
-     //       params.height = getPixelsFromDPs((Activity) gridViewAndroid.getContext(),50);
+          // params.height = getPixelsFromDPs((Activity) gridViewAndroid.getContext(),50);
 
 
 
             imageViewAndroid.getLayoutParams().height=100;
+            imageViewAndroid.getLayoutParams().width=100;
      //       textViewAndroid.setLayoutParams(params);
             textViewAndroid.setText(gridViewString[i]);
             imageViewAndroid.setImageResource(gridViewImageId[i]);

@@ -1,7 +1,6 @@
 package com.p4u.parvarish.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,13 +25,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
-
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.WelcomeActivity;
 import com.p4u.parvarish.user_pannel.ResetPasswordActivity;
 
+import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
@@ -82,6 +79,8 @@ public class Login_emailActivity extends AppCompatActivity {
             finish();
 
         }
+
+
 
 
 
@@ -156,7 +155,7 @@ public class Login_emailActivity extends AppCompatActivity {
     }
 
     public void login_with_mobile(View view) {
-        startActivity(new Intent(Login_emailActivity.this, Login_mobileActivity.class));
+        startActivity(new Intent(Login_emailActivity.this, Activity_mobile_login.class));
         finish();
     }
 

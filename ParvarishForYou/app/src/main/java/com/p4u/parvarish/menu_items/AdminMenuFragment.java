@@ -19,11 +19,12 @@ import androidx.fragment.app.Fragment;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BeneficiaryAddFragment;
+import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
-import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.galary.ManagegalaryFragment;
+import com.p4u.parvarish.menu_data.AdminTimelineFragment;
 import com.p4u.parvarish.menu_data.ManageArticleFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
@@ -112,8 +113,8 @@ public class AdminMenuFragment extends HomeFragment {
                     "Manage News",
                     "Manage Gallery",
                     "Report Book",
-                    "Manage Articles"
-
+                    "Manage Articles",
+                    "Manage Timeline"
             };
 
             gridViewImageId = new int[]{
@@ -131,7 +132,8 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_library_books_black_24dp,
                     R.drawable.ic_image_black_24dp,
                     R.drawable.ic_report_black_24dp,
-                    R.drawable.ic_burst_mode_black_24dp
+                    R.drawable.ic_burst_mode_black_24dp,
+                    R.drawable.ic_mode_comment_black_24dp
 
             };
 
@@ -185,10 +187,15 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new ManagegalaryFragment());
                         break;
                     case 12:
+                       // Intent ActivityIndent = new Intent(context, RecyclerViewActivity.class);
+                       // startActivity(ActivityIndent);
                         break;
                     case 13:
                         switchFragment(new ManageArticleFragment());
 
+                        break;
+                    case 14:
+                        switchFragment(new AdminTimelineFragment());
                         break;
 
                 }

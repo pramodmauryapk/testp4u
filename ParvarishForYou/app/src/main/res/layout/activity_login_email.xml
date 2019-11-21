@@ -52,6 +52,7 @@
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:id="@+id/logo"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/logo"
                 android:contentDescription="@string/parvarish_knowledge_center" />
@@ -68,7 +69,7 @@
                 android:textStyle="bold" />
             <androidx.cardview.widget.CardView
 
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -77,7 +78,7 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp"
@@ -133,10 +134,10 @@
 
                         <Button
                             android:id="@+id/login_button"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:background="@color/colorRed"
-                            android:ems="15"
+                            android:background="@drawable/button_shape"
+                            android:ems="5"
                             android:onClick="loginButton"
                             android:text="@string/login"
                             android:textAllCaps="false"
@@ -172,20 +173,14 @@
                 android:orientation="horizontal"
                 android:padding="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login_with_mobile"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textSize="16sp" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:onClick="login_with_mobile"
-                    android:text="@string/login_here"
+                    android:text="@string/login_with_mobile"
                     android:paddingEnd="16dp"
                     android:textColor="@color/about_facebook_color"
                     android:textSize="16sp"
@@ -217,7 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:onClick="register"
-                    android:text="@string/join_us"
+                    android:text="@string/register"
                     android:paddingEnd="16dp"
                     android:textColor="@color/colorRed"
                     android:textSize="16sp"

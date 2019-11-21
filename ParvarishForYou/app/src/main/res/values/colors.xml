@@ -11,6 +11,11 @@
     <color name="colorEdittextborder">#A9A9A9</color>
     <color name="colorwhite">#fff </color>
 
+    <color name="item_selected">#90FFFFFF</color>
+    <color name="drop_shadow">#66000000</color>
+
+    <color name="menu_icons">#757575</color>
+    <color name="menu_text">#222222</color>
     <color name="main">#4CAF50</color>
     <color name="colorblack">#000</color>
     <color name="colorRed">#D81B60</color>
@@ -19,7 +24,8 @@
     <color name="about_item_icon_color">#313131</color>
     <color name="about_background_color">#FFFFFF</color>
     <color name="about_separator_color">#e1e1e1</color>
-
+    <color name="itemcolor">#2808EE9E</color>
+    <color name="textColor">#292929</color>
     <!-- Social -->
     <color name="about_facebook_color">#3b5998</color>
     <color name="about_youtube_color">#cd201f</color>
@@ -33,22 +39,7 @@
     <color name="orange">#F4511E</color>
     <color name="green">#21E43C</color>
     <color name="grey">#828080</color>
-    <color name="darkgreen">#17bb0b</color>
     <color name="red">#e50b1f</color>
-    <color name="MulledWine">#493E58</color>
-    <color name="LinkWater">#C8CACC</color>
-    <color name="Venus">#8E8485</color>
-    <color name="EchoBlue">#B8BABE</color>
     <color name="Cranberry">#FF44C0</color>
-    <color name="Mischka">#A7A8AD</color>
-    <color name="gradient_start">#5770f3</color>
-    <color name="gradient_end">#8e5aeb</color>
-    <color name="profile_desc">#D1D1FF</color>
-    <color name="bg_meta_container">#000000</color>
-    <color name="profile_default_tint">#e0e0e0</color>
 
-    <color name="blue">#ff82e0ff</color>
-    <color name="yellow">#fffffbae</color>
-
-    <color name="list_item_pressed">#1A000000</color>
 </resources>

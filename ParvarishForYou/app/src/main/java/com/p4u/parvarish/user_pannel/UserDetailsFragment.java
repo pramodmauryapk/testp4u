@@ -13,14 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.squareup.picasso.Picasso;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
-
 import com.p4u.parvarish.R;
+import com.squareup.picasso.Picasso;
 
 public class UserDetailsFragment extends Fragment {
 
@@ -73,7 +67,7 @@ public class UserDetailsFragment extends Fragment {
 
         Picasso.get()
                 .load(imageURL)
-                .placeholder(R.drawable.logo)
+                .placeholder(R.drawable.userpic)
                 .fit()
                 .centerCrop()
                 .into(teacherDetailImageView);

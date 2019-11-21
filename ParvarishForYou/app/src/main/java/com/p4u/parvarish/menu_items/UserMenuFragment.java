@@ -1,6 +1,7 @@
 package com.p4u.parvarish.menu_items;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -17,7 +18,9 @@ import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.galary.GalleryFragment;
+import com.p4u.parvarish.menu_data.ShowTimelineFragment;
 import com.p4u.parvarish.menu_data.menudataFragment;
+import com.p4u.parvarish.video.RecyclerViewActivity;
 
 import static java.util.Objects.requireNonNull;
 
@@ -32,7 +35,9 @@ public class UserMenuFragment extends HomeFragment {
             "Capacity Building",
             "Internship Program",
             "Academic Partner",
-            "Gallery"
+            "Gallery",
+            "Videos",
+            "Timeline"
     } ;
 
     private int[] gridViewImageId = {
@@ -42,7 +47,9 @@ public class UserMenuFragment extends HomeFragment {
             R.drawable.ic_business_black_24dp,
             R.drawable.ic_transfer_within_a_station_black_24dp,
             R.drawable.ic_school_black_24dp,
-            R.drawable.ic_camera_black_24dp
+            R.drawable.ic_camera_black_24dp,
+            R.drawable.ic_ondemand_video_black_24dp,
+            R.drawable.ic_playlist_add_black_24dp
 
     };
 
@@ -60,7 +67,7 @@ public class UserMenuFragment extends HomeFragment {
         LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         androidGridView.setAdapter(adapterViewAndroid);
-        androidGridView.setColumnWidth(getWidthAndHeight()/5);
+        androidGridView.setColumnWidth(getWidthAndHeight()/4);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -88,7 +95,12 @@ public class UserMenuFragment extends HomeFragment {
                     case 6:
                         switchFragment(new GalleryFragment(),6);//new ImageGalleryFragment()
                         break;
-
+                    case 7:
+                        Intent ActivityIndent = new Intent(getActivity(), RecyclerViewActivity.class);
+                        startActivity(ActivityIndent);
+                        break;
+                    case 8:switchFragment(new ShowTimelineFragment(),8);//new ImageGalleryFragment()
+                        break;
 
                 }
 

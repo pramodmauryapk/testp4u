@@ -14,14 +14,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.p4u.parvarish.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import com.p4u.parvarish.R;
 
 
 public  class RecyclerAdapter_model extends RecyclerView.Adapter<RecyclerAdapter_model.RecyclerViewHolder>{
@@ -49,7 +48,7 @@ public  class RecyclerAdapter_model extends RecyclerView.Adapter<RecyclerAdapter
         holder.dateTextView.setText(currentTeacher.getUserTime());
         Picasso.get()
                 .load(currentTeacher.getImageURL())
-                .placeholder(R.drawable.logo)
+                .placeholder(R.drawable.userpic)
                 .fit()
                 .centerCrop()
                 .into(holder.teacherImageView);

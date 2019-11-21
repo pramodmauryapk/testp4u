@@ -42,34 +42,22 @@ public class NewsTextFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String value = (String) dataSnapshot.getValue();
                     // do your stuff here with value
-
                     tv.setText(value);
-
-
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-
-
             });
         } catch (Exception e){
             tv.setText("error fetching news ");
-
         }finally {
-
             tv.setSelected(true);
         }
         return v;
     }
-
-
     private void initViews() {
         tv = v.findViewById(R.id.newsmarquee);
     }
-
-
 
 }

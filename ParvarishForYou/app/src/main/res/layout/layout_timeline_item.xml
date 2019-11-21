@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/recyclercard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorwhite"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    app:contentPadding="5dp"
+    app:cardUseCompatPadding="true">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_horizontal"
+       android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+      <de.hdodenhof.circleimageview.CircleImageView
+         android:id="@+id/userpic"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:contentDescription="@string/nav_header_desc"
+         android:paddingTop="@dimen/nav_header_vertical_spacing"
+         android:src="@drawable/userpic"
+         app:srcCompat="@drawable/userpic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+       <TextView
+           android:id="@+id/headingTv"
+           android:layout_marginTop="@dimen/_8dp"
+           android:layout_marginStart="@dimen/_8dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textColor="@color/about_facebook_color"
+           android:textStyle="bold"
+           android:textSize="12sp"
+           android:importantForAutofill="no"/>
+            <TextView
+                android:layout_marginTop="@dimen/_8dp"
+                android:layout_marginStart="@dimen/_8dp"
+                android:id="@+id/datetimetv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/about_facebook_color"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:importantForAutofill="no"/>
+        </LinearLayout>
+    </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/l1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+
+           android:orientation="horizontal">
+
+    <TextView
+        android:layout_marginTop="@dimen/_8dp"
+        android:id="@+id/articleTv"
+        style="@style/about_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="5dp"
+        android:textSize="12sp"
+        android:background="@drawable/bg_edittext_normal"
+        android:gravity="top|start"
+        android:importantForAutofill="no"/>
+
+    </LinearLayout>
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/rImageView"
+           android:scaleType="fitCenter"
+           android:adjustViewBounds="true"
+           android:cropToPadding="true"
+           android:layout_gravity="center_horizontal"
+           android:contentDescription="@string/todo" />
+   </LinearLayout>
+</androidx.cardview.widget.CardView>

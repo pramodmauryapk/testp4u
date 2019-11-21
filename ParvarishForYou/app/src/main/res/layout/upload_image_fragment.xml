@@ -2,7 +2,7 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".galary.UploadActivity"
+    tools:context=".galary.UploadImage"
     android:background="@color/colorwhite"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
@@ -65,15 +65,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-    <ProgressBar
+   <!-- <ProgressBar
         android:id="@+id/progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="52dp" />
+        android:layout_height="10dp" />-->
     <ImageView
         android:id="@+id/chosenImageView"
         android:layout_width="match_parent"
-        android:layout_margin="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/placeholder"
         android:layout_height="200dp"
         android:contentDescription="@string/todo" />
@@ -81,12 +82,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/button_choose_image"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ems="7"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textColor="@color/white"
@@ -95,10 +98,11 @@
             tools:ignore="ButtonStyle" />
         <Button
             android:id="@+id/uploadBtn"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
+            android:ems="7"
             android:background="@drawable/button_shape"
             android:textColor="@color/white"
             android:text="@string/upload"

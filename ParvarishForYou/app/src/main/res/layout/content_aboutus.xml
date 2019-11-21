@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             style="@style/about_description"
             android:text="@string/about_page_description5"/>
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

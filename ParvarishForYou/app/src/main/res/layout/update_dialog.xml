@@ -173,6 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="2dp"
+
             android:text="@string/update"
             android:background="@drawable/button_shape"
             android:textColor="@color/colorwhite"
@@ -189,6 +190,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:text="@string/delete"
+
             android:background="@drawable/button_shape"
             android:textColor="@color/colorwhite"
             android:textStyle="bold"
@@ -203,6 +205,7 @@
             android:layout_weight="1"
             android:layout_margin="2dp"
             android:text="@string/back"
+
             android:background="@drawable/button_shape"
             android:textColor="@color/colorwhite"
             android:textStyle="bold"

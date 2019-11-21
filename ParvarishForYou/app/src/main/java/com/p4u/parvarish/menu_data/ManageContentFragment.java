@@ -10,20 +10,14 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,9 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,12 +43,6 @@ import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
-import com.p4u.parvarish.menu_data.ARecyclerAdapter_model;
-import com.p4u.parvarish.menu_data.Article_Model;
-import com.p4u.parvarish.user_pannel.RecyclerAdapter_model;
-import com.p4u.parvarish.user_pannel.Teacher;
-import com.p4u.parvarish.user_pannel.UpdatePasswordFragment;
-import com.p4u.parvarish.user_pannel.UserDetailsFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -125,7 +110,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -151,7 +136,8 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                 article.getDescription(),
                 article.getImageUrl(),
                 article.getTime(),
-                article.getStatus()};
+                article.getStatus()
+        };
        // openDetails(ArticleData);
     }
 
@@ -193,14 +179,14 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                                 public void OnClick() {
 
                                     mDatabaseRef.child(selectedKey).removeValue();
-                                    Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
 
                                 }
                             })
                             .OnNegativeClicked(new FancyAlertDialogListener() {
                                 @Override
                                 public void OnClick() {
-                                    Toast.makeText(context, "Item not deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Item not deleted", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .build();
@@ -222,14 +208,14 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                         public void OnClick() {
 
                             mDatabaseRef.child(selectedKey).removeValue();
-                            Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
 
                         }
                     })
                     .OnNegativeClicked(new FancyAlertDialogListener() {
                         @Override
                         public void OnClick() {
-                            Toast.makeText(context, "Item not deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Item not deleted", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .build();
@@ -265,7 +251,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
             @Override
             public void onClick(View view) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
                    uploadFile(Id,Title,Desc,Url,get_current_time(),"1");
 
@@ -298,7 +284,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                             mDatabaseRef.child(id).child("status").setValue("1");
 
                             //displaying success toast
-                            Toast.makeText(context, "Article Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Article Uploaded ", Toast.LENGTH_LONG).show();
 
                         }
 

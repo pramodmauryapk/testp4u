@@ -3,7 +3,6 @@ package com.p4u.parvarish.menu_items;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,9 +23,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         mView=itemView;
     }
     public void set_details(Context ctx,String title,String img){
-        TextView textView=mView.findViewById(R.id.rTitleTv);
+        //TextView textView=mView.findViewById(R.id.rTitleTv);
         ImageView imageView=mView.findViewById(R.id.rImageView);
-        textView.setText(title);
+      //  textView.setText(title);
         Picasso.get().load(img).into(imageView);
     }
 }

@@ -4,31 +4,30 @@ import com.google.firebase.database.Exclude;
 
 public class Article_Model {
     private String id;
-
-
-
     private String title;
     private String imageURL;
     private String key;
     private String description;
-
-
-
     private String time;
     private String status;
+    private String userid;
 
     public Article_Model() {
         //empty constructor needed
     }
     public Article_Model(int position){
     }
-    Article_Model(String id,String title, String imageUrl, String Des,String time,String status) {
+
+
+
+    public Article_Model(String id, String title, String imageUrl, String Des, String time, String status, String userid) {
         this.id=id;
         this.title = title;
         this.imageURL = imageUrl;
         this.description = Des;
         this.time=time;
         this.status=status;
+        this.userid=userid;
     }
     public String getId() {
         return id;
@@ -82,6 +81,12 @@ public class Article_Model {
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getUserid() {
+        return userid;
+    }
 
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
 }

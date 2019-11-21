@@ -19,8 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.menu_data.Article_Model;
-import com.p4u.parvarish.menu_data.LayoutArticleList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +31,7 @@ public class menudataFragment extends Fragment {
     private DatabaseReference myRef;
     private ListView listViewArticles;
     private View v;
+
 
     private static final String TAG = "menudataFragment";
     @Nullable
@@ -60,6 +59,7 @@ public class menudataFragment extends Fragment {
 
         context = container.getContext();
         initViews();
+
         article_array = new ArrayList<>();
 
         return v;
@@ -89,12 +89,8 @@ public class menudataFragment extends Fragment {
                         }
 
                             LayoutArticleList articleAdapter = new LayoutArticleList(getActivity(), article_array);
-
                             listViewArticles.setAdapter(articleAdapter);
                             articleAdapter.notifyDataSetChanged();
-
-
-
 
                     }
 

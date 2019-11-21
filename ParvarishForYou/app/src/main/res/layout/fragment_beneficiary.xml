@@ -131,6 +131,7 @@
                 android:id="@+id/btnsearch"
                 android:text="@string/search"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/colorwhite"
@@ -142,7 +143,7 @@
                 android:id="@+id/btnreset"
                 android:text="@string/reset"
                 android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
+                                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/colorwhite"

@@ -25,11 +25,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.p4u.parvarish.R;
 
 import java.util.Objects;
-
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.menu_items.HomeFragment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -42,6 +40,7 @@ public class UpdatePasswordFragment extends Fragment {
     private Context context;
     private FirebaseUser user;
     private DatabaseReference myref;
+    private String userID;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_update_password, container, false);
@@ -56,7 +55,14 @@ public class UpdatePasswordFragment extends Fragment {
         tf3 = v.findViewById(R.id.tf3);
         //get Firebase auth instance
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = (requireNonNull(user)).getUid();
+
+
+       if(getArguments() != null) {
+           userID = getArguments().getString("ID_KEY");
+       }else{
+           userID = (requireNonNull(user)).getUid();
+       }
+
         myref = FirebaseDatabase.getInstance().getReference().child("USERS").child(userID).child("userPassword");
         change_listner(txtoldpass,tf1);
         change_listner(txtpass,tf2);

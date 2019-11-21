@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -175,7 +176,8 @@ public class upload_article extends AppCompatActivity {
                                     uri.toString(),
                                     descriptionEditText.getText().toString(),
                                     get_current_time(),
-                                    "1"
+                                    "1",
+                                    Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()
                             );
 
                             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
@@ -209,7 +211,8 @@ public class upload_article extends AppCompatActivity {
                     null,
                     descriptionEditText.getText().toString(),
                     get_current_time(),
-                    "1"
+                    "1",
+                    Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()
             );
 
             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);

@@ -32,7 +32,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:padding="8dp"
-                    android:textColor="@color/colorblack"
+                    android:textColor="@color/colorRed"
                     android:layout_gravity="center_horizontal" />
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -140,17 +140,17 @@
                             android:layout_gravity="center_horizontal"
                             app:cardBackgroundColor="@color/main_color">
                             <Button
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="@string/send_information"
+                                android:text="@string/submit"
                                 android:textSize="16sp"
 
                                 android:id="@+id/register_button"
                                 android:textStyle="bold"
-                                android:ems="15"
+                                android:ems="7"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white"
-                                android:background="@color/colorRed"
+                                android:background="@drawable/button_shape"
                                 />
                         </androidx.cardview.widget.CardView>
 

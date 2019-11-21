@@ -19,7 +19,6 @@
         <item>ACADEMIC PARTNER</item>
     </array>
     <string name="app_name">Parvarish4U</string>
-    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="tv_passwordresetinstruction">We just need your registered Email id to send you password reset instructions</string>
     <string name="tv_passwordupdateinstruction">Please enter password minimum 6 characters.</string>
@@ -29,78 +28,38 @@
     <string name="address">Address</string>
     <string name="identity">Identity</string>
     <string name="aadhar_id_voter_id">Aadhar ID/Voter ID</string>
-    <string name="create_user">Create User</string>
-    <string name="exiting">Exiting…</string>
     <string name="login">Login</string>
     <string name="forget_password">Forget Password</string>
     <string name="reset_password">Reset Password</string>
-    <string name="welcome_to">Welcome To</string>
     <string name="parvarish_knowledge_center">Parvarish4U</string>
     <string name="welcome">Welcome</string>
     <string name="books_list">Books List</string>
-    <string name="text_internship_program">Parvarish4U has started this program to provide internship for freshers or students. Under this program individual will work under the guidance of our experienced team.</string>
-    <string name="tap_to_update_and_view_book_details">Tap to update and view book details</string>
     <string name="center_location">Center Location</string>
     <string name="name">Name</string>
-    <string name="search_by_author">Search By Author</string>
-    <string name="search_by_cost">Search By Cost</string>
     <string name="navigation_drawer_open">Drawer open</string>
     <string name="navigation_drawer_close">Drawer close</string>
-    <string name="menu_home">Home</string>
     <string name="action_update_profile">Update Profile</string>
     <string name="action_logout_profile">Logout</string>
     <string name="nav_header_desc">desc</string>
     <string name="nav_header_title">Welcome User!</string>
-    <string name="nav_header_subtitle">Email Id</string>
-    <string name="user_corner">User Corner</string>
     <string name="change_password">Change Password</string>
     <string name="Book_Id">Book Id</string>
     <string name="bookidd">Book Id-</string>
     <string name="mobile">Mobile No</string>
     <string name="menu_feedback">Feedback</string>
-    <string name="search_by_subject">Search By Subject</string>
     <string name="donor_list">Donor List</string>
-    <string name="center_list">Center List</string>
     <string name="author_name">Author Name</string>
     <string name="book_title">Book Title</string>
     <string name="book_cost">Book Cost</string>
     <string name="book_location">Book Location</string>
     <string name="donor_name">Donor Name</string>
-    <string name="search_by_name">Search By Name</string>
-    <string name="large_text">
-        "Under this scheme we are establishing centres where sessions"
-        "and classes can be arranged by expert to increase capacity of"
-        "students. As most of problems of society can be solved with "
-        "this capacity building initiative."
-        "Currently we are running our capacity building centres which "
-        "is giving very good response."
-    </string>
 
-    <string name="text_telent_support">
-
-    "Parvarish4U has started this scheme. Under this scheme"
-    "we are trying to support talent either in academics , "
-    "sports and any other field of life. Under this scheme "
-    "organisation support students in different ways."
-
-    "1. To support student one year school fee of student who "
-    "got first position in school. (Already selected two students"
-    "from two different schools)."
-    "2. Awarding and supporting district topper with cash support"
-    "and other required support ."
-
-    "There are several other ways where organisation is working "
-    "to support real and needy talent."
-
-</string>
     <string name="copy_right" translatable="false">Copyrights © %1$d</string>
-    <string name="text_tech_partner">Under this programme we are making parternership with the computer centres, shops which use to help students. We provide all kind of assistance to them with the help of our technical team. We also pay charges for those talented students who are not able to pay that . So if you are interested to be technical partner pls send you name and address to WhatsApp .our team will contact you soon .</string>
     <string name="about_page_description" translatable="false" />
     <string name="about_contact_us">Contact us</string>
     <string name="about_facebook">Like us on Facebook</string>
     <string name="about_youtube">Watch us on Youtube</string>
     <string name="about_website">Visit our website</string>
-    <string name="chose_one_of_them_to_search">Chose one of them to search</string>
     <string name="user_name">User Name</string>
     <string name="role">Role</string>
     <string name="email">Email</string>
@@ -127,8 +86,6 @@
     <string name="didn_t_receieve_the_code">Didn\'t receieve the code?</string>
     <string name="resend_code">RESEND CODE</string>
     <string name="verify">Verify</string>
-    <string name="login_here">Login Here</string>
-    <string name="new_user">New User?</string>
     <string-array name="pub_year">
         <item>Year</item>
         <item>2000</item>
@@ -162,7 +119,7 @@
         <item>HISTORY</item>
         <item>SCIENCE</item>
         <item>CHEMISTRY</item>
-        <item>PYSICS</item>
+        <item>PHYSICS</item>
         <item>STORIES</item>
         <item>POLITICAL SCIENCE</item>
         <item>DRAMA</item>
@@ -178,33 +135,8 @@
         <item>PYSICAL SCIENCE</item>
         <item>OTHERS</item>
     </string-array>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="start">Start Service</string>
-    <string name="stop">Stop service</string>
-    <string name="item_name">Name</string>
-    <string name="item_position">Position</string>
-    <string name="profile_desc">Rowan Sebastian Atkinson CBE is an English actor,  comedian and screenwriter</string>
-    <string name="profile_title">Mr Bean</string>
-    <string name="posts">posts</string>
-    <string name="followers">followers</string>
-    <string name="following">following</string>
-    <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
-    <string name="lbl_set_profile_photo">Set profile image</string>
-    <string name="lbl_take_camera_picture">Take a picture</string>
-    <string name="lbl_choose_from_gallery">Choose from gallery</string>
-    <string name="toast_image_intent_null">Image picker option is missing!</string>
 
     <!-- font families -->
-    <string name="font_family_light">sans-serif-light</string>
-    <string name="font_family_medium">sans-serif-medium</string>
-    <string name="font_family_regular">sans-serif</string>
-    <string name="font_family_condensed">sans-serif-condensed</string>
-    <string name="font_family_black">sans-serif-black</string>
-    <string name="font_family_thin">sans-serif-thin</string>
-    <string name="dialog_permission_title">Grant Permissions</string>
-    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
-    <string name="go_to_settings">GOTO SETTINGS</string>
     <string name="our_work">Our Work</string>
     <string name="about_us">About Us</string>
     <string name="contact_us">Contact Us</string>
@@ -215,8 +147,8 @@
     <string name="about_page_description1" translatable="false">This is an initiative by alumni of Jawahar Navodaya Vidyalaya and youth from different sectors of working environment, different part of society and also from different geographical area, rural background. We all have same mind set about the problem of remote area and also challenges faced by backward class or other area of society. This mindset gave a positive path to all of us to do something for positive change . This laid the foundation of ParvarishForYou: a helping hand.</string>
     <string name="about_page_description2" translatable="false">♦ Initiative by a Team of Youth having Common Goal for Positive Change.\n♦ Team - From different working Sectors, Environment, Society and Geographical area, rural background.\n♦ Common Goal - Eliminate problems and challenges faced by Backward Class of rural area and Society.\n♦ This noble cause overwhelms and gives us the everlasting motivation, energy and sufficient fuel to laid down the foundation of Parvarish: a helping hand.\n♦ Parvarish - A Helping Hand’ will provide you the Canvas, Colour, Palette and Brush to paint the dreams of a Child.\n♦ Canvas (Life of A child) + Colour, Palette and Brush (Parvarish) = Painting (Dreams with flying Colours).\n</string>
     <string name="about_page_description3" translatable="false">We are here to work for different sector like education, health, agriculture, organic farming, counselling, behavioural change (Mentioned by P.M. Modi in rajya-sabha on 08 feb 2018), social awareness, to full-fill the gap between government facilities and ground level benefits etc</string>
-    <string name="about_page_description4" translatable="false">♦ Team to impart behavioural changes in society by the way of education.\n♦ To develop an ecosystem of mutualism instead of competetion for sustainable prosperity.\n</string>
-    <string name="about_page_description5" translatable="false">To fulfill the gap between rural and urban population with various mechanism and also to reflect them in government census or survey.</string>
+    <string name="about_page_description4" translatable="false">♦ Team to impart behavioural changes in society by the way of education.\n♦ To develop an ecosystem of mutualism instead of competetion for sustainable prosperity.</string>
+    <string name="about_page_description5" translatable="false">To fulfill the gap between rural and urban population with various mechanism and also to reflect them in government census or survey.\n\n</string>
     <string name="ourwork_page_description1" translatable="false">We are here to work for different sector like education, health, agriculture, organic farming, counselling, behavioural change (Mentioned by P.M. Modi in rajya-sabha on 08 feb 2018), social awareness, to full-fill the gap between government facilities and ground level benefits etc.</string>
     <string name="ourwork_page_description2" translatable="false">We are working in education field where there is no institutional source of education. As most of the places have schools but there is no carrier guiding or preparation centres. This is the major cause of backwardness there as we think. Most of the people who get education move away from these places. This creates a gap between rural and urban development. We are working to fulfill this gap.</string>
     <string name="ourwork_page_description3" translatable="false">Parvarish4U has started this scheme. Under this scheme we are trying to support talent either in academics , sports and any other field of life. Under this scheme organisation support students in different ways.</string>
@@ -242,14 +174,12 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="deposit_paid">Deposit Paid</string>
     <string name="handover">HANDOVER</string>
     <string name="book_title_author_subject_cost">Book-Title/Author/Subject/Cost</string>
-    <string name="list_of_books">List of Books</string>
     <string name="search_books">Search Books</string>
     <string name="book_list">Book List</string>
     <string name="green_color_available_red_color_unavailable">(Green Color-Available,Red Color-Unavailable)</string>
     <string name="gallery_images">Gallery Images</string>
     <string name="add_new">Add New</string>
     <string name="view_all">View All</string>
-    <string name="send_information">Send Information</string>
     <string name="join_us">Join Us</string>
     <string name="tap_to_book_for_update">Tap to Book for Update</string>
     <string name="type_news_to_add_in_marquee">Type News to Add in Marquee</string>
@@ -294,6 +224,25 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="reset">Reset</string>
     <string name="add_image_to_gallery">Add Image to Gallery</string>
     <string name="select_image_for_profile_photo">Select image for Profile photo</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="do_you_really_want_to_exit">Do you really want to Exit ?</string>
+    <string name="please_rate_us_if_you_like_the_app">Please Rate us if you like the app</string>
+    <string name="rupee">₹</string>
+    <string name="_100">100</string>
+    <string name="yashwant_kanitkar">Yashwant Kanitkar</string>
+    <string name="center_name">Center Name</string>
+    <string name="enter_article_details">Enter Article Details</string>
+    <string name="article_tittle">Article Tittle</string>
+    <string name="play_button">Play button</string>
+    <string name="null_time">0:00</string>
+    <string name="open_video_in_youtube">Open video in YouTube</string>
+    <string name="full_screen_button">Full screen button</string>
+    <string name="live">LIVE</string>
 
-
+    <string name="phone_number">Phone Number</string>
+    <string name="generate_otp">Generate OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify_sign_in">Verify and Sign In</string>
+    <string name="sign_out">sign out</string>
 </resources>

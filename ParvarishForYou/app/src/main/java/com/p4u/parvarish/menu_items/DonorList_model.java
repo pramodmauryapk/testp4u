@@ -2,7 +2,6 @@ package com.p4u.parvarish.menu_items;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +10,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
-import java.util.Set;
-
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.book_pannel.Book;
+import com.p4u.parvarish.book_pannel.Donor;
 
-public class DonorList_model extends ArrayAdapter<Book> {
+import java.util.List;
+
+public class DonorList_model extends ArrayAdapter<Donor> {
     private static final String TAG = "DonorList_model";
     private Activity context;
-    private List<Book> books;
+    private List<Donor> books;
 
-     DonorList_model(Activity context, List<Book> books) {
+     DonorList_model(Activity context, List<Donor> books) {
         super(context, R.layout.layout_all_donor, books);
         this.context = context;
         this.books = books;
@@ -37,7 +35,7 @@ public class DonorList_model extends ArrayAdapter<Book> {
 
         TextView textViewDonorName = listViewItem.findViewById(R.id.textView_DonorName);
         TextView textViewDonorMobile = listViewItem.findViewById(R.id.textView_DonorMobile);
-        Book book = books.get(position);
+        Donor book = books.get(position);
         textViewDonorName.setText(book.getBookDonor());
         textViewDonorMobile.setText(book.getBookDonorMobile());
 
