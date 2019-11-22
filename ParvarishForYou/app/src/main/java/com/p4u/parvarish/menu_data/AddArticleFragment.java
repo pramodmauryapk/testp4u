@@ -3,12 +3,15 @@ package com.p4u.parvarish.menu_data;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,7 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,8 +41,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import static android.app.Activity.RESULT_OK;
 
-public class upload_article extends AppCompatActivity {
+public class AddArticleFragment extends Fragment {
+
+    private View v;
+    private Context context;
     private static final String TAG = "Uplaoad_article";
     private static final int PICK_IMAGE_REQUEST = 1;
     private EditText nameEditText;
@@ -52,11 +59,13 @@ public class upload_article extends AppCompatActivity {
     private StorageTask mUploadTask;
     private Button uploadBtn,chooseImageBtn;
     String s;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.upload_page_fragment);
-        init();
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+
+       v = inflater.inflate(R.layout.upload_page_fragment, container, false);
+        context = container.getContext();
+        initViews();
         sppagelist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -96,27 +105,28 @@ public class upload_article extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(upload_article.this, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
                 }
             }
         });
-
-
-
+        return v;
     }
 
-    private void init(){
-        chooseImageBtn = findViewById(R.id.button_choose_image);
-        uploadBtn = findViewById(R.id.uploadBtn);
 
-        descriptionEditText = findViewById ( R.id.descriptionEditText );
-        chosenImageView = findViewById(R.id.chosenImageView);
-        nameEditText =findViewById(R.id.nameEditText);
-        sppagelist=findViewById(R.id.sppagelist);
+
+    private void initViews(){
+
+        chooseImageBtn = v.findViewById(R.id.button_choose_image);
+        uploadBtn = v.findViewById(R.id.uploadBtn);
+
+        descriptionEditText =v. findViewById ( R.id.descriptionEditText );
+        chosenImageView =v. findViewById(R.id.chosenImageView);
+        nameEditText =v.findViewById(R.id.nameEditText);
+        sppagelist=v.findViewById(R.id.sppagelist);
+
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,7 +134,7 @@ public class upload_article extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
-                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
+                Bitmap bitmap= MediaStore.Images.Media.getBitmap(context.getContentResolver(),filePath);
                 chosenImageView.setImageBitmap(bitmap);
                 //Picasso.get().load(filePath).into(chosenImageView);
             } catch (IOException e) {
@@ -145,14 +155,14 @@ public class upload_article extends AppCompatActivity {
     }
 
     private String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
+        ContentResolver cR =context. getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     private void uploadFile() {
         if (filePath != null) {
-           final ProgressDialog progressDialog=new ProgressDialog(this);
+            final ProgressDialog progressDialog=new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
@@ -168,7 +178,7 @@ public class upload_article extends AppCompatActivity {
 
                             progressDialog.dismiss();
                             //displaying success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
                             String uploadId = mDatabaseRef.push().getKey();
                             Article_Model upload = new Article_Model(
                                     uploadId,
@@ -181,7 +191,7 @@ public class upload_article extends AppCompatActivity {
                             );
 
                             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-                            Toast.makeText(upload_article.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
 
 
                         }
@@ -189,20 +199,20 @@ public class upload_article extends AppCompatActivity {
                     });
                 }
             }).addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                        //uploadProgressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(upload_article.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    //uploadProgressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             })
-            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-             @Override
-             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-             //displaying the upload progress
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                    progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                }
-             });
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                            //displaying the upload progress
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                        }
+                    });
         } else{
             String uploadId = mDatabaseRef.push().getKey();
             Article_Model upload = new Article_Model(
@@ -216,7 +226,7 @@ public class upload_article extends AppCompatActivity {
             );
 
             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-            Toast.makeText(upload_article.this, "Details saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Details saved", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -224,5 +234,12 @@ public class upload_article extends AppCompatActivity {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
         return sdf.format(new Date());
     }
+
+
+
+
+
+
+
 
 }

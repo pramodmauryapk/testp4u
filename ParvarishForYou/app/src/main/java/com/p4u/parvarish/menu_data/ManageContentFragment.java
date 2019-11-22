@@ -179,14 +179,14 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                                 public void OnClick() {
 
                                     mDatabaseRef.child(selectedKey).removeValue();
-                                    Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
 
                                 }
                             })
                             .OnNegativeClicked(new FancyAlertDialogListener() {
                                 @Override
                                 public void OnClick() {
-                                    Toast.makeText(getActivity(), "Item not deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Item not deleted", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .build();
@@ -208,14 +208,14 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                         public void OnClick() {
 
                             mDatabaseRef.child(selectedKey).removeValue();
-                            Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
 
                         }
                     })
                     .OnNegativeClicked(new FancyAlertDialogListener() {
                         @Override
                         public void OnClick() {
-                            Toast.makeText(getActivity(), "Item not deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Item not deleted", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .build();

@@ -1,7 +1,6 @@
 package com.p4u.parvarish.menu_data;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +67,7 @@ public class ManageArticleFragment extends Fragment {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, upload_article.class));
+                switchFragment(new AddArticleFragment());
             }
         });
         btnupdate.setOnClickListener(new View.OnClickListener() {

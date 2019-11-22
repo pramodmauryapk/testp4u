@@ -2,10 +2,13 @@ package com.p4u.parvarish.galary;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,7 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,8 +35,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+import static android.app.Activity.RESULT_OK;
+import static java.util.Objects.requireNonNull;
 
-public class UploadImage extends AppCompatActivity {
+public class AddGallaryItemFragment extends Fragment {
+
+    private View v;
+    private Context context;
     private static final String TAG = "UplaoadActivity";
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -48,20 +56,16 @@ public class UploadImage extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private Spinner spimagelist;
     private StorageTask mUploadTask;
-
+    private Button chooseImageBtn,uploadBtn;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.upload_image_fragment);
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+
+       v = inflater.inflate(R.layout.upload_image_fragment, container, false);
+        context = container.getContext();
+        initViews();
 
 
-
-        Button chooseImageBtn = findViewById(R.id.button_choose_image);
-        Button uploadBtn = findViewById(R.id.uploadBtn);
-        nameEditText =findViewById(R.id.nameEditText);
-        descriptionEditText = findViewById ( R.id.descriptionEditText );
-        chosenImageView = findViewById(R.id.chosenImageView);
-        spimagelist=findViewById(R.id.spimagelist);
         spimagelist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -85,7 +89,7 @@ public class UploadImage extends AppCompatActivity {
         chooseImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UploadImage.this.openFileChooser();
+                openFileChooser();
             }
         });
 
@@ -93,16 +97,26 @@ public class UploadImage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(UploadImage.this, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
-                    UploadImage.this.uploadFile();
+                   uploadFile();
                 }
             }
         });
-
+        return v;
     }
 
 
+
+    private void initViews(){
+
+        chooseImageBtn =v. findViewById(R.id.button_choose_image);
+        uploadBtn = v.findViewById(R.id.uploadBtn);
+        nameEditText =v.findViewById(R.id.nameEditText);
+        descriptionEditText =v. findViewById ( R.id.descriptionEditText );
+        chosenImageView = v.findViewById(R.id.chosenImageView);
+        spimagelist=v.findViewById(R.id.spimagelist);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -127,14 +141,14 @@ public class UploadImage extends AppCompatActivity {
     }
 
     private String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
+        ContentResolver cR = context.getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     private void uploadFile() {
         if (mImageUri != null) {
-            final ProgressDialog progressDialog=new ProgressDialog(this);
+            final ProgressDialog progressDialog=new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
@@ -149,14 +163,14 @@ public class UploadImage extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
 
                                     progressDialog.dismiss();
-                                    Toast.makeText(UploadImage.this, "Image Uploaded", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Image Uploaded", Toast.LENGTH_LONG).show();
                                     Image_Model upload = new Image_Model(nameEditText.getText().toString().trim(),
                                             uri.toString(),
                                             descriptionEditText.getText().toString());
 
                                     String uploadId = mDatabaseRef.push().getKey();
                                     mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-                                    Toast.makeText(UploadImage.this, "Upload successful", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
 
                                 }
 
@@ -166,8 +180,8 @@ public class UploadImage extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                           // uploadProgressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(UploadImage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            // uploadProgressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -178,14 +192,24 @@ public class UploadImage extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, "You haven't Selected Any file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "You haven't Selected Any file selected", Toast.LENGTH_SHORT).show();
         }
 
     }
     private void openImagesActivity(){
-       // switchFragment(new ManagePageFragment());
-        startActivity(new Intent(this, ManagegalaryFragment.class));
-        finish();
+         switchFragment(new ManagegalaryFragment());
+
     }
+
+    private void switchFragment(Fragment fragment) {
+        if(getActivity()!=null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
+        }
+    }
+
+
+
 
 }

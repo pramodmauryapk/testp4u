@@ -129,6 +129,7 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     mListener.onItemClick(position);
+
                 }
             }
         }

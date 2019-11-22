@@ -1,16 +1,15 @@
 package com.p4u.parvarish.menu_data;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +49,7 @@ import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,10 +62,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
-public class ShowTimelineFragment extends Fragment {
+public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAdapter_model.OnItemClickListener {
 
     private static final String TAG = "ShowTimelineFragment";
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
     private Context context;
     private TimelineRecyclerAdapter_model mAdapter;
     private List<Article_Model> article_array;
@@ -79,14 +79,15 @@ public class ShowTimelineFragment extends Fragment {
     private Button positive,negative;
     private TextView inst;
     private CardView cd;
-
+    private List<Article_Model> articles;
     private ListView listViewArticles;
     private String user_role;
     private static final int PICK_IMAGE_REQUEST = 1;
     private EditText descriptionEditText;
     private ImageView chosenImageView;
     private Uri filePath;
-
+   private static final int CAMERA_REQUEST=500;
+    public static int count = 0;
     private StorageTask mUploadTask;
     private ImageButton chooseImageBtn,img2;
     private CircleImageView uploadBtn;
@@ -94,6 +95,7 @@ public class ShowTimelineFragment extends Fragment {
     private Bitmap mImageBitmap;
     private String imageFilePath;
     private View v;
+    String mCurrentPhotoPath;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -107,11 +109,13 @@ public class ShowTimelineFragment extends Fragment {
 
         mAdapter = new TimelineRecyclerAdapter_model(context, article_array);
         mRecyclerView.setAdapter(mAdapter);
-       // mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemClickListener(this);
         mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");
         mStorage  = FirebaseStorage.getInstance().getReference("TIMELINE").getStorage();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("TIMELINE");
-
+        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolder/";
+        File newdir = new File(dir);
+        newdir.mkdirs();
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
             myref.addValueEventListener(new ValueEventListener() {
@@ -142,8 +146,8 @@ public class ShowTimelineFragment extends Fragment {
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+               Intent cameraintent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               startActivityForResult(cameraintent,CAMERA_REQUEST);
             }
         });
         uploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +165,8 @@ public class ShowTimelineFragment extends Fragment {
         });
         return v;
     }
+
+
 
     private void initViews(){
 
@@ -234,28 +240,13 @@ public class ShowTimelineFragment extends Fragment {
 
 
         }
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
+       // if(requestCode==CAMERA_REQUEST&&requestCode== RESULT_OK){
+       //     Bitmap photo=(Bitmap)data.getExtras().get("data");
+       //     chosenImageView.setImageBitmap(photo);
+       // }
 
-                Bitmap bmp = (Bitmap) data.getExtras().get("data");
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-
-                // convert byte array to Bitmap
-
-                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
-                        byteArray.length);
-
-                chosenImageView.setImageBitmap(bitmap);
-
-
-            }
-        }
 
     }
-
 
     private void openFileChooser() {
         Intent intent = new Intent();
@@ -388,11 +379,52 @@ public class ShowTimelineFragment extends Fragment {
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+
+        //Article_Model article = articles.get(position);
+       if(article_array.get(position)!=null) {
+           String url=null;
+
+           Intent shareIntent=new Intent(Intent.ACTION_SEND);
+           if(!article_array.get(position).getDescription().equals("")) {
+
+
+              //without the below line intent will show error
+               shareIntent.setType("text/plain");
+               shareIntent.putExtra(Intent.EXTRA_TEXT,article_array.get(position).getDescription());
+
+
+           }
+           if(article_array.get(position).getImageUrl()!=null) {
+           //    shareIntent.setType("image/*");
+           //      url = article_array.get(position).getImageUrl();
+         //      new Download_GIF(url).execute();
+                //Uri imageUri = Uri.parse("file:///sdcard/DCIM/Screenshots/Screenshot_20191106-205151_Parvarish4You.jpg");
+         //      shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+              // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+          }
+           startActivity(Intent.createChooser(shareIntent,"share using"));
 
 
 
 
 
 
+        }
 
+
+
+
+    }
+
+    @Override
+    public void onShowItemClick(int position) {
+
+    }
+
+    @Override
+    public void onDeleteItemClick(int position) {
+
+    }
 }
