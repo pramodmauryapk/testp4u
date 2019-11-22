@@ -9,7 +9,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/lay0"
         android:orientation="vertical"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
@@ -43,7 +42,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="20sp"
-            android:id="@+id/txt2"
             android:text="Our objective"
             android:textStyle="bold"/>
 
@@ -58,7 +56,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="20sp"
-            android:id="@+id/txt3"
             android:text="Our Vision"
             android:textStyle="bold"/>
 
@@ -73,7 +70,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="20sp"
-            android:id="@+id/txt4"
             android:text="Our Mission"
             android:textStyle="bold"/>
 

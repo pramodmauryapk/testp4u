@@ -71,7 +71,6 @@
                 android:layout_width="wrap_content" />
 
             <TextView
-                android:id="@+id/textView_currency"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
                 android:text="@string/rupee"
@@ -98,6 +97,5 @@
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/ic_chevron_right_black_24dp"
-        android:id="@+id/nextbutton"/>
+        android:background="@drawable/ic_chevron_right_black_24dp" />
 </LinearLayout>

@@ -28,7 +28,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/welcome"
         android:layout_marginTop="10dp"
-        android:id="@+id/tvUserInfo"
         android:layout_below="@+id/circle_loading_view"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"

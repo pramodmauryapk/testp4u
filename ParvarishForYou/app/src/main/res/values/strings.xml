@@ -75,17 +75,12 @@
     <string name="choose">Choose</string>
     <string name="register">Register</string>
     <string name="already_have_account">Already Have Account?</string>
-    <string name="hi">Hi.</string>
-    <string name="let_s_get_started">Let\'s get Started</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
-    <string name="proceed">Proceed</string>
-    <string name="waiting_to_automatically_detect_an_n_sms_sent_to_your_mobile_number">Waiting to automatically detect an   SMS sent to your mobile number</string>
     <string name="_91">+91</string>
     <string name="minus">-</string>
     <string name="invalid_otp">Invalid OTP</string>
     <string name="didn_t_receieve_the_code">Didn\'t receieve the code?</string>
     <string name="resend_code">RESEND CODE</string>
-    <string name="verify">Verify</string>
     <string-array name="pub_year">
         <item>Year</item>
         <item>2000</item>
@@ -240,9 +235,4 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="full_screen_button">Full screen button</string>
     <string name="live">LIVE</string>
 
-    <string name="phone_number">Phone Number</string>
-    <string name="generate_otp">Generate OTP</string>
-    <string name="enter_otp">Enter OTP</string>
-    <string name="verify_sign_in">Verify and Sign In</string>
-    <string name="sign_out">sign out</string>
 </resources>

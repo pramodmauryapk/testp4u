@@ -12,7 +12,6 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/l0"
             android:weightSum="10"
             android:orientation="horizontal">
             <TextView
@@ -133,7 +132,6 @@
                 style="@style/createuser_control_style"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/l7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -150,7 +148,6 @@
                 style="@style/createuser_control_style"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/l8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -168,7 +165,6 @@
                 style="@style/createuser_control_style"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/l9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -186,7 +182,6 @@
                 style="@style/createuser_control_style"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/l10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -203,7 +198,6 @@
                 style="@style/createuser_control_style"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/l11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

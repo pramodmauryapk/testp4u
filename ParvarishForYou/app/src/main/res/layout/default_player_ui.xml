@@ -19,14 +19,12 @@
         android:background="@android:color/transparent" >
 
         <View
-            android:id="@+id/drop_shadow_top"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_alignParentTop="true"
             android:background="@drawable/drop_shadow_top" />
 
         <View
-            android:id="@+id/drop_shadow_bottom"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_alignParentBottom="true"

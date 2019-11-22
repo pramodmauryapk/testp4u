@@ -10,7 +10,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/lay0"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:orientation="vertical"
@@ -35,7 +34,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="20sp"
-            android:id="@+id/txt_education"
             android:text="Education"
             android:textStyle="bold"/>
 
@@ -50,7 +48,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="15sp"
-            android:id="@+id/txt_talentsupportscheme"
             android:text="♦ParvarishForYou Talent Support Scheme"
             android:textStyle="bold"/>
 
@@ -77,7 +74,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="15sp"
-            android:id="@+id/txt_knowledgecenter"
             android:text="♦ParvarishForYou Knowledge Center"
             android:textStyle="bold"/>
 
@@ -92,7 +88,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="15sp"
-            android:id="@+id/txt_academicpartnership"
             android:text="♦ParvarishForYou Academic Partnership Program"
             android:textStyle="bold"/>
 
@@ -107,7 +102,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="15sp"
-            android:id="@+id/txt_capacitybuildingcenter"
             android:text="♦ParvarishForYou Capacity Building Center"
             android:textStyle="bold"/>
 
@@ -122,7 +116,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="15sp"
-            android:id="@+id/txt_technicalpartnership"
             android:text="♦ParvarishForYou Technical Partnership Program"
             android:textStyle="bold"/>
 
@@ -137,7 +130,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="15sp"
-            android:id="@+id/txt_internshipprogram"
             android:text="♦ParvarishForYou Internship Program"
             android:textStyle="bold"/>
 
@@ -152,7 +144,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="20sp"
-            android:id="@+id/txt3"
             android:text="Health"
             android:textStyle="bold"/>
 
@@ -173,7 +164,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorRed"
             android:textSize="20sp"
-            android:id="@+id/txt4"
             android:text="Agriculture"
             android:textStyle="bold"/>
 

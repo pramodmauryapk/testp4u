@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="8dp"
-    android:id="@+id/cord_lay1"
     android:background="@color/colorwhite"
     android:scrollbars="vertical"
     android:fitsSystemWindows="true">
@@ -38,7 +37,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/r1"
 
                     android:layout_gravity="bottom"
                     android:layout_margin="@dimen/_8dp"
@@ -103,7 +101,6 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_below="@+id/lp"
-    android:id="@+id/lp1"
     android:orientation="vertical"
     android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView

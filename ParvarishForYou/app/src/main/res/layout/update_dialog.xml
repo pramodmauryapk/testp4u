@@ -43,7 +43,6 @@
         android:weightSum="10"
         android:baselineAligned="false">
         <LinearLayout
-            android:id="@+id/l10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -61,7 +60,6 @@
                 android:entries="@array/subject_list" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/l11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="7"

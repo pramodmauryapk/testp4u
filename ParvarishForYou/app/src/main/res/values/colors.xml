@@ -14,7 +14,6 @@
     <color name="item_selected">#90FFFFFF</color>
     <color name="drop_shadow">#66000000</color>
 
-    <color name="menu_icons">#757575</color>
     <color name="menu_text">#222222</color>
     <color name="main">#4CAF50</color>
     <color name="colorblack">#000</color>
@@ -24,8 +23,6 @@
     <color name="about_item_icon_color">#313131</color>
     <color name="about_background_color">#FFFFFF</color>
     <color name="about_separator_color">#e1e1e1</color>
-    <color name="itemcolor">#2808EE9E</color>
-    <color name="textColor">#292929</color>
     <!-- Social -->
     <color name="about_facebook_color">#3b5998</color>
     <color name="about_youtube_color">#cd201f</color>
