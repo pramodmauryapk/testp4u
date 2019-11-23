@@ -234,5 +234,10 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="open_video_in_youtube">Open video in YouTube</string>
     <string name="full_screen_button">Full screen button</string>
     <string name="live">LIVE</string>
+    <string name="tap_to_select">Tap to select</string>
+    <string name="write_to_timeline">Write to Timeline....</string>
+    <string name="wait_for_the_code_i_sent_you">Wait for the code I sent you...</string>
+    <string name="i_sent_you_a_code_it_will_be_detected_automatically_but_if_it_is_not_detected_you_can_put_it_below_manually_as_well">I sent you a code, it will be detected automatically but if it is not detected you can put it below manually as well</string>
+    <string name="sign_in">Sign In</string>
 
 </resources>

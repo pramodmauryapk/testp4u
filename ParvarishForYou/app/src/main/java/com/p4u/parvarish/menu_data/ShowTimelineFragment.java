@@ -5,22 +5,22 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +45,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.mindorks.paracamera.Camera;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
@@ -69,33 +70,26 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     private Context context;
     private TimelineRecyclerAdapter_model mAdapter;
     private List<Article_Model> article_array;
-    private DatabaseReference myRef;
     private RecyclerView mRecyclerView;
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
-    private View dialogView;
-    private Button positive,negative;
     private TextView inst;
     private CardView cd;
-    private List<Article_Model> articles;
-    private ListView listViewArticles;
-    private String user_role;
-    private static final int PICK_IMAGE_REQUEST = 1;
+
     private EditText descriptionEditText;
     private ImageView chosenImageView;
-    private Uri filePath;
-   private static final int CAMERA_REQUEST=500;
+    private Uri filePath,imageUri;
+
     public static int count = 0;
     private StorageTask mUploadTask;
     private ImageButton chooseImageBtn,img2;
     private CircleImageView uploadBtn;
-    String user_name,user_id;
-    private Bitmap mImageBitmap;
-    private String imageFilePath;
+    private String user_id, user_name;
     private View v;
-    String mCurrentPhotoPath;
+
+    private Camera camera;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -106,16 +100,13 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         article_array = new ArrayList<>();
-
         mAdapter = new TimelineRecyclerAdapter_model(context, article_array);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");
         mStorage  = FirebaseStorage.getInstance().getReference("TIMELINE").getStorage();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("TIMELINE");
-        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/picFolder/";
-        File newdir = new File(dir);
-        newdir.mkdirs();
+
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
             myref.addValueEventListener(new ValueEventListener() {
@@ -146,8 +137,16 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent cameraintent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-               startActivityForResult(cameraintent,CAMERA_REQUEST);
+                PackageManager packageManager = context.getPackageManager();
+                if(!packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+                    Toast.makeText(getActivity(), "This device does not have a camera.", Toast.LENGTH_SHORT)
+                            .show();
+                }else {
+
+                      // takePhoto();
+
+
+                }
             }
         });
         uploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +186,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         load_list();
 
     }
-  @SuppressLint("LongLogTag")
+   @SuppressLint("LongLogTag")
     private void load_list() {
         try {
             mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -203,9 +202,9 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                             article_array.add(0,article);
                         }
                     }
-
-                    mAdapter.notifyDataSetChanged();
                     mRecyclerView.smoothScrollToPosition(0);
+                    mAdapter.notifyDataSetChanged();
+
 
 
 
@@ -224,10 +223,11 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         }
 
     }
+    /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+       if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
@@ -240,20 +240,14 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
 
 
         }
-       // if(requestCode==CAMERA_REQUEST&&requestCode== RESULT_OK){
-       //     Bitmap photo=(Bitmap)data.getExtras().get("data");
-       //     chosenImageView.setImageBitmap(photo);
-       // }
 
-
-    }
+    }*/
 
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), 989);
 
     }
 
@@ -295,17 +289,30 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                             //displaying success toast
                             Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
                             String uploadId = mDatabaseRef.push().getKey();
-                            Article_Model upload = new Article_Model(
-                                    uploadId,
-                                    user_name,
-                                    uri.toString(),
-                                    descriptionEditText.getText().toString(),
-                                    get_current_time(),
-                                    "0",
-                                    user_id
-                            );
+                            if(user_name!=null && user_id!=null) {
+                                Article_Model upload = new Article_Model(
+                                        uploadId,
+                                        user_name,
+                                        uri.toString(),
+                                        descriptionEditText.getText().toString(),
+                                        get_current_time(),
+                                        "0",
+                                        user_id
+                                );
+                                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
+                            }else{
+                                Article_Model upload = new Article_Model(
+                                        uploadId,
+                                        "Unknown User",
+                                        uri.toString(),
+                                        descriptionEditText.getText().toString(),
+                                        get_current_time(),
+                                        "0",
+                                        "Unknown"
+                                );
+                                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
+                            }
 
-                            mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
                             Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
                             clearall();
 
@@ -319,7 +326,6 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
                     clearall();
-
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             })
@@ -332,7 +338,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                         }
                     });
         } else{
-            if(!descriptionEditText.getText().toString().equals("")) {
+            if(!descriptionEditText.getText().toString().equals("")&&user_name!=null && user_id!=null) {
                 String uploadId = mDatabaseRef.push().getKey();
                 Article_Model upload = new Article_Model(
                         uploadId,
@@ -345,9 +351,22 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                 );
 
                 mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-                Toast.makeText(context, "Details saved", Toast.LENGTH_LONG).show();
-                clearall();
+
+            }else{
+                String uploadId = mDatabaseRef.push().getKey();
+                Article_Model upload = new Article_Model(
+                        uploadId,
+                        "Unknown User",
+                        null,
+                        descriptionEditText.getText().toString(),
+                        get_current_time(),
+                        "0",
+                        "Unknown"
+                );
+                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
             }
+            Toast.makeText(context, "Details saved", Toast.LENGTH_LONG).show();
+            clearall();
         }
     }
     private void clearall() {
@@ -377,16 +396,79 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         }
 
     }
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        camera = new Camera.Builder()
+                .resetToCorrectOrientation(true)
+                .setTakePhotoRequestCode(1)
+                .setDirectory("pics")
+                .setName("ali_" + System.currentTimeMillis())
+                .setImageFormat(Camera.IMAGE_JPEG)
+                .setCompression(75)
+                .setImageHeight(1000)
+                .build(this);
 
+    }
+    private void takePhoto() {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 
+        File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(photo));
+        imageUri = Uri.fromFile(photo);
+        requireNonNull(getActivity()).startActivityForResult(intent,100);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 100:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = imageUri;
+                    requireNonNull(getActivity()).getContentResolver().notifyChange(selectedImage, null);
+                    ContentResolver cr = getActivity().getContentResolver();
+                    Bitmap bitmap;
+                    try {
+                        bitmap = android.provider.MediaStore.Images.Media
+                                .getBitmap(cr, selectedImage);
+
+                        chosenImageView.setImageBitmap(bitmap);
+                        Toast.makeText(getActivity(), selectedImage.toString(),
+                                Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT)
+                                .show();
+                        Log.e("Camera", e.toString());
+                    }
+                }
+                break;
+            case 989:
+                if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+                    filePath = data.getData();
+                    try {
+                        Bitmap bitmap= MediaStore.Images.Media.getBitmap(requireNonNull(context).getContentResolver(),filePath);
+                        chosenImageView.setImageBitmap(bitmap);
+                        //Picasso.get().load(filePath).into(chosenImageView);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+    }
     @Override
     public void onItemClick(int position) {
 
-        //Article_Model article = articles.get(position);
+
        if(article_array.get(position)!=null) {
-           String url=null;
+
 
            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+           //checking message is blank or not
            if(!article_array.get(position).getDescription().equals("")) {
 
 
@@ -396,27 +478,19 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
 
 
            }
-           if(article_array.get(position).getImageUrl()!=null) {
+          // if(article_array.get(position).getImageUrl()!=null) {
            //    shareIntent.setType("image/*");
            //      url = article_array.get(position).getImageUrl();
          //      new Download_GIF(url).execute();
                 //Uri imageUri = Uri.parse("file:///sdcard/DCIM/Screenshots/Screenshot_20191106-205151_Parvarish4You.jpg");
          //      shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
               // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-          }
+         // }
            startActivity(Intent.createChooser(shareIntent,"share using"));
 
-
-
-
-
-
         }
-
-
-
-
     }
+
 
     @Override
     public void onShowItemClick(int position) {

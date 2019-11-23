@@ -25,7 +25,7 @@ import com.p4u.parvarish.user_pannel.Teacher;
 
 import static java.util.Objects.requireNonNull;
 
-public class Activity_mobile_login extends AppCompatActivity {
+public class Login_mobileActivity extends AppCompatActivity {
 
 
     private Spinner spinner;
@@ -43,7 +43,7 @@ public class Activity_mobile_login extends AppCompatActivity {
 
 
         spinner = findViewById(R.id.spinnerCountries);
-        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
+        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
         editText = findViewById(R.id.editTextPhone);
 
         findViewById(R.id.buttonContinue).setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class Activity_mobile_login extends AppCompatActivity {
 
                 String phoneNumber = "+" + code + number;
 
-                Intent intent = new Intent(Activity_mobile_login.this, VerifyPhoneActivity.class);
+                Intent intent = new Intent(Login_mobileActivity.this, MobileVerifyActivity.class);
                 intent.putExtra("phonenumber", phoneNumber);
                 startActivity(intent);
 
@@ -83,7 +83,7 @@ public class Activity_mobile_login extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     // Log.d(TAG, "Accessing database");
                     getting_role(dataSnapshot);
-                    Intent intent = new Intent(Activity_mobile_login.this, MainActivity.class);
+                    Intent intent = new Intent(Login_mobileActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("user_name",user_name);
                     intent.putExtra("user_email",user_email);

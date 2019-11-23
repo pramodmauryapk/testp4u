@@ -51,6 +51,7 @@ import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -223,7 +224,8 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                 user.getUserEmail(),
                 user.getUserRole(),
                 user.getUserMobile(),
-                user.getUserAddress());
+                user.getUserAddress(),
+                user.getImageURL());
 
 
     }
@@ -271,7 +273,8 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                                   final String userEmail,
                                   final String userRole,
                                   final String userMobile,
-                                  final String userAddress) {
+                                  final String userAddress,
+                                  final String userimg) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (context);
         LayoutInflater inflater = getLayoutInflater ();
@@ -318,22 +321,42 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
-                    uploadFile(userId);
+                    uploadFile(userId,userimg);
 
                 }
             }
         });
     }
-    private void uploadFile(final String id) {
+    private void uploadFile(final String id,final String img) {
 
         if (filePath != null) {
             final ProgressDialog progressDialog=new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
             mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
+            ////////////////
+            StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(img);
+            delimageRef.delete();
+            ///////////////
             final StorageReference sRef = mStorageRef.child(System.currentTimeMillis()+ "." + getFileExtension(filePath));
+          ////////////////
 
-            sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            Bitmap bmp = null;
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(requireNonNull(context).getContentResolver(), filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            assert bmp != null;
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+            byte[] data = baos.toByteArray();
+            //uploading the image
+            UploadTask uploadTask2 = sRef.putBytes(data);
+
+            uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+
+         //   sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

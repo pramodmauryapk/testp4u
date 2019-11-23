@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -24,7 +25,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.menu_items.MainActivity;
 import com.p4u.parvarish.user_pannel.Teacher;
@@ -35,7 +39,7 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-public class UserMobileAfterActivity extends AppCompatActivity {
+public class UserRegistrationMobileActivity extends AppCompatActivity {
 
     private static final String TAG = "UserRegistrationActivity";
     private TextInputLayout tlname;
@@ -97,7 +101,7 @@ public class UserMobileAfterActivity extends AppCompatActivity {
         register_card.startAnimation(center_reveal_anim);
 
 
-        /*
+
         if(FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
             myref = FirebaseDatabase.getInstance().getReference().child("USERS");
@@ -108,7 +112,7 @@ public class UserMobileAfterActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     // Log.d(TAG, "Accessing database");
                     getting_role(dataSnapshot);
-                    Intent intent = new Intent(UserMobileAfterActivity.this, MainActivity.class);
+                    Intent intent = new Intent(UserRegistrationMobileActivity.this, MainActivity.class);
                     intent.putExtra("user_name",user_name);
                     intent.putExtra("user_email",user_email);
                     intent.putExtra("user_role",user_roll);
@@ -123,7 +127,7 @@ public class UserMobileAfterActivity extends AppCompatActivity {
                 }
             });
 
-        }else {*/
+        }else {
             btnregister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -133,7 +137,7 @@ public class UserMobileAfterActivity extends AppCompatActivity {
 
                 }
             });
-       // }
+        }
         change_listner(etFullname, tlname);
         change_listner(etAddress, tladdress);
 
@@ -222,8 +226,8 @@ public class UserMobileAfterActivity extends AppCompatActivity {
                             null
                     );
                     myref.child(Objects.requireNonNull(id)).setValue(upload);
-                    Toast.makeText(UserMobileAfterActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(UserMobileAfterActivity.this, MainActivity.class);
+                    Toast.makeText(UserRegistrationMobileActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(UserRegistrationMobileActivity.this, MainActivity.class);
                     intent.putExtra("user_name",name);
                     intent.putExtra("user_email",mobilenumber);
                     intent.putExtra("user_role",role);

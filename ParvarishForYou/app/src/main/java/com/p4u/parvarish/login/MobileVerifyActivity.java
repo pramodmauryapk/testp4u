@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.util.Objects.requireNonNull;
 
-public class VerifyPhoneActivity extends AppCompatActivity implements View.OnClickListener {
+public class MobileVerifyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText otp1, otp2,otp3,otp4,otp5,otp6;
     private Button verify;
@@ -68,7 +68,7 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                    // Log.d(TAG, "Accessing database");
                     getting_role(dataSnapshot);
-                    Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
+                    Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
                     intent.putExtra("user_name",user_name);
                     intent.putExtra("user_email",user_email);
                     intent.putExtra("user_role",user_roll);
@@ -127,7 +127,8 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
                 verifyVerificationCode(code);
                 break;
             case R.id.resend_otp:
-                Toast.makeText(this,"Resend Code Clicked",Toast.LENGTH_SHORT).show();
+                sendVerificationCode(phonenumber);
+                Toast.makeText(this,"Code sent",Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -221,7 +222,7 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
     }
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(VerifyPhoneActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(MobileVerifyActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -243,7 +244,7 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
                                 }
                             });
                             if(user_roll!=null){
-                                Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
+                                Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
                                 intent.putExtra("user_name",user_name);
                                 intent.putExtra("user_email",user_email);
                                 intent.putExtra("user_role",user_roll);
@@ -252,7 +253,7 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
                                 finish();
 
                             }else {
-                                Intent intent = new Intent(VerifyPhoneActivity.this, UserMobileAfterActivity.class);
+                                Intent intent = new Intent(MobileVerifyActivity.this, UserRegistrationMobileActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.putExtra("mobile", phonenumber);
                                 startActivity(intent);
@@ -265,7 +266,7 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
                                 message = "Welcome Back!";
                             }
 
-                            Toast.makeText(VerifyPhoneActivity.this,message,Toast.LENGTH_LONG).show();
+                            Toast.makeText(MobileVerifyActivity.this,message,Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -303,11 +304,11 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(MobileVerifyActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             //storing the verification id that is sent to the user
             verificationId = s;
@@ -338,7 +339,7 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private String getting_role(DataSnapshot dataSnapshot) {
+    private void getting_role(DataSnapshot dataSnapshot) {
 
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
                 Teacher uInfo=ds.getValue(Teacher.class);
@@ -352,7 +353,6 @@ public class VerifyPhoneActivity extends AppCompatActivity implements View.OnCli
                 }
 
             }
-            return user_roll;
 
-        }
+    }
 }

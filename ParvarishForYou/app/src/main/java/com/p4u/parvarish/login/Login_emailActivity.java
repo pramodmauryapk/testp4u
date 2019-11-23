@@ -155,7 +155,7 @@ public class Login_emailActivity extends AppCompatActivity {
     }
 
     public void login_with_mobile(View view) {
-        startActivity(new Intent(Login_emailActivity.this, Activity_mobile_login.class));
+        startActivity(new Intent(Login_emailActivity.this, Login_mobileActivity.class));
         finish();
     }
 

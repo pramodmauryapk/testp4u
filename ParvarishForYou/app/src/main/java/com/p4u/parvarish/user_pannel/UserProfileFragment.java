@@ -40,18 +40,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
-
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.p4u.parvarish.R;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
@@ -95,12 +95,13 @@ public class UserProfileFragment extends Fragment {
         myRef = mFirebaseDatabase.getReference().child("USERS");
 
         final FirebaseUser user = mAuth.getCurrentUser();
-        userID = (requireNonNull(user)).getUid();
+        if(user!=null) {
+            userID = (requireNonNull(user)).getUid();
 
-        change_listner(username,l1);
-        change_listner(email,l2);
-        change_listner(mobile,l3);
-        change_listner(location,l4);
+            change_listner(username, l1);
+            change_listner(email, l2);
+            change_listner(mobile, l3);
+            change_listner(location, l4);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -117,17 +118,10 @@ public class UserProfileFragment extends Fragment {
         });
         save.setOnClickListener (new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                updatedetails(userID,userPassword,userImg);
-            }
-        });
-
-       change.setOnClickListener (new View.OnClickListener() {
+            public void onClick(View view) {   updatedetails(userID,userPassword,userImg);           }        });
+        change.setOnClickListener (new View.OnClickListener() {
            @Override
-           public void onClick(View view) {
-               switchFragment(new UpdatePasswordFragment());
-           }
-       });
+           public void onClick(View view) { switchFragment(new UpdatePasswordFragment());           }       });
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,21 +130,23 @@ public class UserProfileFragment extends Fragment {
         });
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
+            public void onClick(View view) { if (mUploadTask != null && mUploadTask.isInProgress()) {
                      Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
-                uploadFile();
+                        uploadFile();
 
+                    }
                 }
-            }
-        });
+            });
+        }else {
+            Toast.makeText(context, "Please Register then update", Toast.LENGTH_SHORT).show();
+        }
         return v;
     }
 
 
-       @Override
-       public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
            super.onActivityResult(requestCode, resultCode, data);
            if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                    && data != null && data.getData() != null) {
@@ -166,12 +162,12 @@ public class UserProfileFragment extends Fragment {
 
            }
        }
-       private String getFileExtension(Uri uri) {
+        private String getFileExtension(Uri uri) {
            ContentResolver cR = requireNonNull(context.getContentResolver());
            MimeTypeMap mime = MimeTypeMap.getSingleton();
            return mime.getExtensionFromMimeType(cR.getType(uri));
        }
-    private void change_listner(final TextView v, final TextInputLayout til){
+        private void change_listner(final TextView v, final TextInputLayout til){
 
 
 
@@ -190,13 +186,13 @@ public class UserProfileFragment extends Fragment {
 
         });
     }
-    private void switchFragment(Fragment fragment) {
+        private void switchFragment(Fragment fragment) {
 
         Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null).commit();
     }
-    private void initViews(){
+        private void initViews(){
         username=v.findViewById(R.id.etUserName);
         email=v.findViewById(R.id.etEmailID);
         mobile=v.findViewById(R.id.etMobile);
@@ -213,17 +209,35 @@ public class UserProfileFragment extends Fragment {
         l3=v.findViewById(R.id.l3);
         l4=v.findViewById(R.id.l4);
     }
-    private void uploadFile() {
+        private void uploadFile() {
 
         if (filePath != null) {
             final ProgressDialog progressDialog=new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
             mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
-            final StorageReference sRef = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(filePath));
+         ////////////////user already contains image then delete it from storage
 
-            sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(userImg);
+            delimageRef.delete();
+///////////////////////////////
+            final StorageReference sRef = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(filePath));
+
+            Bitmap bmp = null;
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(requireNonNull(context).getContentResolver(), filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            assert bmp != null;
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+            byte[] data = baos.toByteArray();
+            //uploading the image
+            UploadTask uploadTask2 = sRef.putBytes(data);
+
+            uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+          /*  sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {*/
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

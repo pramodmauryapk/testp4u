@@ -53,6 +53,15 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
         Article_Model article = articles.get(position);
+
+        uid=article.getUserid();
+      /*  if(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(uid)){
+
+            //CardView.LayoutParams params = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            //params.gravity = Gravity.END;
+            //holder.cardView.setLayoutParams(params);
+
+        }*/
         holder.Title.setText(article.getTitle()+":");
         if(article.getDescription().equals("")) {
             holder.Article.setVisibility(View.GONE);
@@ -71,7 +80,7 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
         }else{
             holder.img.setVisibility(View.GONE);
         }
-        uid=article.getUserid();
+
         DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
         myref.addValueEventListener(new ValueEventListener() {
 
@@ -79,12 +88,21 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Log.d(TAG, "Accessing database");
-                Picasso.get()
-                        .load(getting_userpic(dataSnapshot,uid))
-                        .placeholder(R.drawable.userpic)
-                        .fit()
-                        .centerInside()
-                        .into(holder.userpic);
+                if(!uid.equals("Unknown")) {
+                    Picasso.get()
+                            .load(getting_userpic(dataSnapshot, uid))
+                            .placeholder(R.drawable.userpic)
+                            .fit()
+                            .centerInside()
+                            .into(holder.userpic);
+                }else{
+                    Picasso.get()
+                            .load(R.drawable.userpic)
+                            .placeholder(R.drawable.userpic)
+                            .fit()
+                            .centerInside()
+                            .into(holder.userpic);
+                }
             }
 
             @Override
@@ -181,11 +199,10 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
             if(requireNonNull(uInfo).getUserId().equals(user_id)) {
                 s=  requireNonNull(uInfo).getImageURL();
 
-
-
-            }
+           }
 
         }
         return s;
     }
+
 }
