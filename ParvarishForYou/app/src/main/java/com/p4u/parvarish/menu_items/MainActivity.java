@@ -39,7 +39,7 @@ import java.util.Stack;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "newgallary";
     private Fragment newContent;
     private Bundle bundle;
     private FirebaseAuth mAuth;
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void OnClick() {
 
-                            //Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
+                            //Intent ActivityIndent = new Intent(newgallary.this, ExitActivity.class);
                             //startActivity(ActivityIndent);
                             finish();
 
@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void OnClick() {
 
-                            //Intent ActivityIndent = new Intent(MainActivity.this, ExitActivity.class);
+                            //Intent ActivityIndent = new Intent(newgallary.this, ExitActivity.class);
                             //startActivity(ActivityIndent);
                             finish();
 

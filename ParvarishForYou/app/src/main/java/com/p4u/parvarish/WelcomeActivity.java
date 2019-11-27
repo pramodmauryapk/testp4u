@@ -129,7 +129,7 @@ public class WelcomeActivity extends AppCompatActivity {
                        changePercent(i);
 
                     }
-                   // startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                   // startActivity(new Intent(WelcomeActivity.this, newgallary.class));
                    // finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

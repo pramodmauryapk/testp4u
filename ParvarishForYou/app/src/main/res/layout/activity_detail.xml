@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/tvDescription"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_horizontal"
+      android:padding="5dp"
+      android:text=""
+      android:textColor="@color/black"
+      android:textSize="18sp" />
+
+
+  <com.p4u.parvarish.gallary.TouchImageView
+      android:id="@+id/ivImage"
+      android:scrollbars="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:layout_marginTop="10dp"
+      android:adjustViewBounds="true"
+      android:src="@drawable/logo" />
+  <com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:keepScreenOn="true"
+
+    android:id="@+id/player1">
+
+  </com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerView>
+</LinearLayout>

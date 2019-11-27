@@ -1,21 +1,14 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.gallary;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,15 +18,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.banner_pannel.BannerLayout;
 import com.p4u.parvarish.banner_pannel.WebBannerAdapter;
-import com.p4u.parvarish.galary.Image_Model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class GalleryFragment extends Fragment {
+public class slideshowFragment extends Fragment {
 
-    private static final String TAG = "GalleryFragment";
+    private static final String TAG = "slideshowFragment";
 
 
     private Context context;
@@ -46,7 +38,7 @@ public class GalleryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_gallery, container, false);
+        v = inflater.inflate(R.layout.fragment_slideshow, container, false);
         context = container.getContext();
         initViews();
 

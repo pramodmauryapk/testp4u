@@ -22,11 +22,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.gallary.Image_Model;
 
 import java.util.List;
-
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.galary.Image_Model;
 
 import static java.util.Objects.requireNonNull;
 
@@ -81,14 +80,9 @@ public class GalleryItemFragment extends Fragment {
         textView.setText("Gallery item: " + postion);
         imageView.setLayoutParams(layoutParams);
 
-       // list = new ArrayList<String>();
 
-       imageView.setImageResource(imageArray[postion]);
-        //String a="https://firebasestorage.googleapis.com/v0/b/p4ulibrary-2ea34.appspot.com/o/UPLOADED_IMAGES%2F1570034052417.jpg?alt=media&token=07c3952d-bc23-412c-8a27-999f21def175";
-        //Uri b=Uri.parse(a);
-        //imageView.setImageURI(b);
+        imageView.setImageResource(imageArray[postion]);
 
-        //textView.setText( get_images());
 
 
 

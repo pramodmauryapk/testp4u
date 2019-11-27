@@ -1,6 +1,7 @@
 package com.p4u.parvarish.menu_data;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -73,7 +75,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     private RecyclerView mRecyclerView;
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef,dR;
     private ValueEventListener mDBListener;
     private TextView inst;
     private CardView cd;
@@ -81,13 +83,13 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     private EditText descriptionEditText;
     private ImageView chosenImageView;
     private Uri filePath,imageUri;
-
+    private Button positive,negative;
     public static int count = 0;
     private StorageTask mUploadTask;
     private ImageButton chooseImageBtn,img2;
     private CircleImageView uploadBtn;
-    private String user_id, user_name;
-    private View v;
+    private String user_id, user_name,user_role;
+    private View v,dialogView;
 
     private Camera camera;
     @Nullable
@@ -106,7 +108,8 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");
         mStorage  = FirebaseStorage.getInstance().getReference("TIMELINE").getStorage();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("TIMELINE");
-
+        user_name="Unknown User";
+        user_id="Unknown";
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
             myref.addValueEventListener(new ValueEventListener() {
@@ -143,7 +146,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                             .show();
                 }else {
 
-                      // takePhoto();
+                     //  takePhoto();
 
 
                 }
@@ -155,8 +158,14 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(context, "An Upload is Still in Progress", Toast.LENGTH_SHORT).show();
                 } else {
+                        if(descriptionEditText.getText().toString().equals("")&&filePath==null){
+                            Toast.makeText(context, "Empty Message", Toast.LENGTH_SHORT).show();
+                        }else {
 
-                        uploadFile();
+                                uploadFile();
+
+                        }
+
 
 
                 }
@@ -258,8 +267,11 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     }
 
     private void uploadFile() {
-        if (filePath != null) {
-            final ProgressDialog progressDialog=new ProgressDialog(context);
+
+        final String uploadId = mDatabaseRef.push().getKey();
+        final Article_Model upload = new Article_Model();
+        if(filePath!=null) {
+            final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
@@ -288,31 +300,28 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                             progressDialog.dismiss();
                             //displaying success toast
                             Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
-                            String uploadId = mDatabaseRef.push().getKey();
-                            if(user_name!=null && user_id!=null) {
-                                Article_Model upload = new Article_Model(
-                                        uploadId,
-                                        user_name,
-                                        uri.toString(),
-                                        descriptionEditText.getText().toString(),
-                                        get_current_time(),
-                                        "0",
-                                        user_id
-                                );
-                                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-                            }else{
-                                Article_Model upload = new Article_Model(
-                                        uploadId,
-                                        "Unknown User",
-                                        uri.toString(),
-                                        descriptionEditText.getText().toString(),
-                                        get_current_time(),
-                                        "0",
-                                        "Unknown"
-                                );
-                                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
+
+                            if (user_name != null && user_id != null) {
+                                upload.setId(uploadId);
+                                upload.setTitle(user_name);
+                                upload.setImageUrl(uri.toString());
+                                upload.setDescription(descriptionEditText.getText().toString());
+                                upload.setTime(get_current_time());
+                                upload.setStatus("0");
+                                upload.setUserid(user_id);
+
+                            } else {
+                                upload.setId(uploadId);
+                                upload.setTitle("Unknown User");
+                                upload.setImageUrl(uri.toString());
+                                upload.setDescription(descriptionEditText.getText().toString());
+                                upload.setTime(get_current_time());
+                                upload.setStatus("0");
+                                upload.setUserid("Unknown");
+
                             }
 
+                            mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
                             Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
                             clearall();
 
@@ -328,46 +337,37 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                     clearall();
                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            //displaying the upload progress
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    });
-        } else{
-            if(!descriptionEditText.getText().toString().equals("")&&user_name!=null && user_id!=null) {
-                String uploadId = mDatabaseRef.push().getKey();
-                Article_Model upload = new Article_Model(
-                        uploadId,
-                        user_name,
-                        null,
-                        descriptionEditText.getText().toString(),
-                        get_current_time(),
-                        "0",
-                        user_id
-                );
-
-                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-
-            }else{
-                String uploadId = mDatabaseRef.push().getKey();
-                Article_Model upload = new Article_Model(
-                        uploadId,
-                        "Unknown User",
-                        null,
-                        descriptionEditText.getText().toString(),
-                        get_current_time(),
-                        "0",
-                        "Unknown"
-                );
-                mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                    //displaying the upload progress
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                    progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                }
+            });
+        }else if(!descriptionEditText.getText().toString().equals("")){
+            if (user_name != null && user_id != null) {
+                upload.setId(uploadId);
+                upload.setTitle(user_name);
+                upload.setImageUrl(null);
+                upload.setDescription(descriptionEditText.getText().toString());
+                upload.setTime(get_current_time());
+                upload.setStatus("0");
+                upload.setUserid(user_id);
+            }else {
+                upload.setId(uploadId);
+                upload.setTitle("Unknown User");
+                upload.setImageUrl(null);
+                upload.setDescription(descriptionEditText.getText().toString());
+                upload.setTime(get_current_time());
+                upload.setStatus("0");
+                upload.setUserid("Unknown");
             }
-            Toast.makeText(context, "Details saved", Toast.LENGTH_LONG).show();
+            mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
+            Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
             clearall();
         }
+
     }
     private void clearall() {
         descriptionEditText.setText(null);
@@ -389,6 +389,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
             if(requireNonNull(uInfo).getUserId().equals(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
                 user_name = requireNonNull(uInfo).getUserName();
                 user_id=uInfo.getUserId();
+                user_role=uInfo.getUserRole();
 
 
             }
@@ -416,10 +417,9 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 
         File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                Uri.fromFile(photo));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photo));
         imageUri = Uri.fromFile(photo);
-        requireNonNull(getActivity()).startActivityForResult(intent,100);
+        getActivity().startActivityForResult(intent,989);
     }
 
     @Override
@@ -442,7 +442,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT)
                                 .show();
-                        Log.e("Camera", e.toString());
+
                     }
                 }
                 break;
@@ -450,7 +450,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                 if (resultCode == RESULT_OK && data != null && data.getData() != null) {
                     filePath = data.getData();
                     try {
-                        Bitmap bitmap= MediaStore.Images.Media.getBitmap(requireNonNull(context).getContentResolver(),filePath);
+                        Bitmap bitmap= MediaStore.Images.Media.getBitmap(requireNonNull(getActivity()).getContentResolver(),filePath);
                         chosenImageView.setImageBitmap(bitmap);
                         //Picasso.get().load(filePath).into(chosenImageView);
                     } catch (IOException e) {
@@ -464,41 +464,97 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     public void onItemClick(int position) {
 
 
-       if(article_array.get(position)!=null) {
-
-
-           Intent shareIntent=new Intent(Intent.ACTION_SEND);
-           //checking message is blank or not
-           if(!article_array.get(position).getDescription().equals("")) {
-
-
-              //without the below line intent will show error
-               shareIntent.setType("text/plain");
-               shareIntent.putExtra(Intent.EXTRA_TEXT,article_array.get(position).getDescription());
-
-
-           }
-          // if(article_array.get(position).getImageUrl()!=null) {
-           //    shareIntent.setType("image/*");
-           //      url = article_array.get(position).getImageUrl();
-         //      new Download_GIF(url).execute();
-                //Uri imageUri = Uri.parse("file:///sdcard/DCIM/Screenshots/Screenshot_20191106-205151_Parvarish4You.jpg");
-         //      shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-              // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-         // }
-           startActivity(Intent.createChooser(shareIntent,"share using"));
-
-        }
     }
 
 
     @Override
     public void onShowItemClick(int position) {
 
+        if(article_array.get(position)!=null) {
+
+
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            //checking message is blank or not
+            if(!article_array.get(position).getDescription().equals("")) {
+
+
+                //without the below line intent will show error
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT,article_array.get(position).getDescription());
+
+
+            }
+            // if(article_array.get(position).getImageUrl()!=null) {
+            //    shareIntent.setType("image/*");
+            //      url = article_array.get(position).getImageUrl();
+            //      new Download_GIF(url).execute();
+            //Uri imageUri = Uri.parse("file:///sdcard/DCIM/Screenshots/Screenshot_20191106-205151_Parvarish4You.jpg");
+            //      shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            // }
+            startActivity(Intent.createChooser(shareIntent,"share using"));
+
+        }
     }
 
     @Override
     public void onDeleteItemClick(int position) {
+        if(user_role.equals("ADMIN"))
+        {
+            Article_Model article = article_array.get(position);
+            show_publish_dialog(article.getId(),article.getImageUrl());
 
+
+        }else{
+            Toast.makeText(getContext(), "Please request to ADMIN", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    @SuppressLint("InflateParams")
+    private void show_publish_dialog(final String id, final String url) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        final LayoutInflater inflater = getLayoutInflater();
+        dialogView = inflater.inflate(R.layout.allowdenydialog, null);
+        dialogBuilder.setView(dialogView);
+        init_dialog_views();
+        positive.setText("Delete");
+        negative.setText("Cancel");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dR = FirebaseDatabase.getInstance().getReference().child("TIMELINE").child(id);
+                if(url!=null) {
+                    StorageReference imageRef = mStorage.getReferenceFromUrl(url);
+                    imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            dR.removeValue();
+
+                        }
+                    });
+                }else{
+                    dR.removeValue();
+
+                }
+                Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                b.cancel();
+
+            }
+        });
+        negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.cancel();
+            }
+        });
+    }
+
+    private void init_dialog_views() {
+        positive=dialogView.findViewById(R.id.positiveBtn);
+        negative=dialogView.findViewById(R.id.negativeBtn);
     }
 }

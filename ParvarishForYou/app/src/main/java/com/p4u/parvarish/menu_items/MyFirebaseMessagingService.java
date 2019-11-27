@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -23,10 +22,7 @@ import java.util.Objects;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
-    @Override
-    public void onNewToken(@NonNull String s) {
-        Log.e("NEW_TOKEN", s);
-    }
+
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

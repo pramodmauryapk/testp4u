@@ -3,8 +3,10 @@ package com.p4u.parvarish.menu_data;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,7 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
     private Context mContext;
     private List<Article_Model> articles;
     private OnItemClickListener mListener;
-    private String uid;
+    private String uid="Unknown";
     TimelineRecyclerAdapter_model(Context context, List<Article_Model> uploads) {
         mContext = context;
         articles = uploads;
@@ -52,9 +54,9 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
-        Article_Model article = articles.get(position);
+        final Article_Model article = articles.get(position);
 
-        uid=article.getUserid();
+
       /*  if(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(uid)){
 
             //CardView.LayoutParams params = new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -87,8 +89,10 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Log.d(TAG, "Accessing database");
+                uid=article.getUserid();
+
                 if(!uid.equals("Unknown")) {
+
                     Picasso.get()
                             .load(getting_userpic(dataSnapshot, uid))
                             .placeholder(R.drawable.userpic)
@@ -107,7 +111,7 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                /// Log.d(TAG, "failed to read values", databaseError.toException());
+                 Log.d(TAG, "failed to read values", databaseError.toException());
             }
         });
         holder.datetime.setText(article.getTime());
@@ -138,7 +142,8 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
             datetime=itemView.findViewById(R.id.datetimetv);
             cardView=itemView.findViewById(R.id.recyclercard);
             cardView.setOnClickListener(this);
-            //img.setOnCreateContextMenuListener(this);
+            cardView.setOnCreateContextMenuListener(this);
+
         }
 
         @Override
@@ -154,12 +159,12 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-           // menu.setHeaderTitle("Select Action");
-           // MenuItem showItem = menu.add( Menu.NONE, 1, 1, "Show");
-           // MenuItem deleteItem = menu.add(Menu.NONE, 2, 2, "Delete");
+            menu.setHeaderTitle("Select Action");
+            MenuItem showItem = menu.add( Menu.NONE, 1, 1, "Share");
+            MenuItem deleteItem = menu.add(Menu.NONE, 2, 2, "Delete");
 
-           // showItem.setOnMenuItemClickListener(this);
-           // deleteItem.setOnMenuItemClickListener(this);
+            showItem.setOnMenuItemClickListener(this);
+            deleteItem.setOnMenuItemClickListener(this);
         }
 
         @Override

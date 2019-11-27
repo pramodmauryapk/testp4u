@@ -127,15 +127,20 @@ public class AdminTimelineFragment extends Fragment implements TimelineRecyclerA
             @Override
             public void onClick(View view) {
                 dR = FirebaseDatabase.getInstance().getReference().child("TIMELINE").child(id);
-                 StorageReference imageRef = mStorage.getReferenceFromUrl(url);
-                 imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                   @Override
-                   public void onSuccess(Void aVoid) {
-                       dR.removeValue();
-                       Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
-                   }
-               });
+                if(url!=null) {
+                    StorageReference imageRef = mStorage.getReferenceFromUrl(url);
+                    imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            dR.removeValue();
 
+                        }
+                    });
+                }else{
+                    dR.removeValue();
+
+                }
+                Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
                 b.cancel();
             }
         });

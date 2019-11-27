@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.gallary.TouchImageView;
 import com.squareup.picasso.Picasso;
 
 public class UserDetailsFragment extends Fragment {
@@ -23,7 +23,7 @@ public class UserDetailsFragment extends Fragment {
     private TextView Email;
     private TextView Role;
     private TextView Mobile,Identity,Address,Status;
-    private ImageView teacherDetailImageView;
+    private TouchImageView teacherDetailImageView;
     private View v;
     private Context context;
     @SuppressLint("SetTextI18n")

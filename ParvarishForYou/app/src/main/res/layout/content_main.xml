@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:background="@drawable/downbar"
             android:layout_gravity="bottom"
-            android:layout_height="20dp"
+            android:layout_height="10dp"
             android:contentDescription="@string/parvarish_knowledge_center">
 
         </ImageView>

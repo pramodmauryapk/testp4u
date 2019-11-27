@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.banner_pannel.BannerLayout;
 import com.p4u.parvarish.banner_pannel.WebBannerAdapter;
-import com.p4u.parvarish.galary.Image_Model;
+import com.p4u.parvarish.gallary.Image_Model;
 import com.p4u.parvarish.news_marquee.NewsTextFragment;
 
 import java.util.ArrayList;
@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
         String role = this.getArguments().getString("user_role");
         Bundle bundle=new Bundle();
         Fragment child2Fragment = new UserMenuFragment();
+
         bundle.putString("user_role", role);
         child2Fragment.setArguments(bundle);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

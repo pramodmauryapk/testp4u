@@ -1,7 +1,8 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.gallary;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,13 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
+public  class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryRecyclerAdapter.RecyclerViewHolder>{
     private static final String TAG = "RecyclerAdapter_model";
     private Context mContext;
     private List<Image_Model> imageModels;
     private OnItemClickListener mListener;
-
-    RecyclerAdapter(Context context, List<Image_Model> uploads) {
+    private Image_Model currentImageModel;
+    private Bundle bundle;
+    GalleryRecyclerAdapter(Context context, List<Image_Model> uploads) {
         mContext = context;
         imageModels = uploads;
     }
@@ -37,19 +38,21 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.row_model, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.recyclerview_row_item, parent, false);
+
+
         return new RecyclerViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        Image_Model currentImageModel = imageModels.get(position);
-        holder.nameTextView.setText(currentImageModel.getName());
-        holder.descriptionTextView.setText(currentImageModel.getDescription());
-        holder.dateTextView.setText(getDateToday());
+        currentImageModel = imageModels.get(position);
+       // holder.nameTextView.setText(currentImageModel.getName());
+       // holder.descriptionTextView.setText(currentImageModel.getDescription());
+       // holder.dateTextView.setText(getDateToday());
         Picasso.get()
                 .load(currentImageModel.getImageUrl())
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.logo)
                 .fit()
                 .centerCrop()
                 .into(holder.teacherImageView);
@@ -63,18 +66,19 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
 
-        TextView nameTextView,descriptionTextView,dateTextView;
+        //TextView nameTextView,descriptionTextView,dateTextView;
         ImageView teacherImageView;
 
-        RecyclerViewHolder(View itemView) {
+        RecyclerViewHolder(final View itemView) {
             super(itemView);
-            nameTextView =itemView.findViewById ( R.id.nameTextView );
-            descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
-            teacherImageView = itemView.findViewById(R.id.teacherImageView);
+            //nameTextView =itemView.findViewById ( R.id.nameTextView );
+            //descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
+            //dateTextView = itemView.findViewById(R.id.dateTextView);
+            teacherImageView = itemView.findViewById(R.id.ivImage);
 
             itemView.setOnClickListener(this);
-            itemView.setOnCreateContextMenuListener(this);
+
+           // itemView.setOnCreateContextMenuListener(this);
         }
 
         @Override
@@ -83,7 +87,9 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     mListener.onItemClick(position);
+
                 }
+
             }
         }
 
@@ -92,7 +98,6 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
             menu.setHeaderTitle("Select Action");
             MenuItem showItem = menu.add( Menu.NONE, 1, 1, "Show");
             MenuItem deleteItem = menu.add(Menu.NONE, 2, 2, "Delete");
-
             showItem.setOnMenuItemClickListener(this);
             deleteItem.setOnMenuItemClickListener(this);
         }
@@ -106,6 +111,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
                     switch (item.getItemId()) {
                         case 1:
                             mListener.onShowItemClick(position);
+
                             return true;
                         case 2:
                             mListener.onDeleteItemClick(position);
@@ -131,4 +137,5 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
         Date date=new Date();
         return dateFormat.format(date);
     }
+
 }

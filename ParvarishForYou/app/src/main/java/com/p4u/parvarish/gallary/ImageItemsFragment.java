@@ -1,4 +1,4 @@
-package com.p4u.parvarish.galary;
+package com.p4u.parvarish.gallary;
 
 import android.content.Context;
 import android.os.Bundle;

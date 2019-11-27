@@ -1,6 +1,7 @@
 package com.p4u.parvarish.menu_items;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -9,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.p4u.parvarish.NotificationActivity;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BeneficiaryAddFragment;
@@ -23,12 +24,13 @@ import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
-import com.p4u.parvarish.galary.ManagegalaryFragment;
+import com.p4u.parvarish.gallary.ManagegalaryFragment;
 import com.p4u.parvarish.menu_data.AdminTimelineFragment;
 import com.p4u.parvarish.menu_data.ManageArticleFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
+import com.p4u.parvarish.video.AddYoutubeVideofragment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -114,7 +116,9 @@ public class AdminMenuFragment extends HomeFragment {
                     "Manage Gallery",
                     "Report Book",
                     "Manage Articles",
-                    "Manage Timeline"
+                    "Manage Timeline",
+                    "Add Video"
+
             };
 
             gridViewImageId = new int[]{
@@ -133,14 +137,15 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_image_black_24dp,
                     R.drawable.ic_report_black_24dp,
                     R.drawable.ic_burst_mode_black_24dp,
-                    R.drawable.ic_mode_comment_black_24dp
+                    R.drawable.ic_mode_comment_black_24dp,
+                    R.drawable.ic_video_call_black_24dp
 
             };
 
         }
         LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         androidGridView.setAdapter(adapterViewAndroid);
-        androidGridView.setColumnWidth(getWidthAndHeight()/5);
+        androidGridView.setColumnWidth(getWidthAndHeight()/6);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -187,8 +192,9 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new ManagegalaryFragment());
                         break;
                     case 12:
-                       // Intent ActivityIndent = new Intent(context, RecyclerViewActivity.class);
-                       // startActivity(ActivityIndent);
+                        Intent ActivityIndent = new Intent(context, NotificationActivity.class);
+                        startActivity(ActivityIndent);
+                       // switchFragment(new newgallaryFragment());
                         break;
                     case 13:
                         switchFragment(new ManageArticleFragment());
@@ -196,6 +202,9 @@ public class AdminMenuFragment extends HomeFragment {
                         break;
                     case 14:
                         switchFragment(new AdminTimelineFragment());
+                        break;
+                    case 15:
+                        switchFragment(new AddYoutubeVideofragment());
                         break;
 
                 }
@@ -218,9 +227,7 @@ public class AdminMenuFragment extends HomeFragment {
 
 
 
-    private void makeToast(String input) {
-        Toast.makeText(context, input, Toast.LENGTH_SHORT).show();
-    }
+
     private int getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
