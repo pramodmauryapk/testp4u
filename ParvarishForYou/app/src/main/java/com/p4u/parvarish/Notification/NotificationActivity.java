@@ -1,4 +1,4 @@
-package com.p4u.parvarish;
+package com.p4u.parvarish.Notification;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -15,6 +15,8 @@ import android.widget.EditText;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+
+import com.p4u.parvarish.R;
 
 import java.util.Objects;
 

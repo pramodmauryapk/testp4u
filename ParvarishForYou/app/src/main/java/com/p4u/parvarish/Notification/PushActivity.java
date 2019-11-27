@@ -1,8 +1,10 @@
-package com.p4u.parvarish;
+package com.p4u.parvarish.Notification;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.p4u.parvarish.R;
 
 public class PushActivity extends AppCompatActivity {
 

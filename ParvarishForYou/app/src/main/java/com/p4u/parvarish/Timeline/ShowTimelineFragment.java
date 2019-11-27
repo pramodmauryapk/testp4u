@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_data;
+package com.p4u.parvarish.Timeline;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -49,6 +49,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mindorks.paracamera.Camera;
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.Articles.Article_Model;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.io.ByteArrayOutputStream;

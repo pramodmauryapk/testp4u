@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.gallary.newgallaryFragment;
 import com.p4u.parvarish.gallary.slideshowFragment;
-import com.p4u.parvarish.menu_data.ShowTimelineFragment;
-import com.p4u.parvarish.menu_data.menudataFragment;
+import com.p4u.parvarish.Timeline.ShowTimelineFragment;
+import com.p4u.parvarish.Articles.menudataFragment;
 import com.p4u.parvarish.video.youtubegallaryFragment;
 
 import static java.util.Objects.requireNonNull;

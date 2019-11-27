@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish.Notification;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

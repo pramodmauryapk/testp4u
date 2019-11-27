@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_data;
+package com.p4u.parvarish.Articles;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
