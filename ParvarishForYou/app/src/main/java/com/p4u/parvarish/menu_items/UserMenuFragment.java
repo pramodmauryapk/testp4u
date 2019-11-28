@@ -15,11 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.p4u.parvarish.Articles.menudataFragment;
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.Timeline.ShowTimelineFragment;
 import com.p4u.parvarish.gallary.newgallaryFragment;
 import com.p4u.parvarish.gallary.slideshowFragment;
-import com.p4u.parvarish.Timeline.ShowTimelineFragment;
-import com.p4u.parvarish.Articles.menudataFragment;
 import com.p4u.parvarish.video.youtubegallaryFragment;
 
 import static java.util.Objects.requireNonNull;
@@ -99,6 +99,7 @@ public class UserMenuFragment extends HomeFragment {
                         break;
                     case 7:
                         switchFragment(new slideshowFragment(),7);
+
                         break;
                     case 8:
                         //Intent ActivityIndent = new Intent(getActivity(), RecyclerViewActivity.class);
