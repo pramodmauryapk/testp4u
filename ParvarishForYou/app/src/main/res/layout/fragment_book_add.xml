@@ -9,13 +9,44 @@
 
 <RelativeLayout
 
-    android:padding="@dimen/activity_horizontal_margin"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/transparent">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/logowithtitle"
+            android:contentDescription="@string/parvarish_knowledge_center" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/relativeLayout"
+        android:layout_marginTop="-80dp"
+        android:background="@drawable/waves"
+        android:contentDescription="@string/parvarish_knowledge_center" />
+
+    <RelativeLayout
+
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_margin="@dimen/dimen_20dp"
+        android:layout_width="match_parent">
     <Spinner
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:padding="16dp"
+
         android:background="@drawable/bg_edittext_focused"
         android:id="@+id/etBookLocation"
         android:layout_height="wrap_content"/>
@@ -193,6 +224,7 @@
         android:layout_marginTop="10dp"
         tools:ignore="ButtonStyle" />
     </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
 
 

@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -43,7 +43,7 @@ import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AddArticleFragment extends Fragment {
+public class AddPageFragment extends Fragment {
 
     private View v;
     private Context context;
@@ -63,7 +63,7 @@ public class AddArticleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
-       v = inflater.inflate(R.layout.upload_page_fragment, container, false);
+       v = inflater.inflate(R.layout.add_page_fragment, container, false);
         context = container.getContext();
         initViews();
         sppagelist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -120,7 +120,6 @@ public class AddArticleFragment extends Fragment {
 
         chooseImageBtn = v.findViewById(R.id.button_choose_image);
         uploadBtn = v.findViewById(R.id.uploadBtn);
-
         descriptionEditText =v. findViewById ( R.id.descriptionEditText );
         chosenImageView =v. findViewById(R.id.chosenImageView);
         nameEditText =v.findViewById(R.id.nameEditText);
@@ -180,7 +179,7 @@ public class AddArticleFragment extends Fragment {
                             //displaying success toast
                             Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
                             String uploadId = mDatabaseRef.push().getKey();
-                            Article_Model upload = new Article_Model(
+                            Page_data_Model upload = new Page_data_Model(
                                     uploadId,
                                     nameEditText.getText().toString().trim(),
                                     uri.toString(),
@@ -215,7 +214,7 @@ public class AddArticleFragment extends Fragment {
                     });
         } else{
             String uploadId = mDatabaseRef.push().getKey();
-            Article_Model upload = new Article_Model(
+            Page_data_Model upload = new Page_data_Model(
                     uploadId,
                     nameEditText.getText().toString().trim(),
                     null,

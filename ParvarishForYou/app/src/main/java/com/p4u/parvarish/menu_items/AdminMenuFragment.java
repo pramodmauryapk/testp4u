@@ -19,14 +19,14 @@ import androidx.fragment.app.Fragment;
 import com.p4u.parvarish.Notification.NotificationActivity;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
-import com.p4u.parvarish.book_pannel.BeneficiaryAddFragment;
+import com.p4u.parvarish.Beneficiary.AddBeneficiaryFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.gallary.ManagegalaryFragment;
 import com.p4u.parvarish.Timeline.AdminTimelineFragment;
-import com.p4u.parvarish.Articles.ManageArticleFragment;
+import com.p4u.parvarish.MenuPages.ManagePagesFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -171,7 +171,7 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new AddBookFragment());
                         break;
                     case 5:
-                        switchFragment(new BeneficiaryAddFragment());
+                        switchFragment(new AddBeneficiaryFragment());
                         break;
                     case 6:
                         switchFragment(new IssueBookFragment());
@@ -197,7 +197,7 @@ public class AdminMenuFragment extends HomeFragment {
                        // switchFragment(new newgallaryFragment());
                         break;
                     case 13:
-                        switchFragment(new ManageArticleFragment());
+                        switchFragment(new ManagePagesFragment());
 
                         break;
                     case 14:

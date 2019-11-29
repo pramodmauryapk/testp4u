@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,20 +25,20 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class menudataFragment extends Fragment {
+public class PageListFragment extends Fragment {
     private Context context;
-    private List<Article_Model> article_array;
+    private List<Page_data_Model> article_array;
     private DatabaseReference myRef;
     private ListView listViewArticles;
     private View v;
 
 
-    private static final String TAG = "menudataFragment";
+    private static final String TAG = "PageListFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_menu_data, container, false);
+        v = inflater.inflate(R.layout.fragment_page_list, container, false);
         //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -83,12 +83,12 @@ public class menudataFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         article_array.clear();
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            Article_Model article = postSnapshot.getValue(Article_Model.class);
+                            Page_data_Model article = postSnapshot.getValue(Page_data_Model.class);
                             article_array.add(article);
 
                         }
 
-                            LayoutArticleList articleAdapter = new LayoutArticleList(getActivity(), article_array);
+                            LayoutPage articleAdapter = new LayoutPage(getActivity(), article_array);
                             listViewArticles.setAdapter(articleAdapter);
                             articleAdapter.notifyDataSetChanged();
 

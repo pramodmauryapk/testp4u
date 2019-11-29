@@ -1,4 +1,4 @@
-package com.p4u.parvarish.book_pannel;
+package com.p4u.parvarish.Beneficiary;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,12 +18,12 @@ import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class Layoutbeneficiary_details extends ArrayAdapter<TempUser> {
+public class beneficiary_details_model extends ArrayAdapter<TempUser> {
     private Activity context;
     private List<TempUser> users;
 
-     Layoutbeneficiary_details(Activity context, List<TempUser> users) {
-        super(context, R.layout.layout_beneficiary, users);
+     public beneficiary_details_model(Activity context, List<TempUser> users) {
+        super(context, R.layout.layout_beneficiary_details, users);
         this.context = context;
         this.users = users;
     }
@@ -35,7 +35,7 @@ public class Layoutbeneficiary_details extends ArrayAdapter<TempUser> {
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_beneficiary, null, true);
+        @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_beneficiary_details, null, true);
         try {
 
 

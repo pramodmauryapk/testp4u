@@ -1,4 +1,4 @@
-package com.p4u.parvarish.book_pannel;
+package com.p4u.parvarish.Beneficiary;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.book_pannel.SelectBookFragment;
 import com.p4u.parvarish.user_pannel.TempUser;
 
 import java.util.ArrayList;
@@ -36,9 +37,9 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-public class BeneficiaryAddFragment extends Fragment {
+public class AddBeneficiaryFragment extends Fragment {
 
-    private static final String TAG = "BeneficiaryAddFragment";
+    private static final String TAG = "AddBeneficiaryFragment";
     private View dialogView;
     private View beneficiarydialog;
     private ArrayList<String> beneficiary_list;
@@ -62,7 +63,7 @@ public class BeneficiaryAddFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_beneficiary,container,false);
+        v = inflater.inflate(R.layout.fragment_add_beneficiary,container,false);
 
         context = container.getContext();
         //getting views

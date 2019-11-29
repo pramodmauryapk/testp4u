@@ -8,13 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +33,7 @@ public class DonorListFragment extends Fragment {
     private static final String TAG = "DonorListFragment";
     private ListView listViewdonors;
     private List<Donor> donors;
-    private TextInputEditText txtname;
+    private EditText txtname;
     private DatabaseReference databaseBooks;
     private View v;
     @Nullable

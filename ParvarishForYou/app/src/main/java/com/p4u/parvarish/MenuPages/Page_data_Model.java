@@ -1,8 +1,8 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import com.google.firebase.database.Exclude;
 
-public class Article_Model {
+public class Page_data_Model {
     private String id;
     private String title;
     private String imageURL;
@@ -12,15 +12,15 @@ public class Article_Model {
     private String status;
     private String userid;
 
-    public Article_Model() {
+    public Page_data_Model() {
         //empty constructor needed
     }
-    public Article_Model(int position){
+    public Page_data_Model(int position){
     }
 
 
 
-    public Article_Model(String id, String title, String imageUrl, String Des, String time, String status, String userid) {
+    Page_data_Model(String id, String title, String imageUrl, String Des, String time, String status, String userid) {
         this.id=id;
         this.title = title;
         this.imageURL = imageUrl;

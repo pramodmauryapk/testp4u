@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.Articles.Article_Model;
+import com.p4u.parvarish.MenuPages.Page_data_Model;
 import com.p4u.parvarish.user_pannel.Teacher;
 import com.squareup.picasso.Picasso;
 
@@ -38,10 +38,10 @@ import static java.util.Objects.requireNonNull;
 public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<TimelineRecyclerAdapter_model.RecyclerViewHolder>{
     private static final String TAG = "TimelineRecyclerAdapter_model";
     private Context mContext;
-    private List<Article_Model> articles;
+    private List<Page_data_Model> articles;
     private OnItemClickListener mListener;
     private String uid="Unknown";
-    TimelineRecyclerAdapter_model(Context context, List<Article_Model> uploads) {
+    TimelineRecyclerAdapter_model(Context context, List<Page_data_Model> uploads) {
         mContext = context;
         articles = uploads;
     }
@@ -55,7 +55,7 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
-        final Article_Model article = articles.get(position);
+        final Page_data_Model article = articles.get(position);
 
 
       /*  if(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(uid)){
@@ -110,6 +110,7 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                  Log.d(TAG, "failed to read values", databaseError.toException());

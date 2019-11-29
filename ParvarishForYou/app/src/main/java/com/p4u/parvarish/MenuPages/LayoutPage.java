@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,13 +17,13 @@ import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class LayoutArticleList extends ArrayAdapter<Article_Model>{
+public class LayoutPage extends ArrayAdapter<Page_data_Model>{
     private Activity context;
-    private List<Article_Model> aricles;
+    private List<Page_data_Model> aricles;
     public String s;
 
-    public LayoutArticleList(Activity context, List<Article_Model> aricles) {
-        super(context, R.layout.layout_article, aricles);
+    LayoutPage(Activity context, List<Page_data_Model> aricles) {
+        super(context, R.layout.layout_page, aricles);
         this.context = context;
         this.aricles = aricles;
     }
@@ -35,14 +35,14 @@ public class LayoutArticleList extends ArrayAdapter<Article_Model>{
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_article, null, true);
+        @SuppressLint({"ViewHolder", "InflateParams"}) View listViewItem = inflater.inflate(R.layout.layout_page, null, true);
         try {
 
 
             TextView Title = listViewItem.findViewById(R.id.headingTv);
             TextView Article = listViewItem.findViewById(R.id.articleTv);
             ImageView img = listViewItem.findViewById(R.id.rImageView);
-            Article_Model articles = aricles.get(position);
+            Page_data_Model articles = aricles.get(position);
             Title.setText(articles.getTitle());
             Article.setText(articles.getDescription());
             if(articles.getImageUrl()!=null) {

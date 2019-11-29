@@ -6,29 +6,25 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.Beneficiary.beneficiary_details_model;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.TempUser;
 
@@ -45,8 +41,8 @@ public class IssueBookFragment extends Fragment {
     private TextView tv2;
     private List<TempUser> users;
     private ListView beneficiarylist;
-    private TextInputEditText search_beneficiary;
-    private TextInputLayout tf1;
+    private EditText search_beneficiary;
+
     private TextView duserid,dtvname,dtvemail,dtvmobile,dtvaddress,dtvidentity,dtvbookshaving,dtvdeposit,dtvrefund;
     private View v;
     private Button btnselect;
@@ -60,7 +56,7 @@ public class IssueBookFragment extends Fragment {
         context = container.getContext();
         initViews();
         tv2.setText("Tap to User to Return Book");
-        tf1.setHint("Beneficiary-Name/Mobile/Email");
+
         //list to store books
         users = new ArrayList<>();
         load_list();
@@ -113,7 +109,7 @@ public class IssueBookFragment extends Fragment {
         search_beneficiary =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
         beneficiarylist =  v.findViewById(R.id.view_list);
-        tf1=v.findViewById(R.id.tf1);
+
 
     }
 
@@ -121,7 +117,7 @@ public class IssueBookFragment extends Fragment {
 
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
 
-        final Layoutbeneficiary_details beneficiary_adapter = new Layoutbeneficiary_details(getActivity(), users);
+        final beneficiary_details_model beneficiary_adapter = new beneficiary_details_model(getActivity(), users);
 
         if (!requireNonNull(search_beneficiary.getText()).toString().toUpperCase().equals("")) {
 

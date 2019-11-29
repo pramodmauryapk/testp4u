@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,29 +23,28 @@ import java.util.Date;
 import java.util.List;
 
 
-public  class ARecyclerAdapter_model extends RecyclerView.Adapter<ARecyclerAdapter_model.RecyclerViewHolder>{
+public  class PageRecyclerAdapter_model extends RecyclerView.Adapter<PageRecyclerAdapter_model.RecyclerViewHolder>{
     private static final String TAG = "RecyclerAdapter_model";
     private Context mContext;
-    private List<Article_Model> articles;
+    private List<Page_data_Model> articles;
     private OnItemClickListener mListener;
 
-    ARecyclerAdapter_model(Context context, List<Article_Model> uploads) {
+    PageRecyclerAdapter_model(Context context, List<Page_data_Model> uploads) {
         mContext = context;
         articles = uploads;
     }
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_article, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_page, parent, false);
         return new RecyclerViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        Article_Model article = articles.get(position);
+        Page_data_Model article = articles.get(position);
         holder.Title.setText(article.getTitle());
         holder.Article.setText(article.getDescription());
-
         Picasso.get()
                 .load(article.getImageUrl())
                 .placeholder(R.drawable.logo)

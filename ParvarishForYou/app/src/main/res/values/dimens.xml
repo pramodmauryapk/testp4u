@@ -24,4 +24,7 @@
     <dimen name="menu_dialog_container_margin">8dp</dimen>
     <dimen name="menu_item_padding">12dp</dimen>
     <dimen name="menu_item_text_size">16sp</dimen>
+
+    <dimen name="spacing_large">15dp</dimen>
+    <dimen name="spacing_xxlarge">50dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +17,11 @@ import com.p4u.parvarish.R;
 
 import static java.util.Objects.requireNonNull;
 
-public class ManageArticleFragment extends Fragment {
+public class ManagePagesFragment extends Fragment {
 
     private static final String TAG = "OurWorkFragment";
-    private EditText editText;
-    private TextView textView;
-    private Button btnadd,btnupdate,btndelete;
+    private Button btnadd;
+    private Button btnupdate;
     private Context context;
     private View v;
     private String s;
@@ -34,7 +31,7 @@ public class ManageArticleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_manage_articles, container, false);
+        v = inflater.inflate(R.layout.fragment_manage_pages, container, false);
         context = container.getContext();
         initViews();
         //s="TELENT_SUPPORT";
@@ -67,13 +64,13 @@ public class ManageArticleFragment extends Fragment {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchFragment(new AddArticleFragment());
+                switchFragment(new AddPageFragment());
             }
         });
         btnupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchFragment(new ManageContentFragment());
+                switchFragment(new ManagePagesContentFragment());
             }
         });
 

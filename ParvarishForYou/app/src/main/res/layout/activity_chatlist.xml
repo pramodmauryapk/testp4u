@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorwhite"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
@@ -13,10 +12,10 @@
         android:contentDescription="@string/parvarish_knowledge_center" />
 
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/txt_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/books_list"
+        android:text="@string/m_e_s_s_a_g_e"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:layout_marginTop="50dp"
@@ -25,7 +24,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_below="@+id/tv2"
+        android:layout_below="@+id/txt_message"
         android:id="@+id/search_bar"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
@@ -51,20 +50,21 @@
                 android:clickable="true"
                 android:tint="#666666"
                 app:srcCompat="@drawable/ic_search"
-                android:contentDescription="@string/parvarish_knowledge_center"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/parvarish_knowledge_center" />
 
             <EditText
-                android:id="@+id/sp_Book_Name"
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="@string/book_title_author_subject_cost"
+                android:hint="@string/search_locations"
                 android:imeOptions="actionSearch"
                 android:maxLines="1"
 
                 android:singleLine="true"
+                android:inputType="text"
                 android:importantForAutofill="no">
 
                 <requestFocus />
@@ -94,22 +94,21 @@
         app:cardElevation="3dp"
         app:layout_collapseMode="pin">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
 
-            <ListView
-                android:id="@+id/view_list"
+        <ListView
+            android:id="@+id/mylist"
 
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:divider="#18000000"
-                android:dividerHeight="1dp">
-            </ListView>
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="#18000000"
+            android:dividerHeight="1dp">
+        </ListView>
 
-        </LinearLayout>
+</LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -30,6 +30,11 @@ import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
 import com.p4u.parvarish.login.Login_emailActivity;
 import com.p4u.parvarish.login.UserRegistrationActivity;
+import com.p4u.parvarish.menu_items.AboutUsFragment;
+import com.p4u.parvarish.menu_items.FeedbackAddFragment;
+import com.p4u.parvarish.menu_items.HomeFragment;
+import com.p4u.parvarish.menu_items.JoinUsFragment;
+import com.p4u.parvarish.menu_items.OurWorkFragment;
 import com.p4u.parvarish.user_pannel.UserProfileFragment;
 import com.squareup.picasso.Picasso;
 

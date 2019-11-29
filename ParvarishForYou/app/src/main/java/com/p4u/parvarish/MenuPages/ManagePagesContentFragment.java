@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Articles;
+package com.p4u.parvarish.MenuPages;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -55,14 +55,14 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
-public class ManageContentFragment extends Fragment implements ARecyclerAdapter_model.OnItemClickListener{
+public class ManagePagesContentFragment extends Fragment implements PageRecyclerAdapter_model.OnItemClickListener{
 
     private static final String TAG = "ManageArticlesFragment";
-    private ARecyclerAdapter_model mAdapter;
+    private PageRecyclerAdapter_model mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
-    private List<Article_Model> article_list;
+    private List<Page_data_Model> article_list;
     private View dialogView;
     private Button uploadBtn,chooseImageBtn;
     private EditText nameEditText;
@@ -79,13 +79,13 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_articles_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_manage_page_content, container, false);
         context = container.getContext();
         RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         article_list = new ArrayList<>();
-        mAdapter = new ARecyclerAdapter_model(context, article_list);
+        mAdapter = new PageRecyclerAdapter_model(context, article_list);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         s = requireNonNull(this.getArguments()).getString("Page");
@@ -100,7 +100,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
                 article_list.clear();
 
                 for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren()) {
-                    Article_Model upload = teacherSnapshot.getValue(Article_Model.class);
+                    Page_data_Model upload = teacherSnapshot.getValue(Page_data_Model.class);
                     Objects.requireNonNull(upload).setKey(teacherSnapshot.getKey());
                     article_list.add(upload);
                 }
@@ -129,7 +129,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
 
     @Override
     public void onItemClick(int position) {
-        Article_Model article=article_list.get(position);
+        Page_data_Model article=article_list.get(position);
         String[] ArticleData={
                 article.getId(),
                 article.getTitle(),
@@ -144,7 +144,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
     @Override
     public void onShowItemClick(int position) {
 
-        Article_Model article = article_list.get(position);
+        Page_data_Model article = article_list.get(position);
         showUpdateDeleteDialog(
                 article.getId(),
                 article.getTitle(),
@@ -159,7 +159,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
     @Override
     public void onDeleteItemClick(int position) {
 
-        Article_Model selectedItem = article_list.get(position);
+        Page_data_Model selectedItem = article_list.get(position);
         final String selectedKey = selectedItem.getKey();
         if(selectedItem.getImageUrl()!=null) {
             final StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
@@ -231,7 +231,7 @@ public class ManageContentFragment extends Fragment implements ARecyclerAdapter_
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (context);
         LayoutInflater inflater = getLayoutInflater ();
-        dialogView = inflater.inflate (R.layout.upload_page_fragment, null);
+        dialogView = inflater.inflate (R.layout.add_page_fragment, null);
         dialogBuilder.setView (dialogView);
         dialogBuilder.setTitle ("Update Details");
         final AlertDialog b = dialogBuilder.create ();

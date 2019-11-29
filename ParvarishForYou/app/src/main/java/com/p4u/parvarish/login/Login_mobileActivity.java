@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.menu_items.MainActivity;
+import com.p4u.parvarish.MainActivity;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import static java.util.Objects.requireNonNull;

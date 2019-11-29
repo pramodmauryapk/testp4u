@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.p4u.parvarish.Articles.menudataFragment;
+import com.p4u.parvarish.MenuPages.PageListFragment;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.Timeline.ShowTimelineFragment;
 import com.p4u.parvarish.gallary.newgallaryFragment;
@@ -77,22 +77,22 @@ public class UserMenuFragment extends HomeFragment {
                                     int i, long id) {
                 switch (i) {
                     case 0:
-                        switchFragment(new menudataFragment(),0);
+                        switchFragment(new PageListFragment(),0);
                         break;
                     case 1:
                         switch_menu(new AdminMenuFragment());
                         break;
                     case 2:
-                        switchFragment(new menudataFragment(),2);
+                        switchFragment(new PageListFragment(),2);
                         break;
                     case 3:
-                        switchFragment(new menudataFragment(),3);
+                        switchFragment(new PageListFragment(),3);
                         break;
                     case 4:
-                        switchFragment(new menudataFragment(),4);
+                        switchFragment(new PageListFragment(),4);
                         break;
                     case 5:
-                        switchFragment(new menudataFragment(),5);
+                        switchFragment(new PageListFragment(),5);
                         break;
                     case 6:
                         switchFragment(new newgallaryFragment(),6);
@@ -105,6 +105,7 @@ public class UserMenuFragment extends HomeFragment {
                         //Intent ActivityIndent = new Intent(getActivity(), RecyclerViewActivity.class);
                         //startActivity(ActivityIndent);
                         switchFragment(new youtubegallaryFragment(),8);
+                        //switchFragment(new chatlistfragment(),8);
                         break;
                     case 9:switchFragment(new ShowTimelineFragment(),9);//new ImageGalleryFragment()
                         break;

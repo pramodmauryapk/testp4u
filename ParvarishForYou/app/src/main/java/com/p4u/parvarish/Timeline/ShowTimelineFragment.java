@@ -49,7 +49,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mindorks.paracamera.Camera;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.Articles.Article_Model;
+import com.p4u.parvarish.MenuPages.Page_data_Model;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.io.ByteArrayOutputStream;
@@ -72,7 +72,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
 
     private Context context;
     private TimelineRecyclerAdapter_model mAdapter;
-    private List<Article_Model> article_array;
+    private List<Page_data_Model> article_array;
     private RecyclerView mRecyclerView;
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
@@ -206,7 +206,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
                     article_array.clear();
 
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        Article_Model article = postSnapshot.getValue(Article_Model.class);
+                        Page_data_Model article = postSnapshot.getValue(Page_data_Model.class);
                         Objects.requireNonNull(article).setKey(postSnapshot.getKey());
                         if (article.getStatus().equals("1")) {
                             article_array.add(0,article);
@@ -270,7 +270,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     private void uploadFile() {
 
         final String uploadId = mDatabaseRef.push().getKey();
-        final Article_Model upload = new Article_Model();
+        final Page_data_Model upload = new Page_data_Model();
         if(filePath!=null) {
             final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
@@ -420,7 +420,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photo));
         imageUri = Uri.fromFile(photo);
-        getActivity().startActivityForResult(intent,989);
+        requireNonNull(getActivity()).startActivityForResult(intent,989);
     }
 
     @Override
@@ -502,7 +502,7 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     public void onDeleteItemClick(int position) {
         if(user_role.equals("ADMIN"))
         {
-            Article_Model article = article_array.get(position);
+            Page_data_Model article = article_array.get(position);
             show_publish_dialog(article.getId(),article.getImageUrl());
 
 
@@ -518,8 +518,8 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
         dialogView = inflater.inflate(R.layout.allowdenydialog, null);
         dialogBuilder.setView(dialogView);
         init_dialog_views();
-        positive.setText("Delete");
-        negative.setText("Cancel");
+        positive.setText(R.string.delete);
+        negative.setText(R.string.cancel);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 

@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.Articles.Article_Model;
+import com.p4u.parvarish.MenuPages.Page_data_Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class AdminTimelineFragment extends Fragment implements TimelineRecyclerA
     private static final String TAG = "ShowTimelineFragment";
     private Context context;
     private TimelineRecyclerAdapter_model mAdapter;
-    private List<Article_Model> article_array;
+    private List<Page_data_Model> article_array;
     private DatabaseReference myRef;
     private RecyclerView mRecyclerView;
     private FirebaseStorage mStorage;
@@ -70,13 +70,14 @@ public class AdminTimelineFragment extends Fragment implements TimelineRecyclerA
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("TIMELINE");
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 article_array.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        Article_Model article = postSnapshot.getValue(Article_Model.class);
+                        Page_data_Model article = postSnapshot.getValue(Page_data_Model.class);
                         Objects.requireNonNull(article).setKey(postSnapshot.getKey());
                         if (article.getStatus().equals("0")) {
                             article_array.add(0,article);
@@ -162,7 +163,7 @@ public class AdminTimelineFragment extends Fragment implements TimelineRecyclerA
 
     @Override
     public void onItemClick(int position) {
-        Article_Model article = article_array.get(position);
+        Page_data_Model article = article_array.get(position);
         show_publish_dialog(
                 article.getId(),
                 article.getImageUrl(),

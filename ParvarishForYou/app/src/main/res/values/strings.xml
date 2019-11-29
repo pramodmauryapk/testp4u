@@ -220,7 +220,7 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="add_image_to_gallery">Add Image to Gallery</string>
     <string name="select_image_for_profile_photo">Select image for Profile photo</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="do_you_really_want_to_exit">Do you really want to Exit ?</string>
     <string name="please_rate_us_if_you_like_the_app">Please Rate us if you like the app</string>
     <string name="rupee">₹</string>
@@ -236,7 +236,18 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="live">LIVE</string>
     <string name="tap_to_select">Tap to select</string>
     <string name="write_to_timeline">Write to Timeline....</string>
-    <string name="wait_for_the_code_i_sent_you">Wait for the code I sent you...</string>
+    <string name="wait_for_the_code_i_sent_you">Wait for the code I sent you…</string>
     <string name="i_sent_you_a_code_it_will_be_detected_automatically_but_if_it_is_not_detected_you_can_put_it_below_manually_as_well">I sent you a code, it will be detected automatically but if it is not detected you can put it below manually as well</string>
     <string name="sign_in">Sign In</string>
+    <string name="youtube_gallary">Youtube Gallary</string>
+    <string name="search_locations">Search Locations</string>
+    <string name="user_mobiles">User Mobiles</string>
+    <string name="center_list">Center List</string>
+    <string name="article_list">Article List</string>
+    <string name="m_e_s_s_a_g_e">M E S S A G E</string>
+    <string name="select_any_option_for_any_page">Select Any Option For Any Page</string>
+    <string name="user_gmail_com">User@gmail.com</string>
+    <string name="enter_video_details">Enter video details</string>
+    <string name="video_url">Video URL</string>
+    <string name="christopea">Christopea</string>
 </resources>

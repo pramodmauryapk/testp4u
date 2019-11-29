@@ -73,7 +73,7 @@ public class AddYoutubeVideofragment extends Fragment {
 
 
     private void uploadURL() {
-        if (descriptionEditText.getText().equals("")&&nameEditText.getText().equals("")) {
+        if (!descriptionEditText.getText().equals("")&&!nameEditText.getText().equals("")) {
             String uploadId = mDatabaseRef.push().getKey();
             YoutubeVideo_Model upload = new YoutubeVideo_Model(nameEditText.getText().toString().trim(),
                                                              descriptionEditText.getText().toString(),

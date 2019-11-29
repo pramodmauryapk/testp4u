@@ -1,10 +1,12 @@
 package com.p4u.parvarish.gallary;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,9 +41,10 @@ public class newgallaryFragment extends Fragment{
     private GalleryRecyclerAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private List<Image_Model> mGallaryList;
-
+    private TextView tv;
    private Bundle bundle;
     private View v;
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,9 +52,7 @@ public class newgallaryFragment extends Fragment{
         v = inflater.inflate(R.layout.newgallary, container, false);
         context = container.getContext();
         initViews();
-
-
-
+        tv.setText("Image Gallary");
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.setHasFixedSize(false);
@@ -81,7 +82,6 @@ public class newgallaryFragment extends Fragment{
             }
         });
         //Toast.makeText(context,position,Toast.LENGTH_LONG).show();
-
        // mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");
        // mStorage  = FirebaseStorage.getInstance().getReference("TIMELINE").getStorage();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
@@ -90,6 +90,7 @@ public class newgallaryFragment extends Fragment{
     }
     private void initViews(){
         mRecyclerView = v.findViewById(R.id.recyclerview);
+        tv=v.findViewById(R.id.textView);
     }
     public void onStart() {
 
@@ -129,7 +130,7 @@ public class newgallaryFragment extends Fragment{
 
 
         }catch (Exception e){
-
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
