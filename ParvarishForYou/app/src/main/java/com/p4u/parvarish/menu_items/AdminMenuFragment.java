@@ -16,17 +16,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.p4u.parvarish.Beneficiary.AddBeneficiaryFragment;
+import com.p4u.parvarish.MenuPages.ManagePagesFragment;
 import com.p4u.parvarish.Notification.NotificationActivity;
 import com.p4u.parvarish.R;
+import com.p4u.parvarish.HelpingHand.AdminHalpingHandFragment;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
-import com.p4u.parvarish.Beneficiary.AddBeneficiaryFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.gallary.ManagegalaryFragment;
-import com.p4u.parvarish.Timeline.AdminTimelineFragment;
-import com.p4u.parvarish.MenuPages.ManagePagesFragment;
+import com.p4u.parvarish.navistrip.Navigationfragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -116,8 +117,9 @@ public class AdminMenuFragment extends HomeFragment {
                     "Manage Gallery",
                     "Report Book",
                     "Manage Articles",
-                    "Manage Timeline",
-                    "Add Video"
+                    "Manage HalpingHand",
+                    "Add Video",
+                    "chat"
 
             };
 
@@ -138,14 +140,15 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_report_black_24dp,
                     R.drawable.ic_burst_mode_black_24dp,
                     R.drawable.ic_mode_comment_black_24dp,
-                    R.drawable.ic_video_call_black_24dp
+                    R.drawable.ic_video_call_black_24dp,
+                    R.drawable.ic_playlist_add_black_24dp
 
             };
 
         }
         LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         androidGridView.setAdapter(adapterViewAndroid);
-        androidGridView.setColumnWidth(getWidthAndHeight()/6);
+        androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -201,10 +204,13 @@ public class AdminMenuFragment extends HomeFragment {
 
                         break;
                     case 14:
-                        switchFragment(new AdminTimelineFragment());
+                        switchFragment(new AdminHalpingHandFragment());
                         break;
                     case 15:
                         switchFragment(new AddYoutubeVideofragment());
+                        break;
+                    case 16://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
+                        switchFragment(new Navigationfragment());
                         break;
 
                 }

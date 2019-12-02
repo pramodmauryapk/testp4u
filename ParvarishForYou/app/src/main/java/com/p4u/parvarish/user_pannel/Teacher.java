@@ -85,7 +85,7 @@ public class Teacher {
         return key;
     }
     @Exclude
-    void setKey(String key) {
+    public void setKey(String key) {
         this.key = key;
     }
     public String getUserPassword() {

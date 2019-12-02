@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Timeline;
+package com.p4u.parvarish.HelpingHand;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -33,11 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AdminTimelineFragment extends Fragment implements TimelineRecyclerAdapter_model.OnItemClickListener {
+public class AdminHalpingHandFragment extends Fragment implements HalpingHandRecyclerAdapter_model.OnItemClickListener {
 
-    private static final String TAG = "ShowTimelineFragment";
+    private static final String TAG = "ShowHalpingHandFragment";
     private Context context;
-    private TimelineRecyclerAdapter_model mAdapter;
+    private HalpingHandRecyclerAdapter_model mAdapter;
     private List<Page_data_Model> article_array;
     private DatabaseReference myRef;
     private RecyclerView mRecyclerView;
@@ -54,7 +54,7 @@ public class AdminTimelineFragment extends Fragment implements TimelineRecyclerA
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_timeline_data, container, false);
+        v = inflater.inflate(R.layout.fragment_halpinghand_data, container, false);
         context = container.getContext();
         initViews();
         inst.setVisibility(View.VISIBLE);
@@ -62,7 +62,7 @@ public class AdminTimelineFragment extends Fragment implements TimelineRecyclerA
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         article_array = new ArrayList<>();
-        mAdapter = new TimelineRecyclerAdapter_model(context, article_array);
+        mAdapter = new HalpingHandRecyclerAdapter_model(context, article_array);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");

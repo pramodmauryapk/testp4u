@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.MenuPages.PageListFragment;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.Timeline.ShowTimelineFragment;
+import com.p4u.parvarish.HelpingHand.ShowHalpingHandFragment;
 import com.p4u.parvarish.gallary.newgallaryFragment;
 import com.p4u.parvarish.gallary.slideshowFragment;
 import com.p4u.parvarish.video.youtubegallaryFragment;
@@ -38,7 +38,7 @@ public class UserMenuFragment extends HomeFragment {
             "Gallery",
             "Slide Show",
             "Videos",
-            "Timeline"
+            "Helping Hand"
     } ;
 
     private int[] gridViewImageId = {
@@ -52,6 +52,7 @@ public class UserMenuFragment extends HomeFragment {
             R.drawable.ic_vibration_black_24dp,
             R.drawable.ic_ondemand_video_black_24dp,
             R.drawable.ic_playlist_add_black_24dp
+
 
     };
 
@@ -69,7 +70,7 @@ public class UserMenuFragment extends HomeFragment {
         LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         androidGridView.setAdapter(adapterViewAndroid);
-        androidGridView.setColumnWidth(getWidthAndHeight()/6);
+        androidGridView.setColumnWidth(getWidthAndHeight()/5);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -105,10 +106,10 @@ public class UserMenuFragment extends HomeFragment {
                         //Intent ActivityIndent = new Intent(getActivity(), RecyclerViewActivity.class);
                         //startActivity(ActivityIndent);
                         switchFragment(new youtubegallaryFragment(),8);
-                        //switchFragment(new chatlistfragment(),8);
                         break;
-                    case 9:switchFragment(new ShowTimelineFragment(),9);//new ImageGalleryFragment()
+                    case 9:switchFragment(new ShowHalpingHandFragment(),9);//new ImageGalleryFragment()
                         break;
+
 
                 }
 

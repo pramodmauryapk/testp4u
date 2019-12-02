@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="8dp"
@@ -52,10 +53,11 @@
                     android:padding="@dimen/_8dp"
                     android:gravity="top|start"
                     android:inputType="textMultiLine"
-                    android:hint="@string/write_to_timeline"
+                    android:hint="@string/write_something"
                     android:textSize="12sp"
                     android:background="@drawable/bg_edittext_normal"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:targetApi="o" />
 
             <ImageButton
                 android:layout_width="50dp"
@@ -70,6 +72,7 @@
                 android:id="@+id/img2"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:background="@drawable/ic_photo_camera_black_24dp"
                 android:layout_height="40dp"
                 android:contentDescription="@string/parvarish_knowledge_center" />

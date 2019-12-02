@@ -20,6 +20,7 @@ import com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayer;
 import com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerFullScreenListener;
 import com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerInitListener;
 import com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerView;
+import com.p4u.parvarish.video.youtubeplayer.player.playerUtils.FullScreenHelper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,6 +33,7 @@ public class videodetailFragment extends Fragment {
     private Button button;
     private Context context;
     private YouTubePlayerView player;
+    private FullScreenHelper fullScreenHelper;
     private YouTubePlayer youTubePlayer;
     private TextView mDescription;
     private TouchImageView mImage;
@@ -39,9 +41,10 @@ public class videodetailFragment extends Fragment {
     private String videoId;
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.activity_detail, container, false);
+        fullScreenHelper = new FullScreenHelper();
         context = container.getContext();
         initViews();
         mImage.setVisibility(View.GONE);
@@ -50,6 +53,7 @@ public class videodetailFragment extends Fragment {
         String desc=this.getArguments().getString("Description");
         try {
             videoId=extractYoutubeId(imageurl);
+
             player.initialize(new YouTubePlayerInitListener() {
                                   @Override
                                   public void onInitSuccess(@NonNull final YouTubePlayer initializedYouTubePlayer) {
@@ -57,9 +61,9 @@ public class videodetailFragment extends Fragment {
                                           @Override
                                           public void onReady() {
                                               youTubePlayer = initializedYouTubePlayer;
-
                                               youTubePlayer.loadVideo(videoId, 0);
                                               youTubePlayer.play();
+
 
 
                                           }
@@ -68,17 +72,24 @@ public class videodetailFragment extends Fragment {
                                   }
                               }, true
             );
-            player.addFullScreenListener(new YouTubePlayerFullScreenListener() {
+          player.addFullScreenListener(new YouTubePlayerFullScreenListener() {
                 @Override
                 public void onYouTubePlayerEnterFullScreen() {
                     player.setRotation(90);
                     player.enterFullScreen();
+                   // player.bringToFront();
+                   //Objects.requireNonNull(getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                   // fullScreenHelper.enterFullScreen(container);
+
                 }
 
                 @Override
                 public void onYouTubePlayerExitFullScreen() {
-                    player.setRotation(-90);
+                   //Objects.requireNonNull(getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                    player.setRotation(0);
                     player.exitFullScreen();
+                    //fullScreenHelper.exitFullScreen(container);
                 }
             });
         } catch (MalformedURLException e) {
@@ -118,8 +129,16 @@ public class videodetailFragment extends Fragment {
         super.onPause();
         try{
         youTubePlayer.pause();
+
+            player.exitFullScreen();
+
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        player.release();
     }
 }

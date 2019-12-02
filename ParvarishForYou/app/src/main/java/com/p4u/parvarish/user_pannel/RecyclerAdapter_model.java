@@ -24,12 +24,12 @@ import java.util.List;
 
 
 public  class RecyclerAdapter_model extends RecyclerView.Adapter<RecyclerAdapter_model.RecyclerViewHolder>{
-    private static final String TAG = "RecyclerAdapter_model";
+    private static final String TAG = "userwiseAdapter_model";
     private Context mContext;
     private List<Teacher> teachers;
     private OnItemClickListener mListener;
 
-    RecyclerAdapter_model(Context context, List<Teacher> uploads) {
+    public RecyclerAdapter_model(Context context, List<Teacher> uploads) {
         mContext = context;
         teachers = uploads;
     }

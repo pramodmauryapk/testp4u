@@ -29,8 +29,6 @@
   <com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:keepScreenOn="true"
-
     android:id="@+id/player1">
 
   </com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerView>

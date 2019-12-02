@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Timeline;
+package com.p4u.parvarish.HelpingHand;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,8 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.MenuPages.Page_data_Model;
+import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 import com.squareup.picasso.Picasso;
 
@@ -35,20 +35,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static java.util.Objects.requireNonNull;
 
 
-public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<TimelineRecyclerAdapter_model.RecyclerViewHolder>{
-    private static final String TAG = "TimelineRecyclerAdapter_model";
+public  class HalpingHandRecyclerAdapter_model extends RecyclerView.Adapter<HalpingHandRecyclerAdapter_model.RecyclerViewHolder>{
+    private static final String TAG = "HalpingHandRecyclerAdapter_model";
     private Context mContext;
     private List<Page_data_Model> articles;
     private OnItemClickListener mListener;
     private String uid="Unknown";
-    TimelineRecyclerAdapter_model(Context context, List<Page_data_Model> uploads) {
+    public HalpingHandRecyclerAdapter_model(Context context, List<Page_data_Model> uploads) {
         mContext = context;
         articles = uploads;
     }
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_timeline_item, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_halpinghand_item, parent, false);
         return new RecyclerViewHolder(v);
     }
 
@@ -211,5 +211,6 @@ public  class TimelineRecyclerAdapter_model extends RecyclerView.Adapter<Timelin
         }
         return s;
     }
+
 
 }

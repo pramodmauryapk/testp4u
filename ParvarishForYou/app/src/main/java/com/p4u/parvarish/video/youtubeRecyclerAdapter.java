@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.List;
 
 public  class youtubeRecyclerAdapter extends RecyclerView.Adapter<youtubeRecyclerAdapter.RecyclerViewHolder>{
-    private static final String TAG = "RecyclerAdapter_model";
+    private static final String TAG = "userwiseAdapter_model";
     private Context mContext;
     private List<YoutubeVideo_Model> imageModels;
     private OnItemClickListener mListener;

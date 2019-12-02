@@ -52,7 +52,7 @@ public class youtubegallaryFragment extends Fragment{
 
 
 
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(context, 2);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(context, 1);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.setHasFixedSize(false);
         mGallaryList = new ArrayList<>();

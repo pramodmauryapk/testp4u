@@ -73,10 +73,8 @@
         style="@style/about_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:padding="5dp"
-        android:textSize="12sp"
-        android:background="@drawable/bg_edittext_normal"
+        android:textSize="13sp"
         android:gravity="top|start"
         android:importantForAutofill="no"/>
 
@@ -85,10 +83,11 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:id="@+id/rImageView"
-           android:scaleType="fitCenter"
+           android:scaleType="fitXY"
            android:adjustViewBounds="true"
            android:cropToPadding="true"
            android:layout_gravity="center_horizontal"
            android:contentDescription="@string/todo" />
+
    </LinearLayout>
 </androidx.cardview.widget.CardView>

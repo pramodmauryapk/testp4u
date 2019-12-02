@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
-    private static final String TAG = "RecyclerAdapter_model";
+    private static final String TAG = "userwiseAdapter_model";
     private Context mContext;
     private List<Image_Model> imageModels;
     private OnItemClickListener mListener;

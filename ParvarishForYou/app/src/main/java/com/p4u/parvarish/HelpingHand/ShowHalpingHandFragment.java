@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Timeline;
+package com.p4u.parvarish.HelpingHand;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -48,8 +48,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.mindorks.paracamera.Camera;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.MenuPages.Page_data_Model;
+import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.io.ByteArrayOutputStream;
@@ -66,12 +66,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
-public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAdapter_model.OnItemClickListener {
+public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecyclerAdapter_model.OnItemClickListener {
 
-    private static final String TAG = "ShowTimelineFragment";
+    private static final String TAG = "ShowHalpingHandFragment";
 
     private Context context;
-    private TimelineRecyclerAdapter_model mAdapter;
+    private HalpingHandRecyclerAdapter_model mAdapter;
     private List<Page_data_Model> article_array;
     private RecyclerView mRecyclerView;
     private FirebaseStorage mStorage;
@@ -93,17 +93,26 @@ public class ShowTimelineFragment extends Fragment implements TimelineRecyclerAd
     private View v,dialogView;
 
     private Camera camera;
+    // newInstance constructor for creating fragment with arguments
+    public static ShowHalpingHandFragment newInstance(int page, String title) {
+        ShowHalpingHandFragment fragment = new ShowHalpingHandFragment();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
-       v = inflater.inflate(R.layout.fragment_timeline_data, container, false);
+       v = inflater.inflate(R.layout.fragment_halpinghand_data, container, false);
         context = container.getContext();
         initViews();
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         article_array = new ArrayList<>();
-        mAdapter = new TimelineRecyclerAdapter_model(context, article_array);
+        mAdapter = new HalpingHandRecyclerAdapter_model(context, article_array);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");

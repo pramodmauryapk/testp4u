@@ -250,4 +250,5 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="enter_video_details">Enter video details</string>
     <string name="video_url">Video URL</string>
     <string name="christopea">Christopea</string>
+    <string name="write_something">Write Something....</string>
 </resources>

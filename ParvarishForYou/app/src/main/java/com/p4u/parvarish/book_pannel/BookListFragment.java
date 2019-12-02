@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,8 +27,6 @@ import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class BookListFragment extends Fragment {
 
@@ -175,12 +172,9 @@ public class BookListFragment extends Fragment {
         void bindData(final Book book) {
             bookTitle.setText(book.getBookTitle());
             bookTitle.setTextColor((Integer.parseInt(book.getBookAvaibility()) > 0) ? greenColor : redColor);
-
             bookCost.setText(book.getBookCost());
             sybool.setImageResource(R.drawable.index);
-
             bookSubject.setText(book.getBookSubject());
-
             bookAuthor.setText(book.getBookAuthor());
             bookAuthor.setTextColor((Integer.parseInt(book.getBookAvaibility()) > 0) ? greenColor : redColor);
 

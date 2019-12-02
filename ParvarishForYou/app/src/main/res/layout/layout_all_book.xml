@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
     android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
@@ -12,6 +11,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="10dp"
+        android:background="@color/transparent"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="9"

@@ -105,6 +105,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("USERS");
         myRef=FirebaseDatabase.getInstance().getReference().child("USERS");
+
         UID= requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         mlistner=myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -330,63 +331,70 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     private void uploadFile(final String id,final String img) {
 
         if (filePath != null) {
-            final ProgressDialog progressDialog=new ProgressDialog(context);
+            final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
             mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
             ////////////////
             StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(img);
-            delimageRef.delete();
-            ///////////////
-            final StorageReference sRef = mStorageRef.child(System.currentTimeMillis()+ "." + getFileExtension(filePath));
-          ////////////////
-
-            Bitmap bmp = null;
             try {
-                bmp = MediaStore.Images.Media.getBitmap(requireNonNull(context).getContentResolver(), filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
+                delimageRef.delete();
+            } catch (Exception e) {
+                Log.d(TAG, "Failed to retrive values" + e);
+            } finally {
+
+
+
+                final StorageReference sRef = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(filePath));
+
+
+                Bitmap bmp = null;
+                try {
+                    bmp = MediaStore.Images.Media.getBitmap(requireNonNull(context).getContentResolver(), filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                assert bmp != null;
+                bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                byte[] data = baos.toByteArray();
+                //uploading the image
+                UploadTask uploadTask2 = sRef.putBytes(data);
+
+                uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                    //   sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                progressDialog.dismiss();
+                                myRef.child(id).child("imageURL").setValue(uri.toString());
+                                //displaying success toast
+                                Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
+
+                            }
+
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                        //displaying the upload progress
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                    }
+                });
             }
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            assert bmp != null;
-            bmp.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-            byte[] data = baos.toByteArray();
-            //uploading the image
-            UploadTask uploadTask2 = sRef.putBytes(data);
-
-            uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
-
-         //   sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-
-                            progressDialog.dismiss();
-                            myRef.child(id).child("imageURL").setValue(uri.toString());
-                            //displaying success toast
-                            Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
-
-                        }
-
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                    //displaying the upload progress
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                    progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                }
-            });
-        } else{
+        }else{
             Toast.makeText(context, "You haven't Selected Any file", Toast.LENGTH_SHORT).show();
         }
     }
