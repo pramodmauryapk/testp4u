@@ -49,10 +49,10 @@ public class newgallaryFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.newgallary, container, false);
+        v = inflater.inflate(R.layout.newgallery, container, false);
         context = container.getContext();
         initViews();
-        tv.setText("Image Gallary");
+        tv.setText("Image Gallery");
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.setHasFixedSize(false);
@@ -81,9 +81,7 @@ public class newgallaryFragment extends Fragment{
 
             }
         });
-        //Toast.makeText(context,position,Toast.LENGTH_LONG).show();
-       // mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");
-       // mStorage  = FirebaseStorage.getInstance().getReference("TIMELINE").getStorage();
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("UPLOADED_IMAGES");
 
         return v;

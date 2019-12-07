@@ -22,7 +22,7 @@ public class LayoutGridView extends BaseAdapter {
     private final String[] gridViewString;
     private final int[] gridViewImageId;
 
-    LayoutGridView(Context context, String[] gridViewString, int[] gridViewImageId) {
+    public LayoutGridView(Context context, String[] gridViewString, int[] gridViewImageId) {
         mContext = context;
         this.gridViewImageId = gridViewImageId;
         this.gridViewString = gridViewString;
@@ -67,7 +67,7 @@ public class LayoutGridView extends BaseAdapter {
 
 
 
-            imageViewAndroid.getLayoutParams().height=100;
+            imageViewAndroid.getLayoutParams().height=120;
             imageViewAndroid.getLayoutParams().width=100;
      //       textViewAndroid.setLayoutParams(params);
             textViewAndroid.setText(gridViewString[i]);

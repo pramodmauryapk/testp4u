@@ -11,31 +11,27 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.p4u.parvarish.R;
-
-import java.util.Objects;
-
 public class Navigationfragment extends Fragment {
     private View v;
     private Context context;
     private ViewPager mViewPager;
     private FragmentPagerAdapter adapterViewPager;
-    private NavigationTabStrip mCenterNavigationTabStrip;
+   // private NavigationTabStrip mCenterNavigationTabStrip;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.navigation_fragment,container,false);
+        //v = inflater.inflate(R.layout.navigation_fragment,container,false);
         context = container.getContext();
 
-        initUI();
-        setUI();
+
+
 
         return v;
     }
 
     private void initUI() {
-        mViewPager = v. findViewById(R.id.vp);
-        mCenterNavigationTabStrip = v. findViewById(R.id.nts_center);
+        //mViewPager = v. findViewById(R.id.vp);
+       // mCenterNavigationTabStrip = v. findViewById(R.id.nts_center);
     }
 
     private void setUI() {
@@ -65,7 +61,7 @@ public class Navigationfragment extends Fragment {
         });*/
 
 
-       mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+     /*  mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
@@ -98,7 +94,7 @@ public class Navigationfragment extends Fragment {
         navigationTabStrip.setAnimationDuration(300);
         navigationTabStrip.setInactiveColor(Color.GRAY);
         navigationTabStrip.setActiveColor(Color.WHITE);*/
-        mCenterNavigationTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    /*    mCenterNavigationTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 mViewPager.setCurrentItem(position);
@@ -114,15 +110,18 @@ public class Navigationfragment extends Fragment {
 
             }
         });
-
+*/
     }
     @Override
     public void onStart(){
+
         super.onStart();
-        loadlist();
+        initUI();
+        //loadlist();
+        setUI();
     }
 
-    private void loadlist() {
+  /*  private void loadlist() {
         adapterViewPager = new MyPagerAdapter(Objects.requireNonNull(getActivity()).getSupportFragmentManager());
         mViewPager.setAdapter(adapterViewPager);
         mCenterNavigationTabStrip.setOnTabStripSelectedIndexListener(new NavigationTabStrip.OnTabStripSelectedIndexListener() {
@@ -132,7 +131,6 @@ public class Navigationfragment extends Fragment {
 
                 mViewPager.setCurrentItem(index);
 
-
             }
 
             @Override
@@ -141,7 +139,7 @@ public class Navigationfragment extends Fragment {
             }
         });
     }
-
+*/
 
 }
 

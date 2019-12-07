@@ -78,8 +78,8 @@ public class AddPageFragment extends Fragment {
                     s="CAPACITY_BUILDING";
                 }else if(sppagelist.getSelectedItem().equals("INTERNSHIP PROGRAM")){
                     s="INTERNSHIP_PROGRAM";
-                }else if(sppagelist.getSelectedItem().equals("ACADEMIC PARTNER")){
-                    s="ACADEMIC_PARTNER";
+                }else if(sppagelist.getSelectedItem().equals("ARTICLES")){
+                    s="ARTICLES";
                 }
                 mStorageRef  = FirebaseStorage.getInstance().getReference(s);
                 mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child(s);

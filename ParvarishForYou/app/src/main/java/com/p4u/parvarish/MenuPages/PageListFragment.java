@@ -53,7 +53,7 @@ public class PageListFragment extends Fragment {
                 break;
             case 4: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("INTERNSHIP_PROGRAM");
                 break;
-            case 5: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("ACADEMIC_PARTNER");
+            case 5: myRef = FirebaseDatabase.getInstance().getReference().child("PAGES").child("ARTICLES");
                 break;
         }
 

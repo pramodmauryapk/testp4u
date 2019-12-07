@@ -2,7 +2,6 @@ package com.p4u.parvarish.HelpingHand;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,11 +43,11 @@ public class UserwiseFragment extends Fragment implements userwiseAdapter_model.
     private Context context;
 
     // newInstance constructor for creating fragment with arguments
-    public static UserwiseFragment newInstance(int page, String title) {
+    public static UserwiseFragment newInstance(int page) {
         UserwiseFragment fragment = new UserwiseFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
-        args.putString("someTitle", title);
+        //args.putString("someTitle", title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,10 +68,10 @@ public class UserwiseFragment extends Fragment implements userwiseAdapter_model.
 
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("USERS");
-        myRef=FirebaseDatabase.getInstance().getReference().child("USERS");
+      //  myRef=FirebaseDatabase.getInstance().getReference().child("USERS");
 
-        UID= requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        mlistner=myRef.addValueEventListener(new ValueEventListener() {
+       // UID= requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+       /* mlistner=myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 show(dataSnapshot);
@@ -84,7 +82,7 @@ public class UserwiseFragment extends Fragment implements userwiseAdapter_model.
 
             }
         });
-
+*/
 
         return v;
     }
@@ -105,7 +103,7 @@ public class UserwiseFragment extends Fragment implements userwiseAdapter_model.
         switchFragment(fragment);
     }
 
-    private void show(DataSnapshot dataSnapshot){
+  /*  private void show(DataSnapshot dataSnapshot){
         try {
             for (DataSnapshot ds : dataSnapshot.getChildren ()) {
                 Teacher uInfo=ds.getValue(Teacher.class);
@@ -121,7 +119,7 @@ public class UserwiseFragment extends Fragment implements userwiseAdapter_model.
     public void onDestroy() {
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
-    }
+    }*/
     @Override
     public void onStart(){
         super.onStart();

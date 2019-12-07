@@ -106,8 +106,7 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:background="@color/about_separator_color"
-          android:scrollbars="vertical"
-          android:paddingBottom="@dimen/dimen_20dp"/>
+          android:scrollbars="vertical"/>
 
 </LinearLayout>
   <!--  <com.google.android.material.floatingactionbutton.FloatingActionButton

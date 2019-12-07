@@ -336,8 +336,9 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
             progressDialog.show();
             mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
             ////////////////
-            StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(img);
+
             try {
+                StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(img);
                 delimageRef.delete();
             } catch (Exception e) {
                 Log.d(TAG, "Failed to retrive values" + e);

@@ -18,8 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
@@ -27,13 +25,11 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class youtubegallaryFragment extends Fragment{
+public class youtubegalleryFragment extends Fragment{
 
-    private static final String TAG = "youtubegallaryFragment";
+    private static final String TAG = "youtubegalleryFragment";
 
     private Context context;
-    private FirebaseStorage mStorage;
-    private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
     private youtubeRecyclerAdapter mAdapter;
@@ -46,7 +42,7 @@ public class youtubegallaryFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.newgallary, container, false);
+        v = inflater.inflate(R.layout.newgallery, container, false);
         context = container.getContext();
         initViews();
 

@@ -15,12 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.p4u.parvarish.Attandence.AttandenceMenuFragment;
+import com.p4u.parvarish.HelpingHand.ShowHalpingHandFragment;
 import com.p4u.parvarish.MenuPages.PageListFragment;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.HelpingHand.ShowHalpingHandFragment;
 import com.p4u.parvarish.gallary.newgallaryFragment;
 import com.p4u.parvarish.gallary.slideshowFragment;
-import com.p4u.parvarish.video.youtubegallaryFragment;
+import com.p4u.parvarish.video.youtubegalleryFragment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -34,11 +35,14 @@ public class UserMenuFragment extends HomeFragment {
             "Technical Partnership",
             "Capacity Building",
             "Internship Program",
+            "Articles",
             "Academic Partner",
             "Gallery",
             "Slide Show",
             "Videos",
             "Helping Hand"
+
+
     } ;
 
     private int[] gridViewImageId = {
@@ -47,11 +51,12 @@ public class UserMenuFragment extends HomeFragment {
             R.drawable.ic_pets_black_24dp,
             R.drawable.ic_business_black_24dp,
             R.drawable.ic_transfer_within_a_station_black_24dp,
+            R.drawable.ic_present_to_all_black_24dp,
             R.drawable.ic_school_black_24dp,
             R.drawable.ic_camera_black_24dp,
             R.drawable.ic_vibration_black_24dp,
             R.drawable.ic_ondemand_video_black_24dp,
-            R.drawable.ic_playlist_add_black_24dp
+            R.drawable.ic_playlist_add_black_24dp,
 
 
     };
@@ -95,20 +100,25 @@ public class UserMenuFragment extends HomeFragment {
                     case 5:
                         switchFragment(new PageListFragment(),5);
                         break;
-                    case 6:
-                        switchFragment(new newgallaryFragment(),6);
+                    case 6://switch_menu(new SchoolSigninFragment());
+                        switch_menu(new AttandenceMenuFragment());
                         break;
-                    case 7:
-                        switchFragment(new slideshowFragment(),7);
 
+                    case 7:
+                        switchFragment(new newgallaryFragment(),7);
                         break;
                     case 8:
+                        switchFragment(new slideshowFragment(),8);
+
+                        break;
+                    case 9:
                         //Intent ActivityIndent = new Intent(getActivity(), RecyclerViewActivity.class);
                         //startActivity(ActivityIndent);
-                        switchFragment(new youtubegallaryFragment(),8);
+                        switchFragment(new youtubegalleryFragment(),9);
                         break;
-                    case 9:switchFragment(new ShowHalpingHandFragment(),9);//new ImageGalleryFragment()
+                    case 10:switchFragment(new ShowHalpingHandFragment(),10);//new ImageGalleryFragment()
                         break;
+
 
 
                 }

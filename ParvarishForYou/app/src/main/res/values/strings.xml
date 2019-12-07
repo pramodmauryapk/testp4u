@@ -5,9 +5,61 @@
         <item>USER</item>
 
     </array>
+    <array name="school_roles">
+        <item>ADMIN</item>
+        <item>PRINCI</item>
+        <item>TEACHER</item>
+        <item>PARENTS</item>
+        <item>STUDENT</item>
+
+    </array>
     <array name="IMAGES">
         <item>ADS</item>
         <item>UPLOADED_IMAGES</item>
+
+
+    </array>
+    <array name="medium">
+        <item>HINDI</item>
+        <item>ENGLISH</item>
+
+
+    </array>
+    <array name="Gender">
+        <item>MALE</item>
+        <item>FEMALE</item>
+        <item>TRANSGENDER</item>
+
+    </array>
+    <array name="Class">
+        <item>Pre NC</item>
+        <item>NC</item>
+        <item>LKG</item>
+        <item>KG</item>
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+        <item>V</item>
+        <item>VI</item>
+        <item>VII</item>
+        <item>VIII</item>
+        <item>IX</item>
+        <item>X</item>
+        <item>XI</item>
+        <item>XII</item>
+
+    </array>
+    <array name="Section">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
 
 
     </array>
@@ -16,7 +68,7 @@
         <item>TECHNICAL PARTNERSHIP</item>
         <item>CAPACITY BUILDING</item>
         <item>INTERNSHIP PROGRAM</item>
-        <item>ACADEMIC PARTNER</item>
+        <item>ARTICLES</item>
     </array>
     <string name="app_name">Parvarish4U</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
@@ -169,8 +221,6 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="deposit_paid">Deposit Paid</string>
     <string name="handover">HANDOVER</string>
     <string name="book_title_author_subject_cost">Book-Title/Author/Subject/Cost</string>
-    <string name="search_books">Search Books</string>
-    <string name="book_list">Book List</string>
     <string name="green_color_available_red_color_unavailable">(Green Color-Available,Red Color-Unavailable)</string>
     <string name="gallery_images">Gallery Images</string>
     <string name="add_new">Add New</string>
@@ -208,7 +258,6 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="choose_image">Choose Image</string>
     <string name="upload">Upload</string>
     <string name="enter_image_details">Enter Image Details</string>
-    <string name="close">Close</string>
     <string name="update_password">Update Password</string>
     <string name="mobile_no">Mobile No.</string>
     <string name="enter_mobile_no">Enter Mobile No.</string>
@@ -235,20 +284,136 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="full_screen_button">Full screen button</string>
     <string name="live">LIVE</string>
     <string name="tap_to_select">Tap to select</string>
-    <string name="write_to_timeline">Write to Timeline....</string>
     <string name="wait_for_the_code_i_sent_you">Wait for the code I sent you…</string>
     <string name="i_sent_you_a_code_it_will_be_detected_automatically_but_if_it_is_not_detected_you_can_put_it_below_manually_as_well">I sent you a code, it will be detected automatically but if it is not detected you can put it below manually as well</string>
     <string name="sign_in">Sign In</string>
-    <string name="youtube_gallary">Youtube Gallary</string>
+    <string name="youtube_gallery">Youtube Gallery</string>
     <string name="search_locations">Search Locations</string>
     <string name="user_mobiles">User Mobiles</string>
     <string name="center_list">Center List</string>
     <string name="article_list">Article List</string>
-    <string name="m_e_s_s_a_g_e">M E S S A G E</string>
     <string name="select_any_option_for_any_page">Select Any Option For Any Page</string>
     <string name="user_gmail_com">User@gmail.com</string>
     <string name="enter_video_details">Enter video details</string>
     <string name="video_url">Video URL</string>
     <string name="christopea">Christopea</string>
     <string name="write_something">Write Something....</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">ALL</string>
+    <string name="tab_text_2">User-wise</string>
+    <string name="tab_text_3">Category-wise</string>
+
+    <string name="title_activity_student">StudentActivity</string>
+    <string name="title_activity_teacher">TeacherActivity</string>
+    <string name="action_profile">My profile</string>
+    <string name="action_password">Change password</string>
+    <string name="action_logout">Logout</string>
+    <string name="tv_username">Full name</string>
+    <string name="tv_studentname">Student name</string>
+    <string name="tv_password">Password</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_mobilenumber">Mobile</string>
+    <string name="tv_role">Role</string>
+    <string name="et_role">admin/teacher/student </string>
+    <string name="btn_createnewuser">Create New User</string>
+    <string name="btn_addstudent">Add Student</string>
+    <string name="btn_deletestudent">Delete Student</string>
+    <string name="tv_selectall">Select All</string>
+    <string name="btn_saveattendance">Submit</string>
+    <string name="btn_take_attendance">Take Attendance</string>
+    <string name="btn_view_attendance">View Attendance</string>
+    <string name="btn_modify_attendance">Modify Attendance</string>
+
+    <!-- Record Attendance fragment -->
+    <string name="tv_class">Class</string>
+    <string name="tv_section">Section</string>
+    <string name="tv_subject">Subject</string>
+
+
+    <string name="year_prompt">Year</string>
+    <string-array name="year_arrays">
+        <item>Year</item>
+        <item>2017</item>
+    </string-array>
+
+    <string name="month_prompt">Month</string>
+    <string-array name="month_arrays">
+        <item>Month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="lang">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Nepali</item>
+        <item>Urdu</item>
+        <item>Spanisch</item>
+        <item>French</item>
+        <item>German</item>
+
+
+    </string-array>
+    <string name="day_prompt">Day</string>
+    <string-array name="day_arrays">
+        <item>Day</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+    <string name="speech_prompt">Say something...</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="tap_on_mic">Tap on mic to speak</string>
+
+    <string name="copy">COPY</string>
+
+    <string name="please_speak_in_english_language">Please speak in English Language.</string>
+    <string name="your_paragraph_listed_here">your paragraph listed here</string>
+    <string name="API_KEY">AIzaSyDpBmHv2e66__P8fCJghcrS6OAmkW8jQt0</string>
+
+
+    <string name="togglebutton">ToggleButton</string>
+    <string name="speech_promp" />
+
+    <string name="addtext">Please add Text</string>
+
+
+
 </resources>

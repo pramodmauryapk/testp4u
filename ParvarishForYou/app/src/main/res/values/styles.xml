@@ -26,13 +26,6 @@
 
     </style>
 
-    <style name="layout_padding">
-        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
-    </style>
-
     <style name="Relative_layout_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -135,6 +128,11 @@
     <style name="about_groupTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/about_item_text_color</item>
         <item name="android:textSize">@dimen/about_group_item_text_size</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

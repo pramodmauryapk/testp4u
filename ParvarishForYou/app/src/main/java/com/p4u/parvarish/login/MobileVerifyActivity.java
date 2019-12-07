@@ -235,6 +235,20 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     // Log.d(TAG, "Accessing database");
                                     getting_role(dataSnapshot);
+                                    if(user_name==null) {
+                                        Intent intent = new Intent(MobileVerifyActivity.this, UserRegistrationMobileActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.putExtra("mobile", phonenumber);
+                                        startActivity(intent);
+                                    }else{
+                                    Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
+                                    intent.putExtra("user_name",user_name);
+                                    intent.putExtra("user_email",user_email);
+                                    intent.putExtra("user_role",user_roll);
+                                    intent.putExtra("user_img", user_img);
+                                    startActivity(intent);
+                                    finish();
+                                    }
 
                                 }
 
@@ -243,7 +257,7 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                                     /// Log.d(TAG, "failed to read values", databaseError.toException());
                                 }
                             });
-                            if(user_roll!=null){
+                         /*   if(user_roll!=null){
                                 Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
                                 intent.putExtra("user_name",user_name);
                                 intent.putExtra("user_email",user_email);
@@ -257,7 +271,7 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.putExtra("mobile", phonenumber);
                                 startActivity(intent);
-                            }
+                            }*/
                         } else {
 
                             //verification unsuccessful.. display an error message

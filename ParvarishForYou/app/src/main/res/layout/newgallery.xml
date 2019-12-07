@@ -15,7 +15,7 @@
       android:textSize="18sp"
       android:background="@color/white"
       android:textStyle="bold"
-      android:text="@string/youtube_gallary" />
+      android:text="@string/youtube_gallery" />
 
 
   <androidx.recyclerview.widget.RecyclerView

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorwhite"
+    android:layout_width="match_parent">
+
+
+    <RelativeLayout
+
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/transparent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/placeholder"
+                android:contentDescription="@string/parvarish_knowledge_center" />
+
+            <ImageButton
+                android:id="@+id/selectimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="-50dp"
+                android:layout_below="@+id/logo"
+                android:layout_toEndOf="@+id/logo"
+                android:background="@drawable/pencil"
+                android:contentDescription="@string/parvarish_knowledge_center" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:layout_width="match_parent">
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:id="@+id/tf2"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSchName"
+                    android:hint="School Name"
+                    android:maxLines="1"
+                    android:inputType="textAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:id="@+id/tf3"
+                android:layout_below="@+id/tf2"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSchAdd"
+                    android:hint="School Address"
+                    android:inputType="textAutoComplete"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tf3"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:id="@+id/spMedium"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_edittext_focused"
+                    android:entries="@array/medium"
+                    tools:ignore="RtlSymmetry" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spYear"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_edittext_focused"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="7"
+                    android:entries="@array/pub_year"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l1"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:baselineAligned="false">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="5"
+                    android:id="@+id/tf6"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPrinciple"
+                        android:hint="Pricipal Name"
+                        android:inputType="textAutoComplete"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="5"
+                    android:id="@+id/tf7"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPrinciMobile"
+                        android:hint="Principal Mobile"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/l3"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btnAddSchool"
+
+                    android:text="@string/add"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape"
+                    android:textColor="@color/colorwhite"
+                    android:textStyle="bold"
+                    android:ems="7"
+                    android:layout_marginTop="10dp"
+                    tools:ignore="ButtonStyle" />
+                <Button
+                    android:id="@+id/btnlistschools"
+
+                    android:text="School list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape"
+                    android:textColor="@color/colorwhite"
+                    android:textStyle="bold"
+                    android:ems="7"
+                    android:layout_marginTop="10dp"
+                    tools:ignore="ButtonStyle" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</ScrollView>
+

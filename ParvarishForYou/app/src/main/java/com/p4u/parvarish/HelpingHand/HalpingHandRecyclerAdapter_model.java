@@ -143,7 +143,7 @@ public  class HalpingHandRecyclerAdapter_model extends RecyclerView.Adapter<Halp
             userpic=itemView.findViewById(R.id.userpic);
             datetime=itemView.findViewById(R.id.datetimetv);
             cardView=itemView.findViewById(R.id.recyclercard);
-            cardView.setOnClickListener(this);
+            img.setOnClickListener(this);
             cardView.setOnCreateContextMenuListener(this);
 
         }

@@ -16,18 +16,19 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.p4u.parvarish.Attandence.admin.AddSchoolFragment;
 import com.p4u.parvarish.Beneficiary.AddBeneficiaryFragment;
+import com.p4u.parvarish.HelpingHand.AdminHalpingHandFragment;
 import com.p4u.parvarish.MenuPages.ManagePagesFragment;
 import com.p4u.parvarish.Notification.NotificationActivity;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.HelpingHand.AdminHalpingHandFragment;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.gallary.ManagegalaryFragment;
-import com.p4u.parvarish.navistrip.Navigationfragment;
+import com.p4u.parvarish.navistrip.HelpingFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -119,7 +120,9 @@ public class AdminMenuFragment extends HomeFragment {
                     "Manage Articles",
                     "Manage HalpingHand",
                     "Add Video",
-                    "chat"
+                    "Help",
+                    "Add School"
+
 
             };
 
@@ -141,7 +144,8 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_burst_mode_black_24dp,
                     R.drawable.ic_mode_comment_black_24dp,
                     R.drawable.ic_video_call_black_24dp,
-                    R.drawable.ic_playlist_add_black_24dp
+                    R.drawable.ic_playlist_add_black_24dp,
+                    R.drawable.ic_burst_mode_black_24dp
 
             };
 
@@ -210,7 +214,10 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new AddYoutubeVideofragment());
                         break;
                     case 16://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
-                        switchFragment(new Navigationfragment());
+                        switchFragment(new HelpingFragment());
+                        break;
+                    case 17:
+                        switchFragment(new AddSchoolFragment());
                         break;
 
                 }

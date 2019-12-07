@@ -94,11 +94,10 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
 
     private Camera camera;
     // newInstance constructor for creating fragment with arguments
-    public static ShowHalpingHandFragment newInstance(int page, String title) {
+    public static ShowHalpingHandFragment newInstance(int page) {
         ShowHalpingHandFragment fragment = new ShowHalpingHandFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
-        args.putString("someTitle", title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -309,7 +308,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
 
                             progressDialog.dismiss();
                             //displaying success toast
-                            Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(context, "Your post successfully updated. Our team will allow if content found useful.", Toast.LENGTH_LONG).show();
 
                             if (user_name != null && user_id != null) {
                                 upload.setId(uploadId);
@@ -332,7 +331,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                             }
 
                             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-                            Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Your post successfully updated. Our team will allow if content found useful.", Toast.LENGTH_LONG).show();
                             clearall();
 
 
@@ -374,7 +373,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                 upload.setUserid("Unknown");
             }
             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
-            Toast.makeText(context, "Upload successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Your post successfully updated. Our team will allow if content found useful.", Toast.LENGTH_LONG).show();
             clearall();
         }
 
@@ -470,12 +469,21 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                 break;
         }
     }
+
+
     @Override
     public void onItemClick(int position) {
-
-
+        openphoto(article_array.get(position).getImageUrl());
     }
+    private void openphoto(String url){
 
+        ImageZoomFragment fragment = new ImageZoomFragment();
+        Bundle args = new Bundle();
+        args.putString("PHOTO", url);
+
+        fragment.setArguments(args);
+        switchFragment(fragment);
+    }
 
     @Override
     public void onShowItemClick(int position) {
@@ -566,5 +574,12 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
     private void init_dialog_views() {
         positive=dialogView.findViewById(R.id.positiveBtn);
         negative=dialogView.findViewById(R.id.negativeBtn);
+    }
+    private void switchFragment(Fragment fragment) {
+
+        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(null).commit();
+
     }
 }

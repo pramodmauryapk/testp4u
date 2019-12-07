@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorwhite"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="212dp"
+        app:srcCompat="@drawable/ic_curvebacks_01"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/parvarish_knowledge_center" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="School List"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/tv1"
+        android:text="Green color-Hindi Medium/Red color-English Medium"
+        android:textColor="@color/colorblack"
+        android:textSize="14sp"
+        android:textAlignment="center"/>
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv2"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="15">
+
+        <Spinner
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="5"
+            android:id="@+id/spclass"
+            android:padding="10dp"
+            android:background="@drawable/bg_edittext_focused"
+            android:entries="@array/Class"/>
+        <Spinner
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="5"
+            android:id="@+id/spsection"
+            android:padding="10dp"
+            android:background="@drawable/bg_edittext_focused"
+            android:entries="@array/Section" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spYear"
+            android:padding="10dp"
+            android:background="@drawable/bg_edittext_focused"
+            android:layout_weight="5"
+            android:entries="@array/pub_year"/>
+
+    </LinearLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_below="@+id/l1"
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recycler_view"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

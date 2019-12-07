@@ -218,8 +218,9 @@ public class UserProfileFragment extends Fragment {
             mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
             ////////////////user already contains image then delete it from storage
 
-            StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(userImg);
+
             try {
+                StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(userImg);
                 delimageRef.delete();
             } catch (Exception e) {
                 Log.d(TAG, "Failed to delete" + e);
