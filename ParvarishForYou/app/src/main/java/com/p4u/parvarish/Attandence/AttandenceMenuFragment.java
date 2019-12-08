@@ -16,11 +16,11 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.Attandence.Teacher.ModifyattendanceTeacherFragment;
-import com.p4u.parvarish.Attandence.Teacher.RecordAttendanceFragment;
-import com.p4u.parvarish.Attandence.Teacher.StudentleaverecordFragment;
-import com.p4u.parvarish.Attandence.Teacher.ViewAttendanceavgFragment;
 import com.p4u.parvarish.Attandence.admin.AddStudentFragment;
+import com.p4u.parvarish.Attandence.admin.AddTeacherFragment;
+import com.p4u.parvarish.Attandence.admin.MarkAttendanceFragment;
 import com.p4u.parvarish.Attandence.admin.StudentlListFragment;
+import com.p4u.parvarish.Attandence.admin.TeacherListFragment;
 import com.p4u.parvarish.Attandence.raw.AssignmentbyteacherFragment;
 import com.p4u.parvarish.Attandence.raw.EnterstudentdataFragment;
 import com.p4u.parvarish.Attandence.raw.EnterteacherdataFragment;
@@ -171,10 +171,10 @@ public class AttandenceMenuFragment extends HomeFragment {
                         "Reports",
                         "Modify Attandence",
                         "Teacher Attandence",
-                        "Leave Record",
-                        "Avg Attandence",
-                        "View Attandence",
-                        "Teacher Attandence",
+                        "Mark Attandence",
+                        "Teacher List",
+                        "Add Teacher",
+                        "Student List",
                         "Add Student",
 
 
@@ -246,13 +246,13 @@ public class AttandenceMenuFragment extends HomeFragment {
                         switchFragment(new ModifyattendanceTeacherFragment());
                         break;
                     case 10:
-                        switchFragment(new RecordAttendanceFragment());
+                        switchFragment(new MarkAttendanceFragment());
                         break;
-                    case 11:
-                        switchFragment(new StudentleaverecordFragment());
+                    case 11:switchFragment(new TeacherListFragment());
+                        //switchFragment(new StudentleaverecordFragment());
                         break;
-                    case 12:
-                        switchFragment(new ViewAttendanceavgFragment());
+                    case 12:switchFragment(new AddTeacherFragment());
+                        //switchFragment(new ViewAttendanceavgFragment());
                         break;
                     case 13:
                         //switchFragment(new ViewattendanceTeacherFragment());

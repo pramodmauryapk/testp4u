@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="10"
+    android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+    android:orientation="horizontal"
+    tools:ignore="RtlSymmetry">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="14sp"
+        android:layout_weight="1"
+        android:ems="5"
+        android:id="@+id/tv_userrole"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorblack"
+        android:layout_height="match_parent"
+        android:text="@string/role"
+        tools:ignore="RtlCompat" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:text="@string/name"
+        android:textSize="16sp"
+        android:gravity="start|center_vertical"
+        android:textStyle="bold"
+        android:textColor="@color/colorblack"
+        android:id="@+id/tv_username"
+        android:textAlignment="viewStart" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_width="match_parent"
+        android:layout_weight="7"
+        android:layout_gravity="end"
+        android:textColor="@color/colorblack"
+        android:id="@+id/checkbox1"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+

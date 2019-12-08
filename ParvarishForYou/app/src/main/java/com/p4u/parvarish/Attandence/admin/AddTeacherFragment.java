@@ -54,17 +54,17 @@ import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
 
-public class AddStudentFragment extends Fragment {
-    private TextInputEditText stuname,stufather,stumother,stuhomemobile,stuadmissionno,studob,stufeepaid,stufeepending,stuaddress,stupin;
-    private Spinner stuclass,stusection,stuyear,stugender;
+public class AddTeacherFragment extends Fragment {
+    private TextInputEditText tname,tfather,tmother,tmobile,tempcode,tdob,tload,tsalary,taddress,tpin;
+    private Spinner tclass,tsection,tyear,tgender;
     private View v;
     private String UserID;
     private Context context;
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
-    private DatabaseReference studentref,princiref;
+    private DatabaseReference techerref,princiref;
     private TextInputLayout tf1,tf2,tf3,tf4,tf5,tf6,tf7,tf8,tf9,tf10;
-    private Button btnAddstudent,btnclear;
+    private Button btnAddteacher,btnclear;
     private ImageView logo;
     private ImageButton selectimg;
     private Uri filePath,imageUri;
@@ -72,7 +72,7 @@ public class AddStudentFragment extends Fragment {
     private String schoolname,schooId;
     private Bundle bundle;
     private int mYear,mMonth,mDay,count;
-    public AddStudentFragment() {
+    public AddTeacherFragment() {
 
         // Required empty public constructor
     }
@@ -81,16 +81,16 @@ public class AddStudentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.fragment_addstudent, container, false);
+        v=inflater.inflate(R.layout.fragment_addteacher, container, false);
         // Inflate the layout for this fragment
         bundle=new Bundle();
         //schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
         schoolname="RD public school";
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        studentref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
+        techerref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("TEACHERS");
         princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("PRINCI");
-        mStorageRef = FirebaseStorage.getInstance().getReference("STUDENTS");
-        mStorage  = FirebaseStorage.getInstance().getReference("STUDENTS").getStorage();
+        mStorageRef = FirebaseStorage.getInstance().getReference("TEACHERS");
+        mStorage  = FirebaseStorage.getInstance().getReference("TEACHERS").getStorage();
         context = container.getContext();
         init();
 
@@ -101,7 +101,7 @@ public class AddStudentFragment extends Fragment {
                 openFileChooser();
             }
         });
-        btnAddstudent.setOnClickListener(new View.OnClickListener() {
+        btnAddteacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
@@ -126,7 +126,7 @@ public class AddStudentFragment extends Fragment {
                 set_blank();
             }
         });
-        studob.setOnClickListener(new View.OnClickListener() {
+        tdob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar c = Calendar.getInstance();
@@ -143,7 +143,7 @@ public class AddStudentFragment extends Fragment {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                studob.setText(String.format("%d/%d/%d", dayOfMonth, monthOfYear + 1, year));
+                                tdob.setText(String.format("%d/%d/%d", dayOfMonth, monthOfYear + 1, year));
 
                             }
                         }, mYear, mMonth, mDay);
@@ -151,34 +151,34 @@ public class AddStudentFragment extends Fragment {
             }
         });
 
-        change_listner(stuname,tf1);
-        change_listner(stufather,tf2);
-        change_listner(stumother,tf3);
-        change_listner(stuhomemobile,tf4);
-        change_listner(stuadmissionno,tf5);
-        change_listner(studob,tf6);
-        change_listner(stufeepaid,tf7);
-        change_listner(stufeepending,tf8);
-        change_listner(stuaddress,tf9);
-        change_listner(stupin,tf10);
+        change_listner(tname,tf1);
+        change_listner(tfather,tf2);
+        change_listner(tmother,tf3);
+        change_listner(tmobile,tf4);
+        change_listner(tempcode,tf5);
+        change_listner(tdob,tf6);
+        change_listner(tload,tf7);
+        change_listner(tsalary,tf8);
+        change_listner(taddress,tf9);
+        change_listner(tpin,tf10);
         return v;
     }
 
     private void init() {
-        stuname=v.findViewById(R.id.etStuName);
-        stufather=v.findViewById(R.id.etStufather);
-        stumother=v.findViewById(R.id.etMotherName);
-        stuhomemobile=v.findViewById(R.id.etHomeMobile);
-        stuadmissionno=v.findViewById(R.id.etAdmissionNo);
-        studob=v.findViewById(R.id.etDOB);
-        stufeepaid=v.findViewById(R.id.etFeePaid);
-        stufeepending=v.findViewById(R.id.etFeePending);
-        stuaddress=v.findViewById(R.id.etstuAddress);
-        stupin=v.findViewById(R.id.etpin);
-        stuclass=v.findViewById(R.id.spclass);
-        stusection=v.findViewById(R.id.spsection);
-        stuyear=v.findViewById(R.id.spYear);
-        stugender=v.findViewById(R.id.spgender);
+        tname=v.findViewById(R.id.etStuName);
+        tfather=v.findViewById(R.id.etStufather);
+        tmother=v.findViewById(R.id.etMotherName);
+        tmobile=v.findViewById(R.id.etHomeMobile);
+        tempcode=v.findViewById(R.id.etAdmissionNo);
+        tdob=v.findViewById(R.id.etDOB);
+        tload=v.findViewById(R.id.etFeePaid);
+        tsalary=v.findViewById(R.id.etFeePending);
+        taddress=v.findViewById(R.id.etstuAddress);
+        tpin=v.findViewById(R.id.etpin);
+        tclass=v.findViewById(R.id.spclass);
+        tsection=v.findViewById(R.id.spsection);
+        tyear=v.findViewById(R.id.spYear);
+        tgender=v.findViewById(R.id.spgender);
         tf1=v.findViewById(R.id.tf1);
         tf2=v.findViewById(R.id.tf2);
         tf3=v.findViewById(R.id.tf3);
@@ -189,7 +189,7 @@ public class AddStudentFragment extends Fragment {
         tf8=v.findViewById(R.id.tf8);
         tf9=v.findViewById(R.id.tf9);
         tf10=v.findViewById(R.id.tf10);
-        btnAddstudent = v.findViewById(R.id.btnAddStudent);
+        btnAddteacher = v.findViewById(R.id.btnAddStudent);
         btnclear=v.findViewById(R.id.btnclear);
         selectimg=v.findViewById(R.id.selectimg);
         logo=v.findViewById(R.id.logo);
@@ -247,37 +247,36 @@ public class AddStudentFragment extends Fragment {
 
                             //getting a unique id using push().getKey() method
                             //it will create a unique id and we will use it as the Primary Key for our Book
-                            String studentId = studentref.push().getKey();
+                            String teacherId = techerref.push().getKey();
                             //creating an Book Object
-                            StudentData student = new StudentData(
-                                    studentId,
-                                    stuname.getText().toString(),
-                                    stuadmissionno.getText().toString(),
-                                    stufather.getText().toString(),
-                                    studob.getText().toString(),
-                                    stumother.getText().toString(),
-                                    stuhomemobile.getText().toString(),
-                                    stuclass.getSelectedItem().toString(),
-                                    stusection.getSelectedItem().toString(),
-                                    stuyear.getSelectedItem().toString(),
-                                    stuaddress.getText().toString(),
-                                    stugender.getSelectedItem().toString(),
-                                    stufeepaid.getText().toString(),
-                                    stufeepending.getText().toString(),
+                            TeacherData teacher = new TeacherData(
+                                    teacherId,
+                                    tname.getText().toString(),
+                                    tempcode.getText().toString(),
+                                    tfather.getText().toString(),
+                                    tdob.getText().toString(),
+                                    tmother.getText().toString(),
+                                    tmobile.getText().toString(),
+                                    tclass.getSelectedItem().toString(),
+                                    tsection.getSelectedItem().toString(),
+                                    tyear.getSelectedItem().toString(),
+                                    taddress.getText().toString(),
+                                    tgender.getSelectedItem().toString(),
+                                    tload.getText().toString(),
+                                    tsalary.getText().toString(),
                                     uri.toString(),
-                                    stupin.getText().toString(),
-                                    studentId,
+                                    tpin.getText().toString(),
                                     "",
-                                    "STUDENT",
+                                    "TEACHER",
                                     schoolname,
-                                    studentId.substring(0, 5));
+                                    teacherId.substring(0, 5));
 
                             //Saving the Book
-                            studentref.child(requireNonNull(studentId)).setValue(student);
+                            techerref.child(requireNonNull(teacherId)).setValue(teacher);
 
 
-                            Toast.makeText(context, "Student added", Toast.LENGTH_LONG).show();
-                            princiref.child(schooId).child("schoolStudents").setValue(count+1);
+                            Toast.makeText(context, "Teacher added", Toast.LENGTH_LONG).show();
+                            princiref.child(schooId).child("schoolTeachers").setValue(count+1);
                             //setting edittext to blank again
                             set_blank();
 
@@ -319,7 +318,7 @@ public class AddStudentFragment extends Fragment {
                     SchoolData school = ds.getValue(SchoolData.class);
                     assert school != null;
                     if(school.getSchoolName().equals(schoolname)) {
-                        count = school.getSchoolStudents();
+                        count = school.getSchoolTeachers();
                         schooId=school.getSchoolId();
 
 
@@ -358,46 +357,46 @@ public class AddStudentFragment extends Fragment {
     }
     private boolean validate() {
 
-        if (TextUtils.isEmpty(stuname.getText())) {
-            tf1.setError("Enter Student Name");
+        if (TextUtils.isEmpty(tname.getText())) {
+            tf1.setError("Name");
 
             return false;
         }
-        if (TextUtils.isEmpty(stufather.getText())) {
-            tf2.setError("Enter Father Name");
+        if (TextUtils.isEmpty(tfather.getText())) {
+            tf2.setError("Father Name");
             return false;
         }
-        if (TextUtils.isEmpty(stumother.getText())) {
-            tf3.setError("Enter Mother Name");
+        if (TextUtils.isEmpty(tmother.getText())) {
+            tf3.setError("Mother Name");
             return false;
         }
-        if (stuhomemobile.length() != 10) {
-            tf4.setError("Enter Home Mobile");
+        if (tmobile.length() != 10) {
+            tf4.setError("Mobile No.");
             return false;
         }
 
-        if (TextUtils.isEmpty(stuadmissionno.getText())) {
-            tf5.setError("Enter Admission No");
+        if (TextUtils.isEmpty(tempcode.getText())) {
+            tf5.setError("EmployeeNo");
             return false;
         }
-        if (TextUtils.isEmpty(studob.getText())) {
+        if (TextUtils.isEmpty(tdob.getText())) {
             tf6.setError("Enter DOB");
             return false;
         }
-        if (TextUtils.isEmpty(stufeepaid.getText())) {
-            tf7.setError("Enter Fee Paid");
+        if (TextUtils.isEmpty(tload.getText())) {
+            tf7.setError("Load/Hours");
             return false;
         }
-        if (TextUtils.isEmpty(stufeepending.getText())) {
-            tf8.setError("Enter Fee Pending");
+        if (TextUtils.isEmpty(tsalary.getText())) {
+            tf8.setError("Salary");
             return false;
         }
-        if (TextUtils.isEmpty(stuaddress.getText())) {
-            tf9.setError("Enter Address");
+        if (TextUtils.isEmpty(taddress.getText())) {
+            tf9.setError("Address");
             return false;
         }
-        if (TextUtils.isEmpty(stupin.getText())) {
-            tf10.setError("Enter PIN");
+        if (TextUtils.isEmpty(tpin.getText())) {
+            tf10.setError("PIN");
             return false;
         }
 
@@ -419,16 +418,16 @@ public class AddStudentFragment extends Fragment {
     }
     private void set_blank(){
 
-        stuname.setText("");
-        stufather.setText("");
-        stumother.setText("");
-        stuhomemobile.setText("");
-        stuadmissionno.setText("");
-        studob.setText("");
-        stufeepaid.setText("");
-        stufeepending.setText("");
-        stuaddress.setText("");
-        stupin.setText("");
+        tname.setText("");
+        tfather.setText("");
+        tmother.setText("");
+        tmobile.setText("");
+        tempcode.setText("");
+        tdob.setText("");
+        tload.setText("");
+        tsalary.setText("");
+        taddress.setText("");
+        tpin.setText("");
 
 
 

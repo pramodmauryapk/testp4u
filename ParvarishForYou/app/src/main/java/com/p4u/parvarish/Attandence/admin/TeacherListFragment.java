@@ -28,15 +28,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentlListFragment extends Fragment {
+public class TeacherListFragment extends Fragment {
 
     private static final String TAG = "ListschookFragment";
-    private List<StudentData> dataList = new ArrayList<>();
+    private List<TeacherData> dataList = new ArrayList<>();
     private int redColor,greenColor;
     private RecyclerView.Adapter adapter;
     private TextView tv1,tv2;
     private Handler handler;
-    private DatabaseReference studentref;
+    private DatabaseReference teacherref;
     private RecyclerView recyclerView;
     private View v;
     private SwipeRefreshLayout refreshLayout;
@@ -47,11 +47,11 @@ public class StudentlListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_schoollist, container, false);
-        studentref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
+        teacherref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("TEACHERS");
         context = container.getContext();
         initViews();
-        tv1.setText("STUDENT LIST");
-        tv2.setText("Choose to find student");
+        tv1.setText("TEACHERS LIST");
+        tv2.setText("Choose to find teacher");
         recyclerView.setLayoutManager(new spreadLayout());
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
@@ -92,14 +92,14 @@ public class StudentlListFragment extends Fragment {
 
     private void appendDataList() {
 
-        studentref.addValueEventListener(new ValueEventListener() {
+        teacherref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 dataList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    StudentData student = ds.getValue(StudentData.class);
-                    dataList.add(student);
+                    TeacherData teacher = ds.getValue(TeacherData.class);
+                    dataList.add(teacher);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -119,7 +119,7 @@ public class StudentlListFragment extends Fragment {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, final int viewType) {
-                View view = inflater.inflate(R.layout.layout_student_item, parent, false);
+                View view = inflater.inflate(R.layout.layout_teacher_item, parent, false);
                 //view.setOnClickListener(mOnClickListener);
              /*   view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -132,7 +132,7 @@ public class StudentlListFragment extends Fragment {
 
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                StudentlListFragment.MyViewHolder myHolder = (StudentlListFragment.MyViewHolder) holder;
+                TeacherListFragment.MyViewHolder myHolder = (TeacherListFragment.MyViewHolder) holder;
                 myHolder.bindData(dataList.get(position));
 
 
@@ -150,8 +150,8 @@ public class StudentlListFragment extends Fragment {
 
         TextView Name;
         TextView Father;
-        TextView AdmissionNo;
-        TextView Mother;
+        TextView Empcode;
+        TextView Class;
         TextView Mobile;
         TextView Address;
         ImageView img;
@@ -159,9 +159,9 @@ public class StudentlListFragment extends Fragment {
         MyViewHolder(View itemView) {
             super(itemView);
             this.Name = itemView.findViewById(R.id.item_name);
-            this.AdmissionNo = itemView.findViewById(R.id.item_admissionno);
+            this.Empcode = itemView.findViewById(R.id.item_admissionno);
             this.Father = itemView.findViewById(R.id.item_fathername);
-            this.Mother = itemView.findViewById(R.id.item_mother);
+            this.Class = itemView.findViewById(R.id.item_class);
             this.Mobile = itemView.findViewById(R.id.item_homemobile);
             this.Address=itemView.findViewById(R.id.item_Address);
             this.img=itemView.findViewById(R.id.img);
@@ -171,17 +171,17 @@ public class StudentlListFragment extends Fragment {
         }
 
         @SuppressLint("SetTextI18n")
-        void bindData(final StudentData studentData) {
-            Name.setText(studentData.getStudentName());
-            Name.setTextColor(studentData.getStudentgender().equals("MALE") ? greenColor : redColor);
-            AdmissionNo.setText("ADMISSION NO-"+studentData.getStudentadmissionno());
-            Father.setText(studentData.getStudentfathername());
-            Mother.setText(studentData.getStudentmothername());
-            Mobile.setText("MOBILE-"+studentData.getStudenthomemobile());
-            Address.setText(studentData.getStudentaddress()+" PIN- "+studentData.getStudentpin());
-            Address.setTextColor(studentData.getStudentgender().equals("MALE") ? redColor : greenColor);
+        void bindData(final TeacherData teacherData) {
+            Name.setText(teacherData.getTeacherName());
+            Name.setTextColor(teacherData.getTeachergender().equals("MALE") ? greenColor : redColor);
+            Empcode.setText("EMPCODE-"+teacherData.getTeacherEmployeecode());
+            Father.setText("FATHER NAME-"+teacherData.getTeacherfathername());
+            Class.setText("CLASS-"+teacherData.getTeacherclass()+"-"+teacherData.getTeachersection());
+            Mobile.setText("MOBILE-"+teacherData.getTeachermobile());
+            Address.setText(teacherData.getTeacheraddress()+" PIN- "+teacherData.getTeacherpin());
+            Address.setTextColor(teacherData.getTeachergender().equals("MALE") ? redColor : greenColor);
             Picasso.get()
-                    .load(studentData.getStudentimgurl())
+                    .load(teacherData.getTeacherimgurl())
                     .placeholder(R.drawable.userpic)
                     .centerCrop()
                     .fit()

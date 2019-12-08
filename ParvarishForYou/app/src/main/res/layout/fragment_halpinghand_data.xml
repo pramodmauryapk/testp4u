@@ -78,11 +78,12 @@
                 android:contentDescription="@string/parvarish_knowledge_center" />
             <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/uploadBtn"
-                        android:layout_width="50dp"
+                        android:layout_width="60dp"
                         android:layout_height="50dp"
+                        android:background="@drawable/circle"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:src="@drawable/forward"
+                        android:src="@drawable/ic_menu_send"
                         android:gravity="end" />
                 </LinearLayout>
              <ImageView

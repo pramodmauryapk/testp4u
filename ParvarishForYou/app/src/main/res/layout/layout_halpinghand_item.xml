@@ -45,7 +45,7 @@
            android:layout_height="wrap_content"
            android:textColor="@color/about_facebook_color"
            android:textStyle="bold"
-           android:textSize="12sp"
+           android:textSize="15sp"
            android:importantForAutofill="no"/>
             <TextView
                 android:layout_marginTop="@dimen/_8dp"
@@ -64,7 +64,6 @@
            android:id="@+id/l1"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-
            android:orientation="horizontal">
 
     <TextView
@@ -74,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:gravity="top|start"
         android:importantForAutofill="no"/>
 

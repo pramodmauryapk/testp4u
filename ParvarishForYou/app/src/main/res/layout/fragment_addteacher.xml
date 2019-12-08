@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etStuName"
-                        android:hint="Student Name"
+                        android:hint="Teacher Name"
                         android:maxLines="1"
                         android:inputType="textAutoComplete"
                         android:layout_width="match_parent"
@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHomeMobile"
-                        android:hint="Home Mobile"
+                        android:hint="Mobile"
                         android:inputType="phone"
                         android:maxLines="1"
                         android:layout_width="match_parent"
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etAdmissionNo"
-                        android:hint="Admission No."
+                        android:hint="Employee Code"
                         android:inputType="textAutoComplete"
                         android:maxLines="1"
                         android:layout_width="match_parent"
@@ -241,7 +241,7 @@
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etFeePaid"
-                        android:hint="Fee Paid"
+                        android:hint="Load/Hours"
                         android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:layout_width="match_parent"
@@ -256,7 +256,7 @@
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etFeePending"
-                        android:hint="Fee Pending"
+                        android:hint="Salary"
                         android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:layout_width="match_parent"
