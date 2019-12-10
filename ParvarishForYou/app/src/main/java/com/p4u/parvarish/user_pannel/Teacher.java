@@ -19,6 +19,7 @@ public class Teacher {
     private String userNews;
     private String userTime;
     private String userRating;
+    private String userRelative;
     private String imageURL;
 
 
@@ -30,7 +31,7 @@ public class Teacher {
 
 
 
-    public Teacher(String id, String name, String email,String password, String role, String mobilenumber, String address, String identity, String status,String feedback,String news,String time, String rating,String imageUrl) {
+    public Teacher(String id, String name, String email,String password, String role, String mobilenumber, String address, String identity, String status,String feedback,String news,String time, String rating,String relative,String imageUrl) {
         this.userId=id;
         this.userName = name;
         this.userEmail = email;
@@ -44,6 +45,7 @@ public class Teacher {
         this.userNews=news;
         this.userTime=time;
         this.userRating=rating;
+        this.userRelative=relative;
         this.imageURL = imageUrl;
     }
     public String getUserId() {
@@ -144,7 +146,13 @@ public class Teacher {
     public void setUserNews(String userNews) {
         this.userNews = userNews;
     }
+    public String getUserRelative() {
+        return userRelative;
+    }
 
+    public void setUserRelative(String userRelative) {
+        this.userRelative = userRelative;
+    }
     public String getUserTime() {
         return userTime;
     }

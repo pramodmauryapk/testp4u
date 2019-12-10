@@ -350,6 +350,7 @@ public class UserProfileFragment extends Fragment {
                     News,
                     Time,
                     Rating,
+                    "",
                     Img);
             dR.setValue(user);
             Toast.makeText(context, "User info Updated", Toast.LENGTH_LONG).show();

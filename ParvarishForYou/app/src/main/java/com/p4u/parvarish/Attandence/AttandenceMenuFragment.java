@@ -31,7 +31,7 @@ import com.p4u.parvarish.Attandence.student.ViewAttendanceFragment;
 import com.p4u.parvarish.Attandence.student.ViewleaveFragment;
 import com.p4u.parvarish.Attandence.student.ViewnoticeFragment;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.menu_items.HomeFragment;
+import com.p4u.parvarish.HomeFragment;
 import com.p4u.parvarish.menu_items.LayoutGridView;
 
 import static java.util.Objects.requireNonNull;

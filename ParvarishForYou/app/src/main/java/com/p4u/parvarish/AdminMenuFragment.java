@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,16 +18,19 @@ import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.Attandence.admin.AddSchoolFragment;
 import com.p4u.parvarish.Beneficiary.AddBeneficiaryFragment;
+import com.p4u.parvarish.HelpLine.AddHelplineFragment;
 import com.p4u.parvarish.HelpingHand.AdminHalpingHandFragment;
 import com.p4u.parvarish.MenuPages.ManagePagesFragment;
 import com.p4u.parvarish.Notification.NotificationActivity;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
 import com.p4u.parvarish.book_pannel.IssueBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.gallary.ManagegalaryFragment;
+import com.p4u.parvarish.menu_items.CentreListFragment;
+import com.p4u.parvarish.menu_items.DonorListFragment;
+import com.p4u.parvarish.menu_items.LayoutGridView;
 import com.p4u.parvarish.navistrip.HelpingFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
@@ -121,7 +124,8 @@ public class AdminMenuFragment extends HomeFragment {
                     "Manage HalpingHand",
                     "Add Video",
                     "Help",
-                    "Add School"
+                    "Add School",
+                    "Add Helpline"
 
 
             };
@@ -145,7 +149,8 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_mode_comment_black_24dp,
                     R.drawable.ic_video_call_black_24dp,
                     R.drawable.ic_playlist_add_black_24dp,
-                    R.drawable.ic_burst_mode_black_24dp
+                    R.drawable.ic_burst_mode_black_24dp,
+                    R.drawable.ic_add_book_24dp
 
             };
 
@@ -218,6 +223,9 @@ public class AdminMenuFragment extends HomeFragment {
                         break;
                     case 17:
                         switchFragment(new AddSchoolFragment());
+                        break;
+                    case 18://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
+                        switchFragment(new AddHelplineFragment());
                         break;
 
                 }

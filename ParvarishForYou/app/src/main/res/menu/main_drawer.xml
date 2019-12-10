@@ -27,7 +27,10 @@
         </item>
         <item android:title="User Corner" >
         <menu>
-
+            <item
+                android:id="@+id/nav_Emergengy"
+                android:icon="@drawable/ic_phone_in_talk_black_24dp"
+                android:title="Emergency Call Management" />
 
         <item
             android:id="@+id/nav_feedback"

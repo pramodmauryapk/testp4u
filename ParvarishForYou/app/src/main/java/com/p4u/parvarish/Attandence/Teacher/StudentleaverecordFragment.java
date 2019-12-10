@@ -16,6 +16,7 @@ import com.p4u.parvarish.R;
  */
 public class StudentleaverecordFragment extends Fragment {
 
+    private View v;
 
     public StudentleaverecordFragment() {
         // Required empty public constructor
@@ -25,8 +26,9 @@ public class StudentleaverecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        v=inflater.inflate(R.layout.fragment_studentleaverecord, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_studentleaverecord, container, false);
+        return v;
     }
 
 }

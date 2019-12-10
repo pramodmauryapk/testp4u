@@ -1,28 +1,39 @@
 package com.p4u.parvarish;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.p4u.parvarish.R;
+import com.p4u.parvarish.HelpLine.EmergencyFragment;
 import com.p4u.parvarish.contact_us.ContactUsFragment;
 import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
@@ -32,7 +43,6 @@ import com.p4u.parvarish.login.Login_emailActivity;
 import com.p4u.parvarish.login.UserRegistrationActivity;
 import com.p4u.parvarish.menu_items.AboutUsFragment;
 import com.p4u.parvarish.menu_items.FeedbackAddFragment;
-import com.p4u.parvarish.menu_items.HomeFragment;
 import com.p4u.parvarish.menu_items.JoinUsFragment;
 import com.p4u.parvarish.menu_items.OurWorkFragment;
 import com.p4u.parvarish.user_pannel.UserProfileFragment;
@@ -49,13 +59,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Bundle bundle;
     private FirebaseAuth mAuth;
     private NavigationView navigationView;
-    private String user_name,user_email,user_roll,user_img;
+    private String user_name,user_email,user_roll,user_img,user_relative,callmobile;
     private Intent intent;
     private TextView name,email;
     public CircleImageView img;
     public FirebaseUser user;
     public Stack<Fragment> fragmentStack;
-
+    SettingsContentObserver settingsContentObserver;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         //setting layout file
         setContentView(R.layout.activity_main);
+        settingsContentObserver = new SettingsContentObserver(this, new Handler());
+
+        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.
+                CONTENT_URI, true, settingsContentObserver);
         //auth instance
         mAuth=FirebaseAuth.getInstance();
         //setting toolbar
@@ -82,13 +96,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         user_name = intent.getStringExtra("user_name");
         user_email=intent.getStringExtra("user_email");
         user_roll=intent.getStringExtra("user_role");
+        user_relative=intent.getStringExtra("user_relative");
         if(intent.getStringExtra("user_img")!=null) {
             user_img = intent.getStringExtra("user_img");
         }// user_img= getApplication().getResources().getDrawable(R.drawable.logo).toString();
 
-        set_profile(user_name,user_email,user_roll,user_img);
+        set_profile(user_name,user_email,user_roll,user_img,user_relative);
         //settting floation action button
-       // FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
 
         //setting title
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
@@ -110,13 +125,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentStack.push(newContent);
         ft.commit();
 
-
-/*        fab.setOnClickListener(view -> {
-            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-              //    .setAction("Action", null).show();
-            switchFragment(new HomeFragment());
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                 //       .setAction("Action", null).show();
+                if(callmobile!=null)
+                call(callmobile);
+                else
+                    Toast.makeText(MainActivity.this, "Kindly Add Number", Toast.LENGTH_SHORT).show();
+            }
         });
-*/
+
 
         //Access real time database
 
@@ -127,7 +147,87 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
     }
+    public class SettingsContentObserver extends ContentObserver {
+        int previousVolume;
+        Context context;
 
+        SettingsContentObserver(Context c, Handler handler) {
+            super(handler);
+            context = c;
+            AudioManager audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            previousVolume =
+                    Objects.requireNonNull(audio).getStreamVolume(AudioManager.STREAM_MUSIC);
+        }
+
+        @Override
+        public boolean deliverSelfNotifications() {
+            return super.deliverSelfNotifications();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            AudioManager audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            int currentVolume =
+                    Objects.requireNonNull(audio).getStreamVolume(AudioManager.STREAM_MUSIC);
+            int delta = previousVolume - currentVolume;
+        if(delta<0) {
+           // startActivity(new Intent(Intent.ACTION_VOICE_COMMAND).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        }
+      /*     if (delta > 0) {
+
+                    //call("9719403593");
+                    Toast.makeText(MainActivity.this, "Volume Decreased"+previousVolume, Toast.LENGTH_SHORT).show();
+
+                    //previousVolume = currentVolume;
+
+            } else if (delta < 0) {
+                if(currentVolume==15)
+                    call("198");
+                Toast.makeText(MainActivity.this, "Volume Increased"+previousVolume, Toast.LENGTH_SHORT).show();
+                //previousVolume = currentVolume;
+
+            }*/
+        }
+    }
+    private void call(final String mobile) {
+
+                    final int MY_PERMISSIONS_REQUEST_CALL_PHONE =1 ;
+
+                        // Write your code here to execute after dialog
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" +mobile));
+                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getApplication()),
+                                Manifest.permission.CALL_PHONE)
+                                != PackageManager.PERMISSION_GRANTED) {
+
+                            ActivityCompat.requestPermissions(Objects.requireNonNull(getParent()),
+                                    new String[]{Manifest.permission.CALL_PHONE},
+                                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
+
+                            // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
+                            // app-defined int constant. The callback method gets the
+                            // result of the request.
+                        } else {
+                            //You already have permission
+                            try {
+                                startActivity(callIntent);
+
+                            } catch (SecurityException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+
+    @Override
+    protected void onDestroy() {
+        getApplicationContext().getContentResolver().unregisterContentObserver(settingsContentObserver);
+        super.onDestroy();
+    }
     private void init(){
         // NavigationView Header
         View headerView = navigationView.getHeaderView(0);
@@ -136,11 +236,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         img= headerView.findViewById(R.id.imageView);
     }
     @SuppressLint({"SetTextI18n", "ResourceType"})
-    public void set_profile(String username,String useremail,String userrole,String imgURL){
+    public void set_profile(String username,String useremail,String userrole,String imgURL,String relative){
 
           name.setText(username);
           email.setText(userrole);
           Picasso.get().load(imgURL).into(img);
+          callmobile=relative;
 
     }
     private void addMenuItemInNavMenuDrawer() {
@@ -237,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 user_email="EMAIL";
                 user_roll="USER";
                 // user_img=null;
-                set_profile(user_name,user_email,user_roll,user_img);
+                set_profile(user_name,user_email,user_roll,user_img,user_relative);
 
 
 
@@ -273,6 +374,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_our_work:newContent=new OurWorkFragment();
                 break;
             case R.id.nav_about_us:newContent=new AboutUsFragment();
+                break;
+            case R.id.nav_Emergengy:newContent=new EmergencyFragment();
                 break;
             case R.id.nav_feedback:newContent=new FeedbackAddFragment();
                 break;

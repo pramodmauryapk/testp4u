@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish;
 
 import android.content.Context;
 import android.os.Build;
@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.banner_pannel.BannerLayout;
 import com.p4u.parvarish.banner_pannel.WebBannerAdapter;
 import com.p4u.parvarish.gallary.Image_Model;

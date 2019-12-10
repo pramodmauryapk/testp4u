@@ -1,4 +1,4 @@
-package com.p4u.parvarish.menu_items;
+package com.p4u.parvarish;
 
 import android.content.Context;
 import android.os.Build;
@@ -16,11 +16,13 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.Attandence.AttandenceMenuFragment;
+import com.p4u.parvarish.HelpLine.HelplineFragment;
 import com.p4u.parvarish.HelpingHand.ShowHalpingHandFragment;
+import com.p4u.parvarish.MenuPages.ArticlegalleryFragment;
 import com.p4u.parvarish.MenuPages.PageListFragment;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.gallary.newgallaryFragment;
 import com.p4u.parvarish.gallary.slideshowFragment;
+import com.p4u.parvarish.menu_items.LayoutGridView;
 import com.p4u.parvarish.video.youtubegalleryFragment;
 
 import static java.util.Objects.requireNonNull;
@@ -40,7 +42,8 @@ public class UserMenuFragment extends HomeFragment {
             "Gallery",
             "Slide Show",
             "Videos",
-            "Helping Hand"
+            "Helping Hand",
+            "Helpline"
 
 
     } ;
@@ -57,6 +60,7 @@ public class UserMenuFragment extends HomeFragment {
             R.drawable.ic_vibration_black_24dp,
             R.drawable.ic_ondemand_video_black_24dp,
             R.drawable.ic_playlist_add_black_24dp,
+            R.drawable.ic_phone_in_talk_black_24dp
 
 
     };
@@ -97,8 +101,8 @@ public class UserMenuFragment extends HomeFragment {
                     case 4:
                         switchFragment(new PageListFragment(),4);
                         break;
-                    case 5:
-                        switchFragment(new PageListFragment(),5);
+                    case 5:switchFragment(new ArticlegalleryFragment(),5);
+                        //switchFragment(new PageListFragment(),5);
                         break;
                     case 6://switch_menu(new SchoolSigninFragment());
                         switch_menu(new AttandenceMenuFragment());
@@ -117,6 +121,8 @@ public class UserMenuFragment extends HomeFragment {
                         switchFragment(new youtubegalleryFragment(),9);
                         break;
                     case 10:switchFragment(new ShowHalpingHandFragment(),10);//new ImageGalleryFragment()
+                        break;
+                    case 11:switchFragment(new HelplineFragment(),11);//new ImageGalleryFragment()
                         break;
 
 

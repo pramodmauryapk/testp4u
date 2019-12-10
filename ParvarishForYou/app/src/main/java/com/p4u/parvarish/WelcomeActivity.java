@@ -26,7 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final String TAG = "WelcomeActivity";
     private AnimatedCircleLoadingView animatedCircleLoadingView;
     FirebaseUser user;
-    String user_name,user_email,user_roll,user_img;
+    String user_name,user_email,user_roll,user_img,user_relative;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -62,12 +62,14 @@ public class WelcomeActivity extends AppCompatActivity {
             user_email="EMAIL";
             user_roll="USER";
             user_img=null;
+            user_relative=null;
             Intent i;
             i=new Intent(this, MainActivity.class);
             i.putExtra("user_role", user_roll);
             i.putExtra("user_name", user_name);
             i.putExtra("user_email", user_email);
             i.putExtra("user_img",user_img);
+            i.putExtra("user_relative",user_relative);
             startActivity(i);
             finish();
         }
@@ -84,7 +86,7 @@ public class WelcomeActivity extends AppCompatActivity {
                    user_email = uInfo.getUserEmail();
                    user_roll = uInfo.getUserRole();
                    user_img = uInfo.getImageURL();
-
+                   user_relative=uInfo.getUserRelative();
 
                }
 
@@ -98,6 +100,7 @@ public class WelcomeActivity extends AppCompatActivity {
             user_email="EMAIL";
             user_roll="USER";
             user_img=null;
+            user_relative=null;
 
 
         }
@@ -108,6 +111,7 @@ public class WelcomeActivity extends AppCompatActivity {
             i.putExtra("user_name", user_name);
             i.putExtra("user_email", user_email);
             i.putExtra("user_img",user_img);
+            i.putExtra("user_relative",user_relative);
             startActivity(i);
             finish();
         }

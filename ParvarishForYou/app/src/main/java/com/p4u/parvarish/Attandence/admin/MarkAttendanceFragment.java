@@ -9,13 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -185,15 +183,7 @@ public class MarkAttendanceFragment extends Fragment implements StudentList_mode
 
     @Override
     public void onItemClick(int position) {
-        //Toast.makeText(getContext(),"hello",Toast.LENGTH_LONG).show();
-        CheckBox cb = (CheckBox) v.findViewById(R.id.checkbox1);
-        TextView tv = (TextView) v.findViewById(R.id.textView1);
-        cb.performClick();
-        if (cb.isChecked()) {
 
-            checkedValue.add(tv.getText().toString());
-        } else if (!cb.isChecked()) {
-            checkedValue.remove(tv.getText().toString());
-        }
+
     }
 }

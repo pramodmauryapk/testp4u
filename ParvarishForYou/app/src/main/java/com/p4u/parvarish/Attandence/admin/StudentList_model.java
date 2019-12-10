@@ -23,7 +23,6 @@ public class StudentList_model extends ArrayAdapter<StudentData> {
     private static final String TAG = "UserList_model";
     private Activity context;
     private List<StudentData> students;
-
     private View listViewItem;
     private StudentData student;
     private StudentList_model.OnItemClickListener mListener;
@@ -38,7 +37,6 @@ public class StudentList_model extends ArrayAdapter<StudentData> {
         this.students = students;
         itemChecked = new boolean[students.size()];
     }
-
 
     @SuppressLint("ViewHolder")
     @Override
@@ -69,8 +67,10 @@ public class StudentList_model extends ArrayAdapter<StudentData> {
               @Override
               public void onClick(View v) {
                   // TODO Auto-generated method stub
-                  if (cb.isChecked())
+                  if (cb.isChecked()) {
                       itemChecked[position] = true;
+
+                  }
                   else
                       itemChecked[position] = false;
               }
@@ -86,7 +86,22 @@ public class StudentList_model extends ArrayAdapter<StudentData> {
 
     }
 /*
-    @Override
+//Toast.makeText(getContext(),"hello",Toast.LENGTH_LONG).show();
+        CheckBox cb = (CheckBox) v.findViewById(R.id.checkbox1);
+        TextView tv = (TextView) v.findViewById(R.id.textView1);
+        cb.performClick();
+        if (cb.isChecked()) {
+            Toast.makeText(getContext(),"" + checkedValue,Toast.LENGTH_LONG).show();
+            //checkedValue.add(tv.getText().toString());
+        } else if (!cb.isChecked()) {
+            checkedValue.remove(tv.getText().toString());
+        }
+
+
+
+
+ */
+ /*   @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
        // Toast.makeText(getContext(),"hello "+mk.date,Toast.LENGTH_LONG).show();
         dR= FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("ATTANDENCE").child(get_current_time()).child(this.textViewRole.getText().toString());
