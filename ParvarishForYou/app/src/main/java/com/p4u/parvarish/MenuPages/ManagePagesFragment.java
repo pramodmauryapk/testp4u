@@ -48,8 +48,8 @@ public class ManagePagesFragment extends Fragment {
                     s="CAPACITY_BUILDING";
                 }else if(sp.getSelectedItem().equals("INTERNSHIP PROGRAM")){
                     s="INTERNSHIP_PROGRAM";
-                }else if(sp.getSelectedItem().equals("ACADEMIC PARTNER")){
-                    s="ACADEMIC_PARTNER";
+                }else if(sp.getSelectedItem().equals("ARTICLES")){
+                    s="ARTICLES";
                 }
                 bundle.putString("Page",s);
             }

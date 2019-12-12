@@ -10,12 +10,11 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -31,6 +30,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.p4u.parvarish.HelpLine.EmergencyFragment;
@@ -65,20 +65,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public CircleImageView img;
     public FirebaseUser user;
     public Stack<Fragment> fragmentStack;
-    SettingsContentObserver settingsContentObserver;
+   SettingsContentObserver settingsContentObserver;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //for full screen view
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         //setting layout file
         setContentView(R.layout.activity_main);
         settingsContentObserver = new SettingsContentObserver(this, new Handler());
-
-        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.
-                CONTENT_URI, true, settingsContentObserver);
+        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System. CONTENT_URI, true, settingsContentObserver);
         //auth instance
         mAuth=FirebaseAuth.getInstance();
         //setting toolbar
@@ -99,9 +95,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         user_relative=intent.getStringExtra("user_relative");
         if(intent.getStringExtra("user_img")!=null) {
             user_img = intent.getStringExtra("user_img");
-        }// user_img= getApplication().getResources().getDrawable(R.drawable.logo).toString();
+        }
 
-        set_profile(user_name,user_email,user_roll,user_img,user_relative);
+        set_profile(user_name, user_roll,user_img,user_relative);
         //settting floation action button
         final FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -128,12 +124,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                 //       .setAction("Action", null).show();
+
                 if(callmobile!=null)
-                call(callmobile);
+                    call(callmobile);
                 else
-                    Toast.makeText(MainActivity.this, "Kindly Add Number", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Kindly Add Number", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
             }
         });
 
@@ -145,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        //starting timer service
+       // startService(new Intent(getApplicationContext(), TimerService.class));
+        //to stop this
+        //stopService(new Intent(getApplicationContext(),
+        //                            TimerService.class));
 
     }
     public class SettingsContentObserver extends ContentObserver {
@@ -172,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Objects.requireNonNull(audio).getStreamVolume(AudioManager.STREAM_MUSIC);
             int delta = previousVolume - currentVolume;
         if(delta<0) {
+            //for activate google assistant
            // startActivity(new Intent(Intent.ACTION_VOICE_COMMAND).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         }
@@ -190,6 +192,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }*/
         }
+    }
+    public void senemail(){
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{"youremail@yahoo.com"});
+        email.putExtra(Intent.EXTRA_SUBJECT, "subject");
+        email.putExtra(Intent.EXTRA_TEXT, "message");
+        email.setType("message/rfc822");
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
+    }
+    public void sendSMS(final String mobile) {
+
+        String message = "Hello World!";
+
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(mobile, null, message, null, null);
     }
     private void call(final String mobile) {
 
@@ -236,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         img= headerView.findViewById(R.id.imageView);
     }
     @SuppressLint({"SetTextI18n", "ResourceType"})
-    public void set_profile(String username,String useremail,String userrole,String imgURL,String relative){
+    public void set_profile(String username, String userrole, String imgURL, String relative){
 
           name.setText(username);
           email.setText(userrole);
@@ -249,8 +266,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.inflateMenu(R.menu.main_drawer);
     }
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -260,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            //super.onBackPressed();
+
             new FancyAlertDialog.Builder(this)
                     .setTitle("Rate us if you like the app")
                     .setMessage("Do you really want to Exit ?")
@@ -295,12 +310,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
-
-
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -338,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 user_email="EMAIL";
                 user_roll="USER";
                 // user_img=null;
-                set_profile(user_name,user_email,user_roll,user_img,user_relative);
+                set_profile(user_name, user_roll,user_img,user_relative);
 
 
 

@@ -307,7 +307,7 @@ public class SelectBookFragment extends Fragment {
     private boolean updateBook(String userid,String bookId){
         try {
             DatabaseReference issueref = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
-            DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(userid);
+            DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("BENEFICIARY").child(userid);
 
             issueref.child("bookAvaibility").setValue("0");
             issueref.child("bookHandoverTo").setValue(userid);

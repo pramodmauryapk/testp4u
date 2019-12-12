@@ -6,359 +6,249 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.Beneficiary.beneficiary_details_model;
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.user_pannel.TempUser;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.fancydialog.Animation;
-import com.p4u.parvarish.fancydialog.FancyAlertDialog;
-import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
-import com.p4u.parvarish.fancydialog.Icon;
-
 
 import static java.util.Objects.requireNonNull;
 
 public class SubmitBookFragment extends Fragment {
 
-    private static final String TAG = "SubmitBookFragment";
-    private ListView listViewBooks;
-    private View dialogView,handover_dialog;
-    private List<Book> books;
-    private DatabaseReference databaseBooks;
-    private EditText spBookName;
-    private TextView dBookid,dAuthor,dTitle,dCost,dDonor,dDonorMobile,dLocation,dYear,dSubject,dDonorTime,dIssueTo,dIssueTime,tv2,tv;
-    private View v;
-    private Button btnissue,handover;
-    private int noofbook,userdeposit,userrefund;
-    private TextInputEditText et_deposit_paid;
-    private TextInputLayout tv1;
-    private String userid=null;
-    private Context context;
+    private static final String TAG = "BeneficiaryFragment";
+    private View dialogView;
+    private TextView tv2;
+    private List<TempUser> users;
+    private ListView beneficiarylist;
+    private EditText search_beneficiary;
 
+    private TextView duserid,dtvname,dtvemail,dtvmobile,dtvaddress,dtvidentity,dtvbookshaving,dtvdeposit,dtvrefund;
+    private View v;
+    private Button btnselect;
+    private Context context;
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_book_search,container,false);
-        databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS");
+        v = inflater.inflate(R.layout.fragment_book_search, container, false);
         context = container.getContext();
         initViews();
+        tv2.setText("Tap to User to Return Book");
 
-
-        assert this.getArguments() != null;
-        userid = this.getArguments().getString("user_id");
-        noofbook=Integer.parseInt(requireNonNull(this.getArguments().getString("user_noofbooks")));
-        userdeposit=Integer.parseInt(requireNonNull(this.getArguments().getString("user_deposit")));
-        userrefund=Integer.parseInt(requireNonNull(this.getArguments().getString("user_refund")));
-        tv2.setText("Tap to Book Handover to center");
         //list to store books
-        books = new ArrayList<>();
+        users = new ArrayList<>();
+        load_list();
+        TextWatcher watch = new TextWatcher(){
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                //import com.google.firebase.database.Exclude; TODO Auto-generated method stub
 
-        listViewBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                //Toast.makeText(getApplicationContext(), "Maximum Limit Reached", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int a, int b, int c) {
+                // TODO Auto-generated method stub
+                load_list();
+
+
+            }};
+        search_beneficiary.addTextChangedListener(watch);
+        beneficiarylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Book book = books.get(i);
+                TempUser user = users.get(i);
                 showDialog(
-                        book.getBookId(),
-                        book.getBookTitle(),
-                        book.getBookAuthor(),
-                        book.getBookSubject(),
-                        book.getBookYear(),
-                        book.getBookCost(),
-                        book.getBookLocation(),
-                        book.getBookDonor(),
-                        book.getBookDonorMobile(),
-                        book.getBookDonorTime(),
-                        book.getBookHandoverTo(),
-                        book.getBookHandoverTime());
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAddress(),
+                        user.getMobile(),
+                        user.getIdentity(),
+                        user.getBookHaving(),
+                        user.getBookDeposit(),
+                        user.getBookRefund());
 
 
             }
         });
 
 
-        spBookName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                onStart();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         return v;
     }
     private void initViews(){
-
-        spBookName =  v.findViewById(R.id.sp_Book_Name);
+        search_beneficiary =  v.findViewById(R.id.sp_Book_Name);
         tv2=v.findViewById(R.id.tv2);
-        listViewBooks =  v.findViewById(R.id.view_list);
+        beneficiarylist =  v.findViewById(R.id.view_list);
+
+
+    }
+
+    private void load_list() {
+
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("BENEFICIARY");
+
+        final beneficiary_details_model beneficiary_adapter = new beneficiary_details_model(getActivity(), users);
+
+        if (!requireNonNull(search_beneficiary.getText()).toString().toUpperCase().equals("")) {
+
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    users.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        TempUser user = postSnapshot.getValue(TempUser.class);
+                        if(Objects.requireNonNull(user).getName().startsWith(search_beneficiary.getText().toString().toUpperCase())||
+                                Objects.requireNonNull(user).getMobile().startsWith(search_beneficiary.getText().toString())||
+                                Objects.requireNonNull(user).getEmail().startsWith(search_beneficiary.getText().toString().toUpperCase())) {
+                                if(Integer.parseInt(user.getBookHaving())>0) {
+                                    users.add(user);
+                                }
+
+                        }
+
+                    }
+
+                    beneficiarylist.setAdapter(beneficiary_adapter);
+                    beneficiary_adapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }else {
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                users.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    TempUser user = postSnapshot.getValue(TempUser.class);
+                    assert user != null;
+                    if(Integer.parseInt(user.getBookHaving())>0) {
+                        users.add(user);
+
+                    }
+
+                }
+                beneficiarylist.setAdapter(beneficiary_adapter);
+                beneficiary_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        }
+
+    }
+    private void init_dialog_views(){
+        duserid=dialogView.findViewById (R.id.tvUserId);
+        dtvname = dialogView.findViewById(R.id.tvName);
+        dtvemail =dialogView.findViewById(R.id.tvEmail);
+        dtvmobile = dialogView.findViewById(R.id.tvMobile);
+        dtvaddress = dialogView.findViewById(R.id.tvAddress);
+        dtvidentity = dialogView.findViewById(R.id.tvIdentity);
+        dtvbookshaving = dialogView.findViewById(R.id.tvBooksHaving);
+        dtvdeposit = dialogView.findViewById(R.id.tvDeposit);
+        dtvrefund = dialogView.findViewById(R.id.tvRefund);
+        btnselect=dialogView.findViewById(R.id.dbuttonSelect);
+    }
+    private void set_dialog_values(String Id,String Name,String Email,String Mobile,String Address,String Identity,String booksCount,String Deposit,String Refund ) {
+        duserid.setText(Id);
+        dtvname.setText(Name);
+        dtvemail.setText(Email);
+        dtvmobile.setText(Mobile);
+        dtvaddress.setText(Address);
+        dtvidentity.setText(Identity);
+        dtvbookshaving.setText(booksCount);
+        dtvdeposit.setText(Deposit);
+        dtvrefund.setText(Refund);
+
+
     }
     @SuppressLint("InflateParams")
-    private void showDialog(final String dbookId,
-                            final String dbookTitle,
-                            final String dbookAuthor,
-                            final String dbookSubject,
-                            final String dbookYear,
-                            final String dbookCost,
-                            final String dbookLocation,
-                            final String dbookDonor,
-                            final String dbookDonorMobile,
-                            final String dbookDonorTime,
-                            final String dbookHandoverTo,
-                            final String dbookHandoverTime) {
+    private void showDialog(final String duserId,
+                            final String duserName,
+                            final String duserEmail,
+                            final String duserMobile,
+                            final String duserAddress,
+                            final String duserIdentity,
+                            final String duserBookHaving,
+                            final String duserBookDeposit,
+                            final String duserBookRefund) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.show_book_dialog, null);
+        dialogView = inflater.inflate(R.layout.show_beneficiary_dialog, null);
         dialogBuilder.setView(dialogView);
 
         init_dialog_views();
 
-        dialogBuilder.setTitle("Book Record");
+        dialogBuilder.setTitle("Benficiary Details");
         final AlertDialog b = dialogBuilder.create();
         b.show();
-
-        set_dialog_values(dbookId,dbookAuthor,dbookCost,dbookTitle,dbookLocation,
-                dbookDonor,dbookDonorMobile,dbookYear,dbookSubject,dbookHandoverTo,
-                dbookHandoverTime,dbookDonorTime);
-
-
-
-        btnissue.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
+        b.setCancelable(false);
+        set_dialog_values(duserId,duserName,duserEmail,duserMobile,duserAddress,duserIdentity,duserBookHaving,duserBookDeposit,duserBookRefund);
+        btnselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 b.cancel();
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = getLayoutInflater();
-                handover_dialog = inflater.inflate(R.layout.show_issuebook_dialog, null);
-                dialogBuilder.setView(handover_dialog);
-                init_dialog_views();
-                dialogBuilder.setTitle("Amount To be Paid");
-                final AlertDialog dialog = dialogBuilder.create();
-                dialog.show();
-
-                et_deposit_paid=dialog.findViewById(R.id.et_depositpaid);
-                handover=dialog.findViewById(R.id.dbuttonissue);
-                tv1=dialog.findViewById(R.id.tv_depositpaid);
-                tv=dialog.findViewById(R.id.tvuserid);
-                tv.setText("ISSUE DATE:"+dbookHandoverTime);
-                tv1.setHint("Refund Money");
-
-                handover.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.cancel();
-
-                            new FancyAlertDialog.Builder(getActivity())
-                                    .setTitle("ParvarishForYou")
-                                    .setMessage("Want to Submit to Center")
-                                    .setNegativeBtnText("Cancel")
-                                    .setPositiveBtnText("OK")
-                                    .setAnimation(Animation.POP)
-                                    .isCancellable(true)
-                                    .setIcon(R.drawable.logo, Icon.Visible)
-                                    .OnPositiveClicked(new FancyAlertDialogListener() {
-
-                                        @Override
-                                        public void OnClick() {
-                                            boolean ans = updateBook(dbookId, dbookHandoverTo, requireNonNull(et_deposit_paid.getText()).toString());
-
-                                            if (ans) {
-                                                Toast.makeText(context, "Submission Successfully", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    })
-                                    .OnNegativeClicked(new FancyAlertDialogListener() {
-                                        @Override
-                                        public void OnClick() {
-                                            Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    })
-                                    .build();
-
-
-
-                    }
-                });
-
+                Bundle bundle=new Bundle();
+                Fragment newfragment = new DepositBookFragment();
+                bundle.putString("user_id", duserId);
+                bundle.putString("user_noofbooks", duserBookHaving);
+                bundle.putString("user_deposit", duserBookDeposit);
+                bundle.putString("user_refund", duserBookRefund);
+                newfragment.setArguments(bundle);
+                switchFragment(newfragment);
             }
         });
 
 
     }
 
-
-    @SuppressLint("SetTextI18n")
-    private void set_dialog_values(String dbookId, String dbookAuthor, String dbookCost, String dbookTitle, String dbookLocation,
-                                   String dbookDonor, String dbookDonorMobile, String dbookYear, String dbookSubject, String dbookHandoverTo,
-                                   String dbookHandoverTime, String dbookDonorTime) {
-        dBookid.setText(dbookId);
-        dAuthor.setText(dbookAuthor);
-        dCost.setText(dbookCost);
-        dTitle.setText(dbookTitle);
-        dLocation.setText(dbookLocation);
-        dDonor.setText(dbookDonor);
-        dDonorMobile.setText(dbookDonorMobile);
-        dYear.setText(dbookYear);
-        dSubject.setText(dbookSubject);
-        dIssueTo.setText(dbookHandoverTo);
-        dIssueTime.setText(dbookHandoverTime);
-        dDonorTime.setText(dbookDonorTime);
-        btnissue.setText("Handover");
-    }
-
-
-    private boolean updateBook(String bookId, final String UserId,String amount) {
-
-        try {
-            databaseBooks = FirebaseDatabase.getInstance().getReference().child("BOOKS").child(bookId);
-            databaseBooks.child("bookAvaibility").setValue("1");
-            databaseBooks.child("bookHandoverTo").setValue("CENTER");
-            databaseBooks.child("bookHandoverTime").setValue(get_current_time());
-            DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS").child(UserId);
-
-            noofbook = noofbook - 1;
-            temp_User.child("bookHaving").setValue(String.valueOf(noofbook));
-            temp_User.child("bookDeposit").setValue(String.valueOf(userdeposit-Integer.parseInt(amount)));
-            temp_User.child("bookRefund").setValue(String.valueOf(userrefund+Integer.parseInt(amount)));
-
-            return true;
-        }catch (Exception e){
-            return false;
+    // switching fragment
+    private void switchFragment(Fragment fragment) {
+        if (getActivity() != null) {
+            requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null).commit();
         }
-
     }
-    public void onStart() {
 
-        super.onStart();
-        load_list();
-
-    }
-    private void init_dialog_views(){
-        dBookid=dialogView.findViewById (R.id.tvBookid);
-        dTitle =dialogView.findViewById(R.id.tvTitle);
-        dCost = dialogView.findViewById(R.id.tvCost);
-        dAuthor =dialogView.findViewById(R.id.tvAuthor);
-        dYear = dialogView.findViewById(R.id.tvYear);
-        dSubject = dialogView.findViewById(R.id.tvSubject);
-        dLocation = dialogView.findViewById(R.id.tvLocation);
-        dDonor = dialogView.findViewById(R.id.tvDonor);
-        dDonorMobile = dialogView.findViewById(R.id.tvDonorMobile);
-        dDonorTime = dialogView.findViewById(R.id.tvDonateTime);
-        dIssueTo =  dialogView.findViewById(R.id.tvBookIssueto);
-        dIssueTime = dialogView.findViewById(R.id.tvIssueTime);
-        btnissue=dialogView.findViewById(R.id.dbuttonBack);
-    }
-    private void load_list() {
-
-
-            if (!spBookName.getText().toString().equals("")) {
-                databaseBooks.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        books.clear();
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            Book book = postSnapshot.getValue(Book.class);
-                            if(Objects.requireNonNull(book).getBookAvaibility().equals("0")&&(book.getBookHandoverTo().equals(userid))){
-                            if(Objects.requireNonNull(book).getBookTitle().startsWith(spBookName.getText().toString().toUpperCase())||
-                                    Objects.requireNonNull(book).getBookAuthor().startsWith(spBookName.getText().toString().toUpperCase())||
-                                    Objects.requireNonNull(book).getBookSubject().startsWith(spBookName.getText().toString().toUpperCase())||
-                                    Objects.requireNonNull(book).getBookCost().equals(spBookName.getText().toString())) {
-
-                                    books.add(book);
-
-                                }
-                            }
-
-                        }
-                        if (getActivity() != null) {
-                            LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                            listViewBooks.setAdapter(bookAdapter);
-                            bookAdapter.notifyDataSetChanged();
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }else {
-                databaseBooks.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        books.clear();
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            Book book = postSnapshot.getValue(Book.class);
-                            if (Objects.requireNonNull(book).getBookAvaibility().equals("0")&&(book.getBookHandoverTo().equals(userid))) {
-                                     books.add(book);
-
-
-                            }
-                        }
-                        if (getActivity() != null) {
-                            LayoutBookList bookAdapter = new LayoutBookList(getActivity(), books);
-                            listViewBooks.setAdapter(bookAdapter);
-                            bookAdapter.notifyDataSetChanged();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-
-    }
-    private String get_current_time(){
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
-        return sdf.format(new Date());
-    }
 }

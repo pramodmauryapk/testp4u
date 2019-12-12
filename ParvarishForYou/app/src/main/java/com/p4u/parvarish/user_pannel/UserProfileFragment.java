@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -70,7 +71,8 @@ public class UserProfileFragment extends Fragment {
     private TextInputLayout l4;
     private TextView location,role;
     private Button save;
-    private Button change,choose,upload;
+    private Button change,upload;
+    private ImageButton choose;
     private Spinner sp;
     private String userrole,id;
     private Context context;
@@ -79,6 +81,7 @@ public class UserProfileFragment extends Fragment {
     private final int PICK_IMAGE_REQUEST = 71;
     private StorageReference mStorageRef;
     private StorageTask mUploadTask;
+    private int emailuser;
     private DatabaseReference myRef;
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -118,10 +121,16 @@ public class UserProfileFragment extends Fragment {
         });
         save.setOnClickListener (new View.OnClickListener() {
             @Override
-            public void onClick(View view) {   updatedetails(userID,userPassword,userImg);           }        });
+            public void onClick(View view) {
+                updatedetails(userID);
+            }
+        });
         change.setOnClickListener (new View.OnClickListener() {
            @Override
-           public void onClick(View view) { switchFragment(new UpdatePasswordFragment());           }       });
+           public void onClick(View view) {
+               switchFragment(new UpdatePasswordFragment());
+           }
+        });
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,7 +303,17 @@ public class UserProfileFragment extends Fragment {
                         id=uInfo.getUserId();
                         username.setText(requireNonNull(uInfo).getUserName());
                         email.setText(uInfo.getUserEmail());
-                        mobile.setText(uInfo.getUserMobile());
+                        String input=uInfo.getUserMobile();
+                        String phone;
+                        if (input.length() > 10)
+                        {
+                            phone = input.substring(input.length() - 10);
+                        }
+                        else
+                        {
+                            phone = input;
+                        }
+                        mobile.setText(phone);
                         location.setText(uInfo.getUserAddress());
                         userrole=uInfo.getUserRole();
                         if(userrole.equals("ADMIN")){
@@ -305,20 +324,23 @@ public class UserProfileFragment extends Fragment {
                             role.setText(uInfo.getUserRole());
                             role.setEnabled(false);
                         }
-
+                        emailuser=uInfo.getEmailuser();
                         userImg = uInfo.getImageURL();
+                        if(emailuser==0){
+                            change.setVisibility(View.GONE);
+                        }
                     }
             }
         }catch (Exception e){
             Log.d(TAG, "Failed to retrive values"+e);
         }
     }
-    private void updatedetails(String ID,String Password,String Img) {
+    private void updatedetails(String ID) {
 
         String Name = username.getText().toString().trim().toUpperCase();
         String Email = email.getText().toString().trim().toLowerCase();
         String Mobile = mobile.getText().toString().trim();
-        String Identity = "";
+
         String Role;
         if(userrole.equals("ADMIN")){
             Role =sp.getSelectedItem().toString().toUpperCase();
@@ -326,33 +348,17 @@ public class UserProfileFragment extends Fragment {
             Role = role.getText().toString().toUpperCase();
         }
         String Address = location.getText().toString().toUpperCase();
-        String Status = "1";
-        String Feedback = "";
-        String News = "";
-        String Rating = "";
-        String Time = get_current_time();
-        //updating artist
+
         boolean ans=validate(Name, Email, Mobile, Address);
         if(ans) {
             //getting the specified artist reference
             DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("USERS").child(ID);
-            Teacher user = new Teacher(
-                    ID,
-                    Name,
-                    Email,
-                    Password,
-                    Role,
-                    Mobile,
-                    Address,
-                    Identity,
-                    Status,
-                    Feedback,
-                    News,
-                    Time,
-                    Rating,
-                    "",
-                    Img);
-            dR.setValue(user);
+
+            dR.child("userName").setValue(Name);
+            dR.child("userEmail").setValue(Email);
+            dR.child("userMobile").setValue(Mobile);
+            dR.child("userAddress").setValue(Address);
+            dR.child("userRole").setValue(Role);
             Toast.makeText(context, "User info Updated", Toast.LENGTH_LONG).show();
         }
     }

@@ -43,7 +43,7 @@ public class UserMenuFragment extends HomeFragment {
             "Slide Show",
             "Videos",
             "Helping Hand",
-            "Helpline"
+            "Emergency Contact"
 
 
     } ;
@@ -116,13 +116,11 @@ public class UserMenuFragment extends HomeFragment {
 
                         break;
                     case 9:
-                        //Intent ActivityIndent = new Intent(getActivity(), RecyclerViewActivity.class);
-                        //startActivity(ActivityIndent);
                         switchFragment(new youtubegalleryFragment(),9);
                         break;
-                    case 10:switchFragment(new ShowHalpingHandFragment(),10);//new ImageGalleryFragment()
+                    case 10:switchFragment(new ShowHalpingHandFragment(),10);
                         break;
-                    case 11:switchFragment(new HelplineFragment(),11);//new ImageGalleryFragment()
+                    case 11:switchFragment(new HelplineFragment(),11);
                         break;
 
 

@@ -55,6 +55,7 @@ public class AddBeneficiaryFragment extends Fragment {
     private Button buttonback;
     private Button btnreset;
     private Bundle bundle;
+    private Boolean ans=true;
     private String Userid,Fullname,Email,Mobile,Address,Identity,Deposit,beneficaiary_mobile,name;
     private Boolean amount_validation=false;
     private Context context;
@@ -79,7 +80,9 @@ public class AddBeneficiaryFragment extends Fragment {
             public void onClick(View view) {
                 get_values();
                 boolean res=validate();
-                if(res) {
+                check_mobile(Mobile.trim());
+
+                if(res && ans ) {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = getLayoutInflater();
                     dialogView = inflater.inflate(R.layout.show_issuebook_dialog, null);
@@ -109,7 +112,7 @@ public class AddBeneficiaryFragment extends Fragment {
                                     @Override
                                     public void onClick(View view) {
                                         dialog.cancel();
-                                        Userid=create_user(Fullname,Email,Address,Mobile,Identity,Deposit);
+                                        Userid=create_user(Fullname,Email.trim(),Address,Mobile.trim(),Identity.trim(),Deposit);
                                         disable_all();
                                         tv1.setText("BENEFICIARY REGISTRED");
                                         Toast.makeText(context, "Beneficiary Created", Toast.LENGTH_SHORT).show();
@@ -121,6 +124,8 @@ public class AddBeneficiaryFragment extends Fragment {
                         }
                     });
 
+                }else{
+                    Toast.makeText(context, "Check Beneficiary already registered", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -159,7 +164,6 @@ public class AddBeneficiaryFragment extends Fragment {
 
                         etsearch.setText(spbeneficiary.getSelectedItem().toString());
                         beneficaiary_mobile= requireNonNull(etsearch.getText()).toString();
-
                         load_values(beneficaiary_mobile);
                         disable_all();
                       //  btnadd.setEnabled(false);
@@ -214,7 +218,7 @@ public class AddBeneficiaryFragment extends Fragment {
     }
     private void load_values(final String beneficaiary_mobile) {
         try {
-            mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
+            mRef = FirebaseDatabase.getInstance().getReference().child("BENEFICIARY");
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -240,6 +244,36 @@ public class AddBeneficiaryFragment extends Fragment {
 
         }
     }
+    private void check_mobile(final String mobile) {
+        try {
+            mRef = FirebaseDatabase.getInstance().getReference().child("BENEFICIARY");
+
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        TempUser beneficiary = postSnapshot.getValue(TempUser.class);
+                        if(mobile.equals(requireNonNull(beneficiary).getMobile())){
+                            ans=false;
+                        }
+
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }catch (Exception ignored){
+
+        }
+
+    }
     private void set_values(String id, String name, String email, String address, String mobile, String identity) {
         Userid=id;
         amount_validation=false;
@@ -252,7 +286,7 @@ public class AddBeneficiaryFragment extends Fragment {
     }
     private void load_beneficiary() {
 
-        mRef = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
+        mRef = FirebaseDatabase.getInstance().getReference().child("BENEFICIARY");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -395,7 +429,7 @@ public class AddBeneficiaryFragment extends Fragment {
 
     }
     private String create_user(String Fullname,String Email,String Address,String Mobile,String Identity,String Deposit) {
-        DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("TEMPUSERS");
+        DatabaseReference temp_User = FirebaseDatabase.getInstance().getReference().child("BENEFICIARY");
         String UserId = temp_User.push().getKey();
         name=Fullname;
 

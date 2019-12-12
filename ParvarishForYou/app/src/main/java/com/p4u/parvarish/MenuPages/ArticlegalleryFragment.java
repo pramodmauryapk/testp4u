@@ -61,9 +61,9 @@ public class ArticlegalleryFragment extends Fragment{
 
                 Page_data_Model imgdetails = mGallaryList.get(position);
                 String[] teacherData={
-
+                        imgdetails.getTitle(),
                         imgdetails.getImageUrl(),
-                        imgdetails.getTitle()};
+                        imgdetails.getDescription()};
                         openDetails(teacherData);
 
             }
@@ -134,8 +134,9 @@ public class ArticlegalleryFragment extends Fragment{
 
 
         bundle = new Bundle();
-        bundle.putString("Video", data[0]);
-        bundle.putString("Description", data[1]);
+        bundle.putString("Title", data[0]);
+        bundle.putString("Image", data[1]);
+        bundle.putString("Description", data[2]);
         switchFragment(new ArticledetailFragment());
 
 

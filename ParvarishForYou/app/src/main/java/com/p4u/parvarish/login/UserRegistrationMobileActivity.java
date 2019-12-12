@@ -224,6 +224,7 @@ public class UserRegistrationMobileActivity extends AppCompatActivity {
                             time,
                             rating,
                             "",
+                            0,
                             null
                     );
                     myref.child(Objects.requireNonNull(id)).setValue(upload);

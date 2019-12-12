@@ -246,6 +246,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
                             time,
                             rating,
                             "",
+                            1,
                             null
                     );
                     myref.child(Objects.requireNonNull(id)).setValue(upload);

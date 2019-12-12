@@ -10,6 +10,7 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:id="@+id/relativeLayout"
+            android:layout_marginTop="-30dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/transparent">
@@ -42,10 +43,10 @@
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:layout_centerHorizontal="true"
-            android:text="@string/new_beneficiary"
+            android:text="Please Search before Add new Beneficiary"
             android:textColor="@color/colorRed"
             android:textSize="20sp" />
 

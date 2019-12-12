@@ -40,7 +40,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:layout_height="wrap_content">
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -72,10 +72,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:id="@+id/l6"
+
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tvRole"
+                    android:hint="@string/role"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sprole"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                android:background="@drawable/bg_edittext_focused"
+
+                android:entries="@array/role_array"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/l12"
-            android:layout_weight="7"
+            android:layout_weight="6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
@@ -84,26 +110,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:textColor="@color/colorRed"
                 android:id="@+id/txt"
                 android:text="@string/select_image_for_profile_photo"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 tools:ignore="SmallSp" />
             <ImageView
                 android:id="@+id/imgView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/parvarish_knowledge_center"
                 app:srcCompat="@drawable/userpic" />
-            <Button
+
+            <ImageButton
                 android:id="@+id/btnChoose"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="-90dp"
+                android:layout_gravity="top"
+                android:background="@drawable/pencil"
+                android:contentDescription="@string/parvarish_knowledge_center" />
+            <Button
+                android:id="@+id/upload_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_shape"
+                android:text="@string/upload"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/choose" />
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -136,49 +175,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_margin="5dp"
-        android:id="@+id/l6"
-        android:layout_below="@+id/l5"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tvRole"
-            android:hint="@string/role"
-            android:maxLines="1"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sprole"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/l6"
-        android:background="@drawable/bg_edittext_focused"
-        android:visibility="gone"
-        android:entries="@array/role_array"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_below="@+id/sprole"
+        android:layout_below="@+id/l4"
         android:orientation="horizontal"
         android:baselineAligned="false">
-        <Button
-            android:id="@+id/upload_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_shape"
-            android:text="@string/upload"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            tools:ignore="ButtonStyle" />
+
         <Button
             android:id="@+id/dbuttonsave"
             android:layout_width="wrap_content"

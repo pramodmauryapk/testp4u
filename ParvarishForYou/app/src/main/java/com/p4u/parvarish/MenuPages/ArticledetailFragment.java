@@ -15,22 +15,17 @@ import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.gallary.TouchImageView;
-import com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayer;
-import com.p4u.parvarish.video.youtubeplayer.player.YouTubePlayerView;
-import com.p4u.parvarish.video.youtubeplayer.player.playerUtils.FullScreenHelper;
 import com.squareup.picasso.Picasso;
 
 public class ArticledetailFragment extends Fragment {
 
-    private static final String TAG = "OurWorkFragment";
+    private static final String TAG = "ArticleFragment";
     private EditText editText;
     private TextView textView;
     private Button button;
     private Context context;
-    private YouTubePlayerView player;
-    private FullScreenHelper fullScreenHelper;
-    private YouTubePlayer youTubePlayer;
-    private TextView mDescription;
+
+    private TextView mDescription,mTitle;
     private TouchImageView mImage;
     private View v;
     private String videoId;
@@ -38,13 +33,14 @@ public class ArticledetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.activity_detail, container, false);
-        fullScreenHelper = new FullScreenHelper();
+        v = inflater.inflate(R.layout.activity_article_detail, container, false);
+
         context = container.getContext();
         initViews();
-        player.setVisibility(View.GONE);
+
         assert this.getArguments() != null;
-        final String imageurl = this.getArguments().getString("Video");
+        String imagetitle = this.getArguments().getString("Title");
+        String imageurl = this.getArguments().getString("Image");
         String desc=this.getArguments().getString("Description");
 
         Picasso.get()
@@ -52,12 +48,13 @@ public class ArticledetailFragment extends Fragment {
                     .placeholder(R.drawable.placeholder)
                     .into(mImage);
             mDescription.setText(desc);
+            mTitle.setText(imagetitle);
 
 
         return v;
     }
     private void initViews(){
-        player=v.findViewById(R.id.player1);
+        mTitle = v.findViewById(R.id.tvTitle);
         mImage = v.findViewById(R.id.ivImage);
         mDescription =v. findViewById(R.id.tvDescription);
     }

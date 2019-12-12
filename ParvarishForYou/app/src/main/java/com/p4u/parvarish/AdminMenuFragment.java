@@ -24,7 +24,7 @@ import com.p4u.parvarish.MenuPages.ManagePagesFragment;
 import com.p4u.parvarish.Notification.NotificationActivity;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
-import com.p4u.parvarish.book_pannel.IssueBookFragment;
+import com.p4u.parvarish.book_pannel.SubmitBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.gallary.ManagegalaryFragment;
@@ -186,7 +186,7 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new AddBeneficiaryFragment());
                         break;
                     case 6:
-                        switchFragment(new IssueBookFragment());
+                        switchFragment(new SubmitBookFragment());
                         break;
                     case 7:
                         switchFragment(new UserMobileFragment());
@@ -206,7 +206,7 @@ public class AdminMenuFragment extends HomeFragment {
                     case 12:
                         Intent ActivityIndent = new Intent(context, NotificationActivity.class);
                         startActivity(ActivityIndent);
-                       // switchFragment(new newgallaryFragment());
+
                         break;
                     case 13:
                         switchFragment(new ManagePagesFragment());
