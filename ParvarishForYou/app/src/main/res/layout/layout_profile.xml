@@ -129,10 +129,11 @@
                 android:id="@+id/btnChoose"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_marginTop="-90dp"
                 android:layout_gravity="top"
+                android:layout_marginTop="-90dp"
                 android:background="@drawable/pencil"
                 android:contentDescription="@string/parvarish_knowledge_center" />
+
             <Button
                 android:id="@+id/upload_button"
                 android:layout_width="wrap_content"

@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.p4u.parvarish.Attandence.AttandenceMenuFragment;
+import com.p4u.parvarish.Attandence.SchoolSigninFragment;
 import com.p4u.parvarish.HelpLine.HelplineFragment;
 import com.p4u.parvarish.HelpingHand.ShowHalpingHandFragment;
 import com.p4u.parvarish.MenuPages.ArticlegalleryFragment;
@@ -104,8 +104,8 @@ public class UserMenuFragment extends HomeFragment {
                     case 5:switchFragment(new ArticlegalleryFragment(),5);
                         //switchFragment(new PageListFragment(),5);
                         break;
-                    case 6://switch_menu(new SchoolSigninFragment());
-                        switch_menu(new AttandenceMenuFragment());
+                    case 6:switch_menu(new SchoolSigninFragment());
+                        //switch_menu(new AttandenceMenuFragment());
                         break;
 
                     case 7:

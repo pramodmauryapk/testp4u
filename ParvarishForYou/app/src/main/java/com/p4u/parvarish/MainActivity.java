@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -30,7 +31,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.p4u.parvarish.HelpLine.EmergencyFragment;
@@ -127,8 +127,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if(callmobile!=null)
                     call(callmobile);
-                else
-                    Snackbar.make(view, "Kindly Add Number", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                else {
+                    Bundle bundle = new Bundle();
+                    newContent = new EmergencyFragment();
+                    newContent.setArguments(bundle);
+                    switchFragment(newContent);
+                    //Snackbar.make(view, "Kindly Add Number", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
+
 
             }
         });
@@ -141,11 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        //starting timer service
-       // startService(new Intent(getApplicationContext(), TimerService.class));
-        //to stop this
-        //stopService(new Intent(getApplicationContext(),
-        //                            TimerService.class));
 
     }
     public class SettingsContentObserver extends ContentObserver {
@@ -172,25 +173,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int currentVolume =
                     Objects.requireNonNull(audio).getStreamVolume(AudioManager.STREAM_MUSIC);
             int delta = previousVolume - currentVolume;
-        if(delta<0) {
+      //  if(delta<0) {
             //for activate google assistant
            // startActivity(new Intent(Intent.ACTION_VOICE_COMMAND).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
-        }
-      /*     if (delta > 0) {
-
-                    //call("9719403593");
-                    Toast.makeText(MainActivity.this, "Volume Decreased"+previousVolume, Toast.LENGTH_SHORT).show();
-
-                    //previousVolume = currentVolume;
+       // }
+            if (delta > 0) {
+                    Toast.makeText(MainActivity.this, "Volume Decreased", Toast.LENGTH_SHORT).show();
+                    previousVolume = currentVolume;
 
             } else if (delta < 0) {
-                if(currentVolume==15)
-                    call("198");
-                Toast.makeText(MainActivity.this, "Volume Increased"+previousVolume, Toast.LENGTH_SHORT).show();
-                //previousVolume = currentVolume;
 
-            }*/
+                Toast.makeText(MainActivity.this, "Volume Increased", Toast.LENGTH_SHORT).show();
+                previousVolume = currentVolume;
+
+            }
         }
     }
     public void senemail(){

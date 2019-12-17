@@ -84,8 +84,8 @@ public class AddTeacherFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_addteacher, container, false);
         // Inflate the layout for this fragment
         bundle=new Bundle();
-        //schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
-        schoolname="RD public school";
+        schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
+        //schoolname="RD public school";
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         techerref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("TEACHERS");
         princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("PRINCI");
@@ -249,23 +249,24 @@ public class AddTeacherFragment extends Fragment {
                             //it will create a unique id and we will use it as the Primary Key for our Book
                             String teacherId = techerref.push().getKey();
                             //creating an Book Object
+                            assert teacherId != null;
                             TeacherData teacher = new TeacherData(
                                     teacherId,
-                                    tname.getText().toString(),
-                                    tempcode.getText().toString(),
-                                    tfather.getText().toString(),
-                                    tdob.getText().toString(),
-                                    tmother.getText().toString(),
-                                    tmobile.getText().toString(),
+                                    requireNonNull(tname.getText()).toString(),
+                                    requireNonNull(tempcode.getText()).toString(),
+                                    requireNonNull(tfather.getText()).toString(),
+                                    requireNonNull(tdob.getText()).toString(),
+                                    requireNonNull(tmother.getText()).toString(),
+                                    requireNonNull(tmobile.getText()).toString(),
                                     tclass.getSelectedItem().toString(),
                                     tsection.getSelectedItem().toString(),
                                     tyear.getSelectedItem().toString(),
-                                    taddress.getText().toString(),
+                                    requireNonNull(taddress.getText()).toString(),
                                     tgender.getSelectedItem().toString(),
-                                    tload.getText().toString(),
-                                    tsalary.getText().toString(),
+                                    requireNonNull(tload.getText()).toString(),
+                                    requireNonNull(tsalary.getText()).toString(),
                                     uri.toString(),
-                                    tpin.getText().toString(),
+                                    requireNonNull(tpin.getText()).toString(),
                                     "",
                                     "TEACHER",
                                     schoolname,

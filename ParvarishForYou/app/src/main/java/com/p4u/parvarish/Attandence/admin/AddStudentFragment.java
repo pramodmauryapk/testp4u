@@ -84,8 +84,8 @@ public class AddStudentFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_addstudent, container, false);
         // Inflate the layout for this fragment
         bundle=new Bundle();
-        //schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
-        schoolname="RD public school";
+        schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
+        //schoolname="RD public school";
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         studentref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
         princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("PRINCI");
@@ -249,28 +249,28 @@ public class AddStudentFragment extends Fragment {
                             //it will create a unique id and we will use it as the Primary Key for our Book
                             String studentId = studentref.push().getKey();
                             //creating an Book Object
+                            assert studentId != null;
                             StudentData student = new StudentData(
                                     studentId,
-                                    stuname.getText().toString(),
-                                    stuadmissionno.getText().toString(),
-                                    stufather.getText().toString(),
-                                    studob.getText().toString(),
-                                    stumother.getText().toString(),
-                                    stuhomemobile.getText().toString(),
+                                    requireNonNull(stuname.getText()).toString(),
+                                    requireNonNull(stuadmissionno.getText()).toString(),
+                                    requireNonNull(stufather.getText()).toString(),
+                                    requireNonNull(studob.getText()).toString(),
+                                    requireNonNull(stumother.getText()).toString(),
+                                    requireNonNull(stuhomemobile.getText()).toString(),
                                     stuclass.getSelectedItem().toString(),
                                     stusection.getSelectedItem().toString(),
                                     stuyear.getSelectedItem().toString(),
-                                    stuaddress.getText().toString(),
+                                    requireNonNull(stuaddress.getText()).toString(),
                                     stugender.getSelectedItem().toString(),
-                                    stufeepaid.getText().toString(),
-                                    stufeepending.getText().toString(),
+                                    requireNonNull(stufeepaid.getText()).toString(),
+                                    requireNonNull(stufeepending.getText()).toString(),
                                     uri.toString(),
-                                    stupin.getText().toString(),
-                                    studentId,
+                                    requireNonNull(stupin.getText()).toString(),
                                     "",
                                     "STUDENT",
                                     schoolname,
-                                    studentId.substring(0, 5));
+                                    studentId.substring(0, 5),false);
 
                             //Saving the Book
                             studentref.child(requireNonNull(studentId)).setValue(student);

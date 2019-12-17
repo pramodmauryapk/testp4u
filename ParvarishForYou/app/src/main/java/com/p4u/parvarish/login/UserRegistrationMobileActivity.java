@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -29,8 +30,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.MainActivity;
+import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.text.SimpleDateFormat;
@@ -41,7 +42,7 @@ import static java.util.Objects.requireNonNull;
 
 public class UserRegistrationMobileActivity extends AppCompatActivity {
 
-    private static final String TAG = "UserRegistrationActivity";
+    private static final String TAG = "UserRegistration";
     private TextInputLayout tlname;
 
     private TextInputLayout tladdress;
@@ -100,7 +101,7 @@ public class UserRegistrationMobileActivity extends AppCompatActivity {
         Animation center_reveal_anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.center_reveal_anim);
         register_card.startAnimation(center_reveal_anim);
 
-
+        user_name=null;
 
         if(FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
@@ -112,22 +113,25 @@ public class UserRegistrationMobileActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     // Log.d(TAG, "Accessing database");
                     getting_role(dataSnapshot);
-                    Intent intent = new Intent(UserRegistrationMobileActivity.this, MainActivity.class);
-                    intent.putExtra("user_name",user_name);
-                    intent.putExtra("user_email",user_email);
-                    intent.putExtra("user_role",user_roll);
-                    intent.putExtra("user_img", user_img);
-                    startActivity(intent);
-                    finish();
+                    if(user_name!=null){
+                        Intent intent = new Intent(UserRegistrationMobileActivity.this, MainActivity.class);
+                        intent.putExtra("user_name",user_name);
+                        intent.putExtra("user_email",user_email);
+                        intent.putExtra("user_role",user_roll);
+                        intent.putExtra("user_img", user_img);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    /// Log.d(TAG, "failed to read values", databaseError.toException());
+                     Log.d(TAG, "failed to read values", databaseError.toException());
                 }
             });
 
-        }else {
+        }
             btnregister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -137,7 +141,7 @@ public class UserRegistrationMobileActivity extends AppCompatActivity {
 
                 }
             });
-        }
+
         change_listner(etFullname, tlname);
         change_listner(etAddress, tladdress);
 
@@ -209,36 +213,33 @@ public class UserRegistrationMobileActivity extends AppCompatActivity {
 
 
             String id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                    Teacher upload = new Teacher(
-                            id,
-                            name,
-                            email,
-                            password,
-                            role,
-                            mobilenumber,
-                            address,
-                            identity,
-                            status,
-                            feedback,
-                            news,
-                            time,
-                            rating,
-                            "",
-                            0,
-                            null
-                    );
-                    myref.child(Objects.requireNonNull(id)).setValue(upload);
-                    Toast.makeText(UserRegistrationMobileActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(UserRegistrationMobileActivity.this, MainActivity.class);
-                    intent.putExtra("user_name",name);
-                    intent.putExtra("user_email",mobilenumber);
-                    intent.putExtra("user_role",role);
-                    intent.putExtra("user_img", (String) null);
-                    startActivity(intent);
-                    finish();
-
-
-
+            Teacher upload = new Teacher(
+                    id,
+                    name,
+                    email,
+                    password,
+                    role,
+                    mobilenumber,
+                    address,
+                    identity,
+                    status,
+                    feedback,
+                    news,
+                    time,
+                    rating,
+                    "",
+                    0,
+                    null
+            );
+            myref.child(Objects.requireNonNull(id)).setValue(upload);
+            Toast.makeText(UserRegistrationMobileActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(UserRegistrationMobileActivity.this, MainActivity.class);
+            intent.putExtra("user_name",name);
+            intent.putExtra("user_email",mobilenumber);
+            intent.putExtra("user_role",role);
+            intent.putExtra("user_img", (String) null);
+            startActivity(intent);
+            finish();
 
         }
     }

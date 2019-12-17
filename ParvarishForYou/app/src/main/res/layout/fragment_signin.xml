@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white">
 
@@ -28,8 +27,7 @@
                 android:textColor="@color/colorRed"
                 android:textSize="20sp"
                 android:id="@+id/txt1"
-
-                android:text="Select Collge Name"
+                android:text="@string/select_college_name_amp_usertype"
                 android:textStyle="bold"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,12 +52,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dimen_20dp"
             android:entries="@array/school_roles"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bg_edittext_focused"
             android:padding="5dp">
-
         </Spinner>
     </LinearLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +68,7 @@
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etpasscode"
-                    android:hint="Passcode"
+                    android:hint="@string/passcode"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
                     android:layout_width="match_parent"
@@ -87,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/BtnSignin"
                     android:layout_marginStart="5dp"
-                    android:text="Enter"
+                    android:text="@string/enter"
                     android:ems="7"
                     android:textColor="@color/white"
                     android:background="@drawable/button_shape"
@@ -100,7 +98,7 @@
                     android:ems="7"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:text="change"
+                    android:text="@string/change"
                     android:background="@drawable/button_shape"
                     android:layout_height="wrap_content"
                     tools:ignore="ButtonStyle" />

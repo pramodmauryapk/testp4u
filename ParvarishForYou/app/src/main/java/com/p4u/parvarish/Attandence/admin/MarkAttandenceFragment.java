@@ -1,10 +1,10 @@
 package com.p4u.parvarish.Attandence.admin;
 
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,61 +33,33 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class MarkAttendanceFragment extends Fragment implements StudentList_model.OnItemClickListener {
-
-    private static String TAG = "rcdattendancefragment";
-    private ListView listViewstudent;
+public class MarkAttandenceFragment extends Fragment {
+    private DatabaseReference studentref;
+    private ListView mainListView;
     private List<StudentData> students;
     private ArrayList <String> checkedValue;
-    private EditText etdate;
-    private View dialogView;
-    private DatabaseReference studentref;
-    private View v;
-    private Context context;
+    private StudentArrayAdapter Adapter;
+    private ImageButton check;
     private int mYear,mMonth,mDay,count;
     private Spinner sp_class,sp_section;
-    private ImageButton btnImg;
-    public String date;
-    public MarkAttendanceFragment() {
-        // Required empty public constructor
-    }
-
+    private String date,schoolname;
+    private DatabaseReference dR;
+    private Bundle bundle;
+    private EditText etdate;
+    private Context context;
+    private String TAG="new";
+    private View v;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_mark_attendance, container, false);
-        Log.d(TAG,"onCreate: starting onCreate");
-        studentref= FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
-        context = container.getContext();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        v=inflater.inflate(R.layout.fragment_markattandence, container, false);
         initViews();
+        bundle=new Bundle();
+        schoolname = (Objects.requireNonNull(this.getArguments())).getString("SCHOOL_NAME");
+        //schoolname="RD public school";
+        context = container.getContext();
         students = new ArrayList<>();
-        listViewstudent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                StudentData student = students.get(i);
-                Toast.makeText(getContext(),"hello "+i,Toast.LENGTH_LONG).show();
-                /*showDeleteDialog(
-                        //  user.getUserId (),
-                        user.getUserName(),
-                        user.getUserEmail(),
-                        user.getUserRole(),
-                        user.getUserMobile(),
-                        user.getUserAddress(),
-                        user.getUserIdentity());*/
-            }
-        });
 
-        btnImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(),"" + checkedValue,Toast.LENGTH_LONG).show();
-            }
-        });
         etdate.setText(get_current_time());
         etdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +78,7 @@ public class MarkAttendanceFragment extends Fragment implements StudentList_mode
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                etdate.setText(String.format("%d/%d/%d", dayOfMonth, monthOfYear + 1, year));
+                                etdate.setText(String.format("%d/%d/%d", year, monthOfYear + 1,dayOfMonth ));
 
                             }
                         }, mYear, mMonth, mDay);
@@ -136,36 +108,74 @@ public class MarkAttendanceFragment extends Fragment implements StudentList_mode
 
             }
         });
-        //Fragment view return
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View item,
+        int position, long id) {
+
+            StudentData stu=Adapter.getItem(position);
+            assert stu != null;
+            stu.toggleChecked();
+            StudentViewHolder viewHolder = (StudentViewHolder) item.getTag();
+            viewHolder.getCheckBox().setChecked(stu.isChecked());
+        }
+    });
+
+        check.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                dR= FirebaseDatabase.getInstance().getReference().child("SCHOOL")
+                        .child("ATTANDENCE")
+                        .child(schoolname)
+                        .child(sp_class.getSelectedItem().toString())
+                        .child(sp_section.getSelectedItem().toString())
+                        .child(etdate.getText().toString());
+               // String attandenceId = dR.push().getKey();
+               // dR.child("ID").setValue(attandenceId);
+                for (int i = 0; i < Adapter.getCount(); i++) {
+                    StudentData student = Adapter.getItem(i);
+                    assert student != null;
+                    if (student.isChecked()) {
+
+                       // Log.d(TAG,"hello"+student.getStudentName());
+                        dR.child("STU"+i).setValue(student.getStudentadmissionno());
+
+                    }else{
+                        dR.child("STU"+i).removeValue();
+                    }
+                }
+                Toast.makeText(context, "Attandence Submitted", Toast.LENGTH_LONG).show();
+
+           }
+        });
         return v;
     }
-    private void initViews(){
-
-        listViewstudent = v.findViewById(R.id.lv_studentlist);
-        etdate=v.findViewById(R.id.et_date);
-        sp_class=v.findViewById(R.id.spn_class);
-        sp_section=v.findViewById(R.id.spn_section);
-        btnImg=v.findViewById(R.id.btn_submitattendence);
 
 
-    }
+
     public void load_list() {
 
-        //super.onStart();
+        super.onStart();
+        studentref= FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
         studentref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+
                 students.clear();
+
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     StudentData student = postSnapshot.getValue(StudentData.class);
                     if(sp_class.getSelectedItem().equals(Objects.requireNonNull(student).getStudentclass())&& sp_section.getSelectedItem().equals(student.getStudentsection())) {
                         students.add(student);
                     }
+
                 }
+
                 if(getActivity()!=null) {
-                    StudentList_model Adapter = new StudentList_model(getActivity(), students);
-                    listViewstudent.setAdapter(Adapter);
+                    Adapter = new StudentArrayAdapter(getActivity(), students);
+                    mainListView.setAdapter(Adapter);
                 }
             }
             @Override
@@ -175,15 +185,20 @@ public class MarkAttendanceFragment extends Fragment implements StudentList_mode
         });
 
     }
-
-    private String get_current_time(){
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(new Date());
+    private void initViews() {
+        check = v.findViewById(R.id.check);
+        mainListView = v. findViewById(R.id.mainListView);
+        etdate=v.findViewById(R.id.et_date);
+        sp_class=v.findViewById(R.id.spn_class);
+        sp_section=v.findViewById(R.id.spn_section);
     }
 
-    @Override
-    public void onItemClick(int position) {
 
-
+    public Object onRetainNonConfigurationInstance(){
+        return students;
+    }
+    private String get_current_time(){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return sdf.format(new Date());
     }
 }

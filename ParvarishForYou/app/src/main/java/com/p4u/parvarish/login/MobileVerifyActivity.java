@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -32,7 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.MainActivity;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.util.concurrent.TimeUnit;
@@ -41,6 +41,7 @@ import static java.util.Objects.requireNonNull;
 
 public class MobileVerifyActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG ="mobilverify" ;
     private EditText otp1, otp2,otp3,otp4,otp5,otp6;
     private Button verify;
     private ImageButton edit;
@@ -59,14 +60,14 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
         (requireNonNull (getSupportActionBar ())).hide ();
         mAuth = FirebaseAuth.getInstance();
         init();
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+       /* if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
             myref.addValueEventListener(new ValueEventListener() {
 
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   // Log.d(TAG, "Accessing database");
+                    // Log.d(TAG, "Accessing database");
                     getting_role(dataSnapshot);
                     Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
                     intent.putExtra("user_name",user_name);
@@ -79,15 +80,15 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                   /// Log.d(TAG, "failed to read values", databaseError.toException());
+                    /// Log.d(TAG, "failed to read values", databaseError.toException());
                 }
             });
-        }else{
+        }else{*/
             if (getIntent().getExtras()!=null){
                 phonenumber = getIntent().getStringExtra("phonenumber");
             }
             sendVerificationCode(phonenumber);
-        }
+      //  }
         otp1.addTextChangedListener(new EditTextWatcher(otp1));
         otp2.addTextChangedListener(new EditTextWatcher(otp2));
         otp3.addTextChangedListener(new EditTextWatcher(otp3));
@@ -124,7 +125,7 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.buttonSignIn:
                 //Toast.makeText(this,"Verify Clicked"+getOTP(),Toast.LENGTH_SHORT).show();
-                verifyVerificationCode(code);
+                verifyVerificationCode(getOTP());
                 break;
             case R.id.resend_otp:
                 sendVerificationCode(phonenumber);
@@ -233,28 +234,29 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    // Log.d(TAG, "Accessing database");
-                                    getting_role(dataSnapshot);
-                                    if(user_name==null) {
+
+                                   // getting_role(dataSnapshot);
+                                   // if(user_name==null) {
+                                        Log.d(TAG,"starting user registation");
                                         Intent intent = new Intent(MobileVerifyActivity.this, UserRegistrationMobileActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.putExtra("mobile", phonenumber);
                                         startActivity(intent);
-                                    }else{
-                                    Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
-                                    intent.putExtra("user_name",user_name);
-                                    intent.putExtra("user_email",user_email);
-                                    intent.putExtra("user_role",user_roll);
-                                    intent.putExtra("user_img", user_img);
-                                    startActivity(intent);
-                                    finish();
-                                    }
+                                   // }else{
+                                     //   Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
+                                     //   intent.putExtra("user_name",user_name);
+                                     //   intent.putExtra("user_email",user_email);
+                                     //   intent.putExtra("user_role",user_roll);
+                                     //   intent.putExtra("user_img", user_img);
+                                     //   startActivity(intent);
+                                     //   finish();
+                                   // }
 
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    /// Log.d(TAG, "failed to read values", databaseError.toException());
+                                     Log.d(TAG, "failed to read values", databaseError.toException());
                                 }
                             });
                          /*   if(user_roll!=null){
@@ -290,7 +292,7 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
         progressBar.setVisibility(View.VISIBLE);
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 number,           // Phone number to verify
-                60,            // Timeout duration
+                120,            // Timeout duration
                 TimeUnit.SECONDS, // Unit of timeout
                 this,//TaskExecutors.MAIN_THREAD// Activity (for callback binding)
                 mCallback
@@ -300,17 +302,22 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
     //the callback to detect the verification status
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
-        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
-            //Getting the code sent by SMS
-            code = phoneAuthCredential.getSmsCode();
+            try{
+                //Getting the code sent by SMS
+                code = phoneAuthCredential.getSmsCode();
+                //sometime the code is not detected automatically
+                //in this case the code will be null
+                //so user has to manually enter the code
+                if (code != null) {
+                    //editTextCode.setText(code);
+                    filltext(code);
 
-            //sometime the code is not detected automatically
-            //in this case the code will be null
-            //so user has to manually enter the code
-            if (code != null) {
-                //editTextCode.setText(code);
-                filltext(code);
+                }
+            }catch (Exception e){
+                Toast.makeText(MobileVerifyActivity.this, "Code Not received", Toast.LENGTH_LONG).show();
+            }finally {
                 //verifying the code
                 verifyVerificationCode(code);
             }
@@ -355,18 +362,18 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void getting_role(DataSnapshot dataSnapshot) {
 
-            for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                Teacher uInfo=ds.getValue(Teacher.class);
-                if(requireNonNull(uInfo).getUserId().equals(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
-                    user_name = requireNonNull(uInfo).getUserName();
-                    user_email = uInfo.getUserEmail();
-                    user_roll = uInfo.getUserRole();
-                    user_img = uInfo.getImageURL();
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            Teacher uInfo=ds.getValue(Teacher.class);
+            if(requireNonNull(uInfo).getUserId().equals(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
+                user_name = requireNonNull(uInfo).getUserName();
+                user_email = uInfo.getUserEmail();
+                user_roll = uInfo.getUserRole();
+                user_img = uInfo.getImageURL();
 
-
-                }
 
             }
+
+        }
 
     }
 }

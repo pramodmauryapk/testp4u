@@ -398,7 +398,7 @@ So if you are interested to be technical partner pls send you name and address t
         <item>30</item>
         <item>31</item>
     </string-array>
-    <string name="speech_prompt">Say something...</string>
+    <string name="speech_prompt">Say something…</string>
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="tap_on_mic">Tap on mic to speak</string>
 
@@ -413,7 +413,19 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="speech_promp" />
 
     <string name="addtext">Please add Text</string>
+    <string name="select_college_name_amp_usertype"><![CDATA[Select College Name & UserType]]></string>
+    <string name="passcode">Passcode</string>
+    <string name="enter">Enter</string>
+    <string name="change">change</string>
+    <string name="_1">1</string>
+    <string name="student_name">Student name</string>
+    <string name="admission_no">Admission No</string>
+    <string name="student_list">Student List</string>
 
+    <string name="upload_pic_amp_details"><![CDATA[Upload Pic & Details]]></string>
+
+    <string name="enter_service_amp_no"><![CDATA[Enter Service & No]]></string>
+    <string name="post">post</string>
 
 
 </resources>

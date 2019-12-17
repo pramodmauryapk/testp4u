@@ -18,14 +18,16 @@ import androidx.fragment.app.Fragment;
 
 import com.p4u.parvarish.Attandence.admin.AddSchoolFragment;
 import com.p4u.parvarish.Beneficiary.AddBeneficiaryFragment;
+import com.p4u.parvarish.Collection.AddCollectioncenterFragment;
+import com.p4u.parvarish.Collection.CollectionCenterFragment;
 import com.p4u.parvarish.HelpLine.AddHelplineFragment;
 import com.p4u.parvarish.HelpingHand.AdminHalpingHandFragment;
 import com.p4u.parvarish.MenuPages.ManagePagesFragment;
 import com.p4u.parvarish.Notification.NotificationActivity;
 import com.p4u.parvarish.book_pannel.AddBookFragment;
 import com.p4u.parvarish.book_pannel.BookListFragment;
-import com.p4u.parvarish.book_pannel.SubmitBookFragment;
 import com.p4u.parvarish.book_pannel.SearchBookFragment;
+import com.p4u.parvarish.book_pannel.SubmitBookFragment;
 import com.p4u.parvarish.book_pannel.UpdateBookFragment;
 import com.p4u.parvarish.gallary.ManagegalaryFragment;
 import com.p4u.parvarish.menu_items.CentreListFragment;
@@ -66,7 +68,8 @@ public class AdminMenuFragment extends HomeFragment {
                     "Center List",
                     "Search Book",
                     "Donor List",
-                    "Book List"
+                    "Book List",
+                    "Collection Center"
 
             };
             gridViewImageId = new int[]{
@@ -74,7 +77,8 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_list_black_24dp,
                     R.drawable.ic_youtube_searched_for_black_24dp,
                     R.drawable.ic_card_giftcard_black_24dp,
-                    R.drawable.ic_book_black_24dp
+                    R.drawable.ic_book_black_24dp,
+                    R.drawable.ic_burst_mode_black_24dp
 
             };
 
@@ -84,6 +88,7 @@ public class AdminMenuFragment extends HomeFragment {
                     "Search Book",
                     "Donor List",
                     "Book List",
+                    "Collection Center",
                     "Add Book",
                     "Issue Book",
                     "Submit Book",
@@ -97,6 +102,7 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_youtube_searched_for_black_24dp,
                     R.drawable.ic_card_giftcard_black_24dp,
                     R.drawable.ic_book_black_24dp,
+                    R.drawable.ic_burst_mode_black_24dp,
                     R.drawable.ic_add_book_24dp,
                     R.drawable.ic_child_friendly_black_24dp,
                     R.drawable.ic_transfer_within_a_station_black_24dp,
@@ -111,6 +117,7 @@ public class AdminMenuFragment extends HomeFragment {
                     "Search Book",
                     "Donor List",
                     "Book List",
+                    "Collection Center",
                     "Add Book",
                     "Issue Book",
                     "Submit Book",
@@ -125,7 +132,8 @@ public class AdminMenuFragment extends HomeFragment {
                     "Add Video",
                     "Help",
                     "Add School",
-                    "Add Helpline"
+                    "Add Helpline",
+                    "Add Collection Center"
 
 
             };
@@ -136,6 +144,7 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_youtube_searched_for_black_24dp,
                     R.drawable.ic_card_giftcard_black_24dp,
                     R.drawable.ic_book_black_24dp,
+                    R.drawable.ic_burst_mode_black_24dp,
                     R.drawable.ic_add_book_24dp,
                     R.drawable.ic_child_friendly_black_24dp,
                     R.drawable.ic_transfer_within_a_station_black_24dp,
@@ -150,8 +159,8 @@ public class AdminMenuFragment extends HomeFragment {
                     R.drawable.ic_video_call_black_24dp,
                     R.drawable.ic_playlist_add_black_24dp,
                     R.drawable.ic_burst_mode_black_24dp,
+                    R.drawable.ic_add_book_24dp,
                     R.drawable.ic_add_book_24dp
-
             };
 
         }
@@ -179,53 +188,58 @@ public class AdminMenuFragment extends HomeFragment {
                     case 3:
                         switchFragment(new BookListFragment());
                         break;
-                    case 4:
-                        switchFragment(new AddBookFragment());
+
+                    case 4:switchFragment(new CollectionCenterFragment());
                         break;
-                    case 5:
-                        switchFragment(new AddBeneficiaryFragment());
+                    case 5:switchFragment(new AddBookFragment());
                         break;
                     case 6:
-                        switchFragment(new SubmitBookFragment());
+                        switchFragment(new AddBeneficiaryFragment());
                         break;
                     case 7:
-                        switchFragment(new UserMobileFragment());
+                        switchFragment(new SubmitBookFragment());
                         break;
                     case 8:
-                        switchFragment(new ManageUserFragment());
+                        switchFragment(new UserMobileFragment());
                         break;
                     case 9:
-                        switchFragment(new UpdateBookFragment());
+                        switchFragment(new ManageUserFragment());
                         break;
                     case 10:
-                        switchFragment(new NewsAddFragment());
+                        switchFragment(new UpdateBookFragment());
                         break;
                     case 11:
-                        switchFragment(new ManagegalaryFragment());
+                        switchFragment(new NewsAddFragment());
                         break;
                     case 12:
+                        switchFragment(new ManagegalaryFragment());
+                        break;
+                    case 13:
                         Intent ActivityIndent = new Intent(context, NotificationActivity.class);
                         startActivity(ActivityIndent);
 
                         break;
-                    case 13:
+                    case 14:
                         switchFragment(new ManagePagesFragment());
 
                         break;
-                    case 14:
+                    case 15:
                         switchFragment(new AdminHalpingHandFragment());
                         break;
-                    case 15:
+                    case 16:
                         switchFragment(new AddYoutubeVideofragment());
                         break;
-                    case 16://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
+                    case 17://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
                         switchFragment(new HelpingFragment());
                         break;
-                    case 17:
+                    case 18:
                         switchFragment(new AddSchoolFragment());
                         break;
-                    case 18://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
+                    case 19://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
                         switchFragment(new AddHelplineFragment());
+                        break;
+                    case 20://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
+                        switchFragment(new AddCollectioncenterFragment());
                         break;
 
                 }

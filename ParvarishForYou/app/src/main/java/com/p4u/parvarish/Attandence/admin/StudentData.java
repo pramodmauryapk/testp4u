@@ -18,11 +18,15 @@ public class StudentData {
     private String studentfeepending;
     private String studentimgurl;
     private String studentpin;
-    private String studentattandenceid;
+
     private String studentresultid;
     private String studentrole;
     private String studentschool;
     private String passcode;
+
+
+
+    private boolean checked = false;
     public StudentData() {
     }
 
@@ -45,11 +49,12 @@ public class StudentData {
                        String studentfeepending,
                        String studentimgurl,
                        String studentpin,
-                       String studentattandenceid,
+
                        String studentresultid,
                        String studentrole,
                        String studentschool,
-                       String passcode){
+                       String passcode,
+                       boolean checked){
         this.studentId=studentId;
         this.studentName=studentName;
         this.studentadmissionno=studentadmissionno;
@@ -66,11 +71,12 @@ public class StudentData {
         this.studentfeepending=studentfeepending;
         this.studentimgurl=studentimgurl;
         this.studentpin=studentpin;
-        this.studentattandenceid=studentattandenceid;
+
         this.studentresultid=studentresultid;
         this.studentrole=studentrole;
         this.studentschool=studentschool;
         this.passcode=passcode;
+        this.checked=checked;
 
     }
     public String getStudentId() {
@@ -201,13 +207,7 @@ public class StudentData {
         this.studentpin = studentpin;
     }
 
-    public String getStudentattandenceid() {
-        return studentattandenceid;
-    }
 
-    public void setStudentattandenceid(String studentattandenceid) {
-        this.studentattandenceid = studentattandenceid;
-    }
 
     public String getStudentresultid() {
         return studentresultid;
@@ -237,5 +237,15 @@ public class StudentData {
     public void setPasscode(String passcode) {
         this.passcode = passcode;
     }
+    public boolean isChecked() {
+        return checked;
+    }
 
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+    public void toggleChecked()
+    {
+        checked = !checked;
+    }
 }

@@ -67,7 +67,7 @@ public class LayoutGridView extends BaseAdapter {
 
 
 
-            imageViewAndroid.getLayoutParams().height=120;
+            imageViewAndroid.getLayoutParams().height=130;
             imageViewAndroid.getLayoutParams().width=100;
      //       textViewAndroid.setLayoutParams(params);
             textViewAndroid.setText(gridViewString[i]);

@@ -15,23 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.p4u.parvarish.Attandence.Teacher.ModifyattendanceTeacherFragment;
 import com.p4u.parvarish.Attandence.admin.AddStudentFragment;
 import com.p4u.parvarish.Attandence.admin.AddTeacherFragment;
-import com.p4u.parvarish.Attandence.admin.MarkAttendanceFragment;
+import com.p4u.parvarish.Attandence.admin.MarkAttandenceFragment;
 import com.p4u.parvarish.Attandence.admin.StudentlListFragment;
 import com.p4u.parvarish.Attandence.admin.TeacherListFragment;
-import com.p4u.parvarish.Attandence.raw.AssignmentbyteacherFragment;
-import com.p4u.parvarish.Attandence.raw.EnterstudentdataFragment;
-import com.p4u.parvarish.Attandence.raw.EnterteacherdataFragment;
-import com.p4u.parvarish.Attandence.raw.GeneratereportFragment;
-import com.p4u.parvarish.Attandence.raw.ModifyattendanceFragment;
-import com.p4u.parvarish.Attandence.student.StudentassignmentFragment;
-import com.p4u.parvarish.Attandence.student.ViewAttendanceFragment;
-import com.p4u.parvarish.Attandence.student.ViewleaveFragment;
-import com.p4u.parvarish.Attandence.student.ViewnoticeFragment;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.HomeFragment;
+import com.p4u.parvarish.R;
 import com.p4u.parvarish.menu_items.LayoutGridView;
 
 import static java.util.Objects.requireNonNull;
@@ -52,9 +42,9 @@ public class AttandenceMenuFragment extends HomeFragment {
         context = container.getContext();
         bundle=new Bundle();
         assert this.getArguments() != null;
-        //schoolname = this.getArguments().getString("SCHOOL_NAME");
-        //role = this.getArguments().getString("ROLE");
-        role="ADMIN";
+        schoolname = this.getArguments().getString("SCHOOL_NAME");
+        role = this.getArguments().getString("ROLE");
+        //role="ADMIN";
         getWidthAndHeight();
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         String[] gridViewString = new String[0];
@@ -62,141 +52,125 @@ public class AttandenceMenuFragment extends HomeFragment {
         assert schoolname != null;
         switch (role) {
             case "STUDENT":
-
-               /* gridViewString = new String[]{
-                        "WorkBook",
-                        "Attandence",
-                        "Leave",
-                        "Notice Board",
-                        "Assignment"
-
-                };
-                gridViewImageId = new int[]{
-
-                        R.drawable.ic_list_black_24dp,
-                        R.drawable.ic_youtube_searched_for_black_24dp,
-                        R.drawable.ic_card_giftcard_black_24dp,
-                        R.drawable.ic_book_black_24dp,
-                        R.drawable.ic_add_book_24dp
-
-                };
-*/
-                break;
             case "PARENTS":
-           /*     gridViewString = new String[]{
-                        "WorkBook",
+                gridViewString = new String[]{
                         "Attandence",
-                        "Leave",
-                        "Notice Board",
-                        "Assignment",
-
-
-
-                };
-                gridViewImageId = new int[]{
-
-                        R.drawable.ic_list_black_24dp,
-                        R.drawable.ic_youtube_searched_for_black_24dp,
-                        R.drawable.ic_card_giftcard_black_24dp,
-                        R.drawable.ic_book_black_24dp,
-                        R.drawable.ic_add_book_24dp,
-
-
-                };
-             */   break;
-            case "TEACHER":
-               /* gridViewString = new String[]{
-                        "WorkBook",
-                        "Attandence",
-                        "Leave",
-                        "Notice Board",
-                        "Assignment",
-
-
-
-                };
-                gridViewImageId = new int[]{
-
-                        R.drawable.ic_list_black_24dp,
-                        R.drawable.ic_youtube_searched_for_black_24dp,
-                        R.drawable.ic_card_giftcard_black_24dp,
-                        R.drawable.ic_book_black_24dp,
-                        R.drawable.ic_add_book_24dp,
-
-
-                };*/
-                break;
-            case "PRINCI":
-            /*    gridViewString = new String[]{
-                        "WorkBook",
-                        "Attandence",
-                        "Leave",
-                        "Notice Board",
-                        "Assignment",
                         "Student Data",
                         "Teacher Data",
-                        "Reports",
-                        "Modify Attandence",
-                        "Teacher Attandence",
-                        "Leave Record",
-
-
 
                 };
                 gridViewImageId = new int[]{
-
-                        R.drawable.ic_list_black_24dp,
                         R.drawable.ic_youtube_searched_for_black_24dp,
-                        R.drawable.ic_card_giftcard_black_24dp,
-                        R.drawable.ic_book_black_24dp,
-                        R.drawable.ic_add_book_24dp,
                         R.drawable.ic_child_friendly_black_24dp,
                         R.drawable.ic_transfer_within_a_station_black_24dp,
-                        R.drawable.ic_phone_in_talk_black_24dp,
-                        R.drawable.ic_verified_user_black_24dp,
-                        R.drawable.ic_update_black_24dp,
-                        R.drawable.ic_library_books_black_24dp,
+                };
 
-                };*/
                 break;
-            case "ADMIN":
+            case "TEACHER":
                 gridViewString = new String[]{
-                        "WorkBook",
                         "Attandence",
-                        "Leave",
-                        "Notice Board",
-                        "Assignment",
                         "Student Data",
                         "Teacher Data",
-                        "Reports",
-                        "Modify Attandence",
-                        "Teacher Attandence",
                         "Mark Attandence",
                         "Teacher List",
-                        "Add Teacher",
                         "Student List",
                         "Add Student",
 
 
                 };
+                gridViewImageId = new int[]{
+                        R.drawable.ic_youtube_searched_for_black_24dp,
+                        R.drawable.ic_child_friendly_black_24dp,
+                        R.drawable.ic_transfer_within_a_station_black_24dp,
+                        R.drawable.ic_library_books_black_24dp,
+                        R.drawable.ic_image_black_24dp,
+                        R.drawable.ic_burst_mode_black_24dp,
+                        R.drawable.ic_add_book_24dp
+
+                };
+                break;
+            case "PRINCI":
+                gridViewString = new String[]{
+                        "Attandence",
+                        "Student Data",
+                        "Teacher Data",
+                        "Mark Attandence",
+                        "Teacher List",
+                        "Student List",
+                        "Add Student",
+                        "Add Teacher",
+
+                        //   "WorkBook",
+                        //   "Leave",
+                        //   "Notice Board",
+                        //   "Assignment",
+                        //   "Reports",
+                        //    "Modify Attandence",
+                        //    "Teacher Attandence",
+
+                };
+
+                gridViewImageId = new int[]{
+                        R.drawable.ic_youtube_searched_for_black_24dp,
+                        R.drawable.ic_child_friendly_black_24dp,
+                        R.drawable.ic_transfer_within_a_station_black_24dp,
+                        R.drawable.ic_library_books_black_24dp,
+                        R.drawable.ic_image_black_24dp,
+                        R.drawable.ic_burst_mode_black_24dp,
+                        R.drawable.ic_add_book_24dp,
+                        R.drawable.ic_report_black_24dp,
+
+                        //   R.drawable.ic_list_black_24dp,
+                        //   R.drawable.ic_card_giftcard_black_24dp,
+                        //   R.drawable.ic_book_black_24dp,
+                        //   R.drawable.ic_add_book_24dp,
+                        // R.drawable.ic_phone_in_talk_black_24dp,
+                        // R.drawable.ic_verified_user_black_24dp,
+                        // R.drawable.ic_update_black_24dp,
+
+                };
+                break;
+            case "ADMIN":
+                gridViewString = new String[]{
+                        "Attandence",
+                        "Student Data",
+                        "Teacher Data",
+                        "Mark Attandence",
+                        "Teacher List",
+                        "Student List",
+                        "Add Student",
+                        "Add Teacher",
+                        "Modify School Data"
+                        //   "WorkBook",
+                        //   "Leave",
+                        //   "Notice Board",
+                        //   "Assignment",
+                        //   "Reports",
+                        //    "Modify Attandence",
+                        //    "Teacher Attandence",
+
+
+                };
 
                 gridViewImageId = new int[]{
 
-                        R.drawable.ic_list_black_24dp,
                         R.drawable.ic_youtube_searched_for_black_24dp,
-                        R.drawable.ic_card_giftcard_black_24dp,
-                        R.drawable.ic_book_black_24dp,
-                        R.drawable.ic_add_book_24dp,
                         R.drawable.ic_child_friendly_black_24dp,
                         R.drawable.ic_transfer_within_a_station_black_24dp,
-                        R.drawable.ic_phone_in_talk_black_24dp,
-                        R.drawable.ic_verified_user_black_24dp,
-                        R.drawable.ic_update_black_24dp,
                         R.drawable.ic_library_books_black_24dp,
                         R.drawable.ic_image_black_24dp,
-                        R.drawable.ic_report_black_24dp,
                         R.drawable.ic_burst_mode_black_24dp,
-                        R.drawable.ic_add_book_24dp
+                        R.drawable.ic_add_book_24dp,
+                        R.drawable.ic_report_black_24dp,
+                        R.drawable.ic_report_black_24dp,
+                        //   R.drawable.ic_list_black_24dp,
+                        //   R.drawable.ic_card_giftcard_black_24dp,
+                        //   R.drawable.ic_book_black_24dp,
+                        //   R.drawable.ic_add_book_24dp,
+                        // R.drawable.ic_phone_in_talk_black_24dp,
+                        // R.drawable.ic_verified_user_black_24dp,
+                        // R.drawable.ic_update_black_24dp,
+
 
 
                 };
@@ -216,50 +190,50 @@ public class AttandenceMenuFragment extends HomeFragment {
                 switch (i) {
 
                     case 0:
-                        switchFragment(new StudentassignmentFragment());
+                        //switchFragment(new StudentassignmentFragment());
                         break;
                     case 1:
-                        switchFragment(new ViewAttendanceFragment());
+                        //switchFragment(new ViewAttendanceFragment());
                         break;
                     case 2:
-                        switchFragment(new ViewleaveFragment());
+                        //switchFragment(new ViewleaveFragment());
                         break;
-                    case 3:
-                        switchFragment(new ViewnoticeFragment());
+                    case 3:switchFragment(new MarkAttandenceFragment());
+                        //switchFragment(new ViewnoticeFragment());
                         break;
-                    case 4:
-                        switchFragment(new AssignmentbyteacherFragment());
+                    case 4:switchFragment(new TeacherListFragment());
+                        //switchFragment(new AssignmentbyteacherFragment());
                         break;
-                    case 5:
-                        switchFragment(new EnterstudentdataFragment());
+                    case 5:switchFragment(new StudentlListFragment());
+                        //switchFragment(new EnterstudentdataFragment());
                         break;
-                    case 6:
-                        switchFragment(new EnterteacherdataFragment());
+                    case 6:switchFragment(new AddStudentFragment());
+                        //switchFragment(new EnterteacherdataFragment());
                         break;
-                    case 7:
-                        switchFragment(new GeneratereportFragment());
+                    case 7:switchFragment(new AddTeacherFragment());
+                        //switchFragment(new GeneratereportFragment());
                         break;
                     case 8:
-                        switchFragment(new ModifyattendanceFragment());
+                       // switchFragment(new ModifyattendanceFragment());
                         break;
                     case 9:
-                        switchFragment(new ModifyattendanceTeacherFragment());
+                        //switchFragment(new ModifyattendanceTeacherFragment());
                         break;
                     case 10:
-                        switchFragment(new MarkAttendanceFragment());
+
                         break;
-                    case 11:switchFragment(new TeacherListFragment());
+                    case 11:
                         //switchFragment(new StudentleaverecordFragment());
                         break;
-                    case 12:switchFragment(new AddTeacherFragment());
+                    case 12:
                         //switchFragment(new ViewAttendanceavgFragment());
                         break;
                     case 13:
                         //switchFragment(new ViewattendanceTeacherFragment());
-                        switchFragment(new StudentlListFragment());
+
                         break;
                     case 14:
-                        switchFragment(new AddStudentFragment());
+
                         break;
 
 
@@ -294,6 +268,9 @@ public class AttandenceMenuFragment extends HomeFragment {
     }
     // switching fragment
     private void switchFragment(Fragment fragment) {
+        bundle.putString("SCHOOL_NAME",schoolname);
+        bundle.putString("ROLE",role);
+        fragment.setArguments(bundle);
         if(getActivity()!=null) {
             requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
                     .add(R.id.content_frame, fragment)

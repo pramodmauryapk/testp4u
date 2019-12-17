@@ -118,6 +118,12 @@ private TextInputEditText etpasscode;
                 });
             }
         });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etpasscode.setText("");
+            }
+        });
         return v;
     }
 
@@ -146,6 +152,7 @@ private TextInputEditText etpasscode;
         spschoollist=v.findViewById(R.id.spschoollist);
         spschoolrole=v.findViewById(R.id.spRolelist);
         etpasscode=v.findViewById(R.id.etpasscode);
+        etpasscode.setText("123456");
         Signin=v.findViewById(R.id.BtnSignin);
         cancel=v.findViewById(R.id.Btncancel);
 

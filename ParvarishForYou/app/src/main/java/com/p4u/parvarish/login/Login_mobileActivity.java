@@ -19,8 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.MainActivity;
+import com.p4u.parvarish.R;
 import com.p4u.parvarish.user_pannel.Teacher;
 
 import static java.util.Objects.requireNonNull;
@@ -73,7 +73,7 @@ public class Login_mobileActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+       if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             myref = FirebaseDatabase.getInstance().getReference().child("USERS");
 
             myref.addValueEventListener(new ValueEventListener() {

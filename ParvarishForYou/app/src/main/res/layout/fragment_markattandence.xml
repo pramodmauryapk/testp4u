@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorwhite"
+    android:orientation="vertical">
+
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="212dp"
+          app:srcCompat="@drawable/ic_curvebacks_01"
+          android:scaleType="fitXY"
+          android:contentDescription="@string/parvarish_knowledge_center" />
+
+      <TextView
+          android:id="@+id/txt_message"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/student_list"
+          android:textColor="#FFFFFF"
+          android:textSize="20sp"
+          android:layout_marginTop="20dp"
+          android:layout_marginStart="15dp"
+          android:textStyle="bold"/>
+      <RelativeLayout
+          android:layout_below="@+id/txt_message"
+          android:layout_width="match_parent"
+          android:layout_marginBottom="@dimen/_8dp"
+          android:background="@color/transparent"
+          android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="9"
+                android:id="@+id/linearLayout0"
+                android:baselineAligned="false">
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="5dp"
+                      android:layout_weight="3"
+                      android:orientation="vertical"
+                      android:id="@+id/linearLayout1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/tv_class"
+                            android:gravity="center_horizontal"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorblack"/>
+
+                        <Spinner
+                            android:id="@+id/spn_class"
+                            android:background="@drawable/bg_edittext_focused"
+                            android:entries="@array/Class"
+                            android:padding="@dimen/_8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="5dp"
+                      android:layout_weight="3"
+                      android:orientation="vertical"
+                      android:id="@+id/linearLayout2">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/tv_section"
+                            android:textSize="15sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/colorblack"/>
+
+                        <Spinner
+                            android:id="@+id/spn_section"
+                            android:padding="@dimen/_8dp"
+                            android:background="@drawable/bg_edittext_focused"
+                            android:entries="@array/Section"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                  </LinearLayout>
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="5dp"
+                      android:layout_weight="3"
+                      android:orientation="vertical"
+                      android:id="@+id/linearLayout3">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/date"
+                            android:textSize="15sp"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/colorblack"/>
+
+                        <EditText
+                            android:id="@+id/et_date"
+                            android:padding="9dp"
+                            android:background="@drawable/bg_edittext_focused"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="date"
+                            android:autofillHints="2019/12/01"
+                            tools:ignore="LabelFor" />
+                  </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="10"
+                android:layout_below="@+id/linearLayout0"
+                android:orientation="vertical">
+
+                        <ListView
+                            android:id="@+id/mainListView"
+                            android:layout_weight="9"
+                            android:layout_marginStart="@dimen/_8dp"
+                            android:layout_marginEnd="@dimen/_8dp"
+                            android:background="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="#18000000"
+                            android:dividerHeight="1dp">
+                        </ListView>
+
+
+
+
+
+                  <ImageButton
+                      android:id="@+id/check"
+                      android:layout_weight="1"
+                      android:layout_width="58dp"
+                      android:layout_height="60dp"
+                      android:layout_gravity="end"
+                      android:background="@drawable/circle"
+                      android:text="@string/btn_saveattendance"
+                      android:textColor="@color/colorwhite"
+                      android:src="@drawable/ic_menu_send"
+                      android:layout_marginEnd="15dp"
+                      android:layout_marginBottom="5dp"
+                      android:contentDescription="@string/parvarish_knowledge_center" />
+
+            </LinearLayout>
+
+      </RelativeLayout>
+
+
+
+<!--
+      <androidx.cardview.widget.CardView
+          android:layout_below="@+id/search_bar"
+          android:layout_marginTop="15dp"
+          android:layout_marginLeft="15dp"
+          android:layout_marginRight="15dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          android:theme="@style/ThemeOverlay.AppCompat.Light"
+          app:cardBackgroundColor="@android:color/white"
+          app:cardCornerRadius="3dp"
+          app:cardElevation="3dp"
+          app:layout_collapseMode="pin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                  <ListView
+                      android:id="@+id/mainListView"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:divider="#18000000"
+                      android:dividerHeight="1dp">
+                  </ListView>
+
+            </LinearLayout>
+      </androidx.cardview.widget.CardView>
+      -->
+
+</RelativeLayout>
+

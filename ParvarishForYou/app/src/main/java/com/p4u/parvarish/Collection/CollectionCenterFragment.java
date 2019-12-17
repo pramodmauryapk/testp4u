@@ -1,4 +1,4 @@
-package com.p4u.parvarish.user_pannel;
+package com.p4u.parvarish.Collection;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -21,7 +21,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +34,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,19 +52,17 @@ import com.p4u.parvarish.fancydialog.Icon;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
-public class ManageUserFragment extends Fragment implements RecyclerAdapter_model.OnItemClickListener{
+public class CollectionCenterFragment extends Fragment implements RecyclerCollection_model.OnItemClickListener{
 
     private static final String TAG = "ManageUserFragment";
-    private RecyclerAdapter_model mAdapter;
+    private RecyclerCollection_model mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef,myRef;
     private ValueEventListener mDBListener,mlistner;
@@ -74,52 +70,47 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     private TextInputLayout l2;
     private TextInputLayout l3;
     private TextInputLayout l4;
-    private List<Teacher> mTeachers;
+    private List<Collection_data> mTeachers;
     private View dialogView;
-    private TextInputEditText username,email, mobile,location,role;
-    private ImageView imageView;
-    private Button change,save,upload;
-    private ImageButton choose;
-    private Spinner sp;
-    private String UID,userrole,id;
+    private DatabaseReference databaseUsers;
     private Context context;
-    private Uri filePath;
-    private final int PICK_IMAGE_REQUEST = 71;
+    private TextInputEditText tv1,tv2,tv3;
+    private ImageButton btnupload;
+
     private StorageReference mStorageRef;
+    private ImageView img;
+    private Button btnpost;
+    private Uri filePath,imageUri;
     private StorageTask mUploadTask;
+    private View v;
+    private TextView textView;
 
+    private final int PICK_IMAGE_REQUEST = 71;
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_user_list, container, false);
         context = container.getContext();
+        textView=v.findViewById(R.id.textView);
+        textView.setText("Collection Centers");
         RecyclerView mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         mTeachers = new ArrayList<>();
-        mAdapter = new RecyclerAdapter_model(context, mTeachers);
+        mAdapter = new RecyclerCollection_model(context, mTeachers);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
 
         mStorage = FirebaseStorage.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("USERS");
-        myRef=FirebaseDatabase.getInstance().getReference().child("USERS");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("COLLECTION_CENTER");
+        myRef=FirebaseDatabase.getInstance().getReference().child("COLLECTION_CENTER");
 
-        UID= requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        mlistner=myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                show(dataSnapshot);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -127,8 +118,8 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                 mTeachers.clear();
 
                 for (DataSnapshot teacherSnapshot : dataSnapshot.getChildren()) {
-                    Teacher upload = teacherSnapshot.getValue(Teacher.class);
-                    Objects.requireNonNull(upload).setKey(teacherSnapshot.getKey());
+                    Collection_data upload = teacherSnapshot.getValue(Collection_data.class);
+                    Objects.requireNonNull(upload).setId(teacherSnapshot.getKey());
                     mTeachers.add(upload);
                 }
                 mAdapter.notifyDataSetChanged();
@@ -147,34 +138,18 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
     private void openDetails(String[] data){
 
-        UserDetailsFragment fragment = new UserDetailsFragment();
+        CenterDetailsFragment fragment = new CenterDetailsFragment();
         Bundle args = new Bundle();
-        args.putString("NAME_KEY", data[0]);
-        args.putString("EMAIL_KEY", data[1]);
-        args.putString("IMAGE_KEY", data[2]);
-        args.putString("MOBILE_KEY", data[3]);
-        args.putString("ROLE_KEY",data[4]);
-        args.putString("IDENTITY_KEY",data[5]);
-        args.putString("ADDRESS_KEY",data[6]);
-        args.putString("STATUS_KEY",data[7]);
+        args.putString("ID_KEY", data[0]);
+        args.putString("NAME_KEY", data[1]);
+        args.putString("MOBILE_KEY", data[2]);
+        args.putString("IMAGE_KEY", data[3]);
+        args.putString("ADDRESS_KEY",data[4]);
         fragment.setArguments(args);
         switchFragment(fragment);
     }
 
-    private void show(DataSnapshot dataSnapshot){
-        try {
-            for (DataSnapshot ds : dataSnapshot.getChildren ()) {
-                Teacher uInfo=ds.getValue(Teacher.class);
-                if(requireNonNull(uInfo).getUserId().equals(UID)) {
 
-                    userrole=uInfo.getUserRole();
-
-                }
-            }
-        }catch (Exception e){
-            Log.d(TAG, "Failed to retrive values"+e);
-        }
-    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -183,34 +158,28 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
 
     @Override
     public void onItemClick(int position) {
-        Teacher clickedTeacher=mTeachers.get(position);
+        Collection_data clickedTeacher=mTeachers.get(position);
         String[] teacherData={
-                clickedTeacher.getUserName(),
-                clickedTeacher.getUserEmail(),
-                clickedTeacher.getImageURL(),
-                clickedTeacher.getUserMobile(),
-                clickedTeacher.getUserRole(),
-                clickedTeacher.getUserIdentity(),
-                clickedTeacher.getUserAddress(),
-                clickedTeacher.getUserStatus()};
+                clickedTeacher.getId(),
+                clickedTeacher.getName(),
+                clickedTeacher.getMobile(),
+                clickedTeacher.getUrl(),
+        clickedTeacher.getAddress()};
         openDetails(teacherData);
     }
-    private boolean validate(String name, String email, String mobile, String address) {
+    private boolean validate(String name, String mobile,String address) {
 
         if (TextUtils.isEmpty(name)) {
             l1.setError("Enter Name");
             return false;
         }
-        if (TextUtils.isEmpty(email)) {
-            l2.setError("Enter Email");
+
+        if (mobile.length() != 10) {
+            l2.setError("Enter Mobile");
             return false;
         }
         if (TextUtils.isEmpty(address)) {
-            l4.setError("Enter Address");
-            return false;
-        }
-        if (mobile.length() != 10) {
-            l3.setError("Enter Mobile");
+            l3.setError("Enter Address");
             return false;
         }
 
@@ -220,30 +189,28 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     @Override
     public void onShowItemClick(int position) {
 
-        Teacher user = mTeachers.get(position);
+        Collection_data user = mTeachers.get(position);
         showDeleteDialog(
-                user.getUserId(),
-                user.getUserName(),
-                user.getUserEmail(),
-                user.getUserRole(),
-                user.getUserMobile(),
-                user.getUserAddress(),
-                user.getImageURL());
+                user.getId(),
+                user.getName(),
+                user.getMobile(),
+                user.getUrl(),
+                user.getAddress());
 
 
     }
 
     @Override
     public void onDeleteItemClick(int position) {
-        Teacher selectedItem = mTeachers.get(position);
-        final String selectedKey = selectedItem.getKey();
-        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageURL());
+        Collection_data selectedItem = mTeachers.get(position);
+        final String selectedKey = selectedItem.getId();
+        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getUrl());
         imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 new FancyAlertDialog.Builder(getActivity())
                         .setTitle("Rate us if you like the app")
-                        .setMessage("Do you really want to Delete User?")
+                        .setMessage("Do you really want to Delete Center?")
                         .setNegativeBtnText("Cancel")
                         .setPositiveBtnText("Delete")
                         .setAnimation(Animation.POP)
@@ -273,52 +240,28 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
     @SuppressLint("InflateParams")
     private void showDeleteDialog(final String userId,
                                   final String userName,
-                                  final String userEmail,
-                                  final String userRole,
                                   final String userMobile,
-                                  final String userAddress,
-                                  final String userimg) {
+                                  final String userimg,
+                                  final String useraddress) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder (context);
         LayoutInflater inflater = getLayoutInflater ();
-        dialogView = inflater.inflate (R.layout.layout_profile, null);
+        dialogView = inflater.inflate (R.layout.layout_addcollectioncenter, null);
         dialogBuilder.setView (dialogView);
-        dialogBuilder.setTitle ("User Details");
+        dialogBuilder.setTitle ("Center Details");
         final AlertDialog b = dialogBuilder.create ();
         b.show ();
         init_dialog_views ();
-        setValues(userName,userEmail,userMobile,userAddress,userRole);
+        setValues(userName,userMobile,useraddress);
 
-        change.setOnClickListener (new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UpdatePasswordFragment fragment = new UpdatePasswordFragment();
-                Bundle args = new Bundle();
-                args.putString("ID_KEY", userId);
-                fragment.setArguments(args);
-                switchFragment(fragment);
-                b.cancel();
-            }
-        });
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-               boolean ans= updatedetails(userId);
-               if(ans)
-                   Toast.makeText(context, "User Updated", Toast.LENGTH_LONG).show();
-               else
-                   Toast.makeText(context, "User Not Updated", Toast.LENGTH_LONG).show();
-
-            }
-        });
-        choose.setOnClickListener(new View.OnClickListener() {
+        btnupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chooseimage(view);
             }
         });
-        upload.setOnClickListener(new View.OnClickListener() {
+        btnpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
@@ -336,11 +279,11 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
             final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
-            mStorageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES");
+            mStorageRef = FirebaseStorage.getInstance().getReference("COLLECTION_CENTER");
             ////////////////
 
             try {
-                StorageReference delimageRef = FirebaseStorage.getInstance().getReference("USERS_IMAGES").getStorage().getReferenceFromUrl(img);
+                StorageReference delimageRef = FirebaseStorage.getInstance().getReference("COLLECTION_CENTER").getStorage().getReferenceFromUrl(img);
                 delimageRef.delete();
             } catch (Exception e) {
                 Log.d(TAG, "Failed to retrive values" + e);
@@ -377,6 +320,8 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                                 myRef.child(id).child("imageURL").setValue(uri.toString());
                                 //displaying success toast
                                 Toast.makeText(context, "File Uploaded ", Toast.LENGTH_LONG).show();
+                                updatedetails(id);
+
 
                             }
 
@@ -415,7 +360,7 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
             filePath = data.getData();
             try {
                 Bitmap bitmap= MediaStore.Images.Media.getBitmap(context.getContentResolver(),filePath);
-                imageView.setImageBitmap(bitmap);
+                img.setImageBitmap(bitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -429,44 +374,28 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
-    private void setValues(String userName,String userEmail,String userMobile,String userAddress,String userRole) {
-        username.setText (userName);
-        email.setText (userEmail);
-        mobile.setText (userMobile);
-        location.setText (userAddress);
-        if(userrole.equals("ADMIN")){
-            role.setVisibility(View.GONE);
-            sp.setVisibility(View.VISIBLE);
-
-        }
-        else {
-            role.setText(userRole);
-            role.setEnabled(false);
-        }
-
+    private void setValues(String userName,String userMobile,String useraddress) {
+        tv1.setText (userName);
+       // email.setText (userEmail);
+        tv2.setText (userMobile);
+        tv3.setText (useraddress);
     }
 
     private void init_dialog_views(){
 
-        username=dialogView.findViewById(R.id.etUserName);
-        email=dialogView.findViewById(R.id.etEmailID);
-        mobile=dialogView.findViewById(R.id.etMobile);
-        location=dialogView.findViewById(R.id.tvCenterName);
-        role=dialogView.findViewById(R.id.tvRole);
-        sp=dialogView.findViewById(R.id.sprole);
-        imageView=dialogView.findViewById(R.id.imgView);
-        change=dialogView.findViewById(R.id.dbuttonchange);
-        save=  dialogView.findViewById(R.id.dbuttonsave);
-        choose=  dialogView.findViewById(R.id.btnChoose);
-        upload=  dialogView.findViewById(R.id.upload_button);
-        l1=dialogView.findViewById(R.id.l1);
-        l2=dialogView.findViewById(R.id.l2);
-        l3=dialogView.findViewById(R.id.l3);
-        l4=dialogView.findViewById(R.id.l4);
-        change_listner(username,l1);
-        change_listner(email,l2);
-        change_listner(mobile,l3);
-        change_listner(location,l4);
+        img=dialogView.findViewById(R.id.img);
+        tv1=dialogView.findViewById(R.id.et_service);
+        tv2=dialogView.findViewById(R.id.et_mobile);
+        tv3=dialogView.findViewById(R.id.et_address);
+        l1=dialogView.findViewById(R.id.tv_service);
+        l2=dialogView.findViewById(R.id.tv_mobile);
+        l3=dialogView.findViewById(R.id.tv_address);
+        btnpost=dialogView.findViewById(R.id.btnpost);
+        btnupload=dialogView.findViewById(R.id.btnupload);
+        change_listner(tv1,l1);
+        change_listner(tv2,l2);
+        change_listner(tv3,l3);
+
     }
     private void change_listner(final TextView v, final TextInputLayout til){
 
@@ -494,41 +423,24 @@ public class ManageUserFragment extends Fragment implements RecyclerAdapter_mode
                 .addToBackStack(null).commit();
 
     }
-    private boolean updatedetails(String Id) {
+    private void updatedetails(String Id) {
         //getting the specified artist reference
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("USERS").child(Id);
-        String Name = requireNonNull(username.getText()).toString().trim().toUpperCase();
-        String Email = requireNonNull(email.getText()).toString();
-        String Role;
-        if (userrole.equals("ADMIN")) {
-            Role = sp.getSelectedItem().toString().toUpperCase();
-        } else {
-            Role = requireNonNull(role.getText()).toString().toUpperCase();
-        }
-        String Mobile = requireNonNull(mobile.getText()).toString().trim();
-        String Location = requireNonNull(location.getText()).toString().toUpperCase();
-        boolean ans = validate(Name, Email, Mobile, Location);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("COLLECTION_CENTER").child(Id);
+        String Name = requireNonNull(tv1.getText()).toString().trim().toUpperCase();
+        String Mobile = requireNonNull(tv2.getText()).toString().trim();
+        String Address= requireNonNull(tv3.getText()).toString();
+        boolean ans = validate(Name, Mobile,Address);
         if (ans) {
 
-                dR.child("userName").setValue(Name);
-                dR.child("userEmail").setValue(Email);
-                dR.child("userRole").setValue(Role);
-                dR.child("userMobile").setValue(Mobile);
-                dR.child("userAddress").setValue(Location);
-                dR.child("userIdentity").setValue("");
-                dR.child("userTime").setValue(get_current_time());
+                dR.child("name").setValue(Name);
+                dR.child("mobile").setValue(Mobile);
+                dR.child("address").setValue(Address);
 
             }
-        else {
-            return false;
-        }
 
-        return true;
+
     }
 
-    private String get_current_time(){
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
-        return sdf.format(new Date());
-    }
+
 
 }
