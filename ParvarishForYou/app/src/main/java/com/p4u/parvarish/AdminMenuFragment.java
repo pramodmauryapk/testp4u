@@ -33,7 +33,6 @@ import com.p4u.parvarish.gallary.ManagegalaryFragment;
 import com.p4u.parvarish.menu_items.CentreListFragment;
 import com.p4u.parvarish.menu_items.DonorListFragment;
 import com.p4u.parvarish.menu_items.LayoutGridView;
-import com.p4u.parvarish.navistrip.HelpingFragment;
 import com.p4u.parvarish.news_marquee.NewsAddFragment;
 import com.p4u.parvarish.user_pannel.ManageUserFragment;
 import com.p4u.parvarish.user_pannel.UserMobileFragment;
@@ -230,7 +229,7 @@ public class AdminMenuFragment extends HomeFragment {
                         switchFragment(new AddYoutubeVideofragment());
                         break;
                     case 17://switchFragment(new UserwiseFragment());//new ImageGalleryFragment()
-                        switchFragment(new HelpingFragment());
+                       // switchFragment(new HelpingFragment());
                         break;
                     case 18:
                         switchFragment(new AddSchoolFragment());

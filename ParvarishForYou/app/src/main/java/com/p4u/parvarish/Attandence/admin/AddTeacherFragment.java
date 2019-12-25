@@ -44,6 +44,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.p4u.parvarish.Attandence.Teacher.TeacherData;
 import com.p4u.parvarish.R;
 
 import java.io.ByteArrayOutputStream;
@@ -252,21 +253,21 @@ public class AddTeacherFragment extends Fragment {
                             assert teacherId != null;
                             TeacherData teacher = new TeacherData(
                                     teacherId,
-                                    requireNonNull(tname.getText()).toString(),
-                                    requireNonNull(tempcode.getText()).toString(),
-                                    requireNonNull(tfather.getText()).toString(),
+                                    requireNonNull(tname.getText()).toString().toUpperCase(),
+                                    requireNonNull(tempcode.getText()).toString().toUpperCase().trim(),
+                                    requireNonNull(tfather.getText()).toString().toUpperCase(),
                                     requireNonNull(tdob.getText()).toString(),
-                                    requireNonNull(tmother.getText()).toString(),
-                                    requireNonNull(tmobile.getText()).toString(),
+                                    requireNonNull(tmother.getText()).toString().toUpperCase(),
+                                    requireNonNull(tmobile.getText()).toString().trim(),
                                     tclass.getSelectedItem().toString(),
                                     tsection.getSelectedItem().toString(),
                                     tyear.getSelectedItem().toString(),
-                                    requireNonNull(taddress.getText()).toString(),
+                                    requireNonNull(taddress.getText()).toString().toUpperCase(),
                                     tgender.getSelectedItem().toString(),
-                                    requireNonNull(tload.getText()).toString(),
-                                    requireNonNull(tsalary.getText()).toString(),
+                                    requireNonNull(tload.getText()).toString().trim(),
+                                    requireNonNull(tsalary.getText()).toString().trim(),
                                     uri.toString(),
-                                    requireNonNull(tpin.getText()).toString(),
+                                    requireNonNull(tpin.getText()).toString().trim(),
                                     "",
                                     "TEACHER",
                                     schoolname,

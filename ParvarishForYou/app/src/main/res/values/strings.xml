@@ -124,7 +124,6 @@
     <string name="skip_login"><![CDATA[>>Skip Login>>]]></string>
     <string name="login_with_mobile">Login with Mobile</string>
     <string name="registration">REGISTRATION</string>
-    <string name="choose">Choose</string>
     <string name="register">Register</string>
     <string name="already_have_account">Already Have Account?</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
@@ -262,7 +261,6 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="mobile_no">Mobile No.</string>
     <string name="enter_mobile_no">Enter Mobile No.</string>
     <string name="submit">Submit</string>
-    <string name="new_beneficiary">NEW BENEFICIARY</string>
     <string name="add">Add</string>
     <string name="search">Search</string>
     <string name="reset">Reset</string>
@@ -298,121 +296,16 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="video_url">Video URL</string>
     <string name="christopea">Christopea</string>
     <string name="write_something">Write Something....</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="tab_text_1">ALL</string>
     <string name="tab_text_2">User-wise</string>
-    <string name="tab_text_3">Category-wise</string>
 
-    <string name="title_activity_student">StudentActivity</string>
-    <string name="title_activity_teacher">TeacherActivity</string>
-    <string name="action_profile">My profile</string>
-    <string name="action_password">Change password</string>
-    <string name="action_logout">Logout</string>
-    <string name="tv_username">Full name</string>
-    <string name="tv_studentname">Student name</string>
-    <string name="tv_password">Password</string>
-    <string name="tv_email">Email</string>
-    <string name="tv_mobilenumber">Mobile</string>
-    <string name="tv_role">Role</string>
-    <string name="et_role">admin/teacher/student </string>
-    <string name="btn_createnewuser">Create New User</string>
-    <string name="btn_addstudent">Add Student</string>
-    <string name="btn_deletestudent">Delete Student</string>
-    <string name="tv_selectall">Select All</string>
     <string name="btn_saveattendance">Submit</string>
-    <string name="btn_take_attendance">Take Attendance</string>
-    <string name="btn_view_attendance">View Attendance</string>
-    <string name="btn_modify_attendance">Modify Attendance</string>
 
     <!-- Record Attendance fragment -->
     <string name="tv_class">Class</string>
     <string name="tv_section">Section</string>
-    <string name="tv_subject">Subject</string>
 
 
-    <string name="year_prompt">Year</string>
-    <string-array name="year_arrays">
-        <item>Year</item>
-        <item>2017</item>
-    </string-array>
-
-    <string name="month_prompt">Month</string>
-    <string-array name="month_arrays">
-        <item>Month</item>
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
-    <string-array name="lang">
-        <item>English</item>
-        <item>Hindi</item>
-        <item>Nepali</item>
-        <item>Urdu</item>
-        <item>Spanisch</item>
-        <item>French</item>
-        <item>German</item>
-
-
-    </string-array>
-    <string name="day_prompt">Day</string>
-    <string-array name="day_arrays">
-        <item>Day</item>
-        <item>01</item>
-        <item>02</item>
-        <item>03</item>
-        <item>04</item>
-        <item>05</item>
-        <item>06</item>
-        <item>07</item>
-        <item>08</item>
-        <item>09</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>24</item>
-        <item>25</item>
-        <item>26</item>
-        <item>27</item>
-        <item>28</item>
-        <item>29</item>
-        <item>30</item>
-        <item>31</item>
-    </string-array>
-    <string name="speech_prompt">Say something…</string>
-    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
-    <string name="tap_on_mic">Tap on mic to speak</string>
-
-    <string name="copy">COPY</string>
-
-    <string name="please_speak_in_english_language">Please speak in English Language.</string>
-    <string name="your_paragraph_listed_here">your paragraph listed here</string>
-    <string name="API_KEY">AIzaSyDpBmHv2e66__P8fCJghcrS6OAmkW8jQt0</string>
-
-
-    <string name="togglebutton">ToggleButton</string>
-    <string name="speech_promp" />
-
-    <string name="addtext">Please add Text</string>
     <string name="select_college_name_amp_usertype"><![CDATA[Select College Name & UserType]]></string>
     <string name="passcode">Passcode</string>
     <string name="enter">Enter</string>

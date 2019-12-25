@@ -174,7 +174,7 @@ public class StudentlListFragment extends Fragment {
         void bindData(final StudentData studentData) {
             Name.setText(studentData.getStudentName());
             Name.setTextColor(studentData.getStudentgender().equals("MALE") ? greenColor : redColor);
-            AdmissionNo.setText("ADMISSION NO-"+studentData.getStudentadmissionno());
+            AdmissionNo.setText("ADMISSION NO-"+studentData.getStudentId());
             Father.setText(studentData.getStudentfathername());
             Mother.setText(studentData.getStudentmothername());
             Mobile.setText("MOBILE-"+studentData.getStudenthomemobile());

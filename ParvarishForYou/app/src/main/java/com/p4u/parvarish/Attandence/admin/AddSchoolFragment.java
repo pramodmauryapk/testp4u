@@ -52,13 +52,15 @@ public class AddSchoolFragment extends Fragment {
     private Context context;
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
-    private DatabaseReference Princi;
+    private DatabaseReference myref;
     private TextInputLayout tf1,tf2,tf3,tf4,tf5,tf6,tf7;
     private Button btnAddSchool,btnlistSchool;
     private ImageView logo;
     private ImageButton selectimg;
     private Uri filePath,imageUri;
     private StorageTask mUploadTask;
+    private Bundle bundle;
+    private String schoolname;
     public AddSchoolFragment() {
 
         // Required empty public constructor
@@ -70,10 +72,11 @@ public class AddSchoolFragment extends Fragment {
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_addschool, container, false);
         // Inflate the layout for this fragment
+
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        Princi = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("PRINCI");
-        mStorageRef = FirebaseStorage.getInstance().getReference("PRINCI");
-        mStorage  = FirebaseStorage.getInstance().getReference("PRINCI").getStorage();
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("SCHOOL");
+        mStorage  = FirebaseStorage.getInstance().getReference("SCHOOL").getStorage();
         context = container.getContext();
         init();
         selectimg.setOnClickListener(new View.OnClickListener() {
@@ -160,27 +163,28 @@ public class AddSchoolFragment extends Fragment {
                         public void onSuccess(Uri uri) {
 
                             progressDialog.dismiss();
-
+                            myref = FirebaseDatabase.getInstance().getReference().child("SCHOOL");
                             //getting a unique id using push().getKey() method
                             //it will create a unique id and we will use it as the Primary Key for our Book
-                            String schoolId = Princi.push().getKey();
+                            String schoolId = myref.push().getKey();
                             //creating an Book Object
+                            assert schoolId != null;
                             SchoolData school = new SchoolData(
                                     schoolId,
-                                    schname.getText().toString(),
-                                    schadd.getText().toString(),
+                                    requireNonNull(schname.getText()).toString().toUpperCase(),
+                                    requireNonNull(schadd.getText()).toString().toUpperCase(),
                                     schmedium.getSelectedItem().toString(),
                                     schstbyear.getSelectedItem().toString(),
                                     0,
                                     0,
-                                    schprinciname.getText().toString(),
-                                    schprinciphone.getText().toString(),
+                                    requireNonNull(schprinciname.getText()).toString().toUpperCase(),
+                                    requireNonNull(schprinciphone.getText()).toString().trim(),
                                     uri.toString(),
                                     "PRINCI",
                                     schoolId.substring(0, 5));
 
                             //Saving the Book
-                            Princi.child(requireNonNull(schoolId)).setValue(school);
+                            myref.child(schname.getText().toString().toUpperCase().trim()).child("PRINCI").setValue(school);
                             Toast.makeText(context, "School added", Toast.LENGTH_LONG).show();
                             //setting edittext to blank again
                             set_blank();
@@ -271,7 +275,7 @@ public class AddSchoolFragment extends Fragment {
         schadd.setText("");
         schprinciphone.setText("");
         schprinciname.setText("");
-        //schteachercount.setText("");
+
 
     }
 

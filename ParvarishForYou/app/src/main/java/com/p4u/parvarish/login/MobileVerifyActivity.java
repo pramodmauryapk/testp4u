@@ -60,35 +60,12 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
         (requireNonNull (getSupportActionBar ())).hide ();
         mAuth = FirebaseAuth.getInstance();
         init();
-       /* if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
-            myref.addValueEventListener(new ValueEventListener() {
 
-                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    // Log.d(TAG, "Accessing database");
-                    getting_role(dataSnapshot);
-                    Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
-                    intent.putExtra("user_name",user_name);
-                    intent.putExtra("user_email",user_email);
-                    intent.putExtra("user_role",user_roll);
-                    intent.putExtra("user_img", user_img);
-                    startActivity(intent);
-                    finish();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    /// Log.d(TAG, "failed to read values", databaseError.toException());
-                }
-            });
-        }else{*/
             if (getIntent().getExtras()!=null){
                 phonenumber = getIntent().getStringExtra("phonenumber");
             }
             sendVerificationCode(phonenumber);
-      //  }
+
         otp1.addTextChangedListener(new EditTextWatcher(otp1));
         otp2.addTextChangedListener(new EditTextWatcher(otp2));
         otp3.addTextChangedListener(new EditTextWatcher(otp3));
@@ -235,22 +212,12 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                   // getting_role(dataSnapshot);
-                                   // if(user_name==null) {
+
                                         Log.d(TAG,"starting user registation");
                                         Intent intent = new Intent(MobileVerifyActivity.this, UserRegistrationMobileActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.putExtra("mobile", phonenumber);
                                         startActivity(intent);
-                                   // }else{
-                                     //   Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
-                                     //   intent.putExtra("user_name",user_name);
-                                     //   intent.putExtra("user_email",user_email);
-                                     //   intent.putExtra("user_role",user_roll);
-                                     //   intent.putExtra("user_img", user_img);
-                                     //   startActivity(intent);
-                                     //   finish();
-                                   // }
 
                                 }
 
@@ -259,21 +226,7 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                                      Log.d(TAG, "failed to read values", databaseError.toException());
                                 }
                             });
-                         /*   if(user_roll!=null){
-                                Intent intent = new Intent(MobileVerifyActivity.this, MainActivity.class);
-                                intent.putExtra("user_name",user_name);
-                                intent.putExtra("user_email",user_email);
-                                intent.putExtra("user_role",user_roll);
-                                intent.putExtra("user_img", user_img);
-                                startActivity(intent);
-                                finish();
 
-                            }else {
-                                Intent intent = new Intent(MobileVerifyActivity.this, UserRegistrationMobileActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.putExtra("mobile", phonenumber);
-                                startActivity(intent);
-                            }*/
                         } else {
 
                             //verification unsuccessful.. display an error message

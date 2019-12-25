@@ -1,35 +1,34 @@
-package com.p4u.parvarish.Attandence.admin;
+package com.p4u.parvarish.Attandence.student;
 
-import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class StudentViewHolder
+public class AttandenceViewHolder
 {
-    private CheckBox checkBox;
+    private TextView textView3;
+
 
 
     private TextView textView1;
     private TextView textView2;
-    public StudentViewHolder()
+    public AttandenceViewHolder()
     {
     }
 
-    public StudentViewHolder(TextView textView1, TextView textView2, CheckBox checkBox)
+    public AttandenceViewHolder(TextView textView1, TextView textView2, TextView textView3)
     {
-        this.checkBox = checkBox;
+        this.textView3 = textView3;
         this.textView1 = textView1;
-        this.textView2=textView2;
+        this.textView2 = textView2;
     }
 
-    public CheckBox getCheckBox()
-    {
-        return checkBox;
+    public TextView getTextView3() {
+        return textView3;
     }
 
-    public void setCheckBox(CheckBox checkBox)
-    {
-        this.checkBox = checkBox;
+    public void setTextView3(TextView textView3) {
+        this.textView3 = textView3;
     }
+
     public TextView getTextView1() {
         return textView1;
     }
@@ -45,7 +44,6 @@ public class StudentViewHolder
     public void setTextView2(TextView textView2) {
         this.textView2 = textView2;
     }
-
 
 }
 

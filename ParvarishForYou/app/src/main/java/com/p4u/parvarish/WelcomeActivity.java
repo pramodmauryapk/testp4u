@@ -126,14 +126,13 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                     for (int i = 0; i <= 100; i++) {
-                        Thread.sleep(50);
+                        Thread.sleep(30);
                        changePercent(i);
 
                     }
-                   // startActivity(new Intent(WelcomeActivity.this, newgallary.class));
-                   // finish();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                    resetLoading();

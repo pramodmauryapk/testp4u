@@ -15,7 +15,7 @@ import com.p4u.parvarish.R;
 
 import java.util.List;
 
-class StudentArrayAdapter extends ArrayAdapter<StudentData>
+public class StudentArrayAdapter extends ArrayAdapter<StudentData>
 {
 
     private LayoutInflater inflater;
@@ -88,7 +88,7 @@ class StudentArrayAdapter extends ArrayAdapter<StudentData>
         assert student != null;
         checkBox.setChecked(student.isChecked());
         textView1.setText(student.getStudentName());
-        textView2.setText(student.getStudentadmissionno());
+        textView2.setText(student.getStudentId());
 
         return convertView;
     }

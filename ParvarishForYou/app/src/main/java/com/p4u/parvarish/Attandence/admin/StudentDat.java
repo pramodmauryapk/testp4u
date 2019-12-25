@@ -2,14 +2,17 @@ package com.p4u.parvarish.Attandence.admin;
 
 import com.p4u.parvarish.Attandence.student.AttandenceData;
 
-public class StudentData extends AttandenceData {
+public class StudentDat extends AttandenceData {
 
     private String studentId;
     private String studentName;
+    private String studentadmissionno;
     private String studentfathername;
     private String studentdob;
     private String studentmothername;
     private String studenthomemobile;
+    private String studentclass;
+    private String studentsection;
     private String studentadmyear;
     private String studentaddress;
     private String studentgender;
@@ -19,40 +22,48 @@ public class StudentData extends AttandenceData {
     private String studentpin;
     private String studentresultid;
     private String studentrole;
+    private String studentschool;
     private String passcode;
 
 
 
     private boolean checked = false;
-    public StudentData() {
+    public StudentDat() {
     }
 
 
 
 
-    public StudentData(String studentId,
-                       String studentName,
-                       String studentfathername,
-                       String studentdob,
-                       String studentmothername,
-                       String studenthomemobile,
-                       String studentadmyear,
-                       String studentaddress,
-                       String studentgender,
-                       String studentfeepaid,
-                       String studentfeepending,
-                       String studentimgurl,
-                       String studentpin,
-                       String studentresultid,
-                       String studentrole,
-                       String passcode,
-                       boolean checked){
+    public StudentDat(String studentId,
+                      String studentName,
+                      String studentadmissionno,
+                      String studentfathername,
+                      String studentdob,
+                      String studentmothername,
+                      String studenthomemobile,
+                      String studentclass,
+                      String studentsection,
+                      String studentadmyear,
+                      String studentaddress,
+                      String studentgender,
+                      String studentfeepaid,
+                      String studentfeepending,
+                      String studentimgurl,
+                      String studentpin,
+                      String studentresultid,
+                      String studentrole,
+                      String studentschool,
+                      String passcode,
+                      boolean checked){
         this.studentId=studentId;
         this.studentName=studentName;
+        this.studentadmissionno=studentadmissionno;
         this.studentfathername=studentfathername;
         this.studentdob=studentdob;
         this.studentmothername=studentmothername;
         this.studenthomemobile=studenthomemobile;
+        this.studentclass=studentclass;
+        this.studentsection=studentsection;
         this.studentadmyear=studentadmyear;
         this.studentaddress=studentaddress;
         this.studentgender=studentgender;
@@ -62,6 +73,7 @@ public class StudentData extends AttandenceData {
         this.studentpin=studentpin;
         this.studentresultid=studentresultid;
         this.studentrole=studentrole;
+        this.studentschool=studentschool;
         this.passcode=passcode;
         this.checked=checked;
 
@@ -82,6 +94,13 @@ public class StudentData extends AttandenceData {
         this.studentName = studentName;
     }
 
+    public String getStudentadmissionno() {
+        return studentadmissionno;
+    }
+
+    public void setStudentadmissionno(String studentadmissionno) {
+        this.studentadmissionno = studentadmissionno;
+    }
 
     public String getStudentfathername() {
         return studentfathername;
@@ -115,6 +134,21 @@ public class StudentData extends AttandenceData {
         this.studenthomemobile = studenthomemobile;
     }
 
+    public String getStudentclass() {
+        return studentclass;
+    }
+
+    public void setStudentclass(String studentclass) {
+        this.studentclass = studentclass;
+    }
+
+    public String getStudentsection() {
+        return studentsection;
+    }
+
+    public void setStudentsection(String studentsection) {
+        this.studentsection = studentsection;
+    }
 
     public String getStudentadmyear() {
         return studentadmyear;
@@ -184,7 +218,13 @@ public class StudentData extends AttandenceData {
     public String getStudentrole() {
         return studentrole;
     }
+    public String getStudentschool() {
+        return studentschool;
+    }
 
+    public void setStudentschool(String studentschool) {
+        this.studentschool = studentschool;
+    }
 
     public void setStudentrole(String studentrole) {
         this.studentrole = studentrole;

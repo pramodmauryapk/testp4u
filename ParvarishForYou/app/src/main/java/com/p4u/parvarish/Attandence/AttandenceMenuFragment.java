@@ -15,11 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.p4u.parvarish.Attandence.Teacher.AddleavedataFragment;
+import com.p4u.parvarish.Attandence.Teacher.TeacherListFragment;
 import com.p4u.parvarish.Attandence.admin.AddStudentFragment;
 import com.p4u.parvarish.Attandence.admin.AddTeacherFragment;
 import com.p4u.parvarish.Attandence.admin.MarkAttandenceFragment;
 import com.p4u.parvarish.Attandence.admin.StudentlListFragment;
-import com.p4u.parvarish.Attandence.admin.TeacherListFragment;
+import com.p4u.parvarish.Attandence.student.ViewAttendanceFragment;
+import com.p4u.parvarish.Attandence.student.ViewleaveFragment;
 import com.p4u.parvarish.HomeFragment;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.menu_items.LayoutGridView;
@@ -28,7 +31,7 @@ import static java.util.Objects.requireNonNull;
 
 public class AttandenceMenuFragment extends HomeFragment {
 
-    private static final String TAG = "AdminMenuFragment";
+    private static final String TAG = "AttandenceMenuFragment";
     private String schoolname,role;
     private Bundle bundle;
     private Context context;
@@ -43,8 +46,9 @@ public class AttandenceMenuFragment extends HomeFragment {
         bundle=new Bundle();
         assert this.getArguments() != null;
         schoolname = this.getArguments().getString("SCHOOL_NAME");
+        //schoolname="PARVARISH FOR U";
         role = this.getArguments().getString("ROLE");
-        //role="ADMIN";
+        role="PRINCI";
         getWidthAndHeight();
         final GridView androidGridView = v.findViewById(R.id.grid_view_image_text);
         String[] gridViewString = new String[0];
@@ -140,7 +144,9 @@ public class AttandenceMenuFragment extends HomeFragment {
                         "Student List",
                         "Add Student",
                         "Add Teacher",
-                        "Modify School Data"
+                        "Add Leave",
+                        "View Leave"
+
                         //   "WorkBook",
                         //   "Leave",
                         //   "Notice Board",
@@ -163,6 +169,8 @@ public class AttandenceMenuFragment extends HomeFragment {
                         R.drawable.ic_add_book_24dp,
                         R.drawable.ic_report_black_24dp,
                         R.drawable.ic_report_black_24dp,
+                        R.drawable.ic_report_black_24dp,
+
                         //   R.drawable.ic_list_black_24dp,
                         //   R.drawable.ic_card_giftcard_black_24dp,
                         //   R.drawable.ic_book_black_24dp,
@@ -185,11 +193,10 @@ public class AttandenceMenuFragment extends HomeFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int i, long id) {
-
-
                 switch (i) {
 
                     case 0:
+                        switchFragment(new ViewAttendanceFragment());
                         //switchFragment(new StudentassignmentFragment());
                         break;
                     case 1:
@@ -208,19 +215,18 @@ public class AttandenceMenuFragment extends HomeFragment {
                         //switchFragment(new EnterstudentdataFragment());
                         break;
                     case 6:switchFragment(new AddStudentFragment());
-                        //switchFragment(new EnterteacherdataFragment());
+                        //switchFragment(new AddleavedataFragment());
                         break;
                     case 7:switchFragment(new AddTeacherFragment());
                         //switchFragment(new GeneratereportFragment());
                         break;
-                    case 8:
+                    case 8:switchFragment(new AddleavedataFragment());
                        // switchFragment(new ModifyattendanceFragment());
                         break;
-                    case 9:
+                    case 9:switchFragment(new ViewleaveFragment());
                         //switchFragment(new ModifyattendanceTeacherFragment());
                         break;
                     case 10:
-
                         break;
                     case 11:
                         //switchFragment(new StudentleaverecordFragment());
@@ -230,10 +236,8 @@ public class AttandenceMenuFragment extends HomeFragment {
                         break;
                     case 13:
                         //switchFragment(new ViewattendanceTeacherFragment());
-
                         break;
                     case 14:
-
                         break;
 
 
@@ -254,13 +258,7 @@ public class AttandenceMenuFragment extends HomeFragment {
 
     }
 
-
-
-
-
-
-
-    private int getWidthAndHeight() {
+   private int getWidthAndHeight() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int screenHeight = displaymetrics.heightPixels;

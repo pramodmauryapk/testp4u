@@ -10,7 +10,7 @@ android {
         applicationId "com.p4u.parvarish"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 3
+        versionCode 5
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

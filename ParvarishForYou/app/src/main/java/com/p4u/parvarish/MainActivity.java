@@ -8,16 +8,18 @@ import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,6 +35,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.HelpLine.EmergencyFragment;
 import com.p4u.parvarish.contact_us.ContactUsFragment;
 import com.p4u.parvarish.fancydialog.Animation;
@@ -45,6 +52,7 @@ import com.p4u.parvarish.menu_items.AboutUsFragment;
 import com.p4u.parvarish.menu_items.FeedbackAddFragment;
 import com.p4u.parvarish.menu_items.JoinUsFragment;
 import com.p4u.parvarish.menu_items.OurWorkFragment;
+import com.p4u.parvarish.user_pannel.Teacher;
 import com.p4u.parvarish.user_pannel.UserProfileFragment;
 import com.squareup.picasso.Picasso;
 
@@ -53,19 +61,24 @@ import java.util.Stack;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static java.util.Objects.requireNonNull;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "newgallary";
+    private static final String TAG = "Main";
     private Fragment newContent;
     private Bundle bundle;
     private FirebaseAuth mAuth;
     private NavigationView navigationView;
-    private String user_name,user_email,user_roll,user_img,user_relative,callmobile;
+    private String user_name, user_email, user_roll, user_img, user_relative;
     private Intent intent;
-    private TextView name,email;
+    public String callmobile;
+    private TextView name, email;
     public CircleImageView img;
     public FirebaseUser user;
+    private DatabaseReference myref;
     public Stack<Fragment> fragmentStack;
-   SettingsContentObserver settingsContentObserver;
+    SettingsContentObserver settingsContentObserver;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setting layout file
         setContentView(R.layout.activity_main);
         settingsContentObserver = new SettingsContentObserver(this, new Handler());
-        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System. CONTENT_URI, true, settingsContentObserver);
+        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, settingsContentObserver);
         //auth instance
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         //setting toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,14 +103,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //intent object
         Intent intent = getIntent();
         user_name = intent.getStringExtra("user_name");
-        user_email=intent.getStringExtra("user_email");
-        user_roll=intent.getStringExtra("user_role");
-        user_relative=intent.getStringExtra("user_relative");
-        if(intent.getStringExtra("user_img")!=null) {
+        user_email = intent.getStringExtra("user_email");
+        user_roll = intent.getStringExtra("user_role");
+        //user_relative = intent.getStringExtra("user_relative");
+        user_relative=get_mobile();;
+           // Toast.makeText(this,"Please Logout and then Login to make Call on Registered Mobile Number",Toast.LENGTH_LONG).show();
+
+
+
+        if (intent.getStringExtra("user_img") != null) {
             user_img = intent.getStringExtra("user_img");
         }
 
-        set_profile(user_name, user_roll,user_img,user_relative);
+        set_profile(user_name, user_roll, user_img, user_relative);
+
         //settting floation action button
         final FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -108,11 +127,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //login default homefragment
         fragmentStack = new Stack<>();
         //transferring some fields to fragment
-        Bundle bundle=new Bundle();
-        bundle.putString("user_name",user_email);
-        bundle.putString("user_role",user_roll);
-        bundle.putString("user_name",user_name);
-        bundle.putString("user_img",user_img);
+        Bundle bundle = new Bundle();
+        bundle.putString("user_name", user_email);
+        bundle.putString("user_role", user_roll);
+        bundle.putString("user_name", user_name);
+        bundle.putString("user_img", user_img);
         newContent = new HomeFragment();
         newContent.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -125,15 +144,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-                if(callmobile!=null)
-                    call(callmobile);
-                else {
-                    Bundle bundle = new Bundle();
-                    newContent = new EmergencyFragment();
-                    newContent.setArguments(bundle);
-                    switchFragment(newContent);
+
+                    if(get_mobile()!=null) {
+                       call(get_mobile());
+                    }else{
+                        Bundle bundle = new Bundle();
+                        newContent = new EmergencyFragment();
+                        newContent.setArguments(bundle);
+                        switchFragment(newContent);
+
+                    }
                     //Snackbar.make(view, "Kindly Add Number", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
+
 
 
             }
@@ -149,6 +171,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
     }
+
+    private String get_mobile() {
+        myref= FirebaseDatabase.getInstance().getReference().child("USERS");
+        myref.addValueEventListener(new ValueEventListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "Accessing database");
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Teacher uInfo=ds.getValue(Teacher.class);
+                    if(requireNonNull(uInfo).getUserId().equals(user.getUid())) {
+                       // user_name = requireNonNull(uInfo).getUserName();
+                       // user_email = uInfo.getUserEmail();
+                       // user_roll = uInfo.getUserRole();
+                       // user_img = uInfo.getImageURL();
+                        user_relative=uInfo.getUserRelative();
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "failed to read values", databaseError.toException());
+            }
+        });
+        return user_relative;
+    }
+
     public class SettingsContentObserver extends ContentObserver {
         int previousVolume;
         Context context;
@@ -173,24 +228,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int currentVolume =
                     Objects.requireNonNull(audio).getStreamVolume(AudioManager.STREAM_MUSIC);
             int delta = previousVolume - currentVolume;
-      //  if(delta<0) {
+            //  if(delta<0) {
             //for activate google assistant
-           // startActivity(new Intent(Intent.ACTION_VOICE_COMMAND).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            // startActivity(new Intent(Intent.ACTION_VOICE_COMMAND).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
-       // }
+            // }
             if (delta > 0) {
-                    Toast.makeText(MainActivity.this, "Volume Decreased", Toast.LENGTH_SHORT).show();
-                    previousVolume = currentVolume;
+                // Toast.makeText(MainActivity.this, "Volume Decreased", Toast.LENGTH_SHORT).show();
+                previousVolume = currentVolume;
 
             } else if (delta < 0) {
 
-                Toast.makeText(MainActivity.this, "Volume Increased", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Volume Increased", Toast.LENGTH_SHORT).show();
                 previousVolume = currentVolume;
 
             }
         }
     }
-    public void senemail(){
+
+    public void senemail() {
         Intent email = new Intent(Intent.ACTION_SEND);
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{"youremail@yahoo.com"});
         email.putExtra(Intent.EXTRA_SUBJECT, "subject");
@@ -198,6 +254,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         email.setType("message/rfc822");
         startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
+
     public void sendSMS(final String mobile) {
 
         String message = "Hello World!";
@@ -205,36 +262,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(mobile, null, message, null, null);
     }
+
     private void call(final String mobile) {
 
-                    final int MY_PERMISSIONS_REQUEST_CALL_PHONE =1 ;
+        final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
-                        // Write your code here to execute after dialog
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:" +mobile));
-                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getApplication()),
-                                Manifest.permission.CALL_PHONE)
-                                != PackageManager.PERMISSION_GRANTED) {
+        // Write your code here to execute after dialog
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + mobile));
+        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(this),
+                Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(Objects.requireNonNull(this),
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
 
-                            ActivityCompat.requestPermissions(Objects.requireNonNull(getParent()),
-                                    new String[]{Manifest.permission.CALL_PHONE},
-                                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
+            // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
+            // app-defined int constant. The callback method gets the
+            // result of the request.
+        } else {
+            //You already have permission
+            try {
+                startActivity(callIntent);
 
-                            // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
-                            // app-defined int constant. The callback method gets the
-                            // result of the request.
-                        } else {
-                            //You already have permission
-                            try {
-                                startActivity(callIntent);
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+        }
 
-                            } catch (SecurityException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
+    }
 
 
     @Override
@@ -242,22 +299,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getApplicationContext().getContentResolver().unregisterContentObserver(settingsContentObserver);
         super.onDestroy();
     }
-    private void init(){
+
+    private void init() {
         // NavigationView Header
         View headerView = navigationView.getHeaderView(0);
         name = headerView.findViewById(R.id.username);
         email = headerView.findViewById(R.id.email);
-        img= headerView.findViewById(R.id.imageView);
+        img = headerView.findViewById(R.id.imageView);
     }
+
     @SuppressLint({"SetTextI18n", "ResourceType"})
-    public void set_profile(String username, String userrole, String imgURL, String relative){
+    public void set_profile(String username, String userrole, String imgURL, String relative) {
 
-          name.setText(username);
-          email.setText(userrole);
-          Picasso.get().load(imgURL).into(img);
-          callmobile=relative;
+        name.setText(username);
+        email.setText(userrole);
+        Picasso.get().load(imgURL).into(img);
+        callmobile = relative;
 
     }
+
     private void addMenuItemInNavMenuDrawer() {
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.main_drawer);
@@ -296,7 +356,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         public void OnClick() {
 
 
-
                         }
                     })
                     .build();
@@ -312,13 +371,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.cornor_menu, menu);
-        if (FirebaseAuth.getInstance().getCurrentUser() == null){
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             menu.findItem(R.id.action_login_logout).setTitle("Login");
             menu.findItem(R.id.action_update).setTitle("Register");
 
 
-        }
-        else {
+        } else {
             menu.findItem(R.id.action_login_logout).setTitle("Logout");
             menu.findItem(R.id.action_update).setTitle("Update Profile");
 
@@ -331,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             if (id == R.id.action_update) {
                 newContent = new UserProfileFragment();
                 newContent.setArguments(bundle);
@@ -341,17 +399,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mAuth.signOut();
                 item.setTitle("Login");
                 user_name = "USER";
-                user_email="EMAIL";
-                user_roll="USER";
+                user_email = "EMAIL";
+                user_roll = "USER";
                 // user_img=null;
-                set_profile(user_name, user_roll,user_img,user_relative);
-
-
+                set_profile(user_name, user_roll, user_img, user_relative);
 
 
             }
 
-        }else{
+        } else {
             if (id == R.id.action_update) {
                 startActivity(new Intent(this, UserRegistrationActivity.class));
                 finish();
@@ -362,12 +418,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
 
-
         }
 
 
         return super.onOptionsItemSelected(item);
     }
+
     // Handle navigation view item clicks here.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -375,25 +431,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         bundle = new Bundle();
 
-        switch (id){
+        switch (id) {
 
-            case R.id.nav_our_work:newContent=new OurWorkFragment();
+            case R.id.nav_our_work:
+                newContent = new OurWorkFragment();
                 break;
-            case R.id.nav_about_us:newContent=new AboutUsFragment();
+            case R.id.nav_about_us:
+                newContent = new AboutUsFragment();
                 break;
-            case R.id.nav_Emergengy:newContent=new EmergencyFragment();
+            case R.id.nav_Emergengy:
+                newContent = new EmergencyFragment();
                 break;
-            case R.id.nav_feedback:newContent=new FeedbackAddFragment();
+            case R.id.nav_feedback:
+                newContent = new FeedbackAddFragment();
                 break;
-            case R.id.nav_contact_us:newContent=new ContactUsFragment();
+            case R.id.nav_contact_us:
+                newContent = new ContactUsFragment();
                 break;
             case R.id.nav_joinus:
-                Bundle bundle=new Bundle();
-                bundle.putString("user_name",user_email);
-                bundle.putString("user_role",user_roll);
-                bundle.putString("user_name",user_name);
-                bundle.putString("user_img",user_img);
-                newContent=new JoinUsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("user_name", user_email);
+                bundle.putString("user_role", user_roll);
+                bundle.putString("user_name", user_name);
+                bundle.putString("user_img", user_img);
+                newContent = new JoinUsFragment();
                 newContent.setArguments(bundle);
 
                 break;
@@ -401,33 +462,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_share:
                 shareApp();
                 break;
-            case R.id.nav_exit:new FancyAlertDialog.Builder(this)
-                    .setTitle("Rate us if you like the app")
-                    .setMessage("Do you really want to Exit ?")
-                    .setNegativeBtnText("Cancel")
-                    .setPositiveBtnText("Close")
-                    .setAnimation(Animation.POP)
-                    .isCancellable(true)
-                    .setIcon(R.drawable.logo, Icon.Visible)
-                    .OnPositiveClicked(new FancyAlertDialogListener() {
-                        @Override
-                        public void OnClick() {
+            case R.id.nav_exit:
+                new FancyAlertDialog.Builder(this)
+                        .setTitle("Rate us if you like the app")
+                        .setMessage("Do you really want to Exit ?")
+                        .setNegativeBtnText("Cancel")
+                        .setPositiveBtnText("Close")
+                        .setAnimation(Animation.POP)
+                        .isCancellable(true)
+                        .setIcon(R.drawable.logo, Icon.Visible)
+                        .OnPositiveClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick() {
 
-                            //Intent ActivityIndent = new Intent(newgallary.this, ExitActivity.class);
-                            //startActivity(ActivityIndent);
-                            finish();
+                                //Intent ActivityIndent = new Intent(newgallary.this, ExitActivity.class);
+                                //startActivity(ActivityIndent);
+                                finish();
 
-                        }
-                    })
-                    .OnNegativeClicked(new FancyAlertDialogListener() {
-                        @Override
-                        public void OnClick() {
+                            }
+                        })
+                        .OnNegativeClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick() {
 
 
-
-                        }
-                    })
-                    .build();
+                            }
+                        })
+                        .build();
 
                 break;
 
@@ -445,22 +506,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // switching fragment
 
     public void switchFragment(Fragment fragment) {
-      FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentStack.push(fragment);
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)
                 .commit();
 
-     }
+    }
+
     private void shareApp() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         String shareSubText = "Kindly install our android app Parvarish4U: From ParvarishForYou Team ";
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareSubText + "https://play.google.com/store/apps/details?id=com.p4u.parvarish&hl=en");
-        startActivity(Intent.createChooser(shareIntent,"Share link using"));
+        startActivity(Intent.createChooser(shareIntent, "Share link using"));
     }
-
 
 
 

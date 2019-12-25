@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
@@ -69,7 +70,7 @@ public class AddStudentFragment extends Fragment {
     private ImageButton selectimg;
     private Uri filePath,imageUri;
     private StorageTask mUploadTask;
-    private String schoolname,schooId;
+    private String schoolname,schooId,stclass,stsection,role;
     private Bundle bundle;
     private int mYear,mMonth,mDay,count;
     public AddStudentFragment() {
@@ -83,16 +84,42 @@ public class AddStudentFragment extends Fragment {
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_addstudent, container, false);
         // Inflate the layout for this fragment
+        init();
         bundle=new Bundle();
         schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
-        //schoolname="RD public school";
+        role = requireNonNull(this.getArguments()).getString("ROLE");
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        studentref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
-        princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("PRINCI");
+        stuclass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                stclass=stuclass.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                stclass=stuclass.getItemAtPosition(0).toString();
+            }
+
+        });
+        stusection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                stsection=stusection.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                stsection=stusection.getItemAtPosition(0).toString();
+            }
+
+        });
+        princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(schoolname).child("PRINCI");
         mStorageRef = FirebaseStorage.getInstance().getReference("STUDENTS");
         mStorage  = FirebaseStorage.getInstance().getReference("STUDENTS").getStorage();
         context = container.getContext();
-        init();
+
 
         get_count();
         selectimg.setOnClickListener(new View.OnClickListener() {
@@ -244,40 +271,40 @@ public class AddStudentFragment extends Fragment {
                         public void onSuccess(Uri uri) {
 
                             progressDialog.dismiss();
-
+                            studentref = FirebaseDatabase.getInstance().getReference()
+                                    .child("SCHOOL")
+                                    .child(schoolname)
+                                    .child("STUDENTS")
+                                    .child("PERSONAL_DATA")
+                                    .child(stclass)
+                                    .child(stsection);
                             //getting a unique id using push().getKey() method
                             //it will create a unique id and we will use it as the Primary Key for our Book
                             String studentId = studentref.push().getKey();
                             //creating an Book Object
                             assert studentId != null;
                             StudentData student = new StudentData(
-                                    studentId,
-                                    requireNonNull(stuname.getText()).toString(),
-                                    requireNonNull(stuadmissionno.getText()).toString(),
-                                    requireNonNull(stufather.getText()).toString(),
-                                    requireNonNull(studob.getText()).toString(),
-                                    requireNonNull(stumother.getText()).toString(),
-                                    requireNonNull(stuhomemobile.getText()).toString(),
-                                    stuclass.getSelectedItem().toString(),
-                                    stusection.getSelectedItem().toString(),
+                                    requireNonNull(stuadmissionno.getText()).toString().toUpperCase(),
+                                    requireNonNull(stuname.getText()).toString().toUpperCase(),
+                                    requireNonNull(stufather.getText()).toString().toUpperCase(),
+                                    requireNonNull(studob.getText()).toString().trim(),
+                                    requireNonNull(stumother.getText()).toString().toUpperCase(),
+                                    requireNonNull(stuhomemobile.getText()).toString().trim(),
                                     stuyear.getSelectedItem().toString(),
-                                    requireNonNull(stuaddress.getText()).toString(),
+                                    requireNonNull(stuaddress.getText()).toString().toUpperCase(),
                                     stugender.getSelectedItem().toString(),
-                                    requireNonNull(stufeepaid.getText()).toString(),
-                                    requireNonNull(stufeepending.getText()).toString(),
+                                    requireNonNull(stufeepaid.getText()).toString().trim(),
+                                    requireNonNull(stufeepending.getText()).toString().trim(),
                                     uri.toString(),
-                                    requireNonNull(stupin.getText()).toString(),
+                                    requireNonNull(stupin.getText()).toString().trim(),
                                     "",
                                     "STUDENT",
-                                    schoolname,
                                     studentId.substring(0, 5),false);
 
                             //Saving the Book
-                            studentref.child(requireNonNull(studentId)).setValue(student);
-
-
+                            studentref.child(stuadmissionno.getText().toString().toUpperCase()).setValue(student);
                             Toast.makeText(context, "Student added", Toast.LENGTH_LONG).show();
-                            princiref.child(schooId).child("schoolStudents").setValue(count+1);
+                            princiref.child("schoolStudents").setValue(count+1);
                             //setting edittext to blank again
                             set_blank();
 
@@ -308,33 +335,22 @@ public class AddStudentFragment extends Fragment {
     }
 
     private void get_count() {
-
-        princiref.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    SchoolData school = ds.getValue(SchoolData.class);
-                    assert school != null;
-                    if(school.getSchoolName().equals(schoolname)) {
-                        count = school.getSchoolStudents();
-                        schooId=school.getSchoolId();
+        try {
+            princiref.child("schoolStudents").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    count = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
 
 
-                    }
                 }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
+                }
+            });
+        } catch (Exception e) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
+        }
 
     }
 
@@ -429,7 +445,7 @@ public class AddStudentFragment extends Fragment {
         stufeepending.setText("");
         stuaddress.setText("");
         stupin.setText("");
-
+        logo.setImageBitmap(null);
 
 
     }

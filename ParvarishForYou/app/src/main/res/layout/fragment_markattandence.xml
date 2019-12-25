@@ -42,8 +42,7 @@
                       android:layout_height="wrap_content"
                       android:layout_margin="5dp"
                       android:layout_weight="3"
-                      android:orientation="vertical"
-                      android:id="@+id/linearLayout1">
+                      android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -55,7 +54,7 @@
                         <Spinner
                             android:id="@+id/spn_class"
                             android:background="@drawable/bg_edittext_focused"
-                            android:entries="@array/Class"
+
                             android:padding="@dimen/_8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -66,8 +65,7 @@
                       android:layout_height="wrap_content"
                       android:layout_margin="5dp"
                       android:layout_weight="3"
-                      android:orientation="vertical"
-                      android:id="@+id/linearLayout2">
+                      android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -80,7 +78,7 @@
                             android:id="@+id/spn_section"
                             android:padding="@dimen/_8dp"
                             android:background="@drawable/bg_edittext_focused"
-                            android:entries="@array/Section"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                   </LinearLayout>
@@ -90,8 +88,7 @@
                       android:layout_height="wrap_content"
                       android:layout_margin="5dp"
                       android:layout_weight="3"
-                      android:orientation="vertical"
-                      android:id="@+id/linearLayout3">
+                      android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

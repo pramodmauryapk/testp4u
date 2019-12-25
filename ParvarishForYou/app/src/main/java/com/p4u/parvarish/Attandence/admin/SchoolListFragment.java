@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,8 +24,6 @@ import com.p4u.parvarish.book_pannel.spreadLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class SchoolListFragment extends Fragment {
 
@@ -41,43 +38,65 @@ public class SchoolListFragment extends Fragment {
     private Context context;
     private LinearLayout l1;
     private String schoolname;
+    private  String key;
     //private final View.OnClickListener mOnClickListener = new MyOnClickListener();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_schoollist, container, false);
-        princi = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("STUDENTS");
+
+        FirebaseDatabase.getInstance().getReference().child("SCHOOL")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            //here is your every post
+                            dataList.clear();
+                            key = snapshot.getKey();
+                            princi = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(key);
+                            //Log.d(TAG,princi.toString());
+                            appendDataList(princi);
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
         context = container.getContext();
-        schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
+
         initViews();
         l1.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new spreadLayout());
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
-
         redColor = getResources().getColor(R.color.red);
         greenColor = getResources().getColor(R.color.green);
 
-        appendDataList();
-        adapter.notifyDataSetChanged();
+
+
 
         return v;
     }
     private void initViews(){
         recyclerView =v. findViewById(R.id.main_recycler_view);
         l1=v.findViewById(R.id.l1);
-        SwipeRefreshLayout refreshLayout = v.findViewById(R.id.refresh_layout);
+        //SwipeRefreshLayout refreshLayout = v.findViewById(R.id.refresh_layout);
     }
 
 
-    private void appendDataList() {
+    private void appendDataList(DatabaseReference mref) {
 
-        princi.addValueEventListener(new ValueEventListener() {
+        mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                dataList.clear();
+
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     SchoolData school = ds.getValue(SchoolData.class);
                     dataList.add(school);

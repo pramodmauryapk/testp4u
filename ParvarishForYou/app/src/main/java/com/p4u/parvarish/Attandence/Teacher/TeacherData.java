@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Attandence.admin;
+package com.p4u.parvarish.Attandence.Teacher;
 
 public class TeacherData {
 
