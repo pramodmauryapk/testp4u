@@ -1,12 +1,10 @@
-package com.p4u.parvarish.Attandence.student;
+package com.p4u.parvarish.Attandence.admin;
 
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,7 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.p4u.parvarish.Attandence.admin.StudentData;
+import com.p4u.parvarish.Attandence.student.AttandenceViewHolder;
 import com.p4u.parvarish.R;
 
 import java.text.SimpleDateFormat;
@@ -38,43 +37,36 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-
-public class ViewAttendanceFragment extends Fragment {
-
+public class arkAttandenceFragment extends Fragment {
     private DatabaseReference studentref;
     private ListView mainListView;
     private List<StudentData> students;
-    private ArrayList<String> attandence=new ArrayList<>();
-    private ArrayList<String> checkedValue;
-    private StudentAttandenceArrayAdapter Adapter;
-    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList <String> checkedValue;
+    private StudentAttandenceAdapter Adapter;
+    private ImageButton check;
     private int mYear,mMonth,mDay,count;
     private Spinner sp_class,sp_section;
     private String date,schoolname,classname,section;
     private DatabaseReference dR;
     private Bundle bundle;
+    private AttandenceViewHolder viewHolder;
     private EditText etdate;
     private Context context;
-    private String TAG="view attandence";
+    private String TAG="new";
     private View v;
-
-    public ViewAttendanceFragment() {
-        // Required empty public constructor
-    }
-
+    private String Value;
+    private List<String> tasks;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.fragment_view_attendance, container, false);
-        // Inflate the layout for this fragment
-        init();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        v=inflater.inflate(R.layout.fragment_markattandence, container, false);
+        initViews();
         bundle=new Bundle();
         schoolname = (Objects.requireNonNull(this.getArguments())).getString("SCHOOL_NAME");
-
+        //schoolname="RD public school";
         context = container.getContext();
-        students = new ArrayList<>();
-
+        students = new ArrayList<StudentData>();
+        tasks = new ArrayList<String>();
         etdate.setText(get_current_time());
         etdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,35 +111,41 @@ public class ViewAttendanceFragment extends Fragment {
         sp_section.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                section=sp_section.getSelectedItem().toString();
                 load_list(schoolname,classname,sp_section.getSelectedItem().toString(),date);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                section=sp_section.getItemAtPosition(0).toString();
                 load_list(schoolname,classname,sp_section.getItemAtPosition(0).toString(),date);
             }
         });
-        etdate.addTextChangedListener(new TextWatcher() {
+
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View item,  int position, long id) {
+
+            //StudentData stu=Adapter.getItem(position);
+            //assert stu != null;
+            //stu.toggleChecked();
+            //viewHolder = (StudentViewHolder) item.getTag();
+            //viewHolder.getCheckBox().setChecked(stu.isChecked());
+        }
+    });
+
+        check.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View view) {
 
-            }
+               // Toast.makeText(context, "Attandence Submitted", Toast.LENGTH_LONG).show();
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                load_list(schoolname,classname,section,date);
-            }
+           }
         });
-
         return v;
     }
+
+
+
     private void load_section(String Name,String classname) {
         FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(Name).child("STUDENTS").child("PERSONAL_DATA").child(classname).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -172,91 +170,86 @@ public class ViewAttendanceFragment extends Fragment {
 
 
     }
-    public void load_list(final String schoolname, final String classname, final String section,final String date) {
+    private void load_class(String Name) {
 
-        dR= FirebaseDatabase.getInstance().getReference()
+            FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(Name).child("STUDENTS").child("PERSONAL_DATA").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<String> classlist = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        //here is your every post
+                        classlist.add(snapshot.getKey());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireNonNull(context), android.R.layout.simple_spinner_item, classlist);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp_class.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    classname=classlist.get(0);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+    }
+    public void load_list(final String schoolname, final String classname, final String section, final String date) {
+
+
+        studentref = FirebaseDatabase.getInstance().getReference()
                 .child("SCHOOL")
                 .child(schoolname)
                 .child("STUDENTS")
                 .child("PERSONAL_DATA")
                 .child(classname)
                 .child(section);
-        final ArrayList<String> keylist = new ArrayList<>();
-        dR.addValueEventListener(new ValueEventListener() {
+
+
+        studentref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
                 students.clear();
-                Adapter = new StudentAttandenceArrayAdapter(getActivity(), students);
+                tasks.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     StudentData student = postSnapshot.getValue(StudentData.class);
                     students.add(student);
-                    keylist.add(postSnapshot.getKey());
+                    dR = FirebaseDatabase.getInstance().getReference().child("SCHOOL")
+                            .child(schoolname)
+                            .child("STUDENTS")
+                            .child("ATTANDENCE")
+                            .child(classname)
+                            .child(section)
+                            .child(date);
+                    assert student != null;
+                    dR.child(student.getStudentId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                          tasks.add(String.valueOf(dataSnapshot.getValue()));
+
+                           // viewHolder.getStatus().setText("A");
+                           //
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                   });
+
+
                 }
-                load_attandence(keylist);
-                mainListView.setAdapter(arrayAdapter);
-                mainListView.setAdapter(Adapter);
 
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-    private void load_attandence(ArrayList<String> keylist) {
-
-
-        attandence.clear();
-      for(int i=0;i<keylist.size();i++) {
-         studentref = FirebaseDatabase.getInstance().getReference()
-                  .child("SCHOOL")
-                  .child(schoolname)
-                  .child("STUDENTS")
-                  .child("ATTANDENCE")
-                  .child(classname)
-                  .child(section)
-                  .child(date)
-                  .child(keylist.get(i));
-          studentref.addListenerForSingleValueEvent(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                  attandence.add(dataSnapshot.getValue(String.class));
-                  ///////////////////////////
-                  arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, attandence);
-
-
-
-                  Toast.makeText(context,"hello"+arrayAdapter.toString(),Toast.LENGTH_LONG).show();
-                  arrayAdapter.notifyDataSetChanged();
-
-              }
-
-              @Override
-              public void onCancelled(@NonNull DatabaseError databaseError) {
-
-              }
-          });
-
-      }
-    }
-
-    private void load_class(String Name) {
-
-        FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(Name).child("STUDENTS").child("PERSONAL_DATA").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<String> classlist = new ArrayList<>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    //here is your every post
-                    classlist.add(snapshot.getKey());
+                if (getActivity() != null) {
+                    Toast.makeText(context,"hello"+tasks,Toast.LENGTH_LONG).show();
+                    Adapter = new StudentAttandenceAdapter(getActivity(), students,tasks);
+                    mainListView.setAdapter(Adapter);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireNonNull(context), android.R.layout.simple_spinner_item, classlist);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                sp_class.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-                classname=classlist.get(0);
             }
 
             @Override
@@ -264,19 +257,28 @@ public class ViewAttendanceFragment extends Fragment {
 
             }
         });
-
-
     }
-    private void init() {
+        // String attandenceId = dR.push().getKey();
+        // dR.child("ID").setValue(attandenceId);
 
+       // for (int i = 0; i < Adapter.getCount(); i++) {
+         //   final StudentData student = Adapter.getItem(i);
+        //    assert student != null;
+
+
+
+    private void initViews() {
+        check = v.findViewById(R.id.check);
         mainListView = v. findViewById(R.id.mainListView);
         etdate=v.findViewById(R.id.et_date);
         sp_class=v.findViewById(R.id.spn_class);
         sp_section=v.findViewById(R.id.spn_section);
     }
+    public Object onRetainNonConfigurationInstance(){
+        return students;
+    }
     private String get_current_time(){
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         return sdf.format(new Date());
     }
-
 }

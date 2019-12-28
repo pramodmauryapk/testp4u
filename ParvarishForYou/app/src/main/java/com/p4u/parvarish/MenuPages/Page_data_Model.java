@@ -12,7 +12,10 @@ public class Page_data_Model {
     private String status;
     private String userid;
 
-    public Page_data_Model() {
+
+
+    private String category;
+   public Page_data_Model() {
         //empty constructor needed
     }
     public Page_data_Model(int position){
@@ -20,7 +23,7 @@ public class Page_data_Model {
 
 
 
-    Page_data_Model(String id, String title, String imageUrl, String Des, String time, String status, String userid) {
+    public Page_data_Model(String id, String title, String imageUrl, String Des, String time, String status, String userid) {
         this.id=id;
         this.title = title;
         this.imageURL = imageUrl;
@@ -28,6 +31,18 @@ public class Page_data_Model {
         this.time=time;
         this.status=status;
         this.userid=userid;
+
+    }
+    public Page_data_Model(String id, String title, String imageUrl, String Des, String time, String status, String userid,String category) {
+        this.id=id;
+        this.title = title;
+        this.imageURL = imageUrl;
+        this.description = Des;
+        this.time=time;
+        this.status=status;
+        this.userid=userid;
+        this.category=category;
+
     }
     public String getId() {
         return id;
@@ -89,4 +104,10 @@ public class Page_data_Model {
         this.userid = userid;
     }
 
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String cat) {
+       this.category=cat;
+    }
 }

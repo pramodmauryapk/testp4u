@@ -63,6 +63,19 @@
 
 
     </array>
+    <array name="Categories">
+        <item>General</item>
+        <item>Emplyement</item>
+        <item>Defence</item>
+        <item>Games</item>
+        <item>Study</item>
+        <item>Research</item>
+        <item>Technology</item>
+        <item>Youth</item>
+        <item>Social</item>
+
+
+    </array>
     <array name="PAGES">
         <item>TELENT SUPPORT</item>
         <item>TECHNICAL PARTNERSHIP</item>
@@ -319,6 +332,7 @@ So if you are interested to be technical partner pls send you name and address t
 
     <string name="enter_service_amp_no"><![CDATA[Enter Service & No]]></string>
     <string name="post">post</string>
+    <string name="tab_text_3">Category</string>
 
 
 </resources>

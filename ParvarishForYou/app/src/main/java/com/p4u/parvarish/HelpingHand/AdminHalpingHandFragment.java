@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.p4u.parvarish.R;
 import com.p4u.parvarish.MenuPages.Page_data_Model;
+import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,10 @@ public class AdminHalpingHandFragment extends Fragment implements HalpingHandRec
     private ValueEventListener mDBListener;
     private View dialogView;
     private Button positive,negative;
+    private Spinner spcategory;
     private TextView inst;
     private CardView cd;
+    private String cat;
     private View v;
     @Nullable
     @Override
@@ -116,15 +120,29 @@ public class AdminHalpingHandFragment extends Fragment implements HalpingHandRec
         init_dialog_views();
         final AlertDialog b = dialogBuilder.create();
         b.show();
+        cat="General";
         myRef = FirebaseDatabase.getInstance().getReference().child("TIMELINE");
+        spcategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cat=spcategory.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                cat=spcategory.getItemAtPosition(0).toString();
+            }
+        });
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 myRef.child(id).child("status").setValue("1");
+                myRef.child(id).child("category").setValue(cat);
                 b.cancel();
             }
         });
+
         negative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,6 +169,7 @@ public class AdminHalpingHandFragment extends Fragment implements HalpingHandRec
     private void init_dialog_views() {
         positive=dialogView.findViewById(R.id.positiveBtn);
         negative=dialogView.findViewById(R.id.negativeBtn);
+        spcategory=dialogView.findViewById(R.id.spcategory);
     }
 
     private void initViews(){

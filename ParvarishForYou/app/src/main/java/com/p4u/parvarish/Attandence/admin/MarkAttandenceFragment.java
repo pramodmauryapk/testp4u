@@ -146,8 +146,7 @@ public class MarkAttandenceFragment extends Fragment {
                     assert student != null;
                     if (student.isChecked()) {
                         dR.child(student.getStudentId()).setValue("P");
-                       // Log.d(TAG,"hello"+student.getStudentName());
-                       // dR.child("STU"+i).setValue(student.getStudentadmissionno());
+
                     }else{
                         dR.child(student.getStudentId()).setValue("A");
                     }

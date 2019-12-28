@@ -6,8 +6,6 @@ import android.widget.TextView;
 public class StudentViewHolder
 {
     private CheckBox checkBox;
-
-
     private TextView textView1;
     private TextView textView2;
     public StudentViewHolder()

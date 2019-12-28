@@ -21,6 +21,7 @@ import com.p4u.parvarish.Attandence.admin.AddStudentFragment;
 import com.p4u.parvarish.Attandence.admin.AddTeacherFragment;
 import com.p4u.parvarish.Attandence.admin.MarkAttandenceFragment;
 import com.p4u.parvarish.Attandence.admin.StudentlListFragment;
+import com.p4u.parvarish.Attandence.admin.arkAttandenceFragment;
 import com.p4u.parvarish.Attandence.student.ViewAttendanceFragment;
 import com.p4u.parvarish.Attandence.student.ViewleaveFragment;
 import com.p4u.parvarish.HomeFragment;
@@ -200,7 +201,7 @@ public class AttandenceMenuFragment extends HomeFragment {
                         //switchFragment(new StudentassignmentFragment());
                         break;
                     case 1:
-                        //switchFragment(new ViewAttendanceFragment());
+                        switchFragment(new arkAttandenceFragment());
                         break;
                     case 2:
                         //switchFragment(new ViewleaveFragment());

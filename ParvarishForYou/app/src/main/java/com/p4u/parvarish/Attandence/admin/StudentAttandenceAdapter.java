@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Attandence.student;
+package com.p4u.parvarish.Attandence.admin;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,28 +10,25 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.p4u.parvarish.Attandence.admin.StudentData;
+import com.p4u.parvarish.Attandence.student.AttandenceViewHolder;
 import com.p4u.parvarish.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class StudentAttandenceArrayAdapter extends ArrayAdapter<StudentData>
+public class StudentAttandenceAdapter extends ArrayAdapter<StudentData>
 {
 
     private LayoutInflater inflater;
     private String TAG="Adopter";
-
-    public   ArrayList<String> val;
     private TextView Name,AdmissionNo,No,Status;
     private int i=0;
     private View v;
-
-    public StudentAttandenceArrayAdapter(Context context, List<StudentData> studentList)
+    private List<String>list;
+    public StudentAttandenceAdapter(Context context, List<StudentData> studentList, List<String> tasks)
     {
         super(context, R.layout.showattandencerow, R.id.rowTextView, studentList);
-
-
+        this.list=tasks;
+       // Toast.makeText(context,"hello"+tasks.toString(),Toast.LENGTH_LONG).show();
         // Cache the LayoutInflate to avoid asking for a new one each time.
         inflater = LayoutInflater.from(context);
     }
@@ -43,8 +40,8 @@ public class StudentAttandenceArrayAdapter extends ArrayAdapter<StudentData>
     {
         // Planet to display
         StudentData student = this.getItem(position);
+        list=this.getItem(position);
 
-        //val.add("A");
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.showattandencerow, null);
@@ -71,7 +68,7 @@ public class StudentAttandenceArrayAdapter extends ArrayAdapter<StudentData>
         assert student != null;
         Name.setText(student.getStudentName());
         AdmissionNo.setText(student.getStudentId());
-
+        Status.setText(list.get(position));
         return convertView;
     }
 

@@ -84,16 +84,17 @@ public class AddTeacherFragment extends Fragment {
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_addteacher, container, false);
         // Inflate the layout for this fragment
+        init();
         bundle=new Bundle();
         schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
         //schoolname="RD public school";
         UserID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        techerref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("TEACHERS");
-        princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child("PRINCI");
+        techerref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(schoolname).child("TEACHERS");
+        princiref = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(schoolname).child("PRINCI");
         mStorageRef = FirebaseStorage.getInstance().getReference("TEACHERS");
         mStorage  = FirebaseStorage.getInstance().getReference("TEACHERS").getStorage();
         context = container.getContext();
-        init();
+
 
         get_count();
         selectimg.setOnClickListener(new View.OnClickListener() {
@@ -278,7 +279,7 @@ public class AddTeacherFragment extends Fragment {
 
 
                             Toast.makeText(context, "Teacher added", Toast.LENGTH_LONG).show();
-                            princiref.child(schooId).child("schoolTeachers").setValue(count+1);
+                            princiref.child("schoolTeachers").setValue(count+1);
                             //setting edittext to blank again
                             set_blank();
 
@@ -310,30 +311,23 @@ public class AddTeacherFragment extends Fragment {
 
     private void get_count() {
 
-        princiref.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    SchoolData school = ds.getValue(SchoolData.class);
-                    assert school != null;
-                    if(school.getSchoolName().equals(schoolname)) {
-                        count = school.getSchoolTeachers();
-                        schooId=school.getSchoolId();
+        try {
+            princiref.child("schoolTeachers").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    count = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
 
 
-                    }
                 }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
+                }
+            });
+        } catch (Exception e) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        }
 
-            }
-        });
 
 
 
@@ -430,7 +424,7 @@ public class AddTeacherFragment extends Fragment {
         tsalary.setText("");
         taddress.setText("");
         tpin.setText("");
-
+        logo.setImageBitmap(null);
 
 
     }

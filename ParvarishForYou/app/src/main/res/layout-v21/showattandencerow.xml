@@ -22,14 +22,14 @@
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
     <TextView
-        android:id="@+id/rowTextView"
+        android:id="@+id/stuname"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="20sp"
         android:text="@string/student_name"
         android:textColor="@color/colorblack" />
     <TextView
-        android:id="@+id/admTextView"
+        android:id="@+id/stuadmno"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="16sp"
@@ -37,12 +37,12 @@
         android:textColor="@color/grey" />
 </LinearLayout>
     <TextView
-        android:id="@+id/Status"
+        android:id="@+id/stustatus"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:gravity="center_vertical"
         android:textSize="24sp"
-        android:text="A"
+
         />
 </LinearLayout>

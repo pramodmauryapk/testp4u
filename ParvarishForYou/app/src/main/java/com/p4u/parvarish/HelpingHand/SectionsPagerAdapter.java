@@ -15,7 +15,7 @@ import com.p4u.parvarish.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};//,R.string.tab_text_3
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3};//,
     private final Context mContext;
 
     SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -33,8 +33,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 // Fragment # 0 - This will show ThirdFragment different title
                 return UserwiseFragment.newInstance(position);
-           // case 2: // Fragment # 1 - This will show SecondFragment
-           //     return PlaceholderFragment.newInstance(position);
+            case 2: // Fragment # 1 - This will show SecondFragment
+               return ShowCategoryWiseFragment.newInstance(position);
 
 
         }
@@ -52,7 +52,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 3 total pages.
-        return 2;
+        return 3;
     }
 
 }

@@ -318,6 +318,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                                 upload.setTime(get_current_time());
                                 upload.setStatus("0");
                                 upload.setUserid(user_id);
+                                upload.setCategory("General");
 
                             } else {
                                 upload.setId(uploadId);
@@ -327,7 +328,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                                 upload.setTime(get_current_time());
                                 upload.setStatus("0");
                                 upload.setUserid("Unknown");
-
+                                upload.setCategory("General");
                             }
 
                             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
@@ -363,6 +364,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                 upload.setTime(get_current_time());
                 upload.setStatus("0");
                 upload.setUserid(user_id);
+                upload.setCategory("General");
             }else {
                 upload.setId(uploadId);
                 upload.setTitle("Unknown User");
@@ -371,6 +373,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                 upload.setTime(get_current_time());
                 upload.setStatus("0");
                 upload.setUserid("Unknown");
+                upload.setCategory("General");
             }
             mDatabaseRef.child(Objects.requireNonNull(uploadId)).setValue(upload);
             Toast.makeText(context, "Your post successfully updated. Our team will allow if content found useful.", Toast.LENGTH_LONG).show();
@@ -442,12 +445,10 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                     ContentResolver cr = getActivity().getContentResolver();
                     Bitmap bitmap;
                     try {
-                        bitmap = android.provider.MediaStore.Images.Media
-                                .getBitmap(cr, selectedImage);
+                        bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, selectedImage);
 
                         chosenImageView.setImageBitmap(bitmap);
-                        Toast.makeText(getActivity(), selectedImage.toString(),
-                                Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity(), selectedImage.toString(),Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT)
                                 .show();
@@ -461,7 +462,7 @@ public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecy
                     try {
                         Bitmap bitmap= MediaStore.Images.Media.getBitmap(requireNonNull(getActivity()).getContentResolver(),filePath);
                         chosenImageView.setImageBitmap(bitmap);
-                        //Picasso.get().load(filePath).into(chosenImageView);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
