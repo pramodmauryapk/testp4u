@@ -31,7 +31,8 @@ import static java.util.Objects.requireNonNull;
 
 public class newgallaryFragment extends Fragment{
 
-    private static final String TAG = "OurWorkFragment";
+    private static final String TAG = newgallaryFragment.class.getSimpleName();
+
 
     private Context context;
     private FirebaseStorage mStorage;

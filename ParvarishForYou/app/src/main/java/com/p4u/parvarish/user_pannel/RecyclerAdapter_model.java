@@ -24,7 +24,8 @@ import java.util.List;
 
 
 public  class RecyclerAdapter_model extends RecyclerView.Adapter<RecyclerAdapter_model.RecyclerViewHolder>{
-    private static final String TAG = "userwiseAdapter_model";
+    private static final String TAG = RecyclerAdapter_model.class.getSimpleName();
+
     private Context mContext;
     private List<Teacher> teachers;
     private OnItemClickListener mListener;

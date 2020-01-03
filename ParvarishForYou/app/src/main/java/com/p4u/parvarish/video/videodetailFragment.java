@@ -27,7 +27,8 @@ import java.net.URL;
 
 public class videodetailFragment extends Fragment {
 
-    private static final String TAG = "OurWorkFragment";
+    private static final String TAG = videodetailFragment.class.getSimpleName();
+
     private EditText editText;
     private TextView textView;
     private Button button;
@@ -39,6 +40,9 @@ public class videodetailFragment extends Fragment {
     private TouchImageView mImage;
     private View v;
     private String videoId;
+    public videodetailFragment(){
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {

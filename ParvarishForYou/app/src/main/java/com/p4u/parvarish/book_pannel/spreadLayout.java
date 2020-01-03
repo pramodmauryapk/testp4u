@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 @SuppressWarnings("deprecation")
 public class spreadLayout extends RecyclerView.LayoutManager {
-    private static final String TAG = "spreadLayout";
+    private static final String TAG = spreadLayout.class.getSimpleName();
+
     private int scroll = 0;
     private SparseArray<Rect> locationRects = new SparseArray<>();
     private SparseBooleanArray attachedItems = new SparseBooleanArray();

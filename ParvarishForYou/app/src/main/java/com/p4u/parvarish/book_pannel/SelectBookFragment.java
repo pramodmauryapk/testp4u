@@ -39,7 +39,8 @@ import java.util.Objects;
 
 public class SelectBookFragment extends Fragment {
 
-    private static final String TAG = "AddBeneficiaryFragment";
+    private static final String TAG = SelectBookFragment.class.getSimpleName();
+
     private ListView listViewBooks;
     private List<Book> books;
     private DatabaseReference myref;

@@ -36,7 +36,8 @@ import static java.util.Objects.requireNonNull;
 
 
 public  class HalpingHandRecyclerAdapter_model extends RecyclerView.Adapter<HalpingHandRecyclerAdapter_model.RecyclerViewHolder>{
-    private static final String TAG = "HalpingHandRecyclerAdapter_model";
+    private static final String TAG =HalpingHandRecyclerAdapter_model.class.getSimpleName();
+
     private Context mContext;
     private List<Page_data_Model> articles;
     private OnItemClickListener mListener;

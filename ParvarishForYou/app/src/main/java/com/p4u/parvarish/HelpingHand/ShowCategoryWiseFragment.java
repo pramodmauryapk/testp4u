@@ -48,9 +48,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static java.util.Objects.requireNonNull;
 
-public class ShowCategoryWiseFragment extends Fragment{
+public class ShowCategoryWiseFragment extends Fragment implements HalpingHandRecyclerAdapter_model.OnItemClickListener{
 
-    private static final String TAG = "ShowHalpingHandFragment";
+    private static final String TAG = ShowCategoryWiseFragment.class.getSimpleName();
+
 
     private Context context;
     private HalpingHandRecyclerAdapter_model mAdapter;
@@ -96,13 +97,13 @@ public class ShowCategoryWiseFragment extends Fragment{
         article_array = new ArrayList<>();
         mAdapter = new HalpingHandRecyclerAdapter_model(context, article_array);
         mRecyclerView.setAdapter(mAdapter);
-
+        mAdapter.setOnItemClickListener(this);
         mStorageRef = FirebaseStorage.getInstance().getReference("TIMELINE");
         mStorage  = FirebaseStorage.getInstance().getReference("TIMELINE").getStorage();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("TIMELINE");
         user_name="Unknown User";
         user_id="Unknown";
-        cat="General";
+
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("USERS");
             myref.addValueEventListener(new ValueEventListener() {
@@ -213,9 +214,36 @@ public class ShowCategoryWiseFragment extends Fragment{
         }
 
     }
+    private void switchFragment(Fragment fragment) {
+
+        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(null).commit();
+
+    }
 
 
+    @Override
+    public void onItemClick(int position) {
+        openphoto(article_array.get(position).getImageUrl());
+    }
+    private void openphoto(String url){
 
+        ImageZoomFragment fragment = new ImageZoomFragment();
+        Bundle args = new Bundle();
+        args.putString("PHOTO", url);
 
+        fragment.setArguments(args);
+        switchFragment(fragment);
+    }
 
+    @Override
+    public void onShowItemClick(int position) {
+
+    }
+
+    @Override
+    public void onDeleteItemClick(int position) {
+
+    }
 }

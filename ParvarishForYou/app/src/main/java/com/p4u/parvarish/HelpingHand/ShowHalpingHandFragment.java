@@ -68,7 +68,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ShowHalpingHandFragment extends Fragment implements HalpingHandRecyclerAdapter_model.OnItemClickListener {
 
-    private static final String TAG = "ShowHalpingHandFragment";
+    private static final String TAG = ShowHalpingHandFragment.class.getSimpleName();
+
 
     private Context context;
     private HalpingHandRecyclerAdapter_model mAdapter;

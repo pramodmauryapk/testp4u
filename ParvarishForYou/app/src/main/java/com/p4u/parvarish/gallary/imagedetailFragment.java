@@ -19,7 +19,8 @@ import com.squareup.picasso.Picasso;
 
 public class imagedetailFragment extends Fragment {
 
-    private static final String TAG = "OurWorkFragment";
+    private static final String TAG = imagedetailFragment.class.getSimpleName();
+
     private EditText editText;
     private TextView textView;
     private Button button;

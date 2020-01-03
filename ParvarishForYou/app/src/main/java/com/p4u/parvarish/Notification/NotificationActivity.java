@@ -22,6 +22,8 @@ import java.util.Objects;
 
 public class NotificationActivity extends AppCompatActivity {
     private EditText txttitle,txtmessage;
+    private static final String TAG = NotificationActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

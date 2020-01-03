@@ -42,10 +42,13 @@ import static java.util.Objects.requireNonNull;
 
 public class AdminMenuFragment extends HomeFragment {
 
-    private static final String TAG = "AdminMenuFragment";
+    private static final String TAG = AdminMenuFragment.class.getSimpleName();
     private String role;
     private Bundle bundle;
     private Context context;
+    public AdminMenuFragment(){
+
+    }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override

@@ -15,15 +15,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.p4u.parvarish.Attandence.Teacher.AddleavedataFragment;
+import com.p4u.parvarish.Attandence.student.AddleavedataFragment;
 import com.p4u.parvarish.Attandence.Teacher.TeacherListFragment;
 import com.p4u.parvarish.Attandence.admin.AddStudentFragment;
 import com.p4u.parvarish.Attandence.admin.AddTeacherFragment;
 import com.p4u.parvarish.Attandence.admin.MarkAttandenceFragment;
 import com.p4u.parvarish.Attandence.admin.StudentlListFragment;
 import com.p4u.parvarish.Attandence.admin.arkAttandenceFragment;
+import com.p4u.parvarish.Attandence.student.AddNoticedataFragment;
 import com.p4u.parvarish.Attandence.student.ViewAttendanceFragment;
 import com.p4u.parvarish.Attandence.student.ViewleaveFragment;
+import com.p4u.parvarish.Attandence.student.ViewnoticeFragment;
 import com.p4u.parvarish.HomeFragment;
 import com.p4u.parvarish.R;
 import com.p4u.parvarish.menu_items.LayoutGridView;
@@ -95,46 +97,6 @@ public class AttandenceMenuFragment extends HomeFragment {
                 };
                 break;
             case "PRINCI":
-                gridViewString = new String[]{
-                        "Attandence",
-                        "Student Data",
-                        "Teacher Data",
-                        "Mark Attandence",
-                        "Teacher List",
-                        "Student List",
-                        "Add Student",
-                        "Add Teacher",
-
-                        //   "WorkBook",
-                        //   "Leave",
-                        //   "Notice Board",
-                        //   "Assignment",
-                        //   "Reports",
-                        //    "Modify Attandence",
-                        //    "Teacher Attandence",
-
-                };
-
-                gridViewImageId = new int[]{
-                        R.drawable.ic_youtube_searched_for_black_24dp,
-                        R.drawable.ic_child_friendly_black_24dp,
-                        R.drawable.ic_transfer_within_a_station_black_24dp,
-                        R.drawable.ic_library_books_black_24dp,
-                        R.drawable.ic_image_black_24dp,
-                        R.drawable.ic_burst_mode_black_24dp,
-                        R.drawable.ic_add_book_24dp,
-                        R.drawable.ic_report_black_24dp,
-
-                        //   R.drawable.ic_list_black_24dp,
-                        //   R.drawable.ic_card_giftcard_black_24dp,
-                        //   R.drawable.ic_book_black_24dp,
-                        //   R.drawable.ic_add_book_24dp,
-                        // R.drawable.ic_phone_in_talk_black_24dp,
-                        // R.drawable.ic_verified_user_black_24dp,
-                        // R.drawable.ic_update_black_24dp,
-
-                };
-                break;
             case "ADMIN":
                 gridViewString = new String[]{
                         "Attandence",
@@ -146,8 +108,9 @@ public class AttandenceMenuFragment extends HomeFragment {
                         "Add Student",
                         "Add Teacher",
                         "Add Leave",
-                        "View Leave"
-
+                        "View Leave",
+                        "Add Notice",
+                        "View Notice"
                         //   "WorkBook",
                         //   "Leave",
                         //   "Notice Board",
@@ -156,11 +119,9 @@ public class AttandenceMenuFragment extends HomeFragment {
                         //    "Modify Attandence",
                         //    "Teacher Attandence",
 
-
                 };
 
                 gridViewImageId = new int[]{
-
                         R.drawable.ic_youtube_searched_for_black_24dp,
                         R.drawable.ic_child_friendly_black_24dp,
                         R.drawable.ic_transfer_within_a_station_black_24dp,
@@ -171,7 +132,8 @@ public class AttandenceMenuFragment extends HomeFragment {
                         R.drawable.ic_report_black_24dp,
                         R.drawable.ic_report_black_24dp,
                         R.drawable.ic_report_black_24dp,
-
+                        R.drawable.ic_report_black_24dp,
+                        R.drawable.ic_report_black_24dp,
                         //   R.drawable.ic_list_black_24dp,
                         //   R.drawable.ic_card_giftcard_black_24dp,
                         //   R.drawable.ic_book_black_24dp,
@@ -180,11 +142,9 @@ public class AttandenceMenuFragment extends HomeFragment {
                         // R.drawable.ic_verified_user_black_24dp,
                         // R.drawable.ic_update_black_24dp,
 
-
-
                 };
-
                 break;
+
         }
         LayoutGridView adapterViewAndroid = new LayoutGridView(context, gridViewString, gridViewImageId);
         androidGridView.setAdapter(adapterViewAndroid);
@@ -227,10 +187,9 @@ public class AttandenceMenuFragment extends HomeFragment {
                     case 9:switchFragment(new ViewleaveFragment());
                         //switchFragment(new ModifyattendanceTeacherFragment());
                         break;
-                    case 10:
+                    case 10:switchFragment(new AddNoticedataFragment());
                         break;
-                    case 11:
-                        //switchFragment(new StudentleaverecordFragment());
+                    case 11:switchFragment(new ViewnoticeFragment());
                         break;
                     case 12:
                         //switchFragment(new ViewAttendanceavgFragment());

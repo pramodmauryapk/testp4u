@@ -58,7 +58,8 @@ import static android.app.Activity.RESULT_OK;
 import static java.util.Objects.requireNonNull;
 
 public class UserProfileFragment extends Fragment {
-    private static final String TAG = "UserProfileFragment";
+    private static final String TAG = UserProfileFragment.class.getSimpleName();
+
     private String userID;
     private String userPassword,userAgainPassword,userRole,userAddress,userStatus,userFeedback,userNews,userTime,userRating,userImg;
     private View v;

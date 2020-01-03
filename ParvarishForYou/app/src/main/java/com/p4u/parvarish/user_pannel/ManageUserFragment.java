@@ -65,7 +65,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ManageUserFragment extends Fragment implements RecyclerAdapter_model.OnItemClickListener{
 
-    private static final String TAG = "ManageUserFragment";
+    private static final String TAG = ManageUserFragment.class.getSimpleName();
+
     private RecyclerAdapter_model mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef,myRef;

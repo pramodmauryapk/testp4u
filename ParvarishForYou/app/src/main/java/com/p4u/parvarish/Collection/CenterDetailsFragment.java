@@ -29,7 +29,8 @@ import java.util.Objects;
 
 public class CenterDetailsFragment extends Fragment {
 
-    private static final String TAG = "UserDetailsFragment";
+    private static final String TAG = CenterDetailsFragment.class.getSimpleName();
+
     private TextView nameDetailTextView;
     private TextView Email;
     private TextView Role;

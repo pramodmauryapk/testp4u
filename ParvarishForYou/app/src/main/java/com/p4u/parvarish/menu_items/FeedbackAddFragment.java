@@ -25,7 +25,8 @@ import com.p4u.parvarish.R;
 import java.util.Objects;
 
 public class FeedbackAddFragment extends Fragment {
-    private static final String TAG = "FeedbackAddFragment";
+    private static final String TAG = FeedbackAddFragment.class.getSimpleName();
+
 
     private EditText editText;
     private TextView textView;

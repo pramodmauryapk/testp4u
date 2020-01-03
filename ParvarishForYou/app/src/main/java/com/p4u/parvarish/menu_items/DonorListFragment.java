@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.book_pannel.Donor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,9 +29,10 @@ import java.util.Objects;
 
 
 public class DonorListFragment extends Fragment {
-    private static final String TAG = "DonorListFragment";
+    private static final String TAG = DonorListFragment.class.getSimpleName();
+
     private ListView listViewdonors;
-    private List<Donor> donors;
+    private List<Donor> donors,newlist;
     private EditText txtname;
     private DatabaseReference databaseBooks;
     private View v;
@@ -46,7 +46,7 @@ public class DonorListFragment extends Fragment {
         Context context = container.getContext();
         //getting views
         initViews();
-
+        newlist=new ArrayList<>();
         donors = new ArrayList<>();
         txtname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,26 +77,38 @@ public class DonorListFragment extends Fragment {
 
     }
     private void load_list() {
+
+
         try {
+
             if (!Objects.requireNonNull(txtname.getText()).toString().equals("")) {
+
                 databaseBooks.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         donors.clear();
+
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Donor donor = postSnapshot.getValue(Donor.class);
                             if (Objects.requireNonNull(donor).getBookDonor().startsWith(txtname.getText().toString().toUpperCase())) {
-                                donors.add(donor);
+                               donors.add(donor);
+
+
                             }
 
 
                         }
+
+
+
+
                         HashSet<Donor> hs = new HashSet<>(donors); // donor= name of arrayList from which u want to remove duplicates
-                        donors.clear();
-                        donors.addAll(hs);
-                        //creating adapter
+                        newlist.clear();
+                        newlist.addAll(hs);
+
+                       //creating adapter
                         if(getActivity()!=null) {
-                            DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);
+                            DonorList_model donorAdapter = new DonorList_model(getActivity(), newlist);
                             listViewdonors.setAdapter(donorAdapter);
                             donorAdapter.notifyDataSetChanged();
                         }
@@ -109,27 +121,28 @@ public class DonorListFragment extends Fragment {
                 });
 
             } else {
+
                 databaseBooks.addValueEventListener(new ValueEventListener () {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         donors.clear();
+
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             Donor donor = postSnapshot.getValue(Donor.class);
 
-                            // mobiles.add(donor.getBookDonorMobile());
+
                             donors.add(donor);
 
                         }
 
-                        // Create a new ArrayList
-
                         HashSet<Donor> hs = new HashSet<>(donors); // donor= name of arrayList from which u want to remove duplicates
-                        donors.clear();
-                        donors.addAll(hs);
+                        newlist.clear();
+                        newlist.addAll(hs);
+
                         //creating adapter
                         if(getActivity()!=null) {
-                            DonorList_model donorAdapter = new DonorList_model(getActivity(), donors);
+                            DonorList_model donorAdapter = new DonorList_model(getActivity(), newlist);
                             listViewdonors.setAdapter(donorAdapter);
                             donorAdapter.notifyDataSetChanged();
                         }

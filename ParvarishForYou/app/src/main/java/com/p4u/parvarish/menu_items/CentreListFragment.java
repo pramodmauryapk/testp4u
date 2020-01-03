@@ -40,7 +40,8 @@ import java.util.Objects;
 
 
 public class CentreListFragment extends HomeFragment {
-    private static final String TAG = "CenterListFragment";
+    private static final String TAG = CentreListFragment.class.getSimpleName();
+
     private ListView listViewUsers;
     private List<Teacher> users;
     private View dialogView;

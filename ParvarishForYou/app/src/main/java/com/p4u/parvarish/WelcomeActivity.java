@@ -23,10 +23,14 @@ import com.p4u.parvarish.user_pannel.Teacher;
 import static java.util.Objects.requireNonNull;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private static final String TAG = "WelcomeActivity";
+    private static final String TAG = WelcomeActivity.class.getSimpleName();
+
     private AnimatedCircleLoadingView animatedCircleLoadingView;
-    FirebaseUser user;
-    String user_name,user_email,user_roll,user_img,user_relative;
+    private FirebaseUser user;
+    private String user_name,user_email,user_roll,user_img,user_relative;
+    public WelcomeActivity(){
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);

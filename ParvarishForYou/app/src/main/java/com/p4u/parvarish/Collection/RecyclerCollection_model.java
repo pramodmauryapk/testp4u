@@ -34,7 +34,8 @@ import static java.util.Objects.requireNonNull;
 
 
 public  class RecyclerCollection_model extends RecyclerView.Adapter<RecyclerCollection_model.RecyclerViewHolder>{
-    private static final String TAG = "userwiseAdapter_model";
+    private static final String TAG = RecyclerCollection_model.class.getSimpleName();
+
     private Context mContext;
     private List<Collection_data> teachers;
     private OnItemClickListener mListener;

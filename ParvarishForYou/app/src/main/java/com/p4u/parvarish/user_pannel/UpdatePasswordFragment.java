@@ -33,7 +33,8 @@ import static java.util.Objects.requireNonNull;
 
 
 public class UpdatePasswordFragment extends Fragment {
-    private static final String TAG = "UpdatePasswordFragment";
+    private static final String TAG = UpdatePasswordFragment.class.getSimpleName();
+
     private String oldpassword,password, apassword;
     private EditText txtoldpass,txtpass, txtapass;
     private TextInputLayout tf1, tf2,tf3;

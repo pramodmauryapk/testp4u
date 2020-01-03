@@ -24,7 +24,8 @@ import java.util.List;
 
 
 public  class PageRecyclerAdapter_model extends RecyclerView.Adapter<PageRecyclerAdapter_model.RecyclerViewHolder>{
-    private static final String TAG = "userwiseAdapter_model";
+    private static final String TAG = PageRecyclerAdapter_model.class.getSimpleName();
+
     private Context mContext;
     private List<Page_data_Model> articles;
     private OnItemClickListener mListener;

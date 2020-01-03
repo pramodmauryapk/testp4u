@@ -41,7 +41,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="Emergency Contact No of Your Familly or friend"
+        android:text="Kindly Add Emergency Contact Number of Your Familly or Friend to whom You can call in  Emergency Situation."
         android:textSize="20sp" />
 
 

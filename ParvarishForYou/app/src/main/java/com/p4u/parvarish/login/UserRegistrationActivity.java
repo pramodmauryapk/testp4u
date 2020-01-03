@@ -41,7 +41,8 @@ import static java.util.Objects.requireNonNull;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
-    private static final String TAG = "UserRegistrationActivity";
+    private static final String TAG = UserRegistrationActivity.class.getSimpleName();
+
     private TextInputLayout tlname;
     private TextInputLayout tlpassword;
     private TextInputLayout tlapassword;

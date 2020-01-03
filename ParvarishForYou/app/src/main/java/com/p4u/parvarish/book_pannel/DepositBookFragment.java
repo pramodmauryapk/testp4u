@@ -43,7 +43,8 @@ import static java.util.Objects.requireNonNull;
 
 public class DepositBookFragment extends Fragment {
 
-    private static final String TAG = "DepositBookFragment";
+    private static final String TAG = DepositBookFragment.class.getSimpleName();
+
     private ListView listViewBooks;
     private View dialogView,handover_dialog;
     private List<Book> books;

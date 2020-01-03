@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.p4u.parvarish.R;
 
 public class PushActivity extends AppCompatActivity {
+    private static final String TAG = PushActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

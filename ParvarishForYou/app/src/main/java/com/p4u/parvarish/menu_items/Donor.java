@@ -1,4 +1,4 @@
-package com.p4u.parvarish.book_pannel;
+package com.p4u.parvarish.menu_items;
 
 public class Donor {
 

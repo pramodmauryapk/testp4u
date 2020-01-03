@@ -37,7 +37,8 @@ import java.util.Objects;
 
 public class AdminHalpingHandFragment extends Fragment implements HalpingHandRecyclerAdapter_model.OnItemClickListener {
 
-    private static final String TAG = "ShowHalpingHandFragment";
+    private static final String TAG = AdminHalpingHandFragment.class.getSimpleName();
+
     private Context context;
     private HalpingHandRecyclerAdapter_model mAdapter;
     private List<Page_data_Model> article_array;

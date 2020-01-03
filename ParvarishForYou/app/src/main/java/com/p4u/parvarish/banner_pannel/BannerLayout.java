@@ -29,7 +29,8 @@ import com.p4u.parvarish.R;
 import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
 
 public class BannerLayout extends FrameLayout {
-    private static final String TAG = "BannerLayout";
+    private static final String TAG = BannerLayout.class.getSimpleName();
+
     private int autoPlayDuration;
 
     private boolean showIndicator;

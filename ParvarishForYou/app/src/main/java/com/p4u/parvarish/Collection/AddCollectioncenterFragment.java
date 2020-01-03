@@ -54,6 +54,8 @@ public class AddCollectioncenterFragment extends Fragment {
     private Button btnpost;
     private Uri filePath,imageUri;
     private StorageTask mUploadTask;
+    private static final String TAG = AddCollectioncenterFragment.class.getSimpleName();
+
     private View v;
     public AddCollectioncenterFragment() {
         // Required empty public constructor

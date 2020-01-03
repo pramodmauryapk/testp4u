@@ -25,7 +25,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
-    private static final String TAG = "ResetPasswordActivity";
+    private static final String TAG = ResetPasswordActivity.class.getSimpleName();
+
     private EditText inputEmail;
     private FirebaseAuth auth;
     private ProgressBar progressBar;

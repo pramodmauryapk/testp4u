@@ -13,13 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-import java.util.Calendar;
-
 import com.p4u.parvarish.R;
+
+import java.util.Calendar;
 
 public class ContactUsFragment extends Fragment {
 
-    private static final String TAG = "ContactUsFragment";
+    private static final String TAG =ContactUsFragment.class.getSimpleName();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

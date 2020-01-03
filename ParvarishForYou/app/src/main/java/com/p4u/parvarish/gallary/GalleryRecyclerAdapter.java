@@ -23,7 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 public  class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryRecyclerAdapter.RecyclerViewHolder>{
-    private static final String TAG = "userwiseAdapter_model";
+    private static final String TAG = GalleryRecyclerAdapter.class.getSimpleName();
+
     private Context mContext;
     private List<Image_Model> imageModels;
     private OnItemClickListener mListener;

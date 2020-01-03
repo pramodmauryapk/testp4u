@@ -21,7 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.R;
 
 public class NewsTextFragment extends Fragment {
-    private static final String TAG = "NewsTextFragment";
+    private static final String TAG = NewsTextFragment.class.getSimpleName();
+
     private TextView tv;
     private View v;
     private String text;

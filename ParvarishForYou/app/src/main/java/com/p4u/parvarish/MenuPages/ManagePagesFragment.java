@@ -19,7 +19,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ManagePagesFragment extends Fragment {
 
-    private static final String TAG = "OurWorkFragment";
+    private static final String TAG = ManagePagesFragment.class.getSimpleName();
+
     private Button btnadd;
     private Button btnupdate;
     private Context context;

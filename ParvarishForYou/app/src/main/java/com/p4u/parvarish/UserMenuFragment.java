@@ -28,6 +28,7 @@ import com.p4u.parvarish.video.youtubegalleryFragment;
 import static java.util.Objects.requireNonNull;
 
 public class UserMenuFragment extends HomeFragment {
+    private static final String TAG = UserMenuFragment.class.getSimpleName();
 
     private String Role;
     private Bundle bundle;
@@ -43,9 +44,7 @@ public class UserMenuFragment extends HomeFragment {
             "Videos",
             "Helping Hand",
             "Emergency Contact",
-            "Academic Partner",
-
-
+            "Academic Partner"
     } ;
 
     private int[] gridViewImageId = {
@@ -64,6 +63,10 @@ public class UserMenuFragment extends HomeFragment {
 
 
     };
+
+    public UserMenuFragment() {
+
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

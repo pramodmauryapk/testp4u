@@ -3,6 +3,7 @@ package com.p4u.parvarish.login;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,8 @@ import static java.util.Objects.requireNonNull;
 public class Login_mobileActivity extends AppCompatActivity {
 
 
+    private static final String TAG = Login_mobileActivity.class.getSimpleName();
+
     private Spinner spinner;
     private EditText editText;
     private DatabaseReference myref;
@@ -40,8 +43,6 @@ public class Login_mobileActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_mobile_login);
         (requireNonNull (getSupportActionBar ())).hide ();
-
-
         spinner = findViewById(R.id.spinnerCountries);
         spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
         editText = findViewById(R.id.editTextPhone);
@@ -95,7 +96,7 @@ public class Login_mobileActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    /// Log.d(TAG, "failed to read values", databaseError.toException());
+                     Log.d(TAG, "failed to read values", databaseError.toException());
                 }
             });
         }

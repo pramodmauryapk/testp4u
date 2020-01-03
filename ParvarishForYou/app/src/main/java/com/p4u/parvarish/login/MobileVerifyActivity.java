@@ -41,7 +41,8 @@ import static java.util.Objects.requireNonNull;
 
 public class MobileVerifyActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG ="mobilverify" ;
+    private static final String TAG = MobileVerifyActivity.class.getSimpleName();
+
     private EditText otp1, otp2,otp3,otp4,otp5,otp6;
     private Button verify;
     private ImageButton edit;

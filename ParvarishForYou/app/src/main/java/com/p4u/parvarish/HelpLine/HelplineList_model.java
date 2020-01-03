@@ -15,7 +15,8 @@ import com.p4u.parvarish.R;
 import java.util.List;
 
 public class HelplineList_model extends ArrayAdapter<Helpline> {
-    private static final String TAG = "helplineList_model";
+    private static final String TAG = HelplineList_model.class.getSimpleName();
+
     private Activity context;
     private List<Helpline> users;
 

@@ -36,7 +36,8 @@ import static java.util.Objects.requireNonNull;
 
 public class JoinUsFragment extends Fragment {
 
-    private static final String TAG = "JoinUsFragment";
+    private static final String TAG = JoinUsFragment.class.getSimpleName();
+
     private Button btnregister;
     private View v;
     private TextInputLayout tlname,tlpassword,tlapassword,tlemail,tlmobile,tladdress,tlidentity;

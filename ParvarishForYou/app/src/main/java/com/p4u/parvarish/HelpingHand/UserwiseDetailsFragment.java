@@ -44,9 +44,12 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static java.util.Objects.requireNonNull;
+
 public class UserwiseDetailsFragment extends Fragment implements HalpingHandRecyclerAdapter_model.OnItemClickListener {
 
-    private static final String TAG = "UserDetailsFragment";
+    private static final String TAG = UserwiseDetailsFragment.class.getSimpleName();
+
     private TextView nameDetailTextView;
     private TextView Email;
     private TextView Role;
@@ -147,7 +150,16 @@ public class UserwiseDetailsFragment extends Fragment implements HalpingHandRecy
 
     @Override
     public void onItemClick(int position) {
+        openphoto(article_array.get(position).getImageUrl());
+    }
+    private void openphoto(String url){
 
+        ImageZoomFragment fragment = new ImageZoomFragment();
+        Bundle args = new Bundle();
+        args.putString("PHOTO", url);
+
+        fragment.setArguments(args);
+        switchFragment(fragment);
     }
 
     @Override
@@ -284,4 +296,12 @@ public class UserwiseDetailsFragment extends Fragment implements HalpingHandRecy
         positive=dialogView.findViewById(R.id.positiveBtn);
         negative=dialogView.findViewById(R.id.negativeBtn);
     }
+    private void switchFragment(Fragment fragment) {
+
+        requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(null).commit();
+
+    }
+
 }

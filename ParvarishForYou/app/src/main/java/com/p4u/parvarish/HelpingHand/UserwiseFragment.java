@@ -30,7 +30,8 @@ import static java.util.Objects.requireNonNull;
 
 public class UserwiseFragment extends Fragment implements userwiseAdapter_model.OnItemClickListener{
 
-    private static final String TAG = "ManageUserFragment";
+    private static final String TAG = UserwiseFragment.class.getSimpleName();
+
     private userwiseAdapter_model mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef,myRef;

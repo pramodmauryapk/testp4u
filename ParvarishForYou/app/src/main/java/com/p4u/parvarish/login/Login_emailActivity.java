@@ -45,7 +45,8 @@ import static java.util.Objects.requireNonNull;
 public class Login_emailActivity extends AppCompatActivity {
 
     private ImageView top_curve;
-    private static final String TAG = "Login_emailActivity";
+    private static final String TAG = Login_emailActivity.class.getSimpleName();
+
     TextInputEditText inputEmail, inputPassword;
     TextInputLayout tf1,tf2;
     private ProgressBar progressBar;
@@ -127,13 +128,12 @@ public class Login_emailActivity extends AppCompatActivity {
     }
 
     public void loginButton(View view) {
-        //Toast.makeText(this,"Login_mobileActivity Clicked",Toast.LENGTH_SHORT).show();
+
 
         String email = Objects.requireNonNull(inputEmail.getText()).toString().toLowerCase().trim();
         final String password = Objects.requireNonNull(inputPassword.getText()).toString().trim();
 
-        if (TextUtils.isEmpty(email))
-        {
+        if (TextUtils.isEmpty(email))    {
             tf1.setError("Enter email address !");
 
 
@@ -247,8 +247,6 @@ public class Login_emailActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
     //this method is called on click
     private void signIn() {
         //getting the google signin intent

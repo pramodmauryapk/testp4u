@@ -42,7 +42,8 @@ public class AddGallaryItemFragment extends Fragment {
 
     private View v;
     private Context context;
-    private static final String TAG = "UplaoadActivity";
+    private static final String TAG = AddGallaryItemFragment.class.getSimpleName();
+
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private EditText nameEditText;

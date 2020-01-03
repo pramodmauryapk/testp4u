@@ -22,6 +22,7 @@ import java.util.Objects;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
 
     @Override

@@ -39,7 +39,8 @@ import static java.util.Objects.requireNonNull;
 
 public class AddBeneficiaryFragment extends Fragment {
 
-    private static final String TAG = "AddBeneficiaryFragment";
+    private static final String TAG = AddBeneficiaryFragment.class.getSimpleName();
+
     private View dialogView;
     private View beneficiarydialog;
     private ArrayList<String> beneficiary_list;

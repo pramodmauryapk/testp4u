@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.p4u.parvarish.R;
 
 public class AboutUsFragment extends Fragment {
+    private static final String TAG = AboutUsFragment.class.getSimpleName();
 
 
     private DatabaseReference myref;

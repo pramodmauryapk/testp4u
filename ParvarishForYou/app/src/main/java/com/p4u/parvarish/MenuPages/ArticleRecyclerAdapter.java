@@ -20,7 +20,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public  class ArticleRecyclerAdapter extends RecyclerView.Adapter<ArticleRecyclerAdapter.RecyclerViewHolder>{
-    private static final String TAG = "userwiseAdapter_model";
+    private static final String TAG = ArticleRecyclerAdapter.class.getSimpleName();
+
     private Context mContext;
     private List<Page_data_Model> imageModels;
     private OnItemClickListener mListener;

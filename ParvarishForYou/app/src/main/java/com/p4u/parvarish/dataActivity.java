@@ -12,9 +12,12 @@ public class dataActivity extends AppCompatActivity {
     private WebView webviewthis;
     private RecyclerView webVieRes;
     private String mdataRef;
+    private static final String TAG = dataActivity.class.getSimpleName();
 
 
+    public dataActivity(){
 
+    }
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

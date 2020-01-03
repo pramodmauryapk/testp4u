@@ -42,7 +42,8 @@ import static java.util.Objects.requireNonNull;
 
 public class UserRegistrationMobileActivity extends AppCompatActivity {
 
-    private static final String TAG = "UserRegistration";
+    private static final String TAG = UserRegistrationMobileActivity.class.getSimpleName();
+
     private TextInputLayout tlname;
 
     private TextInputLayout tladdress;

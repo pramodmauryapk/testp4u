@@ -40,7 +40,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class UserMobileFragment extends Fragment {
-    private static final String TAG = "UserMobileFragment";
+    private static final String TAG = UserMobileFragment.class.getSimpleName();
+
     private ListView listViewUsers;
     private List<Teacher> users;
     private View dialogView;

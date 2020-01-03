@@ -23,16 +23,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.p4u.parvarish.R;
-
 
 public class ImageItemsFragment extends Fragment implements RecyclerAdapter.OnItemClickListener {
-    private static final String TAG = "ImageItemsFragment";
+    private static final String TAG = ImageItemsFragment.class.getSimpleName();
+
     private RecyclerAdapter mAdapter;
     private ProgressBar mProgressBar;
     private FirebaseStorage mStorage;

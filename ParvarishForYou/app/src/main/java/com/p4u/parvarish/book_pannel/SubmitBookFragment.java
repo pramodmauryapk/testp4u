@@ -36,7 +36,8 @@ import static java.util.Objects.requireNonNull;
 
 public class SubmitBookFragment extends Fragment {
 
-    private static final String TAG = "BeneficiaryFragment";
+    private static final String TAG = SubmitBookFragment.class.getSimpleName();
+
     private View dialogView;
     private TextView tv2;
     private List<TempUser> users;

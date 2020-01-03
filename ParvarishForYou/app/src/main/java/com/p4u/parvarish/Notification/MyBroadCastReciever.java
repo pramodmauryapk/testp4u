@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 public class MyBroadCastReciever extends BroadcastReceiver {
+    private static final String TAG = MyBroadCastReciever.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {

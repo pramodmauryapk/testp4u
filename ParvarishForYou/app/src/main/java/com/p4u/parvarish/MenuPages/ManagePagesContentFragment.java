@@ -57,7 +57,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ManagePagesContentFragment extends Fragment implements PageRecyclerAdapter_model.OnItemClickListener{
 
-    private static final String TAG = "ManageArticlesFragment";
+    private static final String TAG = ManagePagesContentFragment.class.getSimpleName();
+
     private PageRecyclerAdapter_model mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;

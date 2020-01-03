@@ -1,7 +1,6 @@
 package com.p4u.parvarish.book_pannel;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,12 +23,13 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.R;
+import com.p4u.parvarish.user_pannel.Teacher;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,13 +37,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import com.p4u.parvarish.R;
-import com.p4u.parvarish.user_pannel.Teacher;
-
 import static java.util.Objects.requireNonNull;
 
 public class AddBookFragment extends Fragment {
-    private static final String TAG = "AddBookFragment";
+    private static final String TAG = AddBookFragment.class.getSimpleName();
+
     private EditText etBookId,etBookAuthor,etBookTitle,etBookCost,etDonor,etDonorMobile;
     private Spinner spBookLocation;
     private Button btnAddBook,btnlistbook;

@@ -11,12 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.p4u.parvarish.R;
-import com.p4u.parvarish.book_pannel.Donor;
 
 import java.util.List;
 
 public class DonorList_model extends ArrayAdapter<Donor> {
-    private static final String TAG = "DonorList_model";
+    private static final String TAG = DonorList_model.class.getSimpleName();
+
     private Activity context;
     private List<Donor> books;
 

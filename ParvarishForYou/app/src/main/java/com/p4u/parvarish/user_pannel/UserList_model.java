@@ -2,7 +2,6 @@ package com.p4u.parvarish.user_pannel;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +11,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
-
 import com.p4u.parvarish.R;
 
+import java.util.List;
+
 public class UserList_model extends ArrayAdapter<Teacher> {
-    private static final String TAG = "UserList_model";
+    private static final String TAG =UserList_model.class.getSimpleName();
+
     private Activity context;
     private List<Teacher> users;
 

@@ -1,4 +1,4 @@
-package com.p4u.parvarish.Attandence.Teacher;
+package com.p4u.parvarish.Attandence.student;
 
 public class LeaveData {
     private String LeaveName;

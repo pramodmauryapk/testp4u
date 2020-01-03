@@ -10,16 +10,6 @@
     android:layout_height="wrap_content">
 
 
-
-  <com.p4u.parvarish.gallary.TouchImageView
-      android:id="@+id/ivImage"
-      android:scrollbars="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="200dp"
-      android:layout_gravity="center"
-      android:layout_marginTop="10dp"
-      android:adjustViewBounds="true"
-      android:src="@drawable/logo" />
   <TextView
       android:id="@+id/tvTitle"
       android:layout_width="match_parent"
@@ -30,6 +20,16 @@
       android:text=""
       android:textColor="@color/colorRed"
       android:textSize="18sp" />
+  <com.p4u.parvarish.gallary.TouchImageView
+      android:id="@+id/ivImage"
+      android:scrollbars="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="400dp"
+      android:layout_gravity="center"
+      android:layout_marginTop="10dp"
+      android:adjustViewBounds="true"
+      android:src="@drawable/logo" />
+
   <TextView
       android:id="@+id/tvDescription"
       android:layout_width="match_parent"

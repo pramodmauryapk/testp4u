@@ -61,7 +61,8 @@ import static java.util.Objects.requireNonNull;
 
 public class CollectionCenterFragment extends Fragment implements RecyclerCollection_model.OnItemClickListener{
 
-    private static final String TAG = "ManageUserFragment";
+    private static final String TAG = CollectionCenterFragment.class.getSimpleName();
+
     private RecyclerCollection_model mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef,myRef;

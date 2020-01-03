@@ -23,12 +23,15 @@ public class AddYoutubeVideofragment extends Fragment {
 
     private View v;
     private Context context;
-    private static final String TAG = "UplaoadActivity";
+    private static final String TAG = AddYoutubeVideofragment.class.getSimpleName();
+
     private EditText nameEditText;
     private EditText descriptionEditText;
     private DatabaseReference mDatabaseRef;
-
     private Button uploadBtn;
+    public AddYoutubeVideofragment(){
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -36,29 +39,16 @@ public class AddYoutubeVideofragment extends Fragment {
        v = inflater.inflate(R.layout.upload_youtube_fragment, container, false);
         context = container.getContext();
         initViews();
-
-
-
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("YOUTUBE_VIDEOS");
-
-
-
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                    uploadURL();
-
             }
         });
         return v;
     }
-
-
-
     private void initViews(){
-
-
         uploadBtn = v.findViewById(R.id.uploadBtn);
         nameEditText =v.findViewById(R.id.nameEditText);
         descriptionEditText =v. findViewById ( R.id.descriptionEditText );

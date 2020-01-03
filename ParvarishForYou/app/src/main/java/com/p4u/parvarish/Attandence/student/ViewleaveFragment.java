@@ -19,8 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.p4u.parvarish.Attandence.Teacher.LeaveData;
-import com.p4u.parvarish.Attandence.Teacher.LeaveList_model;
 import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
@@ -51,7 +49,7 @@ public class ViewleaveFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_viewleave, container, false);
         bundle=new Bundle();
         schoolname = requireNonNull(this.getArguments()).getString("SCHOOL_NAME");
-        databaseUsers = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(schoolname).child("LEAVES");
+        databaseUsers = FirebaseDatabase.getInstance().getReference().child("SCHOOL").child(schoolname).child("STUDENTS").child("LEAVES");
         context = container.getContext();
         //getting views
         init();

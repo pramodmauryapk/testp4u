@@ -40,6 +40,10 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_share_black_24dp"
             android:title="@string/share" />
+            <item
+                android:id="@+id/nav_locshare"
+                android:icon="@drawable/ic_share_black_24dp"
+                android:title="Location Share" />
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_exit_to_app_black_24dp"

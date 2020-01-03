@@ -13,10 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,15 +25,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.p4u.parvarish.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.p4u.parvarish.R;
-
 public class SearchBookFragment extends Fragment {
-    private static final String TAG = "SearchBookFragment";
+    private static final String TAG = SearchBookFragment.class.getSimpleName();
+
     private ListView listViewBooks;
     private List<Book> books;
     private DatabaseReference databaseBooks;

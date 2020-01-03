@@ -31,6 +31,7 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
 
 
+    private static final String TAG = HomeFragment.class.getSimpleName();
 
     public View v;
 
@@ -38,6 +39,11 @@ public class HomeFragment extends Fragment {
     private List<String> list;
     private WebBannerAdapter webBannerAdapter;
     private DatabaseReference mDatabaseRef;
+    public HomeFragment(){
+
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -47,15 +53,14 @@ public class HomeFragment extends Fragment {
         context = container.getContext();
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("ADS");
-
         //add banner
         banner_load();
         marquee_load();
         menu_load();
-
-
         return v;
     }
+
+
 
     private void marquee_load() {
         //inherit child fragment for marquee

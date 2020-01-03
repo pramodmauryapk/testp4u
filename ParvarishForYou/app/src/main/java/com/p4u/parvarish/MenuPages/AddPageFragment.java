@@ -47,7 +47,8 @@ public class AddPageFragment extends Fragment {
 
     private View v;
     private Context context;
-    private static final String TAG = "Uplaoad_article";
+    private static final String TAG = AddPageFragment.class.getSimpleName();
+
     private static final int PICK_IMAGE_REQUEST = 1;
     private EditText nameEditText;
     private EditText descriptionEditText;

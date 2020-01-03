@@ -17,7 +17,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ManagegalaryFragment extends Fragment {
 
-    private static final String TAG = "ManagegalaryFragment";
+    private static final String TAG = ManagegalaryFragment.class.getSimpleName();
+
     private Button openTeachersActivityBtn,openUploadActivityBtn;
     private View v;
     private Context context;

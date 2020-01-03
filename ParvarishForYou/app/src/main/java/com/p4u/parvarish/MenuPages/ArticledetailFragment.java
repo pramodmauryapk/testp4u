@@ -19,7 +19,8 @@ import com.squareup.picasso.Picasso;
 
 public class ArticledetailFragment extends Fragment {
 
-    private static final String TAG = "ArticleFragment";
+    private static final String TAG = ArticledetailFragment.class.getSimpleName();
+
     private EditText editText;
     private TextView textView;
     private Button button;
@@ -37,16 +38,19 @@ public class ArticledetailFragment extends Fragment {
 
         context = container.getContext();
         initViews();
-
+        mImage.setVisibility(View.VISIBLE);
         assert this.getArguments() != null;
         String imagetitle = this.getArguments().getString("Title");
         String imageurl = this.getArguments().getString("Image");
         String desc=this.getArguments().getString("Description");
-
-        Picasso.get()
+        if(imageurl!=null) {
+            Picasso.get()
                     .load(imageurl)
                     .placeholder(R.drawable.placeholder)
                     .into(mImage);
+        }else{
+            mImage.setVisibility(View.GONE);
+        }
             mDescription.setText(desc);
             mTitle.setText(imagetitle);
 

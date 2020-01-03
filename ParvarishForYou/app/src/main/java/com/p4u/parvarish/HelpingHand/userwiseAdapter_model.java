@@ -26,7 +26,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public  class userwiseAdapter_model extends RecyclerView.Adapter<userwiseAdapter_model.RecyclerViewHolder>{
-    private static final String TAG = "userwiseAdapter_model";
+    private static final String TAG = userwiseAdapter_model.class.getSimpleName();
+
     private Context mContext;
     private List<Teacher> teachers;
     private OnItemClickListener mListener;

@@ -25,7 +25,8 @@ import java.util.Objects;
 
 public class slideshowFragment extends Fragment {
 
-    private static final String TAG = "slideshowFragment";
+    private static final String TAG = slideshowFragment.class.getSimpleName();
+
 
 
     private Context context;

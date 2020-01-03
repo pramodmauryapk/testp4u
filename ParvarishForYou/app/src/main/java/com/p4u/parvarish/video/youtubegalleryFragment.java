@@ -27,7 +27,8 @@ import static java.util.Objects.requireNonNull;
 
 public class youtubegalleryFragment extends Fragment{
 
-    private static final String TAG = "youtubegalleryFragment";
+    private static final String TAG = youtubegalleryFragment.class.getSimpleName();
+
 
     private Context context;
     private DatabaseReference mDatabaseRef;
@@ -38,6 +39,9 @@ public class youtubegalleryFragment extends Fragment{
 
    private Bundle bundle;
     private View v;
+    public youtubegalleryFragment(){
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

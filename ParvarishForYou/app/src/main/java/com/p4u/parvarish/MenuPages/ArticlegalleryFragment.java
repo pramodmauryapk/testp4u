@@ -28,7 +28,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ArticlegalleryFragment extends Fragment{
 
-    private static final String TAG = "youtubegalleryFragment";
+    private static final String TAG = ArticlegalleryFragment.class.getSimpleName();
+
 
     private Context context;
     private DatabaseReference mDatabaseRef;

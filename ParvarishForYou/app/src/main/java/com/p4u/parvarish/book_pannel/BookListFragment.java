@@ -30,7 +30,8 @@ import java.util.List;
 
 public class BookListFragment extends Fragment {
 
-    private static final String TAG = "ListBookFragment";
+    private static final String TAG = BookListFragment.class.getSimpleName();
+
     private List<Book> dataList = new ArrayList<>();
     private int redColor,greenColor;
     private RecyclerView.Adapter adapter;
@@ -55,6 +56,7 @@ public class BookListFragment extends Fragment {
 
         redColor = getResources().getColor(R.color.red);
         greenColor = getResources().getColor(R.color.green);
+
 
         appendDataList();
         adapter.notifyDataSetChanged();
@@ -171,9 +173,11 @@ public class BookListFragment extends Fragment {
         @SuppressLint("SetTextI18n")
         void bindData(final Book book) {
             bookTitle.setText(book.getBookTitle());
-            bookTitle.setTextColor((Integer.parseInt(book.getBookAvaibility()) > 0) ? greenColor : redColor);
+            bookTitle.setTextColor((Integer.parseInt(book.getBookAvaibility()) > 0) ?getResources().getColor(R.color.about_facebook_color) : redColor);
             bookCost.setText(book.getBookCost());
+            bookCost.setVisibility(View.GONE);
             sybool.setImageResource(R.drawable.index);
+            sybool.setVisibility(View.GONE);
             bookSubject.setText(book.getBookSubject());
             bookAuthor.setText(book.getBookAuthor());
             bookAuthor.setTextColor((Integer.parseInt(book.getBookAvaibility()) > 0) ? greenColor : redColor);

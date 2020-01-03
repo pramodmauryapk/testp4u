@@ -19,11 +19,14 @@
             app:moveSpeed="1.8"/>
     <FrameLayout
         android:id="@+id/child_fragment_container"
+        android:layout_marginTop="-10dp"
         android:layout_width="match_parent"
         android:layout_below="@+id/recycler"
         android:layout_height="wrap_content">
 
     </FrameLayout>
+
+
 
     <FrameLayout
         android:id="@+id/menu_fragment_container"
@@ -33,8 +36,6 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
-
-
 
 
 

@@ -10,14 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.p4u.parvarish.R;
 
 import java.util.List;
 
-import com.p4u.parvarish.R;
-
 
 public class WebBannerAdapter extends RecyclerView.Adapter<WebBannerAdapter.MzViewHolder> {
-    private static final String TAG = "WebBannerAdapter";
+    private static final String TAG = WebBannerAdapter.class.getSimpleName();
+
     private Context context;
     private List<String> urlList;
     private BannerLayout.OnBannerItemClickListener onBannerItemClickListener;
