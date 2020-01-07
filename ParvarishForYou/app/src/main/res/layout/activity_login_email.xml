@@ -138,9 +138,7 @@
                             android:id="@+id/sign_in_button"
                             android:layout_width="wrap_content"
                             android:visibility="gone"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true" />
+                            android:layout_height="wrap_content" />
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -156,46 +154,8 @@
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:id="@+id/skip_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="8dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:onClick="skiplogin"
-                    android:text="@string/skip_login"
-                    android:textColor="@color/green"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mobile_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="8dp">
 
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:onClick="login_with_mobile"
-                    android:text="@string/login_with_mobile"
-                    android:paddingEnd="16dp"
-                    android:textColor="@color/about_facebook_color"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlSymmetry" />
-            </LinearLayout>
 
 
             <LinearLayout

@@ -371,6 +371,7 @@ So if you are interested to be technical partner pls send you name and address t
     <string name="enter_service_amp_no"><![CDATA[Enter Service & No]]></string>
     <string name="post">post</string>
     <string name="tab_text_3">Category</string>
+    <string name="directory">parvarish_images</string>
 
 
 </resources>

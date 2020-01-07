@@ -114,7 +114,7 @@ public  class HalpingHandRecyclerAdapter_model extends RecyclerView.Adapter<Halp
             @SuppressLint("LongLogTag")
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                 Log.d(TAG, "failed to read values", databaseError.toException());
+                Log.d(TAG, "failed to read values", databaseError.toException());
             }
         });
         holder.datetime.setText(article.getTime());
@@ -207,7 +207,7 @@ public  class HalpingHandRecyclerAdapter_model extends RecyclerView.Adapter<Halp
             if(requireNonNull(uInfo).getUserId().equals(user_id)) {
                 s=  requireNonNull(uInfo).getImageURL();
 
-           }
+            }
 
         }
         return s;

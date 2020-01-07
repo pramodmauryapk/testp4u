@@ -51,7 +51,7 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private String phonenumber,code;
-    private String user_name,user_email,user_roll,user_img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +102,6 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.buttonSignIn:
-                //Toast.makeText(this,"Verify Clicked"+getOTP(),Toast.LENGTH_SHORT).show();
                 verifyVerificationCode(getOTP());
                 break;
             case R.id.resend_otp:
@@ -115,9 +114,13 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
     }
     private void verifyVerificationCode(String code) {
         //creating the credential
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-        //signing the user
-        signInWithPhoneAuthCredential(credential);
+        if(verificationId!=null) {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+            //signing the user
+            signInWithPhoneAuthCredential(credential);
+        }else{
+            Toast.makeText(this,"verifcation could not completed",Toast.LENGTH_SHORT).show();
+        }
     }
     public class EditTextWatcher implements TextWatcher {
 
@@ -319,10 +322,10 @@ public class MobileVerifyActivity extends AppCompatActivity implements View.OnCl
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             Teacher uInfo=ds.getValue(Teacher.class);
             if(requireNonNull(uInfo).getUserId().equals(requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())) {
-                user_name = requireNonNull(uInfo).getUserName();
-                user_email = uInfo.getUserEmail();
-                user_roll = uInfo.getUserRole();
-                user_img = uInfo.getImageURL();
+                String user_name = requireNonNull(uInfo).getUserName();
+                String user_email = uInfo.getUserEmail();
+                String user_roll = uInfo.getUserRole();
+                String user_img = uInfo.getImageURL();
 
 
             }

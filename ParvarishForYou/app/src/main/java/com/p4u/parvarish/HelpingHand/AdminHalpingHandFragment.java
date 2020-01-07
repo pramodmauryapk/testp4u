@@ -201,4 +201,6 @@ public class AdminHalpingHandFragment extends Fragment implements HalpingHandRec
     public void onDeleteItemClick(int position) {
 
     }
+
+
 }

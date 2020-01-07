@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.p4u.parvarish.login.Login_emailActivity;
+import com.p4u.parvarish.login.LoginchangerActivity;
 
 
 public class SplashActivity extends Activity {
@@ -57,7 +57,8 @@ public class SplashActivity extends Activity {
                     }
                     //finally is used so that it is always executed.
                     finally {
-                        Intent ActivityIndent = new Intent(SplashActivity.this, Login_emailActivity.class);
+                       // Intent ActivityIndent = new Intent(SplashActivity.this, Login_emailActivity.class);
+                        Intent ActivityIndent = new Intent(SplashActivity.this, LoginchangerActivity.class);
                         SplashActivity.this.startActivity(ActivityIndent);
                         SplashActivity.this.finish();
                         Log.d(TAG, "going to login activity");

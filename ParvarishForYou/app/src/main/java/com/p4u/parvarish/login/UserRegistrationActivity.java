@@ -71,6 +71,15 @@ public class UserRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         (requireNonNull(getSupportActionBar())).hide();
         initViews();
+        auth = FirebaseAuth.getInstance();
+
+        myref = FirebaseDatabase.getInstance().getReference().child("USERS");
+        Intent intent = getIntent();
+        if(intent!=null){
+            etFullname.setText(intent.getStringExtra("user_name"));
+            etEmail.setText(intent.getStringExtra("user_email"));
+
+        }
         ImageView top_curve = findViewById(R.id.top_curve);
         TextView login_title = findViewById(R.id.registration_title);
         LinearLayout already_have_account_layout = findViewById(R.id.already_have_account_text);
@@ -105,14 +114,6 @@ public class UserRegistrationActivity extends AppCompatActivity {
         Animation new_user_anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.down_top);
         already_have_account_layout.startAnimation(new_user_anim);
         //get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
-
-        myref = FirebaseDatabase.getInstance().getReference().child("USERS");
-
-
-
-
-
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +164,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
 
     private void get_values() {
+
         email = requireNonNull(etEmail.getText()).toString().toLowerCase().trim();
         password = requireNonNull(etPassword.getText()).toString().trim();
         aPassword = requireNonNull(etaPassword.getText()).toString().trim();

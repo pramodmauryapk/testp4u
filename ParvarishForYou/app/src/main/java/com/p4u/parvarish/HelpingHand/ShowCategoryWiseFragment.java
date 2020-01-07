@@ -246,4 +246,6 @@ public class ShowCategoryWiseFragment extends Fragment implements HalpingHandRec
     public void onDeleteItemClick(int position) {
 
     }
+
+
 }

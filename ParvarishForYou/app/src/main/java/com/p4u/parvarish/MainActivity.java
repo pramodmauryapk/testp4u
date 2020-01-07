@@ -51,12 +51,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.p4u.parvarish.HelpLine.EmergencyFragment;
+import com.p4u.parvarish.Location.LocationActivity;
 import com.p4u.parvarish.contact_us.ContactUsFragment;
 import com.p4u.parvarish.fancydialog.Animation;
 import com.p4u.parvarish.fancydialog.FancyAlertDialog;
 import com.p4u.parvarish.fancydialog.FancyAlertDialogListener;
 import com.p4u.parvarish.fancydialog.Icon;
-import com.p4u.parvarish.login.Login_emailActivity;
+import com.p4u.parvarish.login.LoginchangerActivity;
 import com.p4u.parvarish.login.UserRegistrationActivity;
 import com.p4u.parvarish.menu_items.AboutUsFragment;
 import com.p4u.parvarish.menu_items.FeedbackAddFragment;
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myref= FirebaseDatabase.getInstance().getReference().child("USERS");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null) {
             myref.addValueEventListener(new ValueEventListener() {
 
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -232,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Teacher uInfo = ds.getValue(Teacher.class);
                         if (requireNonNull(uInfo).getUserId().equals(user.getUid())) {
-                           user_relative = uInfo.getUserRelative();
+                            user_relative = uInfo.getUserRelative();
 
                         }
 
@@ -245,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Log.d(TAG, "failed to read values", databaseError.toException());
                 }
             });
-
+        }
         return user_relative;
     }
     public class SettingsContentObserver extends ContentObserver {
@@ -617,7 +619,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // user_img=null;
                     set_profile(user_name, user_roll, user_img, user_relative);
                 } else {
-                    startActivity(new Intent(this, Login_emailActivity.class));
+                    startActivity(new Intent(this, LoginchangerActivity.class));
                     finish();
                 }
                 return true;

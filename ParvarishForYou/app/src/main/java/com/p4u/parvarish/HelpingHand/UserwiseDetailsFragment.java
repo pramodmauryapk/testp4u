@@ -204,6 +204,7 @@ public class UserwiseDetailsFragment extends Fragment implements HalpingHandRecy
         }
     }
 
+
     public void onStart() {
 
         super.onStart();
